@@ -537,8 +537,12 @@ width: auto;
 
 .green-circle {background-color:#188f48 !important;}
 
-.sort-btns {background: rgba(0, 0, 0, 0) none repeat scroll 0 0;border: medium none;color: #bbb;float: left;font-size: 14px;line-height: 25px;margin: 0;padding: 0;text-transform: uppercase;}
-
+.sort-btns {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: medium none;
+  margin: 0;
+  padding: 0;
+}
 button.sort-btns:focus {
 background-color: transparent;
 outline: medium none;
@@ -2200,7 +2204,7 @@ border-color:#26A9E0;
 
 .bread-comb-outer {color: #818d94;float: left;font-size: 16px;font-weight: 400;margin: 0 0 25px;text-align: left;text-transform: uppercase;font-family: 'Montserrat', sans-serif;}
 
-.bread-comb-outer ul li {display: inline-block;float: none;font-size: 16px;font-weight: normal;margin: 0 10px;padding: 0;text-align: left;color: #818d94;text-transform: uppercase;}
+.bread-comb-outer ul li {display: inline-block;float: none;font-size: 14px;font-weight: normal;margin: 0 10px;padding: 0;text-align: left;color: #818d94;text-transform: uppercase;}
 
 .bread-comb-outer ul li:first-child {margin-left: 0;}
 
@@ -2301,7 +2305,7 @@ width: 100%;
 
 .blue-text {color:#2b517b !important;}
 
-.instruction-note {color: #000;float: left;font-size: 14px;margin: 0 0 -15px;padding: 0;text-align: right;width: 100%;}
+.instruction-note {color: #000;float: left;font-size: 14px;margin: 0 0 0px;padding: 0;text-align: right;width: 100%;}
 
 
 /*keyword-phraser-section css*/
@@ -2518,9 +2522,9 @@ width: 100%;
   background-color: #e6e7e9;
   border-radius: 5px;
   color: #323232;
-  display: inline-block;
+  float: left;
   font-size: 12px;
-  margin: 0 0 5px;
+  margin: 0 5px 5px;
   padding: 3px 5px;
 }
 
@@ -2692,7 +2696,7 @@ width: 100%;
 }
 
 .active-new-project-link  a{
-  color: #9cc0cf;
+  color: #9cc0cf !important;
   font-size:28px;
   font-weight: bold;
   height: 100%;
@@ -2748,20 +2752,47 @@ width: 100%;
 
 
 .sort-navigation ul li {
+  border-right: 1px solid #818d94;
   color: #818d94;
   display: inline-block;
   float: none;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: normal;
-  margin: 0 10px;
-  padding: 0;
+  margin: 0 10px 0 0;
+  padding: 0 10px 0 0;
   text-align: left;
+  line-height: 14px;
 }
 
 .sort-navigation ul li a{
   color: #818d94;
 }
 
+.sort-navigation li:last-child {
+  border-right: medium none;
+  margin-right: 0;
+  padding-right: 0;
+}
+
+.sort-navigation li:first-child {
+  border-right: medium none;
+  margin-right: 0;
+}
+
+.sort-navigation li.active button {color:#231F20;}
 
 
+.project-cards-outer ul li {
+    float: left; box-sizing:border-box;margin:0  0 30px;
+}
 
+.custom-input-keyword input {
+  background-color: #fff;
+  border: medium none;
+  color: #000;
+  font-size: 12px;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}

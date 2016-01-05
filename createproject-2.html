@@ -17,7 +17,6 @@
          FONTS
     ============================== -->
 <link href="fonts/font-awesome/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
-<link href="fonts/font-family.css" rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Nixie+One' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
@@ -50,10 +49,6 @@
 ============================== -->
 <section id="header" class="blurable">
 <div id="report-bg" class="piece "></div>
-<!--div class="piece scanlines noclick"></div>
-    <div id="hacker-text" class="piece glow noclick"></div>
-    <div id="crt-output" class="piece output noopacity"></div-->
-
 <div class="overlay interface-outer">
 <div class="projects">
 <div class="row row-v-spacing"></div>
@@ -70,18 +65,8 @@
     <div class="col-lg-6 view-option-outer">
       <ul>
         <li class="black-box-rh"></li>
-        <!--li class="active"><a href="#">Project View </a> </li>
-        <li><a href="#"> Research View</a> </li-->
       </ul>
     </div>
-    <!--div class="col-lg-6 rh-actions-menu pull-right">
-      <ul>
-        <li><a href="" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Download selected projects" data-original-title="" title="">Download</a></li>
-        <li>
-          <button id="create-new-project" class="btn btn-orange btn-round"> <i class="fa fa-plus"></i><span>Create New</span> </button>
-        </li>
-      </ul>
-    </div-->
   </div>
   <div id="shadow"> </div>
 </div>
@@ -107,22 +92,21 @@
 	 
 	  <div class="project-setup-input row enter-keyword-new-project"><label class="col-lg-12 col-md-12"> Preliminary Keywords</label> 
 	  <p class="col-lg-12 col-md-12 note">Enter at least one keyword phrase. Separate additional phrases with commas.</p>
-		<div class="col-lg-12"> <ul>
-		
-                  <li>you see it's curious</li>
-                  <li>ted did figure it out </li>
-                  <li>time travel</li>
-                  <li>and when we get back</li>
-                  <li>we gonna tell everyone</li>
-                  <li>how it's possible</li>
-				    <li class="custom-input-keyword"><input type="text" value=""/></li>
-
-                </ul>
+		<div class="col-lg-12"> 
+		<ul id="ctc">	
+			<li>you see it's curious</li>
+			<li>ted did figure it out </li>
+			<li>time travel</li>
+			<li>and when we get back</li>
+			<li>we gonna tell everyone</li>
+			<li>how it's possible</li>
+			<li class="custom-input-keyword" style="display:none;"><input type="text" value=""/></li>
+		</ul>
 	</div>
 	</div>
 	 
 	 
-	 <button class="orange-btn btn pull-right" type="button">FINISH</button>
+	 <a class="orange-btn btn pull-right">FINISH</a>
 	 
 	 
 	 </form> 
@@ -185,79 +169,31 @@ jQuery(function($){
 </script> 
 <script>
 jQuery(document).ready(function() {
-    //$(".project-status-card").click(function(){
-        //$(this).toggleClass("inactive");
-		//if($(".project-status-card").hasClass("inactive")) {
-		 //$(this).text("Paused");
-		 //} else{
-		 //$(this).text("Active");
-		 //}
-		
-		
-   // });
 
 
-   //hide url-label and show url-input
-    $('#url-list').on('click','.url-label', function() {
-        $(this).hide();     
-    	$(this).next('.url-input').show().focus();
-    });
+
+$("#ctc").on("click", function(event) {
+		event.preventDefault();
+		$(".custom-input-keyword").css("display", "inline-block");
+	});
+		
+    $(this).on('keypress','.custom-input-keyword input', function(e) {
+		if (e.which == 13) {
+			$(this).blur();
+		}
+	});
 	
-    //hide url-input and show url-label
-    $('#url-list').on('focusout', '.url-input',function() {
-        $(this).hide();     
-    	$(this).parents('li').find('.url-label').show();
-    });
+    $(this).on('blur','.custom-input-keyword input', function() {
 	
-	//put  url-input value in url-label
-    $('#url-list').on('keyup','.url-input', function() {
 		var url_val = $(this).val();
-    	$(this).parents('li').find('.url-label span').html(url_val);
+		if(url_val==""){
+		} 
+		else {
+			$('<li>'+url_val+'</li>').insertBefore(".custom-input-keyword");
+		}
+		$(".custom-input-keyword").css("display", "none");
+		$(".custom-input-keyword input").val("");
     });
-	
-    // Delete parent li on click 
-	$("#url-list").on('click','.url-delete',function(event) {
-		event.preventDefault();
-        $(this).parents('li').remove();
-		toggle_add_more();
-	});
-	
-	$("a#button-add-url").click(function(event) {
-		event.preventDefault();
-		var url_box = $("#url-box-template").html();
-        $(this).parent().before(url_box);
-		toggle_add_more();
-	});
-	
-	 // show or hide add more button
-	function toggle_add_more(){
-	  var url_boxes = $(".url-box").length;
-	  if(url_boxes>=5){
-		$("a#button-add-url").hide();
-	  }else{
-		$("a#button-add-url").show();
-	  }
-	}
-	
-	jQuery('#keyword-phraser-accordion').on('shown.bs.collapse', function () {
-//		alert('shown');
-//		jQuery('#keyword-phraser-accordion .keyword-phraser-row').removeClass('active');
-		
-		
-		jQuery('#keyword-phraser-accordion .keyword-phraser-row').each(function(i) {
-			if (jQuery(this).children('div[aria-expanded="true"]').length != 0) {
-			    console.log(jQuery(this).parents('.keyword-phraser-row').hide());
-				jQuery(this).parents('.keyword-phraser-row').addClass('active');
-			}
-		});
-		
-		
-	});
-	
-	//jQuery('#keyword-phraser-accordion').on('hidden.bs.collapse', function () {
-//		alert('hidden');
-	//	jQuery('#keyword-phraser-accordion .keyword-phraser-row').removeClass('active');
-	//});
 	
 });
 </script>

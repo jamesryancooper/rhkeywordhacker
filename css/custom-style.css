@@ -2106,9 +2106,9 @@ width: 100%;}
 
 .warrining-message h2 {color: #272422;font-size: 22px;margin: 0 0 10px;text-align: left;text-transform: none;}
 
-.warrining-message ul {background: rgba(0, 0, 0, 0) none repeat scroll 0 0 !important;height: auto !important;margin: 0 !important;}
+.warrining-message ul {background: rgba(0, 0, 0, 0) none repeat scroll 0 0 !important;border: medium none;height: auto !important;list-style: outside none disc;margin: 0 !important;}
 
-.warrining-message ul li {color: #000;font-size: 14px;height: auto !important;list-style: inside none disc;}
+.warrining-message ul li {color: #000;font-size: 14px;height: auto !important;list-style: disc !important;list-style-position: inside !important;}
 
 .warrining-icon img {max-width: 50px;width: 100%;}
 

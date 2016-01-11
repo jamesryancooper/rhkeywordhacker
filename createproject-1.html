@@ -180,26 +180,46 @@ jQuery(function($){
 <script>
 jQuery(document).ready(function() {
 
+/*
+var originalVal;
+
+$('#ex6').slider().on('slideStart', function(slideEvt){
+    originalVal = $('#ex').data('slider').getValue();
+});
+
+$('#ex6').slider().on('slideStop', function(slideEvt){
+    var newVal = $('#ex6').data('slider').getValue();
+    if(originalVal != newVal) {
+        alert('Value Changed!');
+        alert('Value Changed!');
+    }
+});
+*/
+
 	//range slider custom js
-	$("#ex6").slider();
-		$("#ex6").on("slide", function(slideEvt) {
+		$("#ex6").slider();
+		$("#ex6").on("slide, slideStop", function(slideEvt) {
 			var slider_num_ex6 = numeral(slideEvt.value).format('0,0');
+			//var slider_num_ex6 = tooltip-inner;
 			$("#ex6SliderVal").text(slider_num_ex6);
 		});
-
+		
+		
 	$("#ex7").slider();
-		$("#ex7").on("slide", function(slideEvt) {
+		$("#ex7").on("slide, slideStop", function(slideEvt) {
 			var slider_num_ex7 = numeral(slideEvt.value).format('0,0');
 			$("#ex7SliderVal").text(slider_num_ex7);
-		});
+	});
+	
 
 	$("#ex8").slider();
-		$("#ex8").on("slide", function(slideEvt) {
+		$("#ex8").on("slide, slideStop", function(slideEvt) {
 			var slider_num_ex8 = numeral(slideEvt.value).format('0,0');
 			$("#ex8SliderVal").text(slider_num_ex8);
-		});
+	});
 	
-	
+		
+		
 	// ADD Cumma after three numbers
 	function numberWithCommas(x) {
 	return x.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",");

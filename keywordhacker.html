@@ -838,7 +838,7 @@
          </div>
 		 
 		 
-		         <div class="panel panel-default project-row-outer">
+		    <div class="panel panel-default project-row-outer">
           <div  role="tab" id="project-headingTwo">
             <div class="collapsed collapsenew" data-toggle="collapse" data-parent="#project-row-accordion" href="#project-collapseTwo" aria-expanded="false" aria-controls="project-collapseTwo">
               <h2 class="project-name">FairMarketing.com </h2>
@@ -2686,6 +2686,9 @@ $(document).ready(function() {
 	
 	$(".keyword-phraser-row-outer .suggest-keywords-list ul ").on("click","li",function(){
 	    var parent_get = $(this).parents().find(".keyword-phraser-section.collapse.in").attr('id');
+		//jQuery('.phraser-accordion-outer .keyword-phraser-row').removeClass('active');
+		//jQuery('.phraser-accordion-outer .keyword-phraser-row .collapse').removeClass('in');
+
 		console.log(parent_get);
 		var parent_id = "#"+parent_get;
 		//alert(parent_id);
@@ -2735,6 +2738,27 @@ $(document).ready(function() {
 				$(this).find('label').attr('for','chk-content-'+text_of_li_new+parent_get+chkflag);
 			});
 			
+			
+				
+			/*jQuery(parent_id+" .phraser-accordion-outer .keyword-phraser-row .keyword-phraser-tittle a").on('click', function(){
+				//jQuery('.phraser-accordion-outer .keyword-phraser-row').removeClass('active');
+				//jQuery('.phraser-accordion-outer .keyword-phraser-row .keyword-phraser-tittle a').removeClass('collapsed');
+				//jQuery('.phraser-accordion-outer .keyword-phraser-row .collapse').removeClass('in');
+				var href_val = jQuery(this).attr("aria-controls");
+			
+				//jQuery('.phraser-accordion-outer .keyword-phraser-row .keyword-phraser-tittle a').toggleClass('collapsed');
+				jQuery(this).toggleClass('collapsed');
+				//if(jQuery(this).hasClass('collapsed')){
+					
+				//}
+				jQuery('.phraser-accordion-outer .keyword-phraser-row').removeClass('active');
+					//jQuery('.phraser-accordion-outer .keyword-phraser-row .keyword-phraser-tittle a').removeClass('collapsed');
+					jQuery('.phraser-accordion-outer .keyword-phraser-row .collapse').removeClass('in');
+				jQuery(this).parents(".keyword-phraser-row").addClass('active');
+				//jQuery(this).parents(".keyword-phraser-row").children(".panel-collapse.collapse").addClass('in');
+			
+				
+			});*/
 		//	..attr('id', 'chk-content-'+text_of_li_new+parent_get);
 			
 			
@@ -2760,11 +2784,82 @@ $(document).ready(function() {
 	});
 	
     $('.add-custom-keyword-outer').on('blur','.url-input', function() {
+		var parent_get = $(this).parents().find(".keyword-phraser-section.collapse.in").attr('id');
+		console.log(parent_get);
+		var parent_id = "#"+parent_get;
 		var url_val = $(this).val();
 		if(url_val==""){
 			
 		} else {
-			$(this).parent().parent().parent().find(".suggest-keywords-list ul").append('<li>'+url_val+'</li>');
+		    $("#template .keyword-phraser-row").clone().appendTo(parent_id+" .phraser-accordion-outer");
+			$(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child .keyword-phraser-tittle h2 a").html(url_val);
+			//$(this).parent().parent().parent().find(".suggest-keywords-list ul").append('<li>'+url_val+'</li>');
+			//jQuery('.phraser-accordion-outer .keyword-phraser-row').removeClass('active');
+			//jQuery('.phraser-accordion-outer .keyword-phraser-row .collapse').removeClass('in');
+			
+			var text_of_li = url_val;
+			alert(text_of_li);
+			
+			
+			//$("#template .keyword-phraser-row").clone().appendTo(parent_id+" .phraser-accordion-outer");
+			//$(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child .keyword-phraser-tittle h2 a").html(text_of_li);
+			
+			var text_of_li_new_old = text_of_li.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '');
+			var text_of_li_new = text_of_li_new_old.substring(0, 5);
+			  
+			//alert(text_of_li_new);
+			
+			var id_of_ul = $(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child ul").attr('id');
+			var id_of_ul_div = $(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child ul").next('div').attr('id');
+			var id_of_ul_div_attr = $(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child ul").next('div').attr('aria-labelledby');
+			var id_of_ul_aria_controls = $(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child ul li.power-goal-info h2 a").attr('aria-controls');
+			var id_of_ul_aria_labelledby = $(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child ul li.power-goal-info h2 a").attr('href');
+			var id_of_ul_aria_controls = $(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child ul li.keyword-phraser-tittle h2 a").attr('href');
+			var id_of_ul_aria_controls = $(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child ul li.keyword-phraser-tittle h2 a").attr('aria-controls');
+			var id_phraser_accordion = $(parent_id+" .phraser-accordion-outer").attr('id');
+			
+			/*alert(id_of_ul);	*/
+			
+			
+			$(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child ul").attr('id', id_of_ul+text_of_li_new+parent_get);
+			$(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child ul").next('div').attr('id', id_of_ul_div+text_of_li_new+parent_get);
+			$(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child ul").next('div').attr('aria-labelledby', id_of_ul_div_attr+text_of_li_new+parent_get);
+			$(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child ul li.power-goal-info h2 a").attr('aria-controls', id_of_ul_aria_controls+text_of_li_new+parent_get);
+			$(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child ul li.power-goal-info h2 a").attr('href', id_of_ul_aria_labelledby+text_of_li_new+parent_get);
+			$(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child ul li.keyword-phraser-tittle h2 a").attr('aria-controls', id_of_ul_aria_controls+text_of_li_new+parent_get);
+			$(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child ul li.keyword-phraser-tittle h2 a").attr('href', id_of_ul_aria_labelledby+text_of_li_new+parent_get);
+			
+			$(parent_id+" .phraser-accordion-outer").attr('id', id_phraser_accordion+parent_get );
+			$(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child ul li.power-goal-info h2 a").attr('data-parent', '#'+id_phraser_accordion+parent_get);
+			$(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child ul li.keyword-phraser-tittle h2 a").attr('data-parent', '#'+id_phraser_accordion+parent_get);
+			
+			var chkflag = 1;
+			$(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child ul li.checkbox-outer").each(function(){
+				chkflag++;
+				$(this).find('input').attr('id', 'chk-content-'+text_of_li_new+parent_get+chkflag);
+				$(this).find('label').attr('for','chk-content-'+text_of_li_new+parent_get+chkflag);
+			});
+			
+			/*jQuery(parent_id+" .phraser-accordion-outer .keyword-phraser-row .keyword-phraser-tittle a").on('click', function(){
+				//jQuery('.phraser-accordion-outer .keyword-phraser-row').removeClass('active');
+				//jQuery('.phraser-accordion-outer .keyword-phraser-row .keyword-phraser-tittle a').removeClass('collapsed');
+				//jQuery('.phraser-accordion-outer .keyword-phraser-row .collapse').removeClass('in');
+				var href_val = jQuery(this).attr("aria-controls");
+			
+				//jQuery('.phraser-accordion-outer .keyword-phraser-row .keyword-phraser-tittle a').toggleClass('collapsed');
+				jQuery(this).toggleClass('collapsed');
+				if(jQuery(this).hasClass('collapsed')){
+					jQuery('.phraser-accordion-outer .keyword-phraser-row').removeClass('active');
+					jQuery('.phraser-accordion-outer .keyword-phraser-row .keyword-phraser-tittle a').toggleClass('collapsed');
+					jQuery('.phraser-accordion-outer .keyword-phraser-row .collapse').removeClass('in');
+				}
+					jQuery(this).parents(".keyword-phraser-row").toggleClass('active');
+				//jQuery(this).parents(".keyword-phraser-row").children(".panel-collapse.collapse").addClass('in');
+			
+				
+			});*/
+			
+			
 		}
 		$(this).remove();
 		$("a#button-add-url").show();
@@ -2775,6 +2870,7 @@ $(document).ready(function() {
 	jQuery('.phraser-accordion-outer').on('shown.bs.collapse', function () {
 	
 		jQuery('.phraser-accordion-outer .keyword-phraser-row').each(function(i) {
+			
 			if (jQuery(this).children('div[aria-expanded="true"]').length != 0) {
 				jQuery(this).addClass('active');
 			}
@@ -2782,6 +2878,7 @@ $(document).ready(function() {
 		
 		
 		jQuery('.phraser-accordion-outer').each(function(i) {
+			
 			var rows = jQuery(this).find('.keyword-phraser-row').length;
 			var expanded = jQuery(this).find('div[aria-expanded="true"]').length;
 			if(rows==expanded){
@@ -2793,6 +2890,7 @@ $(document).ready(function() {
 	
 	
 	jQuery('.phraser-accordion-outer').on('hidden.bs.collapse', function () {
+		
 		jQuery('.phraser-accordion-outer .keyword-phraser-row').each(function(i) {
 			if (jQuery(this).children('div[aria-expanded="false"]').length != 0) {
 				jQuery(this).removeClass('active');
@@ -2802,6 +2900,7 @@ $(document).ready(function() {
 
 
 		jQuery('.phraser-accordion-outer').each(function(i) {
+			
 			var rows = jQuery(this).find('.keyword-phraser-row').length;
 			var expanded = jQuery(this).find('div[aria-expanded="true"]').length;
 			if(rows>expanded){
@@ -2822,6 +2921,7 @@ $(document).ready(function() {
 		jQuery(this).parent().find('.panel-collapse').collapse(all)
 	});
 	
+
 	
 	
 });

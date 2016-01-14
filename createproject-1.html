@@ -88,30 +88,32 @@
     </div>
 	
 	 <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2" id="setup-box-outer"> 
-	 <h2 class="setup-heading">You are about to uncover keyword net-worth.</h2>
+	 <h2 class="setup-heading">You are about to uncover Keyword Net-Worth™.</h2>
 	 <form class="project-setup-form"> 
-	 <div class="project-setup-input row"><label class="col-lg-3 col-md-3">Project Name*</label> <span class="col-lg-9 col-md-9"><input type="text" placeholder="Enter project name"></span> </div>
-	 <div class="project-setup-input row"><label class="col-lg-3 col-md-3">Description</label><span class="col-lg-9 col-md-9"> <input type="text" placeholder="Enter description"></span> </div>
+	 <div class="project-setup-input row"><label class="col-lg-3 col-md-3">Project URL*</label> <span class="col-lg-9 col-md-9"><input type="text" placeholder="Enter project URL"></span> </div>
+	 <!--div class="project-setup-input row"><label class="col-lg-3 col-md-3">Description</label><span class="col-lg-9 col-md-9"> <input type="text" placeholder="Enter description"></span> </div-->
 	 
 	 <div class="range-slider-section">
 	 <div class="project-setup-input row"><label class="col-lg-6">How many visitors currently land on your website each month?</label>
 	 <div class="col-lg-6 project-setup-slider">
 	 <input id="ex6" type="text" data-slider-min="0" data-slider-max="100000" data-slider-step="1000" data-slider-value="0"/>
-<div id="ex6CurrentSliderValLabel" class="range-slider-value"><span class="range-title">V</span><span id="ex6SliderVal" class="range-count">0</span></div>
+<div id="ex6CurrentSliderValLabel" class="range-slider-value"><span class="range-title">V</span><input id="ex6SliderVal" type="text" class="range-count" value="0"/></div>
  </div> 
  </div>
 	 
 	 <div class="project-setup-input row"><label class="col-lg-6">How many of the above visitors convert to actual paying customers?</label>
 	 <div class="col-lg-6 project-setup-slider">
 	 <input id="ex7" type="text" data-slider-min="0" data-slider-max="1000" data-slider-step="10" data-slider-value="0"/>
-<div id="ex7CurrentSliderValLabel" class="range-slider-value"><span class="range-title">P</span><span id="ex7SliderVal" class="range-count">0</span></div>
+<div id="ex7CurrentSliderValLabel" class="range-slider-value"><span class="range-title">P</span>
+<input id="ex7SliderVal" type="text" class="range-count" value="0"/></div>
  </div> 
  </div>
 	 
 	 <div class="project-setup-input row"><label class="col-lg-6">What is the one-time $ value of ONE paying customer? (average is okay)</label>
 	 <div class="col-lg-6 project-setup-slider">
 	 <input id="ex8" type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="25" data-slider-value="0"/>
-<div id="ex8CurrentSliderValLabel" class="range-slider-value"><span class="range-title">$</span><span id="ex8SliderVal" class="range-count">0</span></div>
+<div id="ex8CurrentSliderValLabel" class="range-slider-value"><span class="range-title">$</span>
+<input id="ex8SliderVal" type="text" class="range-count" value="0"/></div>
  </div> 
  </div>
 	 
@@ -196,29 +198,41 @@ $('#ex6').slider().on('slideStop', function(slideEvt){
 });
 */
 
+
 	//range slider custom js
 		$("#ex6").slider();
 		$("#ex6").on("slide, slideStop", function(slideEvt) {
 			var slider_num_ex6 = numeral(slideEvt.value).format('0,0');
 			//var slider_num_ex6 = tooltip-inner;
-			$("#ex6SliderVal").text(slider_num_ex6);
+			$("#ex6SliderVal").val(slider_num_ex6);
 		});
 		
 		
 	$("#ex7").slider();
 		$("#ex7").on("slide, slideStop", function(slideEvt) {
 			var slider_num_ex7 = numeral(slideEvt.value).format('0,0');
-			$("#ex7SliderVal").text(slider_num_ex7);
+			$("#ex7SliderVal").val(slider_num_ex7);
 	});
 	
 
 	$("#ex8").slider();
 		$("#ex8").on("slide, slideStop", function(slideEvt) {
 			var slider_num_ex8 = numeral(slideEvt.value).format('0,0');
-			$("#ex8SliderVal").text(slider_num_ex8);
+			$("#ex8SliderVal").val(slider_num_ex8);
 	});
 	
+			
+			
+	$('.project-setup-input input.range-count').on("blur",function() {
+		var inputval = $(this).val();
+		//alert(inputval);
+		var inputval_new = numeral(inputval).format('0,0');
+	//	alert(inputval_new);
+		$(this).val(inputval_new);
+	});
+
 		
+
 		
 	// ADD Cumma after three numbers
 	function numberWithCommas(x) {

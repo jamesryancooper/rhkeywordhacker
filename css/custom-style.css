@@ -1297,3 +1297,17 @@ width: 100%;}
   padding:10px 15px;
   width: 100%;
 }
+
+/*********** !4-1-16 ***********/
+.project-setup-input input.range-count{
+	
+	    background-color: #fff;
+    float: right;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 0 0 10px;
+    width: 75%;
+    color: #000;
+    font-size: 14px;
+}
+

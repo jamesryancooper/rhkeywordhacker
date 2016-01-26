@@ -188,3 +188,75 @@ cursor:pointer;
 .footnote {color:#ec1c24;cursor:pointer;}
 .footnote:hover .footnotetooltip {display:block;}
 .footnotetooltip {font-size:12px;display:none;color:#000000;border:1px solid #242021;background:#D8D8D8;margin-left:250px;margin-top:-175px;padding:5px;position:absolute;z-index:998;width:200px;}
+
+.tt-dropdown-menu, .gist {
+    text-align: left;
+}
+#scrollable-dropdown-menu .tt-dropdown-menu {
+  //max-height: 150px;
+  //overflow-y: auto;
+}
+.typeahead, .tt-query, .tt-hint {
+    background: #ec1c24 none repeat scroll 0 0;
+    border: medium none;
+    color: #000;
+    font-size: 14px;
+    height: 35px;
+    padding: 0 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 350px;
+}
+.typeahead {
+    background-color: #ec1c24;
+    width: 350px;
+}
+.typeahead:focus {
+    border: medium none;
+}
+.tt-query {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+.tt-hint {
+    color: #999999;
+}
+.tt-dropdown-menu, .tt-menu {
+    background-color: #fff;
+    border: 1px solid #1b3a5f;
+    color: #000000;
+    font-size: 14px;
+    height: 210px;
+    padding: 5px 5px;
+    text-align: left;
+    margin-top: 12px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 350px;
+    cursor: pointer;
+}
+
+.tt-suggestion {
+    font-size: 14px;
+    padding: 0 10px;
+}
+.tt-suggestion.tt-cursor {
+    background-color: #0097CF;
+    color: #FFFFFF;
+}
+.tt-suggestion p {
+    margin: 0;
+}
+
+.tt-suggestion:hover {
+    font-size: 14px;
+    padding: 0 10px;
+    background-color: #eaeaeb;
+}
+/*#scrollable-dropdown-menu .tt-dropdown-menu {
+  max-height: 150px;
+  width: 100%;
+  overflow-y: auto;
+}
+.typeahead {
+    
+}*/

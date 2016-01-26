@@ -36,6 +36,8 @@
     <!--1520 files-->
     <script src="js/1520.js"></script>
     <link href="css/1520.css" rel="stylesheet" id="theme-change">
+    <link href="css/spinner.css" rel="stylesheet" id="theme-change">
+    
 </head>
 
 <body id="body" class="page-loading home noisy">
@@ -85,8 +87,8 @@
                             <ul>
                                 <li><a href="dashboard.html">Projects</a></li>
                                 >
-                                <li><a href="keywordhacker.html">Keyword hacker</a></li>
-                                >
+                                <!--<li><a href="keywordhacker.html">Keyword hacker</a></li>
+                                >-->
                                 <li><a>New Project Setup</a></li>
                             </ul>
                         </div>
@@ -96,23 +98,32 @@
                         <h2 class="setup-heading">You are about to uncover Keyword Net-Worth™.</h2>
 
                         <form class="project-setup-form">
-                            <div class="project-setup-input row"><label class="col-lg-2 col-md-3">Project URL*</label> <span class="col-lg-10 col-md-9"><input type="text" placeholder="Enter project URL"></span></div>
-                            <!--div class="project-setup-input row"><label class="col-lg-3 col-md-3">Description</label><span class="col-lg-9 col-md-9"> <input type="text" placeholder="Enter description"></span> </div-->
-                            <div class="project-setup-input row"><label class="col-lg-2 col-md-3"> Location*</label><span class="col-lg-10 col-md-9"> <input type="text" placeholder="Enter location"></span></div>
+                            <div class="project-setup-input row"><label class="col-lg-3 col-md-3">Project URL*</label> <span class="col-lg-9 col-md-9"><input type="text" id="project-url" placeholder="Enter project URL"></span></div>
+                            <div class="project-setup-input row">
+                                <label class="col-lg-3 col-md-3"> Location*</label>
+                                <span class="col-lg-9 col-md-9" id="scrollable-dropdown-menu">
+                                    <input type="text" size="60" class="typeahead" id="project-location" placeholder="Enter location">
+                                </span>
+                            </div>
 
-                            <div class="project-setup-input row enter-keyword-new-project"><label class="col-lg-12 col-md-12"> Preliminary Keywords</label>
+<!-- BEGIN TYPEAHEAD TEST -->
 
-                                <p class="col-lg-12 col-md-12 note">Enter at least one keyword phrase.</p>
+
+<!-- END TYPEAHEAD TEST -->
+                            
+                            <div class="project-setup-input row enter-keyword-new-project"><label class="col-lg-12 col-md-12"> Preliminary Keywords*</label>
+
+                                <p class="col-lg-12 col-md-12 note">Provide at least one keyword phrase, and press &lt;Enter&gt; to add</p>
                                 <!--p>Separate additional phrases with commas.</p-->
+                                
+                                <div class="col-lg-12">
+                                    <input type="hidden" id="keyword-count" value="0"/>
+                                    <input type="text" id="new-keyword" class="custom-input-keyword" onkeypress="return addKeyword(event);"/>
+                                </div>
+                                <p class="col-lg-12 col-md-12 note"><br/><br/>Keywords provided so far</p>
                                 <div class="col-lg-12">
                                     <ul id="ctc">
-                                        <li>you see it's curious</li>
-                                        <li>ted did figure it out</li>
-                                        <li>time travel</li>
-                                        <li>and when we get back</li>
-                                        <li>we gonna tell everyone</li>
-                                        <li>how it's possible</li>
-                                        <li class="custom-input-keyword" style="display:none;"><input type="text" value=""/></li>
+
                                     </ul>
                                 </div>
                             </div>
@@ -147,13 +158,39 @@
                                 </div>
 
                             </div>
-                            <a class="orange-btn btn pull-right">FINISH</a>
+
+                            <div id="submit-button-block">
+                                <a class="orange-btn btn pull-right" onclick="createKeywordHackerProject();">FINISH</a>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    
+<!-- Alert modal -->
+<div id="dimmer" class="dimmer"></div>
+
+<div id="alert-window" class="alert-window">
+    <div class="row">
+        <div class="col-lg-12 text-center" id="alert-msg-body">
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <br/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <a class="alert-close-btn" id="alert_close_button" onclick="hideAlert();">CLOSE</a>
+        </div>
+    </div>
+</div>
+    
 </section>
 
 <!-- =========================
@@ -197,18 +234,64 @@
      JS SCRIPTS
 ============================== -->
 <!-- JQUERY -->
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
 
 <!-- BOOTSTRAP SCRIPTS -->
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="js/jquery.matchHeight-min.js"></script>
 <script src="js/bootstrap-slider.js"></script>
+
+<!-- TypeAhead js files -->
+<script type="text/javascript" src="js/typeahead.bundle.js"></script>
+<script type="text/javascript" src="js/georankerregions-data.js"></script>
+
 <script type="text/javascript">
     jQuery(function ($) {
         $('.matchheight').matchHeight();
     });
 </script>
 <script>
+    
+    var substringMatcher = function(strs) {
+  return function findMatches(q, cb) {
+    var matches, substringRegex;
+
+    // an array that will be populated with substring matches
+    matches = [];
+
+    // regex used to determine if a string contains the substring `q`
+    substrRegex = new RegExp(q, 'i');
+
+    // iterate through the pool of strings and for any string that
+    // contains the substring `q`, add it to the `matches` array
+    $.each(strs, function(i, str) {
+      if (substrRegex.test(str)) {
+        matches.push(str);
+      }
+    });
+
+    cb(matches);
+  };
+};
+
+$('#scrollable-dropdown-menu .typeahead').typeahead(null, {
+  name: 'countries',
+  limit: 10,
+  source: substringMatcher(regions)
+});
+
+/*$('#the-basics .typeahead').typeahead({
+  hint: true,
+  highlight: true,
+  minLength: 1
+},
+{
+  name: 'states',
+  source: substringMatcher(states)
+});*/
+    
+    
+    
     jQuery(document).ready(function () {
 
         /*
@@ -260,7 +343,7 @@
         });
 
 
-        // ADD Cumma after three numbers
+        // ADD Comma after three numbers
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",");
         }
@@ -271,8 +354,14 @@
 
             $(this).html(v_pound)
 
-        })
+        });
 
+        /*$('#scrollable-dropdown-menu .typeahead').typeahead(null,
+            {
+              name: 'countries',
+              limit: 10,
+              source: substringMatcher(regions)
+            });*/
 
     });
 </script>

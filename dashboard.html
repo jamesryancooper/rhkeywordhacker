@@ -31,6 +31,10 @@
 
     <!--google js file-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    
+    <!--1520 files-->
+    <script src="js/1520.js"></script>
+    <link href="css/1520.css" rel="stylesheet" id="theme-change">
 </head>
 
 <body id="body" class="page-loading home noisy">
@@ -79,7 +83,7 @@
                         <ul>
                             <li><a href="" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Download selected projects" data-original-title="" title="">Download</a></li>
                             <li>
-                                <button id="create-new-project" class="btn btn-orange btn-round"><i class="fa fa-plus"></i><span>Create New</span></button>
+                                <button id="create-new-project" class="btn btn-orange btn-round" onclick="gotoCreateProject();"><i class="fa fa-plus"></i><span>Create New</span></button>
                             </li>
                         </ul>
                     </div>
@@ -93,7 +97,7 @@
                         <div class="row">
                             <div class="bread-comb-outer col-lg-6">
                                 <ul>
-                                    <li><a href="#">Projects</a></li>
+                                    <li><a href="dashboard.html">Projects</a></li>
                                 </ul>
                             </div>
                             <div class="sort-navigation col-lg-6 text-right  button-group sort-by-button-group  card-sort-menu">
@@ -405,7 +409,7 @@
                                     </li>
 
                                     <li class="col-lg-4 matchheight">
-                                        <div class="active-link-outer"><span class="active-new-project-link"> <a href="backup/createproject-1.html">[ Activate New Project ]</a> </span></div>
+                                        <div class="active-link-outer"><span class="active-new-project-link"> <a href="" onclick="gotoCreateProject();">[ Activate New Project ]</a> </span></div>
                                     </li>
 
                                 </ul>

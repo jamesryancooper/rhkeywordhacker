@@ -1,22 +1,236 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>RankHacker - The intelligent content strategy platform!</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script>
-        function forwardToPage()
-        {
-            document.location = 'dashboard.html';
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- =========================
+              BASIC PAGE INFORMATION
+        ============================== -->
+    <title>RankHacker - The intelligent content strategy platform!</title>
+    <meta name="description" content="Intelligently generate an actionable content strategy complete with publication calendar to beat your competition.">
+    <meta name="keywords" content="content strategy, content roadmap, content calendar">
+    <meta name="author" content="fairmarketing.com">
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- =========================
+             FONTS
+        ============================== -->
+    <link href="fonts/font-awesome/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Nixie+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- =========================
+             STYLESHEETS
+        ============================== -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom-style.css" rel="stylesheet" id="theme-change">
+    <link href="css/rankhacker.css" rel="stylesheet" id="theme-change">
+    <link href="css/bootstrap-slider.min.css" rel="stylesheet" id="theme-change">
+
+    <!--google js file-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
+    
+    <!--1520 files-->
+    <script src="js/1520.js"></script>
+    <link href="css/1520.css" rel="stylesheet" id="theme-change">
+    <link href="css/spinner.css" rel="stylesheet" id="theme-change">
+</head>
+
+<body id="body" class="page-loading home noisy">
+
+<!-- =========================
+     MAIN MENU
+============================== -->
+<div id="rank-header-outer">
+    <nav id="mainmenu" class="navbar navbar-fixed-top main-menu" role="navigation">
+        <!-- LOGO CONTAINER -->
+        <div class="logo-cont logo-outer"><a class="navbar-brand" data-text="RANKHACKER" href="#header"><img src="images/logo-main.png" alt="site-logo"> </a></div>
+    </nav>
+</div>
+
+<!-- =========================
+     HEADER
+============================== -->
+<section id="header" class="blurable">
+    <div id="report-bg" class="piece "></div>
+    <div class="overlay interface-outer">
+        <div class="projects">
+            <div class="row row-v-spacing"></div>
+            <div id="dashboard-header" class="col-lg-10 col-md-offset-1 ">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="head-info-box background-gray">
+                            <h4 class="welcome-text">WELCOME TO THE KEYWORD HACKER MODULE</h4>
+
+                            <h2 class="page-info">the <strong>mission</strong> <strong>[</strong> Find keywords that meet or exceed your search volume goals <strong>]</strong></h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 padding-box">
+                    <div class="col-lg-6 view-option-outer">
+                        <ul>
+                            <li class="black-box-rh"></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div id="shadow"></div>
+            </div>
+            <div class="col-lg-10 col-md-offset-1">
+                <div class="padding-box">
+                    <div class="row">
+                        <div class="bread-comb-outer col-lg-6">
+                            <!--<ul>
+                                <li><a href="dashboard.html">Projects</a></li>
+                                >
+                                <li><a href="keywordhacker.html">Keyword hacker</a></li>
+                                >
+                                <li><a>New Project Setup</a></li>
+                            </ul>-->
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2" id="setup-box-outer">
+                        <h2 class="setup-heading">Please Log In</h2>
+
+                        <form class="project-setup-form">
+                            <div class="project-setup-input row"><label class="col-lg-2 col-md-3">Username</label> <span class="col-lg-10 col-md-9"><input type="text" id="user-email" required placeholder="Your email address"></span></div>
+                            <div class="project-setup-input row"><label class="col-lg-2 col-md-3">Password</label><span class="col-lg-10 col-md-9"> <input type="password" id="user-password" required placeholder="Your password"></span></div>
+
+                            <a class="orange-btn btn pull-right" onclick="loginAccount();">LOGIN</a>
+                            <div class="col-lg-12 text-center">
+                                <span id="login-response" class="login-response"></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =========================
+     FOOTER
+============================== -->
+<!-- Footer start here -->
+<footer id="interface-footer">
+    <div class="col-lg-10 col-lg-offset-1">
+        <div class="row">
+            <!--Footer left section start here-->
+            <div class="footer-link col-lg-4">
+                <ul class="text-left">
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#"> Privacy Policy</a></li>
+                    <li><a href="#">agent@rankhacker.com </a></li>
+                </ul>
+            </div>
+            <!--footer left section close here-->
+            <!--footer center socail icon section start here-->
+            <div class="footer-socail-icon col-lg-4 ">
+                <ul class="text-center">
+                    <li><a href="#"> <i class="fa fa-facebook"></i> </a></li>
+                    <li><a href="#"> <i class="fa fa-twitter"></i> </a></li>
+                    <li><a href="#"> <i class="fa fa-google-plus"></i> </a></li>
+                    <li><a href="#"> <i class="fa fa-vimeo-square"></i> </a></li>
+                    <li><a href="#"> <i class="fa fa-youtube-play"></i> </a></li>
+                    <li><a href="#"> <i class="fa fa-instagram"></i> </a></li>
+                </ul>
+            </div>
+            <!--footer center socail icon section close here-->
+            <!--copyright section start here-->
+            <div class="copy-right-section col-lg-4 text-right"> &copy; 2015 All Rights Reserved</div>
+            <!--copyright section close here-->
+        </div>
+    </div>
+</footer>
+
+<!--Footer close here-->
+
+<!-- =========================
+     JS SCRIPTS
+============================== -->
+<!-- JQUERY -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<!-- BOOTSTRAP SCRIPTS -->
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="js/jquery.matchHeight-min.js"></script>
+<script src="js/bootstrap-slider.js"></script>
+<script type="text/javascript">
+    jQuery(function ($) {
+        $('.matchheight').matchHeight();
+    });
+</script>
+<script>
+    jQuery(document).ready(function () {
+
+        /*
+         var originalVal;
+
+         $('#ex6').slider().on('slideStart', function(slideEvt){
+         originalVal = $('#ex').data('slider').getValue();
+         });
+
+         $('#ex6').slider().on('slideStop', function(slideEvt){
+         var newVal = $('#ex6').data('slider').getValue();
+         if(originalVal != newVal) {
+         alert('Value Changed!');
+         alert('Value Changed!');
+         }
+         });
+         */
+
+
+        //range slider custom js
+        $("#ex6").slider();
+        $("#ex6").on("slide, slideStop", function (slideEvt) {
+            var slider_num_ex6 = numeral(slideEvt.value).format('0,0');
+            //var slider_num_ex6 = tooltip-inner;
+            $("#ex6SliderVal").val(slider_num_ex6);
+        });
+
+
+        $("#ex7").slider();
+        $("#ex7").on("slide, slideStop", function (slideEvt) {
+            var slider_num_ex7 = numeral(slideEvt.value).format('0,0');
+            $("#ex7SliderVal").val(slider_num_ex7);
+        });
+
+
+        $("#ex8").slider();
+        $("#ex8").on("slide, slideStop", function (slideEvt) {
+            var slider_num_ex8 = numeral(slideEvt.value).format('0,0');
+            $("#ex8SliderVal").val(slider_num_ex8);
+        });
+
+
+        $('.project-setup-input input.range-count').on("blur", function () {
+            var inputval = $(this).val();
+            //alert(inputval);
+            var inputval_new = numeral(inputval).format('0,0');
+            //	alert(inputval_new);
+            $(this).val(inputval_new);
+        });
+
+
+        // ADD Cumma after three numbers
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",");
         }
-    </script>
-    </head>
-    <body onload="forwardToPage();">
-        
-    </body>
+
+        $('.range-count').each(function () {
+            var v_pound = $(this).html();
+            v_pound = numberWithCommas(v_pound);
+
+            $(this).html(v_pound)
+
+        })
+
+
+    });
+</script>
+</body>
 </html>

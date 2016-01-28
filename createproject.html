@@ -87,8 +87,6 @@
                             <ul>
                                 <li><a href="dashboard.html">Projects</a></li>
                                 >
-                                <!--<li><a href="keywordhacker.html">Keyword hacker</a></li>
-                                >-->
                                 <li><a>New Project Setup</a></li>
                             </ul>
                         </div>
@@ -154,6 +152,16 @@
 
                                         <div id="ex8CurrentSliderValLabel" class="range-slider-value"><span class="range-title">$</span>
                                             <input id="ex8SliderVal" type="text" class="range-count" value="0"/></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="project-setup-input row"><label class="col-lg-6">What is the $ cost per keyword level for this project?</label>
+
+                                    <div class="col-lg-6 project-setup-slider">
+                                        <input id="ex9" type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="25" data-slider-value="0"/>
+
+                                        <div id="ex9CurrentSliderValLabel" class="range-slider-value"><span class="range-title">$</span>
+                                            <input id="ex9SliderVal" type="text" class="range-count" value="0"/></div>
                                     </div>
                                 </div>
 
@@ -318,6 +326,12 @@ $('#scrollable-dropdown-menu .typeahead').typeahead(null, {
             //var slider_num_ex6 = tooltip-inner;
             $("#ex6SliderVal").val(slider_num_ex6);
         });
+        $("#ex6SliderVal").change(function(){
+            $("#ex6").slider({
+                value: parseInt($("#ex6SliderVal").val().replace(",",""))
+                });
+            $("#ex6").slider('refresh');
+        });
 
 
         $("#ex7").slider();
@@ -325,12 +339,36 @@ $('#scrollable-dropdown-menu .typeahead').typeahead(null, {
             var slider_num_ex7 = numeral(slideEvt.value).format('0,0');
             $("#ex7SliderVal").val(slider_num_ex7);
         });
+        $("#ex7SliderVal").change(function(){
+            $("#ex7").slider({
+                value: parseInt($("#ex7SliderVal").val().replace(",",""))
+                });
+            $("#ex7").slider('refresh');
+        });
 
 
         $("#ex8").slider();
         $("#ex8").on("slide, slideStop", function (slideEvt) {
             var slider_num_ex8 = numeral(slideEvt.value).format('0,0');
             $("#ex8SliderVal").val(slider_num_ex8);
+        });
+        $("#ex8SliderVal").change(function(){
+            $("#ex8").slider({
+                value: parseInt($("#ex8SliderVal").val().replace(",",""))
+                });
+            $("#ex8").slider('refresh');
+        });
+        
+        $("#ex9").slider();
+        $("#ex9").on("slide, slideStop", function (slideEvt) {
+            var slider_num_ex8 = numeral(slideEvt.value).format('0,0');
+            $("#ex9SliderVal").val(slider_num_ex8);
+        });
+        $("#ex9SliderVal").change(function(){
+            $("#ex9").slider({
+                value: parseInt($("#ex9SliderVal").val().replace(",",""))
+                });
+            $("#ex9").slider('refresh');
         });
 
 

@@ -200,6 +200,7 @@ function createKeywordHackerProject()
         var monthlyVisitors = $('#ex6SliderVal').val();
         var payingCustomers = $('#ex7SliderVal').val();
         var customerValue = $('#ex8SliderVal').val();
+        var costPerLevel = $('#ex9SliderVal').val();
         
         /*console.log("proj url  = "+projectURL);
         console.log("location  = "+projectLocation);
@@ -210,7 +211,7 @@ function createKeywordHackerProject()
         
         
         //Once you have required info, create the project
-        $.ajax({url: restURL, data: {'command':'createKHProject','username':username,'projectURL':projectURL,'projectLocation':projectLocation,'keywords':keywordsList,'monthlyVisitors':monthlyVisitors,'payingCustomers':payingCustomers,'customerValue':customerValue}, type: 'post', async: true, success: function postResponse(returnData){
+        $.ajax({url: restURL, data: {'command':'createKHProject','username':username,'projectURL':projectURL,'projectLocation':projectLocation,'keywords':keywordsList,'monthlyVisitors':monthlyVisitors,'payingCustomers':payingCustomers,'customerValue':customerValue,'costPerLevel':costPerLevel}, type: 'post', async: true, success: function postResponse(returnData){
                 var info = JSON.parse(returnData);
 
                 if(info.status == "success")

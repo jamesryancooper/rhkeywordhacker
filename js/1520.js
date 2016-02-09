@@ -232,13 +232,136 @@ function loadProjectDashboard()
 {
     var username = getCookie("username");
     if(username != '')
-    {    
+    {
         $.ajax({url: restURL, data: {'command':'getProjectDashboardData','username':username}, type: 'post', async: true, success: function postResponse(returnData){
                 var info = JSON.parse(returnData);
 
                 if(info.status == "success")
                 {
+                    var numProjects = parseInt(info.projectsCount);
+                    var userFullName = info.userFullName;
                     
+                    //Set the welcome message
+                    $('#dashboard-user-full-name').html("welcome <strong>"+userFullName+"</strong> <strong>[</strong> manage your missions below <strong>]</strong>");
+                    
+                    var finalOutput = "";
+                    var cardHTML = "<ul class=\"row grid\">";
+                    for(var i=0; i<numProjects; i++)
+                    {
+                        var entry = info.data[i];
+                        
+                        var projectID = entry.projectID;
+                        var runDate = entry.runDate;
+                        var numberOfKeywords = entry.numberOfKeywords;
+                        var completed = entry.completed;
+                        var active = entry.active;
+                        var monthlyVisitors = entry.monthlyVisitors;
+                        var payingCustomers = entry.payingCustomers;
+                        var valuePerCustomer = entry.valuePerCustomer;
+                        var costPerLevel = entry.costPerLevel;
+                        var totalPowerLevel = entry.totalPowerLevel;
+                        var incomingTraffic = entry.incomingTraffic;
+                        var projectTitle = entry.projectTitle;
+                        
+                        var activeString = "ACTIVE";
+                        var numberOfKeywordsValue = 0;
+                            if(numberOfKeywords != '') { numberOfKeywordsValue = parseFloat(numberOfKeywords); }
+                        var monthlyVisitorsValue = 0;
+                            if(monthlyVisitors != '') { monthlyVisitorsValue = parseFloat(monthlyVisitors); }
+                        var payingCustomersValue = 0;
+                            if(payingCustomers != '') { payingCustomersValue = parseFloat(payingCustomers); }
+                        var valuePerCustomerValue = 0;
+                            if(valuePerCustomer != '') { valuePerCustomerValue = parseFloat(valuePerCustomer); }
+                        var costPerLevelValue = 0;
+                            if(costPerLevel != '') { costPerLevelValue = parseFloat(costPerLevel); }
+                        var totalPowerLevelValue = 0;
+                            if(totalPowerLevel != '') { totalPowerLevelValue = parseFloat(totalPowerLevel); }
+                        var incomingTrafficValue = 0;
+                            if(incomingTraffic != '') { incomingTrafficValue = parseFloat(incomingTraffic); }
+                        
+                        /*console.log("incoming traffic value = "+incomingTrafficValue);
+                        console.log("monthly visitors value = "+monthlyVisitorsValue);
+                        console.log("paying customers value = "+payingCustomersValue);
+                        console.log("single customer value = "+valuePerCustomerValue);*/
+                        
+                        var marketingCosts = "$" + numberWithCommas(Math.round((totalPowerLevelValue * costPerLevelValue),0)) + "/mo.";
+                        var keywordNetWorth = "$" + numberWithCommas(Math.round((incomingTrafficValue * (payingCustomersValue / monthlyVisitorsValue) * valuePerCustomerValue),0));
+                        
+                        if(completed != '1')
+                        {
+                            keywordNetWorth = "calculating...";
+                            marketingCosts = "calculating...";
+                            totalPowerLevelValue = "calculating...";
+                        }
+                        
+                        if(active != '1')
+                        {
+                            activeString = "INACTIVE";
+                        }
+                        
+                        
+                        //Create a card and add it to the div
+                        //if(completed == '1')
+                        if(true)
+                        {
+                            cardHTML += "<li class=\"col-lg-4 matchheight element-item\">";
+                            cardHTML += "<div class=\"project-cart-box box-shadow-ot\">";
+                            cardHTML += "<div class=\"card-header\">";
+                            cardHTML += "<h1 class=\"project_name_sort\"><input type=\"checkbox\" id=\"chk-content-all1\"><label for=\"chk-content-all1\"></label><a style=\"cursor:pointer;\" onclick=\"window.location='keywordhacker.html?pid="+projectID+"';\">"+projectTitle+"</a></h1>";
+                            cardHTML += "</div>";
+                            cardHTML += "<a style=\"cursor:pointer;\" onclick=\"window.location='keywordhacker.html?pid="+projectID+"';\" class=\"module-link keyword-hacker-module\">";
+                            cardHTML += "<h2 class=\"module-heading text-left\">KEYWORD HACKER MODULE</h2>";
+                            cardHTML += "<div class=\"module-detail-section\">";
+                            cardHTML += "<div class=\"row\">";
+                            cardHTML += "<div class=\"col-lg-2 project-icon\"><i class=\"black-box-rh\"> </i></div>";
+                            cardHTML += "<div class=\"col-lg-10 module-details-outer\">";
+                            cardHTML += "<div class=\"col-lg-6  module-details-left\">";
+                            cardHTML += "<h2 class=\"module-heading\"># of keywords<span>"+numberOfKeywordsValue+"</span></h2>";
+                            cardHTML += "<h2 class=\"module-heading\">Power level sum<span>"+totalPowerLevelValue+"</span></h2>";
+                            cardHTML += "</div>";
+                            cardHTML += "<div class=\"col-lg-6 module-details-right\">";
+                            cardHTML += "<h2 class=\"module-heading\">Keyword net worth<span>"+keywordNetWorth+"</span></h2>";
+                            cardHTML += "<h2 class=\"module-heading\">Marketing costs<span>"+marketingCosts+"</span></h2>";
+                            cardHTML += "</div>";
+                            cardHTML += "</div>";
+                            cardHTML += "</div>";
+                            cardHTML += "</div>";
+                            cardHTML += "</a>";
+                            cardHTML += "<a style=\"cursor:default;\" onclick=\"return false;\" class=\"module-link content-hacker-module\">";
+                            cardHTML += "<h2 class=\"module-heading text-left\">Content Hacker Module</h2>";
+                            cardHTML += "<div class=\"module-detail-section\">";
+                            cardHTML += "<div class=\"row\">";
+                            cardHTML += "<div class=\"col-lg-2 project-icon\"><i class=\"black-box-rh\"> <span class=\"notification-count\"></span></i></div>";
+                            cardHTML += "<div class=\"col-lg-10 module-details-outer\">";
+                            cardHTML += "<div class=\"col-lg-6  module-details-left\">";
+                            cardHTML += "<h2 class=\"module-heading\"># of blueprints<span>--</span></h2>";
+                            cardHTML += "<h2 class=\"module-heading\">Content Goal<span>--</span></h2>";
+                            cardHTML += "</div>";
+                            cardHTML += "<div class=\"col-lg-6 module-details-right\">";
+                            cardHTML += "<h2 class=\"module-heading\">PG one rankings<span>--</span></h2>";
+                            cardHTML += "<h2 class=\"module-heading\">Content Budget<span>--</span></h2>";
+                            cardHTML += "</div>";
+                            cardHTML += "</div>";
+                            cardHTML += "</div>";
+                            cardHTML += "</div>";
+                            cardHTML += "</a>";
+                            cardHTML += "<div class=\"card-box-bottom\">";
+                            cardHTML += "<div class=\"project-date-card date_sort\"><i class=\"eagle-icon\"></i>"+runDate+"</div>";
+                            cardHTML += "<a style=\"cursor:pointer;\" onclick=\"window.location='keywordhacker.html?pid="+projectID+"';\" class=\"project-status-card  project_status_sort \" href=\"javascript:void(0);\"> "+activeString+" </a>";
+                            cardHTML += "</div>";
+                            cardHTML += "</div>";
+                            cardHTML += "</li>";
+                        }
+                    }
+                    
+                    var addMoreHTML = "<li class=\"col-lg-4 matchheight\">" +
+                                        "<div class=\"active-link-outer\"><span class=\"active-new-project-link\"> <a style=\"cursor:pointer;\" onclick=\"gotoCreateProject();\">[ Activate New Project ]</a> </span></div>" +
+                                        "</li>" +
+                                    "</ul>";
+
+                    finalOutput += cardHTML+addMoreHTML;
+                    
+                    $('#card-container').html(finalOutput);
                 }
             }
         });

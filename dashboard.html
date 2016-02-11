@@ -36,9 +36,17 @@
     <script src="js/1520.js"></script>
     <link href="css/1520.css" rel="stylesheet" id="theme-change">
     <link href="css/spinner.css" rel="stylesheet" id="theme-change">
+    
+    <script>
+        function run(){
+            loadProjectDashboard();
+            setInterval(loadProjectDashboard, 60000);
+        }
+    </script>
+    
 </head>
 
-<body id="body" class="page-loading home noisy" onload="loadProjectDashboard();">
+<body id="body" class="page-loading home noisy" onload="run();">
 
 <!-- =========================
      MAIN MENU
@@ -105,13 +113,13 @@
                                 <ul>
                                     <li>Sort by:</li>
                                     <li>
-                                        <button class="sort-btns" data-sort-by="project_name_sort">Project</button>
+                                        <button class="sort-btns" data-sort-by="project_name_sort" onclick="displayDashboardCards('project');">Project</button>
                                     </li>
                                     <li>
-                                        <button class="sort-btns" data-sort-by="date_sort">Publish Date</button>
+                                        <button class="sort-btns" data-sort-by="date_sort" onclick="displayDashboardCards('runDate');">Publish Date</button>
                                     </li>
                                     <li>
-                                        <button class="sort-btns" data-sort-by="project_status_sort">Status</button>
+                                        <button class="sort-btns" data-sort-by="project_status_sort" onclick="displayDashboardCards('status');">Status</button>
                                     </li>
                                 </ul>
                             </div>
@@ -239,6 +247,10 @@
 
 
 </script>
+
+<input type="hidden" id="json" value=""/>
+<input type="hidden" id="curr_sort" value=""/>
+<input type="hidden" id="curr_sort_reversed" value=""/>
 
 </body>
 </html>

@@ -3,6 +3,23 @@
 var restURL = "http://localhost:8084/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://localhost:8084/rest1.0/servlet/ssd.DownloadInventoryReport"
 
+var sort_by = function(field, reverse, primer){
+   var key = function (x) {return primer ? primer(x[field]) : x[field]};
+
+   return function (a,b) {
+	  var A = key(a), B = key(b);
+	  return ( (A < B) ? -1 : ((A > B) ? 1 : 0) ) * [-1,1][+!!reverse];                  
+   }
+}
+
+function date_sort_asc(a, b) {
+    return new Date(a.runDateRaw).getTime() - new Date(b.runDateRaw).getTime();
+}
+
+function date_sort_desc(a, b) {
+    return new Date(b.runDateRaw).getTime() - new Date(a.runDateRaw).getTime();
+}
+
 function getURLParameter(name)
 {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
@@ -238,130 +255,18 @@ function loadProjectDashboard()
 
                 if(info.status == "success")
                 {
-                    var numProjects = parseInt(info.projectsCount);
+                    //Save this to local storage so that it can be used to populate the HTML using any sort method
+                    $('#json').val(returnData);
+                    $('#curr_sort').val("runDate");
+                    $('#curr_sort_reversed').val("true");
+                    
                     var userFullName = info.userFullName;
                     
                     //Set the welcome message
                     $('#dashboard-user-full-name').html("welcome <strong>"+userFullName+"</strong> <strong>[</strong> manage your missions below <strong>]</strong>");
                     
-                    var finalOutput = "";
-                    var cardHTML = "<ul class=\"row grid\">";
-                    for(var i=0; i<numProjects; i++)
-                    {
-                        var entry = info.data[i];
-                        
-                        var projectID = entry.projectID;
-                        var runDate = entry.runDate;
-                        var numberOfKeywords = entry.numberOfKeywords;
-                        var completed = entry.completed;
-                        var active = entry.active;
-                        var monthlyVisitors = entry.monthlyVisitors;
-                        var payingCustomers = entry.payingCustomers;
-                        var valuePerCustomer = entry.valuePerCustomer;
-                        var costPerLevel = entry.costPerLevel;
-                        var totalPowerLevel = entry.totalPowerLevel;
-                        var incomingTraffic = entry.incomingTraffic;
-                        var projectTitle = entry.projectTitle;
-                        
-                        var activeString = "ACTIVE";
-                        var numberOfKeywordsValue = 0;
-                            if(numberOfKeywords != '') { numberOfKeywordsValue = parseFloat(numberOfKeywords); }
-                        var monthlyVisitorsValue = 0;
-                            if(monthlyVisitors != '') { monthlyVisitorsValue = parseFloat(monthlyVisitors); }
-                        var payingCustomersValue = 0;
-                            if(payingCustomers != '') { payingCustomersValue = parseFloat(payingCustomers); }
-                        var valuePerCustomerValue = 0;
-                            if(valuePerCustomer != '') { valuePerCustomerValue = parseFloat(valuePerCustomer); }
-                        var costPerLevelValue = 0;
-                            if(costPerLevel != '') { costPerLevelValue = parseFloat(costPerLevel); }
-                        var totalPowerLevelValue = 0;
-                            if(totalPowerLevel != '') { totalPowerLevelValue = parseFloat(totalPowerLevel); }
-                        var incomingTrafficValue = 0;
-                            if(incomingTraffic != '') { incomingTrafficValue = parseFloat(incomingTraffic); }
-                        
-                        /*console.log("incoming traffic value = "+incomingTrafficValue);
-                        console.log("monthly visitors value = "+monthlyVisitorsValue);
-                        console.log("paying customers value = "+payingCustomersValue);
-                        console.log("single customer value = "+valuePerCustomerValue);*/
-                        
-                        var marketingCosts = "$" + numberWithCommas(Math.round((totalPowerLevelValue * costPerLevelValue),0)) + "/mo.";
-                        var keywordNetWorth = "$" + numberWithCommas(Math.round((incomingTrafficValue * (payingCustomersValue / monthlyVisitorsValue) * valuePerCustomerValue),0));
-                        
-                        if(completed != '1')
-                        {
-                            keywordNetWorth = "calculating...";
-                            marketingCosts = "calculating...";
-                            totalPowerLevelValue = "calculating...";
-                        }
-                        
-                        if(active != '1')
-                        {
-                            activeString = "INACTIVE";
-                        }
-                        
-                        
-                        //Create a card and add it to the div
-                        //if(completed == '1')
-                        if(true)
-                        {
-                            cardHTML += "<li class=\"col-lg-4 matchheight element-item\">";
-                            cardHTML += "<div class=\"project-cart-box box-shadow-ot\">";
-                            cardHTML += "<div class=\"card-header\">";
-                            cardHTML += "<h1 class=\"project_name_sort\"><input type=\"checkbox\" id=\"chk-content-all1\"><label for=\"chk-content-all1\"></label><a style=\"cursor:pointer;\" onclick=\"window.location='keywordhacker.html?pid="+projectID+"';\">"+projectTitle+"</a></h1>";
-                            cardHTML += "</div>";
-                            cardHTML += "<a style=\"cursor:pointer;\" onclick=\"window.location='keywordhacker.html?pid="+projectID+"';\" class=\"module-link keyword-hacker-module\">";
-                            cardHTML += "<h2 class=\"module-heading text-left\">KEYWORD HACKER MODULE</h2>";
-                            cardHTML += "<div class=\"module-detail-section\">";
-                            cardHTML += "<div class=\"row\">";
-                            cardHTML += "<div class=\"col-lg-2 project-icon\"><i class=\"black-box-rh\"> </i></div>";
-                            cardHTML += "<div class=\"col-lg-10 module-details-outer\">";
-                            cardHTML += "<div class=\"col-lg-6  module-details-left\">";
-                            cardHTML += "<h2 class=\"module-heading\"># of keywords<span>"+numberOfKeywordsValue+"</span></h2>";
-                            cardHTML += "<h2 class=\"module-heading\">Power level sum<span>"+totalPowerLevelValue+"</span></h2>";
-                            cardHTML += "</div>";
-                            cardHTML += "<div class=\"col-lg-6 module-details-right\">";
-                            cardHTML += "<h2 class=\"module-heading\">Keyword net worth<span>"+keywordNetWorth+"</span></h2>";
-                            cardHTML += "<h2 class=\"module-heading\">Marketing costs<span>"+marketingCosts+"</span></h2>";
-                            cardHTML += "</div>";
-                            cardHTML += "</div>";
-                            cardHTML += "</div>";
-                            cardHTML += "</div>";
-                            cardHTML += "</a>";
-                            cardHTML += "<a style=\"cursor:default;\" onclick=\"return false;\" class=\"module-link content-hacker-module\">";
-                            cardHTML += "<h2 class=\"module-heading text-left\">Content Hacker Module</h2>";
-                            cardHTML += "<div class=\"module-detail-section\">";
-                            cardHTML += "<div class=\"row\">";
-                            cardHTML += "<div class=\"col-lg-2 project-icon\"><i class=\"black-box-rh\"> <span class=\"notification-count\"></span></i></div>";
-                            cardHTML += "<div class=\"col-lg-10 module-details-outer\">";
-                            cardHTML += "<div class=\"col-lg-6  module-details-left\">";
-                            cardHTML += "<h2 class=\"module-heading\"># of blueprints<span>--</span></h2>";
-                            cardHTML += "<h2 class=\"module-heading\">Content Goal<span>--</span></h2>";
-                            cardHTML += "</div>";
-                            cardHTML += "<div class=\"col-lg-6 module-details-right\">";
-                            cardHTML += "<h2 class=\"module-heading\">PG one rankings<span>--</span></h2>";
-                            cardHTML += "<h2 class=\"module-heading\">Content Budget<span>--</span></h2>";
-                            cardHTML += "</div>";
-                            cardHTML += "</div>";
-                            cardHTML += "</div>";
-                            cardHTML += "</div>";
-                            cardHTML += "</a>";
-                            cardHTML += "<div class=\"card-box-bottom\">";
-                            cardHTML += "<div class=\"project-date-card date_sort\"><i class=\"eagle-icon\"></i>"+runDate+"</div>";
-                            cardHTML += "<a style=\"cursor:pointer;\" onclick=\"window.location='keywordhacker.html?pid="+projectID+"';\" class=\"project-status-card  project_status_sort \" href=\"javascript:void(0);\"> "+activeString+" </a>";
-                            cardHTML += "</div>";
-                            cardHTML += "</div>";
-                            cardHTML += "</li>";
-                        }
-                    }
-                    
-                    var addMoreHTML = "<li class=\"col-lg-4 matchheight\">" +
-                                        "<div class=\"active-link-outer\"><span class=\"active-new-project-link\"> <a style=\"cursor:pointer;\" onclick=\"gotoCreateProject();\">[ Activate New Project ]</a> </span></div>" +
-                                        "</li>" +
-                                    "</ul>";
-
-                    finalOutput += cardHTML+addMoreHTML;
-                    
-                    $('#card-container').html(finalOutput);
+                    //Populate the cards based on a default sort of create date
+                    displayDashboardCards('runDate');
                 }
             }
         });
@@ -372,6 +277,182 @@ function loadProjectDashboard()
     }
 }
 
+function displayDashboardCards(sortMethod)
+{
+    var returnData = $('#json').val();
+    //console.log(returnData);
+    var currSortMethod = $('#curr_sort').val();
+    var sortMethodReversed = $('#curr_sort_reversed').val();
+    
+    var reversed = false;
+    
+    var info = JSON.parse(returnData);
+    var data = info.data;
+    
+    
+    if(sortMethod == 'runDate')
+    {
+        if(sortMethod == currSortMethod)
+        {
+            if(sortMethodReversed == "true")
+            {
+                reversed = false;
+                data.sort(date_sort_asc);
+            }
+            else
+            {
+                reversed = true;
+                data.sort(date_sort_desc);
+            }
+        }
+    }
+    else if(sortMethod == 'project')
+    {
+        if(sortMethod == currSortMethod)
+        {
+            if(sortMethodReversed == "true")
+            {
+                reversed = false;
+            }
+            else
+            {
+                reversed = true;
+            }
+        }
+        data.sort(sort_by('projectID', reversed, parseInt));
+    }
+    else if(sortMethod == 'status')
+    {
+        if(sortMethod == currSortMethod)
+        {
+            if(sortMethodReversed == "true")
+            {
+                reversed = false;
+            }
+            else
+            {
+                reversed = true;
+            }
+        }
+        data.sort(sort_by('completed', reversed, parseInt));
+    }
+    
+    //Save the new sort method and reversed status
+    $('#curr_sort').val(sortMethod);
+    $('#curr_sort_reversed').val(reversed);
+    
+    
+    
+    var finalOutput = "";
+    var cardHTML = "<ul class=\"row grid\">";
+    
+    var numProjects = info.projectsCount;
+    
+    for(var i=0; i<numProjects; i++)
+    {
+        var entry = info.data[i];
+
+        var projectID = entry.projectID;
+        var runDate = entry.runDate;
+        var numberOfKeywords = entry.keywordCount;
+        var completed = entry.completed;
+        var active = entry.active;
+        var monthlyVisitors = entry.monthlyVisitors;
+        var payingCustomers = entry.payingCustomers;
+        var valuePerCustomer = entry.valuePerCustomer;
+        var costPerLevel = entry.costPerLevel;
+        var totalPowerLevel = entry.totalPowerLevel;
+        var incomingTraffic = Math.round(entry.incomingTraffic,0);
+        var projectTitle = entry.projectTitle;
+
+        var activeString = "ACTIVE";
+        
+        var monthlyCustomers = Math.round(incomingTraffic * (payingCustomers / monthlyVisitors),0);
+        var monthlySales = Math.round(monthlyCustomers * valuePerCustomer,0);
+        var marketingCosts = numberWithCommas(Math.round((totalPowerLevel * costPerLevel),0)) + "/mo.";
+        var costPerMonth = Math.round((totalPowerLevel * costPerLevel),0);
+        var keywordNetWorth = numberWithCommas(monthlySales - costPerMonth);
+
+        var keywordNetWorthString = "";
+        if(completed != 1)
+        {
+            keywordNetWorthString = "<span style=\"color:red;\">calculating...</span>";
+        }
+        else
+        {
+            keywordNetWorthString = "$"+keywordNetWorth;
+        }
+
+        if(active != '1')
+        {
+            activeString = "INACTIVE";
+        }
+
+
+        //Create a card and add it to the div
+        //if(completed == '1')
+        if(true)
+        {
+            cardHTML += "<li class=\"col-lg-4 matchheight element-item\">";
+            cardHTML += "<div class=\"project-cart-box box-shadow-ot\">";
+            cardHTML += "<div class=\"card-header\">";
+            cardHTML += "<h1 class=\"project_name_sort\"><input type=\"checkbox\" id=\"chk-content-all1\"><label for=\"chk-content-all1\"></label><a style=\"cursor:pointer;\" onclick=\"window.location='keywordhacker.html?pid="+projectID+"';\">"+projectTitle+"</a></h1>";
+            cardHTML += "</div>";
+            cardHTML += "<a style=\"cursor:pointer;\" onclick=\"window.location='keywordhacker.html?pid="+projectID+"';\" class=\"module-link keyword-hacker-module\">";
+            cardHTML += "<h2 class=\"module-heading text-left\">KEYWORD HACKER MODULE</h2>";
+            cardHTML += "<div class=\"module-detail-section\">";
+            cardHTML += "<div class=\"row\">";
+            cardHTML += "<div class=\"col-lg-2 project-icon\"><i class=\"black-box-rh\"> </i></div>";
+            cardHTML += "<div class=\"col-lg-10 module-details-outer\">";
+            cardHTML += "<div class=\"col-lg-6  module-details-left\">";
+            cardHTML += "<h2 class=\"module-heading\"># of keywords<span>"+numberOfKeywords+"</span></h2>";
+            cardHTML += "<h2 class=\"module-heading\">Power level sum<span>"+totalPowerLevel+"</span></h2>";
+            cardHTML += "</div>";
+            cardHTML += "<div class=\"col-lg-6 module-details-right\">";
+            cardHTML += "<h2 class=\"module-heading\">Keyword net worth<span>"+keywordNetWorthString+"</span></h2>";
+            cardHTML += "<h2 class=\"module-heading\">Marketing costs<span>$"+marketingCosts+"</span></h2>";
+            cardHTML += "</div>";
+            cardHTML += "</div>";
+            cardHTML += "</div>";
+            cardHTML += "</div>";
+            cardHTML += "</a>";
+            cardHTML += "<a style=\"cursor:default;\" class=\"module-link content-hacker-module\">";
+            cardHTML += "<h2 class=\"module-heading text-left\">Content Hacker Module</h2>";
+            cardHTML += "<div class=\"module-detail-section\">";
+            cardHTML += "<div class=\"row\">";
+            cardHTML += "<div class=\"col-lg-2 project-icon\"><i class=\"black-box-rh\"> <span class=\"notification-count\"></span></i></div>";
+            cardHTML += "<div class=\"col-lg-10 module-details-outer\">";
+            cardHTML += "<div class=\"col-lg-6  module-details-left\">";
+            cardHTML += "<h2 class=\"module-heading\"># of blueprints<span>--</span></h2>";
+            cardHTML += "<h2 class=\"module-heading\">Content Goal<span>--</span></h2>";
+            cardHTML += "</div>";
+            cardHTML += "<div class=\"col-lg-6 module-details-right\">";
+            cardHTML += "<h2 class=\"module-heading\">PG one rankings<span>--</span></h2>";
+            cardHTML += "<h2 class=\"module-heading\">Content Budget<span>--</span></h2>";
+            cardHTML += "</div>";
+            cardHTML += "</div>";
+            cardHTML += "</div>";
+            cardHTML += "</div>";
+            cardHTML += "</a>";
+            cardHTML += "<div class=\"card-box-bottom\">";
+            cardHTML += "<div class=\"project-date-card date_sort\"><i class=\"eagle-icon\"></i>"+runDate+"</div>";
+            cardHTML += "<a style=\"cursor:pointer;\" onclick=\"window.location='keywordhacker.html?pid="+projectID+"';\" class=\"project-status-card  project_status_sort \" href=\"javascript:void(0);\"> "+activeString+" </a>";
+            cardHTML += "</div>";
+            cardHTML += "</div>";
+            cardHTML += "</li>";
+        }
+    }
+
+    var addMoreHTML = "<li class=\"col-lg-4 matchheight\">" +
+                        "<div class=\"active-link-outer\"><span class=\"active-new-project-link\"> <a style=\"cursor:pointer;\" onclick=\"gotoCreateProject();\">[ Activate New Project ]</a> </span></div>" +
+                        "</li>" +
+                    "</ul>";
+
+    finalOutput += cardHTML+addMoreHTML;
+
+    $('#card-container').html(finalOutput);
+}
+
 function loadProjectData()
 {
     var projectID = getURLParameter("pid");
@@ -380,13 +461,11 @@ function loadProjectData()
         $.ajax({url: restURL, data: {'command':'getProjectData','projectid':projectID}, type: 'post', async: true, success: function postResponse(returnData){
                 var info = JSON.parse(returnData);
 
-                //Save this to local storage so that it can be sent to the PDF printer service
-                //$('#json').val(returnData);
-
                 if(info.status == "success")
                 {
-                    //Fill in the project data here
-                    //var entry = info.data[0];
+                    //Save this to local storage so that it can be sent to the PDF printer service
+                    $('#json').val(returnData);
+                    displayProjectInfo();
                 }
             }
         });
@@ -499,4 +578,486 @@ function unitTest()
             }
         });
     }*/
+}
+
+function displayProjectInfo()
+{
+    var returnData = $('#json').val();
+    var info = JSON.parse(returnData);
+    
+    //Fill in the project data here
+    var projectInfo = info.projectSummary;
+        var projectID = projectInfo.projectID;
+        var runDate = projectInfo.runDate;
+        var costPerLevel = projectInfo.costPerLevel;
+        var searchVolume = projectInfo.searchVolume;
+        var clientURL = projectInfo.clientURL;
+        var valuePerCustomer = projectInfo.valuePerCustomer;
+        var active = projectInfo.active;
+        var completed = projectInfo.completed;
+        var clientDA = projectInfo.clientDA;
+        var clientPA = projectInfo.clientPA;
+        var clientPowerLevel = Math.max(1,Math.round((clientDA+clientPA)/2/10,0));
+        var totalPowerLevel = projectInfo.totalPowerLevel
+        var incomingTraffic = Math.round(projectInfo.incomingTraffic,0);
+        var runDateRaw = projectInfo.runDateRaw;
+        var keywordCount = projectInfo.keywordCount;
+        var geoLocation = projectInfo.geoLocation;
+        var monthlyVisitors = projectInfo.monthlyVisitors;
+        var payingCustomers = projectInfo.payingCustomers;
+        
+        var monthlyCustomers = Math.round(incomingTraffic * (payingCustomers / monthlyVisitors),0);
+        var monthlySales = Math.round(monthlyCustomers * valuePerCustomer,0);
+        var costPerMonth = Math.round((totalPowerLevel * costPerLevel),0);
+        var keywordNetWorth = (monthlySales - costPerMonth);
+        
+        var customerConversionRate = (payingCustomers / monthlyVisitors);
+            
+            
+        var netWorthStyle = "green-text";
+        if(keywordNetWorth < 0 || completed != 1)
+        {
+            netWorthStyle = "red-text";
+        }
+        
+        var keywordNetWorthString = "";
+        if(completed != 1)
+        {
+            keywordNetWorthString = "<span style=\"font-size:15px;color:red;\">calculating...</span>";
+        }
+        else
+        {
+            keywordNetWorthString = "$"+numberWithCommas(keywordNetWorth);
+        }
+        
+        var activeString = "";
+        if(active == 1)
+        {
+            activeString = "ACTIVE";
+        }
+        else
+        {
+            activeString = "INACTIVE";
+        }
+        
+        $('#projectTitle').html(clientURL);
+        $('#numKeywords').html(keywordCount);
+        $('#geoLocation').html("<h2>"+geoLocation+"<!--<a class=\"edit-icon\" title=\"Edit Location\"></a>--></h2>");
+        $('#searchVolume').html("<h2>"+numberWithCommas(searchVolume)+"<span>MO,SEARCH VOLUME<a class=\"info-icon\" title=\"This is the total sum of monthly search volume for all selected keywords in this project.\"></a></span></h2>");
+        $('#projectedVisitors').html("<h2>"+numberWithCommas(incomingTraffic)+"<span>PROJECTED MO. VISITORS<a class=\"info-icon\" title=\"Calculated by applying the average CTR for your competitors to Mo. Search Volume.\"></a></span></h2>");
+        $('#projectedCustomers').html("<h2>"+numberWithCommas(Math.round(incomingTraffic * (payingCustomers / monthlyVisitors),0))+"<span>PROJECTED MO. CUSTOMERS<a class=\"info-icon\" title=\"Calculated based on your conversion rate.\"></a></span></h2>");
+        $('#projectedSales').html("<h2>$"+numberWithCommas(monthlySales)+"<span>PROJECTED MO. SALES<a class=\"info-icon\" title=\"Calculated based on your conversion rate and customer value.\"></a></span></h2>");
+        $('#costPerMonth').html("<h2>$"+numberWithCommas(costPerMonth)+"<a class=\"edit-icon\" title=\"Edit Costs\"></a><span>COST PER MONTH<a class=\"info-icon\" title=\"This is the total sum of monthly costs for all selected keywords in this project.\"></a></span></h2>");
+        $('#kwNetWorth').html("<h2 class=\""+netWorthStyle+"\">"+keywordNetWorthString+"<span>KEYWORD NET-WORTH<a class=\"info-icon\" title=\"This is the projected return on your invested marketing dollars for all selected keywords in this project.\"></a></span></h2>");
+        $('#dateDivBottom').html("<div class=\"project-date-card date_sort\"><i class=\"eagle-icon\"></i>"+runDate+"</div><a class=\"project-status-card  project_status_sort\" href=\"javascript:void(0);\">"+activeString+"</a>");
+
+    //Fill in the keyword data here
+    var accordianHTML = "";
+    var keywordInfo = info.keywordData;
+    for(var i=0; i<keywordInfo.length; i++)
+    {
+        var thisEntry = keywordInfo[i];
+        var thisCompetitorArray = thisEntry.competitorData;
+        
+        var keywordID = thisEntry.keywordID;
+        var searchVolume = thisEntry.searchVolume;
+        var keywordActive = thisEntry.active;
+        var avgCTR = thisEntry.avgCTR;
+        var totalPowerLevel = thisEntry.totalPowerLevel+clientPowerLevel;     //Add back the client power level to the total power level for this keyword
+        var keyword = thisEntry.keyword;
+        
+        var monthlyVisitors = Math.round(searchVolume * avgCTR,0);
+        var monthlyCustomers = Math.round(monthlyVisitors * customerConversionRate,0);
+        var monthlySales = Math.round(monthlyCustomers * valuePerCustomer,0);
+        var costPerMonth = Math.round((totalPowerLevel - clientPowerLevel) * costPerLevel, 0);
+        var keywordNetWorth = (monthlySales - costPerMonth);
+        
+        var powerLevelGoal = Math.max(1,(totalPowerLevel - clientPowerLevel));
+        
+        var keywordCheckboxStatus = "";
+        if(keywordActive == 1)
+        {
+            keywordCheckboxStatus = "checked";
+        }
+        
+        //Add the header info for the accordian HTML
+        accordianHTML += "<div class=\"panel panel-default keyword-phraser-row\">"+
+                            "<ul role=\"tab\" id=\"keyword-phraser-heading"+i+"\">"+
+                                "<li class=\"checkbox-outer width-2-5\">"+
+                                    "<h2>"+
+                                        "<input type=\"checkbox\" "+keywordCheckboxStatus+" id=\"chk-content-all-kw"+keywordID+"\" onchange=\"toggleKeyword('"+keywordID+"',this.checked);\">"+
+                                        "<label for=\"chk-content-all-kw"+keywordID+"\"></label>"+
+                                    "</h2>"+
+                                "</li>"+
+                                "<li class=\"keyword-phraser-tittle width-20\">"+
+                                    "<h2><a data-toggle=\"collapse\" data-parent=\"#keyword-phraser-accordion\" href=\"#keyword-phraser-collapse"+i+"\" aria-expanded=\"true\" aria-controls=\"keyword-phraser-collapse"+i+"\">"+keyword+"</a></h2>"+
+                                "</li>"+
+                                "<li class=\"power-goal-info width-7\" id=\"kwid-"+keywordID+"-plg-1\">"+
+                                    "<h2>"+powerLevelGoal+"<a data-toggle=\"collapse\" data-parent=\"#keyword-phraser-accordion\" href=\"#keyword-phraser-collapse"+i+"\" aria-expanded=\"true\" aria-controls=\"keyword-phraser-collapse"+i+"\" class=\"rh-view-icon\"> </a></h2>"+
+                                "</li>"+
+                                "<li class=\"monthly-organic-info width-10\" id=\"kwid-"+keywordID+"-search-volume\">"+
+                                    "<h2>"+numberWithCommas(searchVolume)+"</h2>"+
+                                "</li>"+
+                                "<li class=\"monthly-visitors-info width-10\" id=\"kwid-"+keywordID+"-monthly-visitors\">"+
+                                    "<h2>"+numberWithCommas(monthlyVisitors)+"</h2>"+
+                                "</li>"+
+                                "<li class=\"monthly-customers-info width-12\" id=\"kwid-"+keywordID+"-monthly-customers\">"+
+                                    "<h2>"+numberWithCommas(monthlyCustomers)+"</h2>"+
+                                "</li>"+
+                                "<li class=\"monthly-sales-info width-10\" id=\"kwid-"+keywordID+"-monthly-sales\">"+
+                                    "<h2>$"+numberWithCommas(monthlySales)+"</h2>"+
+                                "</li>"+
+                                "<li class=\"cost-monthly-info width-7\" id=\"kwid-"+keywordID+"-cost-per-month\">"+
+                                    "<h2>$"+numberWithCommas(costPerMonth)+"</h2>"+
+                                "</li>"+
+                                "<li class=\"keyword-net-worth-info width-7\" id=\"kwid-"+keywordID+"-kw-net-worth\">"+
+                                    "<h2 class=\"\">$"+numberWithCommas(keywordNetWorth)+"</h2>"+
+                                "</li>"+
+                                "<li class=\"content-blueprint-info width-10\">"+
+                                    "<h2><a class=\"blueprint-links\">CREATE BLUEPRINT </a></h2>"+
+                                "</li>"+
+                                "<li class=\"delete-row width-2-5\">"+
+                                    "<h2><span class=\"delete-icon\"></span></h2>"+
+                                "</li>"+
+                            "</ul>";
+        
+        //Let's first build the "THEM" table so that we can determine if they hav a power level goal of 9 (need to know whether to show the warning message)
+        var competitorHTML = "<div class=\"col-lg-6 them-power-summary-section\">" +
+                "<h2 class=\"power-summary-heading\"><span class=\"tag-label\">them</span> COMPETITOR AVERAGE RANKING POWER LEVEL IS <span class=\"total-power-summery\" id=\"kwid-"+keywordID+"-total-power-summary\">"+totalPowerLevel+"</span></h2>"+
+                "<div class=\"divider\"></div>"+
+                "<ul class=\"power-summary-row power-summary-heading-row\">"+
+                    "<li class=\"checkbox-outer col-lg-1\"> &nbsp; </li>"+
+                    "<li class=\"keyword-phraser-tittle col-lg-2\">"+
+                        "<h2>Google Rank</h2>"+
+                    "</li>"+
+                    "<li class=\"power-goal-info col-lg-6\">"+
+                        "<h2>Their URL</h2>"+
+                    "</li>"+
+                    "<li class=\"power-goal-info col-lg-1\">"+
+                        "<h2>CTR<a class=\"info-icon\" title=\"Click Through Rate for the ranking position and current keyword.\"> </a></h2>"+
+                    "</li>"+
+                    "<li class=\"monthly-organic-info col-lg-1\">"+
+                        "<h2>Power Level<a class=\"info-icon\" title=\"Represents the level of marketing effort required for each keyword.\"></a></h2>"+
+                    "</li>"+
+                "</ul>";
+        
+        var showWarning = false;
+        
+        for(var j=0; j<thisCompetitorArray.length; j++)
+        {
+            var thisCompetitor = thisCompetitorArray[j];
+            
+            var competitorID = thisCompetitor.competitorID;
+            var competitorActive = thisCompetitor.active;
+            var competitorPositionRank = thisCompetitor.positionRank;
+            var competitorURL = thisCompetitor.url;
+                var competitorURLShort = competitorURL.substring(0,35)+"...";
+            var competitorCTR = Math.round(thisCompetitor.traffic);
+            var competitorPowerLevel = Math.round((thisCompetitor.DA+thisCompetitor.PA)/2/10);
+            
+            if(competitorPowerLevel > 9)
+            {
+                showWarning = true;
+            }
+            var competitorCheckboxStatus = "";
+            if(competitorActive == 1)
+            {
+                competitorCheckboxStatus = "checked";
+            }
+            
+            competitorHTML += "<ul class=\"power-summary-row\">"+
+                                "<li class=\"checkbox-outer col-lg-1\">"+
+                                    "<h2>"+
+                                        "<input type=\"checkbox\" "+competitorCheckboxStatus+" id=\"chk-content-all-c"+competitorID+"\" onchange=\"toggleCompetitor('"+competitorID+"',this.checked);\">"+
+                                        "<label for=\"chk-content-all-c"+competitorID+"\"></label>"+
+                                    "</h2>"+
+                                "</li>"+
+                                "<li class=\"col-lg-2\">"+
+                                    "<h2>"+competitorPositionRank+"</h2>"+
+                                "</li>"+
+                                "<li class=\"power-goal-info col-lg-6\">"+
+                                    "<h2 title=\""+competitorURL+"\">"+competitorURLShort+"</h2>"+
+                                "</li>"+
+                                "<li class=\"power-goal-info col-lg-1\">"+
+                                    "<h2>"+competitorCTR+"%</h2>"+
+                                "</li>"+
+                                "<li class=\"col-lg-1\">"+
+                                    "<h2>"+competitorPowerLevel+"</h2>"+
+                                "</li>"+
+                            "</ul>";
+        }
+        competitorHTML += "</div>";
+        
+        //Now put the info for client ranking power
+        accordianHTML += "<div id=\"keyword-phraser-collapse"+i+"\" class=\"panel-collapse collapse \" role=\"tabpanel\" aria-labelledby=\"keyword-phraser-heading"+i+"\">"+
+                            "<div class=\"power-level-summary\">"+
+                                "<div class=\"col-lg-6 you-power-summary-section\">"+
+                                    "<h2 class=\"power-summary-heading\"><span class=\"tag-label\">YOU</span> YOUR RANKING POWER IS <span class=\"total-power-summery\">"+clientPowerLevel+"</span></h2>"+
+                                    "<div class=\"divider\"></div>"+
+                                    "<ul class=\"power-summary-row power-summary-heading-row\">"+
+                                        "<li class=\"checkbox-outer col-lg-1\"> &nbsp; </li>"+
+                                        "<li class=\"keyword-phraser-tittle col-lg-2\">"+
+                                            "<h2>Google Rank</h2>"+
+                                        "</li>"+
+                                        "<li class=\"power-goal-info col-lg-7\">"+
+                                            "<h2>Your URL</h2>"+
+                                        "</li>"+
+                                        "<li class=\"monthly-organic-info col-lg-2\">"+
+                                            "<h2>Power Level</h2>"+
+                                        "</li>"+
+                                    "</ul>"+
+                                    "<ul class=\"power-summary-row\">"+
+                                        "<li class=\"checkbox-outer col-lg-1\">"+
+                                            "<h2>"+
+                                                "<input type=\"checkbox\" checked disabled id=\"chk-content-all2\">"+
+                                                "<label for=\"chk-content-all2\"></label>"+
+                                            "</h2>"+
+                                        "</li>"+
+                                        "<li class=\"col-lg-2\">"+
+                                            "<h2></h2>"+
+                                        "</li>"+
+                                        "<li class=\"col-lg-7\">"+
+                                            "<h2>"+clientURL+"</h2>"+
+                                        "</li>"+
+                                        "<li class=\"col-lg-2\">"+
+                                            "<h2>"+clientPowerLevel+"</h2>"+
+                                        "</li>"+
+                                    "</ul>"+
+                                    "<div class=\"power-goal-section\">"+
+                                        "<div class=\"col-lg-3 goal-img\"><img src=\"images/goal-img.png\" alt=\"\"></div>"+
+                                        "<div class=\"goal-details col-lg-9\">"+
+                                            "<h1>Power Level Goal is <span id=\"kwid-"+keywordID+"-plg-2\">"+powerLevelGoal+"</span></h1>"+
+                                            "<h3>We've subtracted your power level from the average of your competitors' to determine your Power Level Goal.</h3>"+
+                                            "<p>This number is derrived from both domain and page authority scores and is best used as a guide to determine your SEO marketing agression. For example if your PLG=3, then you may consider creating 3 pieces of content per month (or build 3 backlinks per month).</p>"+
+                                        "</div>"+
+                                    "</div>";
+            if(showWarning === true)
+            {
+                accordianHTML += "<div class=\"warrining-message\">"+
+                                        "<div class=\"col-lg-2 warrining-icon\"><img src=\"images/warning-sign.png\" alt=\"\"></div>"+
+                                        "<div class=\"col-lg-10\">"+
+                                            "<h2>You have some tricky competitors</h2>"+
+                                            "<ul>"+
+                                                "<li>Uncheck competitor urls whose power level exceedes 9</li>"+
+                                            "</ul>"+
+                                        "</div>"+
+                                    "</div>";
+            }
+        
+            accordianHTML += "</div>";
+            
+            //Add in the competitorHTML we already built, and finish off the div
+            accordianHTML += competitorHTML + "</div>" +
+                                                "</div>" +
+                                            "</div>";
+    }
+    
+    $('#keyword-phraser-accordion').html(accordianHTML);
+    
+    var suggestedKeywordsHTML = "";
+    var suggestedKeywords = info.suggestedKeywords;
+    for(var i=0; i<suggestedKeywords.length; i++)
+    {
+        suggestedKeywordsHTML += "<li>"+suggestedKeywords[i]+"</li>";
+    }
+    $("#suggestedKeywordsList").html(suggestedKeywordsHTML);
+}
+
+function toggleCompetitor(competitorID,checked)
+{
+    var projectID = getURLParameter("pid");
+    var active = "";
+    if(checked)
+    {
+        active = "1";
+    }
+    else
+    {
+        active = "0";
+    }
+    
+    if(competitorID != '' && projectID != '')
+    {
+        $.ajax({url: restURL, data: {'command':'toggleCompetitorActive','projectid':projectID,'competitorid':competitorID,'active':active}, type: 'post', async: true, success: function postResponse(returnData){
+                var info = JSON.parse(returnData);
+
+                if(info.status == "success")
+                {
+                    refreshProjectData();
+                }
+            }
+        });
+    }
+}
+
+function toggleKeyword(keywordID,checked)
+{
+    var projectID = getURLParameter("pid");
+    var active = "";
+    if(checked)
+    {
+        active = "1";
+    }
+    else
+    {
+        active = "0";
+    }
+    
+    if(keywordID != '' && projectID != '')
+    {
+        $.ajax({url: restURL, data: {'command':'toggleKeywordActive','projectid':projectID,'keywordid':keywordID,'active':active}, type: 'post', async: true, success: function postResponse(returnData){
+                var info = JSON.parse(returnData);
+
+                if(info.status == "success")
+                {
+                    refreshProjectData();
+                }
+            }
+        });
+    }
+}
+
+function addKeywordToProject(keyword)
+{
+    var projectID = getURLParameter("pid");
+    if(projectID != '' && keyword.trim() != '')
+    {
+        $.ajax({url: restURL, data: {'command':'addProjectKeyword','projectid':projectID,'keyword':keyword}, type: 'post', async: true, success: function postResponse(returnData){
+                var info = JSON.parse(returnData);
+
+                if(info.status == "success")
+                {
+                    loadProjectData();
+                }
+            }
+        });
+    }
+}
+
+function refreshProjectData()
+{
+    var projectID = getURLParameter("pid");
+    if(projectID != '')
+    {
+        $.ajax({url: restURL, data: {'command':'getProjectData','projectid':projectID}, type: 'post', async: true, success: function postResponse(returnData){
+                var info = JSON.parse(returnData);
+
+                if(info.status == "success")
+                {
+                    //Save this to local storage so that it can be sent to the PDF printer service
+                    $('#json').val(returnData);
+                    refreshProjectInfo();
+                }
+            }
+        });
+    }
+    else
+    {
+        window.location = "dashboard.html";
+    }
+}
+
+function refreshProjectInfo()
+{
+    var returnData = $('#json').val();
+    var info = JSON.parse(returnData);
+    
+    //Fill in the project data here
+    var projectInfo = info.projectSummary;
+        var projectID = projectInfo.projectID;
+        var runDate = projectInfo.runDate;
+        var costPerLevel = projectInfo.costPerLevel;
+        var searchVolume = projectInfo.searchVolume;
+        var clientURL = projectInfo.clientURL;
+        var valuePerCustomer = projectInfo.valuePerCustomer;
+        var active = projectInfo.active;
+        var completed = projectInfo.completed;
+        var totalPowerLevel = projectInfo.totalPowerLevel;
+        var clientDA = projectInfo.clientDA;
+        var clientPA = projectInfo.clientPA;
+        var incomingTraffic = Math.round(projectInfo.incomingTraffic,0);
+        var runDateRaw = projectInfo.runDateRaw;
+        var keywordCount = projectInfo.keywordCount;
+        var geoLocation = projectInfo.geoLocation;
+        var monthlyVisitors = projectInfo.monthlyVisitors;
+        var payingCustomers = projectInfo.payingCustomers;
+        
+        var monthlyCustomers = Math.round(incomingTraffic * (payingCustomers / monthlyVisitors),0);
+        var monthlySales = Math.round(monthlyCustomers * valuePerCustomer,0);
+        var costPerMonth = Math.round((totalPowerLevel * costPerLevel),0);
+        var keywordNetWorth = (monthlySales - costPerMonth);
+        
+        var customerConversionRate = (payingCustomers / monthlyVisitors);
+        var clientPowerLevel = Math.max(1,Math.round((clientDA+clientPA)/2/10,0));
+        
+        var netWorthStyle = "green-text";
+        if(keywordNetWorth < 0 || completed != 1)
+        {
+            netWorthStyle = "red-text";
+        }
+        
+        var keywordNetWorthString = "";
+        if(completed != 1)
+        {
+            keywordNetWorthString = "<span style=\"font-size:15px;color:red;\">calculating...</span>";
+        }
+        else
+        {
+            keywordNetWorthString = "$"+numberWithCommas(keywordNetWorth);
+        }
+        
+        var activeString = "";
+        if(active == 1)
+        {
+            activeString = "ACTIVE";
+        }
+        else
+        {
+            activeString = "INACTIVE";
+        }
+        
+        $('#projectTitle').html(clientURL);
+        $('#numKeywords').html(keywordCount);
+        $('#geoLocation').html("<h2>"+geoLocation+"<!--<a class=\"edit-icon\" title=\"Edit Location\"></a>--></h2>");
+        $('#searchVolume').html("<h2>"+numberWithCommas(searchVolume)+"<span>MO,SEARCH VOLUME<a class=\"info-icon\" title=\"This is the total sum of monthly search volume for all selected keywords in this project.\"></a></span></h2>");
+        $('#projectedVisitors').html("<h2>"+numberWithCommas(incomingTraffic)+"<span>PROJECTED MO. VISITORS<a class=\"info-icon\" title=\"Calculated by applying the average CTR for your competitors to Mo. Search Volume.\"></a></span></h2>");
+        $('#projectedCustomers').html("<h2>"+numberWithCommas(Math.round(incomingTraffic * (payingCustomers / monthlyVisitors),0))+"<span>PROJECTED MO. CUSTOMERS<a class=\"info-icon\" title=\"Calculated based on your conversion rate.\"></a></span></h2>");
+        $('#projectedSales').html("<h2>$"+numberWithCommas(monthlySales)+"<span>PROJECTED MO. SALES<a class=\"info-icon\" title=\"Calculated based on your conversion rate and customer value.\"></a></span></h2>");
+        $('#costPerMonth').html("<h2>$"+numberWithCommas(costPerMonth)+"<a class=\"edit-icon\" title=\"Edit Costs\"></a><span>COST PER MONTH<a class=\"info-icon\" title=\"This is the total sum of monthly costs for all selected keywords in this project.\"></a></span></h2>");
+        $('#kwNetWorth').html("<h2 class=\""+netWorthStyle+"\">"+keywordNetWorthString+"<span>KEYWORD NET-WORTH<a class=\"info-icon\" title=\"This is the projected return on your invested marketing dollars for all selected keywords in this project.\"></a></span></h2>");
+        $('#dateDivBottom').html("<div class=\"project-date-card date_sort\"><i class=\"eagle-icon\"></i>"+runDate+"</div><a class=\"project-status-card  project_status_sort\" href=\"javascript:void(0);\">"+activeString+"</a>");
+
+    //Fill in the keyword data here
+    var accordianHTML = "";
+    var keywordInfo = info.keywordData;
+    for(var i=0; i<keywordInfo.length; i++)
+    {
+        var thisEntry = keywordInfo[i];
+        var thisCompetitorArray = thisEntry.competitorData;
+        
+        var keywordID = thisEntry.keywordID;
+        var searchVolume = thisEntry.searchVolume;
+        var keywordActive = thisEntry.active;
+        var avgCTR = thisEntry.avgCTR;
+        var totalPowerLevel = thisEntry.totalPowerLevel+clientPowerLevel;     //Add back the client power level to the total power level for this keyword
+        var keyword = thisEntry.keyword;
+        
+        var monthlyVisitors = Math.round(searchVolume * avgCTR,0);
+        var monthlyCustomers = Math.round(monthlyVisitors * customerConversionRate,0);
+        var monthlySales = Math.round(monthlyCustomers * valuePerCustomer,0);
+        var costPerMonth = Math.round((totalPowerLevel - clientPowerLevel) * costPerLevel, 0);
+        var keywordNetWorth = (monthlySales - costPerMonth);
+        
+        var powerLevelGoal = Math.max(1,(totalPowerLevel - clientPowerLevel));
+        
+        $('#kwid-'+keywordID+'-plg-1').html("<h2>"+powerLevelGoal+"<a data-toggle=\"collapse\" data-parent=\"#keyword-phraser-accordion\" href=\"#keyword-phraser-collapse"+i+"\" aria-expanded=\"true\" aria-controls=\"keyword-phraser-collapse"+i+"\" class=\"rh-view-icon\"> </a></h2>");
+        $('#kwid-'+keywordID+'-search-volume').html("<h2>"+numberWithCommas(searchVolume)+"</h2>");
+        $('#kwid-'+keywordID+'-monthly-visitors').html("<h2>"+numberWithCommas(monthlyVisitors)+"</h2>");
+        $('#kwid-'+keywordID+'-monthly-customers').html("<h2>"+numberWithCommas(monthlyCustomers)+"</h2>");
+        $('#kwid-'+keywordID+'-monthly-sales').html("<h2>$"+numberWithCommas(monthlySales)+"</h2>");
+        $('#kwid-'+keywordID+'-cost-per-month').html("<h2>$"+numberWithCommas(costPerMonth)+"</h2>");
+        $('#kwid-'+keywordID+'-kw-net-worth').html("<h2 class=\"\">$"+numberWithCommas(keywordNetWorth)+"</h2>");
+        $('#kwid-'+keywordID+'-plg-2').html(powerLevelGoal);
+        $('#kwid-'+keywordID+'-total-power-summary').html(totalPowerLevel);
+    }
 }

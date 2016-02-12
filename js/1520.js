@@ -1,6 +1,6 @@
-//var restURL = "http://fairmarketing.cloudapp.net/rest1.0/kh_endpoint.jsp?"
+var restURL = "http://fairmarketing.cloudapp.net/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://fairmarketing.cloudapp.net/rest1.0/servlet/ssd.DownloadInventoryReport?"
-var restURL = "http://localhost:8084/rest1.0/kh_endpoint.jsp?"
+//var restURL = "http://localhost:8084/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://localhost:8084/rest1.0/servlet/ssd.DownloadInventoryReport"
 
 var sort_by = function(field, reverse, primer){
@@ -927,7 +927,8 @@ function addKeywordToProject(keyword)
 
                 if(info.status == "success")
                 {
-                    loadProjectData();
+                    //loadProjectData();
+                    window.location.reload();
                 }
             }
         });

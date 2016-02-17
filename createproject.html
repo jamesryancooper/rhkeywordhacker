@@ -327,10 +327,13 @@ $('#scrollable-dropdown-menu .typeahead').typeahead(null, {
             $("#ex6SliderVal").val(slider_num_ex6);
         });
         $("#ex6SliderVal").change(function(){
+            var sliderVal = parseInt($("#ex6SliderVal").val().replace(",",""));
+            if(isNaN(sliderVal) || sliderVal < 0){ sliderVal = 0; }
             $("#ex6").slider({
-                value: parseInt($("#ex6SliderVal").val().replace(",",""))
+                value: sliderVal
                 });
             $("#ex6").slider('refresh');
+            $("#ex6SliderVal").val(numberWithCommas(sliderVal));
         });
 
 
@@ -340,10 +343,13 @@ $('#scrollable-dropdown-menu .typeahead').typeahead(null, {
             $("#ex7SliderVal").val(slider_num_ex7);
         });
         $("#ex7SliderVal").change(function(){
+            var sliderVal = parseInt($("#ex7SliderVal").val().replace(",",""));
+            if(isNaN(sliderVal) || sliderVal < 0){ sliderVal = 0; }
             $("#ex7").slider({
-                value: parseInt($("#ex7SliderVal").val().replace(",",""))
+                value: sliderVal
                 });
             $("#ex7").slider('refresh');
+            $("#ex7SliderVal").val(numberWithCommas(sliderVal));
         });
 
 
@@ -353,32 +359,38 @@ $('#scrollable-dropdown-menu .typeahead').typeahead(null, {
             $("#ex8SliderVal").val(slider_num_ex8);
         });
         $("#ex8SliderVal").change(function(){
+            var sliderVal = parseInt($("#ex8SliderVal").val().replace(",",""));
+            if(isNaN(sliderVal) || sliderVal < 0){ sliderVal = 0; }
             $("#ex8").slider({
-                value: parseInt($("#ex8SliderVal").val().replace(",",""))
+                value: sliderVal
                 });
             $("#ex8").slider('refresh');
+            $("#ex8SliderVal").val(numberWithCommas(sliderVal));
         });
         
         $("#ex9").slider();
         $("#ex9").on("slide, slideStop", function (slideEvt) {
-            var slider_num_ex8 = numeral(slideEvt.value).format('0,0');
-            $("#ex9SliderVal").val(slider_num_ex8);
+            var slider_num_ex9 = numeral(slideEvt.value).format('0,0');
+            $("#ex9SliderVal").val(slider_num_ex9);
         });
         $("#ex9SliderVal").change(function(){
+            var sliderVal = parseInt($("#ex9SliderVal").val().replace(",",""));
+            if(isNaN(sliderVal) || sliderVal < 0){ sliderVal = 0; }
             $("#ex9").slider({
-                value: parseInt($("#ex9SliderVal").val().replace(",",""))
+                value: sliderVal
                 });
             $("#ex9").slider('refresh');
+            $("#ex9SliderVal").val(numberWithCommas(sliderVal));
         });
 
 
-        $('.project-setup-input input.range-count').on("blur", function () {
+        /*$('.project-setup-input input.range-count').on("blur", function () {
             var inputval = $(this).val();
             //alert(inputval);
             var inputval_new = numeral(inputval).format('0,0');
             //	alert(inputval_new);
             $(this).val(inputval_new);
-        });
+        });*/
 
 
         // ADD Comma after three numbers
@@ -386,13 +398,13 @@ $('#scrollable-dropdown-menu .typeahead').typeahead(null, {
             return x.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",");
         }
 
-        $('.range-count').each(function () {
+        /*$('.range-count').each(function () {
             var v_pound = $(this).html();
             v_pound = numberWithCommas(v_pound);
 
-            $(this).html(v_pound)
+            $(this).html(v_pound);
 
-        });
+        });*/
 
         /*$('#scrollable-dropdown-menu .typeahead').typeahead(null,
             {

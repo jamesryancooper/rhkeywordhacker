@@ -42,7 +42,7 @@
     <script>
         function run(){
             loadProjectData();
-            setInterval(loadProjectData, 60000);
+            //setInterval(loadProjectData, 60000);
         }
     </script>
 </head>
@@ -116,7 +116,7 @@
 
                             <div class="panel panel-default project-row-outer">
                                 <div role="tab" id="project-headingOne">
-                                    <div id="projectResearchDiv" class="collapsed collapsenew" data-toggle="collapse" data-parent="#project-row-accordion" href="#project-collapseOne" aria-expanded="true" aria-controls="project-collapseOne">
+                                    <div id="projectResearchDiv" class="collapsed collapsenew" data-toggle="collapse" href="#project-collapseOne" data-parent="#project-row-accordion" aria-expanded="true" aria-controls="project-collapseOne">
                                         <h2 class="project-name" id="projectTitle"></h2>
                                         <ul class="kerword-project-row">
                                             <li class="keyword-items"><b class="fa-2x blue-text"><span id="numKeywords"></span></b>
@@ -228,6 +228,10 @@
                                             <ul id="suggestedKeywordsList">
                                                 
                                             </ul>
+                                            <p class="suggest-keywords-label" style="cursor:pointer;" onclick="toggleSuggestedKeywords();" id="viewMoreLabel">View More...</p>
+                                            <ul id="suggestedKeywordsListFull" style="display:none;">
+                                                
+                                            </ul>
                                         </div>
                                         <div class="card-box-bottom" id="dateDivBottom">
                                             </div>
@@ -307,20 +311,21 @@
 
 
         $(".project-row-outer div").on("click", ".collapsenew", function () {
-            console.log("expanding...");
             
             $(this).addClass("select");
+            $(this).removeAttr("href");
+            
             /*var el = $(this).parent();
             console.log($(el).html());*/
-            if ($(this).hasClass("collapsed")) {
+            /*if ($(this).hasClass("collapsed")) {
                 $(".project-view-nav").removeClass("active");
                 $(".research-view-nav").addClass("active");
             } else {
                 $(".project-view-nav").addClass("active");
                 $(".research-view-nav").removeClass("active");
-            }
+            }*/
         });
-
+        
         $(".keyword-phraser-row-outer .suggest-keywords-list ul ").on("click", "li", function () {
             var parent_get = $(this).parents().find(".keyword-phraser-section.collapse.in").attr('id');
             //jQuery('.phraser-accordion-outer .keyword-phraser-row').removeClass('active');
@@ -401,7 +406,7 @@
             //		$(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child ul li.checkbox-outer label").attr('for','chk-content-'+text_of_li_new+parent_get);
             
             //Here's where we call the REST service to add this to the project and set the status to incomplete
-            addKeywordToProject(text_of_li);
+            //addKeywordToProject(text_of_li);
             
         });
 
@@ -506,7 +511,7 @@
             $("a#button-add-url").show();
             
             //Here's where we call the REST service to add this to the project and set the status to incomplete
-            addKeywordToProject(url_val);
+            //addKeywordToProject(url_val);
         });
 
 

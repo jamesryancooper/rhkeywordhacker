@@ -1,3 +1,17 @@
+.edit-project-window {
+    position: fixed;
+    top: 15%;
+    left: 15%;
+    z-index: 999;
+    background-color: rgba(255,255,255,1);
+    color: #fff;
+    padding: 10px;
+    width: 70%;
+    //border: 2px solid #242021;
+    border: 4px solid #242021;
+    display: none;
+}
+
 .login-window {
     position: fixed;
     top: 40%;
@@ -260,3 +274,11 @@ cursor:pointer;
 .typeahead {
     
 }*/
+
+@keyframes blink {50% { color: transparent }}
+.loader__dot { animation: 1s blink infinite; color:red;}
+.loader__dot:nth-child(2) { animation-delay: 250ms; color:red;}
+.loader__dot:nth-child(3) { animation-delay: 500ms; color:red;}
+
+.gray-btn {background-color: rgba(61,61,61,.8);border-radius: 0 !important;color: #fff;font-size: 18px;font-weight: bold;margin: 0 0 15px;min-width: 160px;padding: 8px 25px !important;cursor:pointer;}
+.gray-btn:hover {background:#000 !important; color:#fff !important;}

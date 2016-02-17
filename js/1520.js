@@ -1,6 +1,6 @@
-var restURL = "http://fairmarketing.cloudapp.net/rest1.0/kh_endpoint.jsp?"
+//var restURL = "http://fairmarketing.cloudapp.net/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://fairmarketing.cloudapp.net/rest1.0/servlet/ssd.DownloadInventoryReport?"
-//var restURL = "http://localhost:8084/rest1.0/kh_endpoint.jsp?"
+var restURL = "http://localhost:8084/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://localhost:8084/rest1.0/servlet/ssd.DownloadInventoryReport"
 
 var sort_by = function(field, reverse, primer){
@@ -257,8 +257,9 @@ function loadProjectDashboard()
                 {
                     //Save this to local storage so that it can be used to populate the HTML using any sort method
                     $('#json').val(returnData);
-                    $('#curr_sort').val("runDate");
-                    $('#curr_sort_reversed').val("true");
+                    var sortMethod = $('#curr_sort').val();
+                    //$('#curr_sort').val("runDate");
+                    //$('#curr_sort_reversed').val("false");
                     
                     var userFullName = info.userFullName;
                     
@@ -266,7 +267,7 @@ function loadProjectDashboard()
                     $('#dashboard-user-full-name').html("welcome <strong>"+userFullName+"</strong> <strong>[</strong> manage your missions below <strong>]</strong>");
                     
                     //Populate the cards based on a default sort of create date
-                    displayDashboardCards('runDate');
+                    displayDashboardCards(sortMethod);
                 }
             }
         });
@@ -374,13 +375,16 @@ function displayDashboardCards(sortMethod)
         var keywordNetWorth = numberWithCommas(monthlySales - costPerMonth);
 
         var keywordNetWorthString = "";
+        var anchorAhref = "";
         if(completed != 1)
         {
-            keywordNetWorthString = "<span style=\"color:red;\">calculating...</span>";
+            keywordNetWorthString = "<span style=\"color:red;display:block;\" class=\"loader__dot\">calculating...</span>";
+            anchorAhref = "onclick=\"'';\"";
         }
         else
         {
             keywordNetWorthString = "$"+keywordNetWorth;
+            anchorAhref = "onclick=\"window.location='keywordhacker.html?pid="+projectID+"';\"";
         }
 
         if(active != '1')
@@ -396,9 +400,10 @@ function displayDashboardCards(sortMethod)
             cardHTML += "<li class=\"col-lg-4 matchheight element-item\">";
             cardHTML += "<div class=\"project-cart-box box-shadow-ot\">";
             cardHTML += "<div class=\"card-header\">";
-            cardHTML += "<h1 class=\"project_name_sort\"><input type=\"checkbox\" id=\"chk-content-all1\"><label for=\"chk-content-all1\"></label><a style=\"cursor:pointer;\" onclick=\"window.location='keywordhacker.html?pid="+projectID+"';\">"+projectTitle+"</a></h1>";
+            cardHTML += "<h2 style=\"clear:both;text-align:right;margin-top:-10px;\"><a style=\"cursor:pointer;\" class=\"edit-icon\" title=\"Edit Project\" onclick=\"displayProjectEditWindow('"+projectID+"');\"></a><a style=\"cursor:pointer;size:small;\" class=\"delete-icon\" title=\"Delete Project\" onclick=\"displayProjectDeleteWindow('"+projectID+"');\"></a></h2>";
+            cardHTML += "<h1 class=\"project_name_sort\"><label for=\"chk-content-all1\"></label><a style=\"cursor:pointer;\" "+anchorAhref+">"+projectTitle+"</a></h1>";
             cardHTML += "</div>";
-            cardHTML += "<a style=\"cursor:pointer;\" onclick=\"window.location='keywordhacker.html?pid="+projectID+"';\" class=\"module-link keyword-hacker-module\">";
+            cardHTML += "<a style=\"cursor:pointer;\" "+anchorAhref+" class=\"module-link keyword-hacker-module\">";
             cardHTML += "<h2 class=\"module-heading text-left\">KEYWORD HACKER MODULE</h2>";
             cardHTML += "<div class=\"module-detail-section\">";
             cardHTML += "<div class=\"row\">";
@@ -436,7 +441,7 @@ function displayDashboardCards(sortMethod)
             cardHTML += "</a>";
             cardHTML += "<div class=\"card-box-bottom\">";
             cardHTML += "<div class=\"project-date-card date_sort\"><i class=\"eagle-icon\"></i>"+runDate+"</div>";
-            cardHTML += "<a style=\"cursor:pointer;\" onclick=\"window.location='keywordhacker.html?pid="+projectID+"';\" class=\"project-status-card  project_status_sort \" href=\"javascript:void(0);\"> "+activeString+" </a>";
+            cardHTML += "<a style=\"cursor:pointer;\" "+anchorAhref+" class=\"project-status-card  project_status_sort \" href=\"javascript:void(0);\"> "+activeString+" </a>";
             cardHTML += "</div>";
             cardHTML += "</div>";
             cardHTML += "</li>";
@@ -448,7 +453,7 @@ function displayDashboardCards(sortMethod)
                         "</li>" +
                     "</ul>";
 
-    finalOutput += cardHTML+addMoreHTML;
+    finalOutput = cardHTML+addMoreHTML;
 
     $('#card-container').html(finalOutput);
 }
@@ -473,22 +478,6 @@ function loadProjectData()
     else
     {
         window.location = "dashboard.html";
-    }
-}
-
-function deleteProject(projectID)
-{
-    if(projectID != '')
-    {   
-        $.ajax({url: restURL, data: {'command':'deleteProject','projectid':projectID}, type: 'post', async: true, success: function postResponse(returnData){
-                var info = JSON.parse(returnData);
-
-                if(info.status == "success")
-                {
-                    window.location = "dashboard.html";
-                }
-            }
-        });
     }
 }
 
@@ -663,7 +652,7 @@ function displayProjectInfo()
         var searchVolume = thisEntry.searchVolume;
         var keywordActive = thisEntry.active;
         var avgCTR = thisEntry.avgCTR;
-        var totalPowerLevel = thisEntry.totalPowerLevel+clientPowerLevel;     //Add back the client power level to the total power level for this keyword
+        var totalPowerLevel = thisEntry.totalPowerLevel;     //Add back the client power level to the total power level for this keyword
         var keyword = thisEntry.keyword;
         
         var monthlyVisitors = Math.round(searchVolume * avgCTR,0);
@@ -855,12 +844,18 @@ function displayProjectInfo()
     $('#keyword-phraser-accordion').html(accordianHTML);
     
     var suggestedKeywordsHTML = "";
+    var suggestedKeywordsHTMLFull = "";
     var suggestedKeywords = info.suggestedKeywords;
     for(var i=0; i<suggestedKeywords.length; i++)
     {
-        suggestedKeywordsHTML += "<li>"+suggestedKeywords[i]+"</li>";
+        if(i<25)
+        {
+            suggestedKeywordsHTML += "<li>"+suggestedKeywords[i]+"</li>";
+        }
+        suggestedKeywordsHTMLFull += "<li>"+suggestedKeywords[i]+"</li>";
     }
     $("#suggestedKeywordsList").html(suggestedKeywordsHTML);
+    $("#suggestedKeywordsListFull").html(suggestedKeywordsHTMLFull);
 }
 
 function toggleCompetitor(competitorID,checked)
@@ -1040,7 +1035,7 @@ function refreshProjectInfo()
         var searchVolume = thisEntry.searchVolume;
         var keywordActive = thisEntry.active;
         var avgCTR = thisEntry.avgCTR;
-        var totalPowerLevel = thisEntry.totalPowerLevel+clientPowerLevel;     //Add back the client power level to the total power level for this keyword
+        var totalPowerLevel = thisEntry.totalPowerLevel;     //Add back the client power level to the total power level for this keyword
         var keyword = thisEntry.keyword;
         
         var monthlyVisitors = Math.round(searchVolume * avgCTR,0);
@@ -1061,4 +1056,171 @@ function refreshProjectInfo()
         $('#kwid-'+keywordID+'-plg-2').html(powerLevelGoal);
         $('#kwid-'+keywordID+'-total-power-summary').html(totalPowerLevel);
     }
+}
+
+function toggleSuggestedKeywords()
+{
+    var expanded = $('#viewMoreLabel').html();
+    if(expanded == "Hide")
+    {
+        //Hide the full list
+        document.getElementById('suggestedKeywordsListFull').style.display = "none";
+        document.getElementById('suggestedKeywordsList').style.display = "block";
+        $('#viewMoreLabel').html("Show More...");
+    }
+    else
+    {
+        //Show the full list
+        document.getElementById('suggestedKeywordsListFull').style.display = "block";
+        document.getElementById('suggestedKeywordsList').style.display = "none";
+        $('#viewMoreLabel').html("Hide");
+    }
+}
+
+function displayProjectEditWindow(projectID)
+{
+    if(projectID != '')
+    {
+        //Set the id of the project we're working with
+        $('#edit-project-id').val(projectID);
+
+        //Get the project summary info and set the values
+        $.ajax({url: restURL, data: {'command':'getProjectSetupData','projectid':projectID}, type: 'post', async: true, success: function postResponse(returnData){
+                var info = JSON.parse(returnData);
+
+                if(info.status == "success")
+                {
+                    var projectInfo = info.projectSummary;
+                    
+                    var projectURL = projectInfo.clientURL;
+                    var geoLocation = projectInfo.geoLocation;
+                    var monthlyVisitors = parseInt(projectInfo.monthlyVisitors);
+                    var payingCustomers = parseInt(projectInfo.payingCustomers);
+                    var valuePerCustomer = parseInt(projectInfo.valuePerCustomer);
+                    var costPerLevel = parseInt(projectInfo.costPerLevel);
+                    
+                    //Update the inputs with the appropriate values
+                    $('#project-url').html(projectURL);
+                    $('#project-location').html(geoLocation);
+                    /*$('#ex6SliderVal').val(numberWithCommas(monthlyVisitors));
+                    $('#ex7SliderVal').val(numberWithCommas(payingCustomers));
+                    $('#ex8SliderVal').val(numberWithCommas(valuePerCustomer));
+                    $('#ex9SliderVal').val(numberWithCommas(costPerLevel));*/
+                    
+                    $("#ex6").slider();
+                    var sliderVal = monthlyVisitors;
+                    if(isNaN(sliderVal) || sliderVal < 0){ sliderVal = 0; }
+                    $("#ex6").slider({
+                        value: sliderVal
+                        });
+                    $("#ex6").slider('refresh');
+                    $("#ex6SliderVal").val(numberWithCommas(sliderVal));
+                    
+                    $("#ex7").slider();
+                    var sliderVal = payingCustomers;
+                    if(isNaN(sliderVal) || sliderVal < 0){ sliderVal = 0; }
+                    $("#ex7").slider({
+                        value: sliderVal
+                        });
+                    $("#ex7").slider('refresh');
+                    $("#ex7SliderVal").val(numberWithCommas(sliderVal));
+                    
+                    $("#ex8").slider();
+                    var sliderVal = valuePerCustomer;
+                    if(isNaN(sliderVal) || sliderVal < 0){ sliderVal = 0; }
+                    $("#ex8").slider({
+                        value: sliderVal
+                        });
+                    $("#ex8").slider('refresh');
+                    $("#ex8SliderVal").val(numberWithCommas(sliderVal));
+                    
+                    $("#ex9").slider();
+                    var sliderVal = costPerLevel;
+                    if(isNaN(sliderVal) || sliderVal < 0){ sliderVal = 0; }
+                    $("#ex9").slider({
+                        value: sliderVal
+                        });
+                    $("#ex9").slider('refresh');
+                    $("#ex9SliderVal").val(numberWithCommas(sliderVal));
+                    
+                    //Show the modal
+                    showEditProject();
+                }
+            }
+        });
+        
+
+            
+    }
+}
+
+function editKeywordHackerProject()
+{
+    //Show the spinner
+    $("#login-response").html("<div class='three-quarters-loader-small'></div>");
+    
+    //Get the new values to update with
+    
+    //Make the AJAX call
+    
+        //On success, hide the window
+        
+        //On error, show the error message
+}
+
+function hideEditProject()
+{
+    document.getElementById("dimmer").style.display = "none";
+    document.getElementById("edit-project-window").style.display = "none";
+}
+
+function showEditProject()
+{
+    document.getElementById("edit-project-window").style.display = "block";
+    document.getElementById("dimmer").style.display = "block";
+}
+
+function cancelEditKeywordHackerProject()
+{
+    //Set the id of the project back to 0
+    $('#edit-project-id').val(0);
+    
+    //Hide the modal
+    hideEditProject();
+}
+
+function displayProjectDeleteWindow(projectID)
+{
+    if(projectID != '')
+    {
+        //Set the id of the project we're working with
+        $('#delete-project-id').val(projectID);
+        
+        document.getElementById("delete-project-window").style.display = "block";
+        document.getElementById("dimmer").style.display = "block";
+    }
+}
+
+function deleteKeywordHackerProject()
+{
+    //Show the spinner
+    $("#login-response").html("<div class='three-quarters-loader-small'></div>");
+    
+    //Get the new values to update with
+    
+    //Make the AJAX call
+    
+        //On success, hide the window
+        
+        //On error, show the error message
+}
+
+function cancelDeleteKeywordHackerProject()
+{
+    //Set the id of the project back to 0
+    $('#delete-project-id').val(0);
+    
+    //Hide the modal
+    document.getElementById("dimmer").style.display = "none";
+    document.getElementById("delete-project-window").style.display = "none";
 }

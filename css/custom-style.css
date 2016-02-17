@@ -1165,6 +1165,11 @@ width: 100%;}
 
 .delete-icon:hover:before {bottom: 8px;left: 50%;border: solid transparent;content: " ";height: 0;width: 0;position: absolute;pointer-events: none;border-color: rgba(136, 183, 213, 0);border-top-color: rgba(0, 0, 0, 0.8);border-width: 10px;margin-left: -10px;font-weight:normal;}
 
+.download-icon {background-image: url("../images/download-icon.png");background-repeat: no-repeat;background-size: 100% auto;cursor: pointer;display: inline-block;font-weight: normal;height: 20px;left: 5px;margin-left: 0;position: relative;top: 0;width: 20px;}
+
+.download-icon:hover:after {background: rgba(0, 0, 0, 0.8) none repeat scroll 0 0;border-radius: 5px;color: #fff;content: attr(title);font-size: 11px;left: -34px;margin: 0 auto;padding: 5px 15px;position: absolute;right: auto;width: auto;z-index: 98;bottom: -moz-calc(100% + 10px);bottom: -webkit-calc(100% + 10px);bottom: -o-calc(100% + 10px);bottom:calc(100% + 10px);font-weight:normal;white-space: nowrap; text-align:center;}
+
+.download-icon:hover:before {bottom: 8px;left: 50%;border: solid transparent;content: " ";height: 0;width: 0;position: absolute;pointer-events: none;border-color: rgba(136, 183, 213, 0);border-top-color: rgba(0, 0, 0, 0.8);border-width: 10px;margin-left: -10px;font-weight:normal;}
 
 .keyword-phraser-row.active .delete-row {padding: 0 !important;}
 

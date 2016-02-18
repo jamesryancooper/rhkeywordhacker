@@ -1,6 +1,6 @@
-//var restURL = "http://fairmarketing.cloudapp.net/rest1.0/kh_endpoint.jsp?"
+var restURL = "http://fairmarketing.cloudapp.net/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://fairmarketing.cloudapp.net/rest1.0/servlet/ssd.DownloadInventoryReport?"
-var restURL = "http://localhost:8084/rest1.0/kh_endpoint.jsp?"
+//var restURL = "http://localhost:8084/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://localhost:8084/rest1.0/servlet/ssd.DownloadInventoryReport"
 var desc = false;
 
@@ -1392,10 +1392,49 @@ function displayProjectEditWindow(projectID)
                     var payingCustomers = parseInt(projectInfo.payingCustomers);
                     var valuePerCustomer = parseInt(projectInfo.valuePerCustomer);
                     var costPerLevel = parseInt(projectInfo.costPerLevel);
+                    var useGoogle = projectInfo.useGoogle;
+                    var useBing = projectInfo.useBing;
+                    var useYouTube = projectInfo.useYouTube;
+                    var useAppStore = projectInfo.useAppStore;
                     
                     //Update the inputs with the appropriate values
                     $('#project-url').html(projectURL);
                     $('#project-location').html(geoLocation);
+                    if(useGoogle == 1)
+                    {
+                        $('#use-google').prop('checked',true);
+                    }
+                    else
+                    {
+                       $('#use-google').prop('checked',false); 
+                    }
+                    
+                    if(useBing == 1)
+                    {
+                        $('#use-bing').prop('checked',true);
+                    }
+                    else
+                    {
+                       $('#use-bing').prop('checked',false); 
+                    }
+                    
+                    if(useYouTube == 1)
+                    {
+                        $('#use-you-tube').prop('checked',true);
+                    }
+                    else
+                    {
+                       $('#use-you-tube').prop('checked',false); 
+                    }
+                    
+                    if(useAppStore == 1)
+                    {
+                        $('#use-app-store').prop('checked',true);
+                    }
+                    else
+                    {
+                       $('#use-app-store').prop('checked',false); 
+                    }
                     /*$('#ex6SliderVal').val(numberWithCommas(monthlyVisitors));
                     $('#ex7SliderVal').val(numberWithCommas(payingCustomers));
                     $('#ex8SliderVal').val(numberWithCommas(valuePerCustomer));
@@ -1460,9 +1499,50 @@ function editKeywordHackerProject()
         var payingCustomers = $('#ex7SliderVal').val();
         var customerValue = $('#ex8SliderVal').val();
         var costPerLevel = $('#ex9SliderVal').val();
+        
+        var useGoogle;
+        var useBing;
+        var useYouTube;
+        var useAppStore;
+        
+        if($('#use-google').is(':checked'))
+        {
+            useGoogle = 1;
+        }
+        else
+        {
+            useGoogle = 0;
+        }
+        
+        if($('#use-bing').is(':checked'))
+        {
+            useBing = 1;
+        }
+        else
+        {
+            useBing = 0;
+        }
+        
+        if($('#use-you-tube').is(':checked'))
+        {
+            useYouTube = 1;
+        }
+        else
+        {
+            useYouTube = 0;
+        }
+        
+        if($('#use-app-store').is(':checked'))
+        {
+            useAppStore = 1;
+        }
+        else
+        {
+            useAppStore = 0;
+        }
 
         //Make the AJAX call
-        $.ajax({url: restURL, data: {'command':'editKHProject','projectid':projectID,'monthlyVisitors':monthlyVisitors,'payingCustomers':payingCustomers,'customerValue':customerValue,'costPerLevel':costPerLevel}, type: 'post', async: true, success: function postResponse(returnData){
+        $.ajax({url: restURL, data: {'command':'editKHProject','projectid':projectID,'monthlyVisitors':monthlyVisitors,'payingCustomers':payingCustomers,'customerValue':customerValue,'costPerLevel':costPerLevel,'useGoogle':useGoogle,'useBing':useBing,'useYouTube':useYouTube,'useAppStore':useAppStore}, type: 'post', async: true, success: function postResponse(returnData){
                 var info = JSON.parse(returnData);
 
                 if(info.status == "success")

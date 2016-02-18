@@ -36,6 +36,7 @@
     
     <!--1520 files-->
     <script src="js/1520.js"></script>
+    <script src="js/sorttable.js"></script>
     <link href="css/1520.css" rel="stylesheet" id="theme-change">
     <link href="css/spinner.css" rel="stylesheet" id="theme-change">
     
@@ -176,29 +177,29 @@
                                     <div class="keyword-phraser-heading">
                                         <ul class="keyword-phraser-row">
                                             <li class="checkbox-outer width-2-5"> &nbsp; </li>
-                                            <li class="keyword-phraser-tittle width-20">
-                                                <h2>Keyword<br>Phrases</h2>
+                                            <li class="keyword-phraser-tittle width-20" style="cursor:pointer;" onclick="displayProjectInfo('keyword');">
+                                                <h2>Keyword<br>Phrases</h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
                                             </li>
-                                            <li class="power-goal-info width-7">
-                                                <h2>Power<br>Level Goal<a title="Represents the level of marketing effort required for each keyword. A lower Power Level Goal is preferable since it suggests that less effort is required to meet your goals." class="info-icon"> </a></h2>
+                                            <li class="power-goal-info width-7" style="cursor:pointer;" onclick="displayProjectInfo('powerLevelGoal');">
+                                                <h2>Power<br>Level Goal<a title="Represents the level of marketing effort required for each keyword. A lower Power Level Goal is preferable since it suggests that less effort is required to meet your goals." class="info-icon"> </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
                                             </li>
-                                            <li class="monthly-organic-info width-10">
-                                                <h2>Monthly Organic<br>Search Volume<a title="The monthly average searches for each keyword." class="info-icon"> </a></h2>
+                                            <li class="monthly-organic-info width-10" style="cursor:pointer;" onclick="displayProjectInfo('searchVolume');">
+                                                <h2>Monthly Organic<br>Search Volume<a title="The monthly average searches for each keyword." class="info-icon"> </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
                                             </li>
-                                            <li class="monthly-visitors-info width-10">
-                                                <h2>Projected<br>Monthly Visitors<a title="Applying each keyword's average Click Through Rate to the Monthly Organic Search Volume. Assumes a page one ranking position." class="info-icon"> </a></h2>
+                                            <li class="monthly-visitors-info width-10" style="cursor:pointer;" onclick="displayProjectInfo('monthlyVisitors');">
+                                                <h2>Projected<br>Monthly Visitors<a title="Applying each keyword's average Click Through Rate to the Monthly Organic Search Volume. Assumes a page one ranking position." class="info-icon"> </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
                                             </li>
-                                            <li class="monthly-customers-info width-12">
-                                                <h2>Projected<br>Monthly Customers<a title="Applying your website's current Conversion Rate to Projected Monthly Visitors." class="info-icon"> </a></h2>
+                                            <li class="monthly-customers-info width-12" style="cursor:pointer;" onclick="displayProjectInfo('monthlyCustomers');">
+                                                <h2>Projected<br>Monthly Customers<a title="Applying your website's current Conversion Rate to Projected Monthly Visitors." class="info-icon"> </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
                                             </li>
-                                            <li class="monthly-sales-info width-10">
-                                                <h2>Projected<br>Monthly Sales<a title="Applying the one-time customer value to the Projected Monthly Customers." class="info-icon"> </a></h2>
+                                            <li class="monthly-sales-info width-10" style="cursor:pointer;" onclick="displayProjectInfo('monthlySales');">
+                                                <h2>Projected<br>Monthly Sales<a title="Applying the one-time customer value to the Projected Monthly Customers." class="info-icon"> </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
                                             </li>
-                                            <li class="cost-monthly-info width-7">
-                                                <h2>Cost<br>Per Month<a title="Marketing cost for this keyword." class="info-icon"> </a></h2>
+                                            <li class="cost-monthly-info width-7" style="cursor:pointer;" onclick="displayProjectInfo('costPerMonth');">
+                                                <h2>Cost<br>Per Month<a title="Marketing cost for this keyword." class="info-icon"> </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
                                             </li>
-                                            <li class="keyword-net-worth-info width-7">
-                                                <h2>Keyword<br>Net-Worth<a title="Projected return on your invested marketing dollars for this keyword." class="info-icon"> </a></h2>
+                                            <li class="keyword-net-worth-info width-7" style="cursor:pointer;" onclick="displayProjectInfo('keywordNetWorth');">
+                                                <h2>Keyword<br>Net-Worth<a title="Projected return on your invested marketing dollars for this keyword." class="info-icon"> </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
                                             </li>
                                             <li class="content-blueprint-info width-10">
                                                 <h2>Content<br>Blueprint<a title="Generate a Content Blueprint for each keyword." class="info-icon"> </a></h2>
@@ -584,6 +585,11 @@
 </script>
 
 <input type="hidden" id="json" value=""/>
+<input type="hidden" id="competitor-sort-method" value="google-rank"/>
+<input type="hidden" id="competitor-sort-reversed" value="false"/>
+
+<input type="hidden" id="keyword-sort-method" value="keyword"/>
+<input type="hidden" id="keyword-sort-reversed" value="false"/>
 
 </body>
 </html>

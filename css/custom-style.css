@@ -1043,7 +1043,13 @@ width: 100%;}
 
 .keyword-phraser-section {background-color: #fff;box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);float: left;margin: 0;padding: 20px;width: 100%;}
 
-.checkbox-outer, .keyword-phraser-tittle, .power-goal-info, .monthly-organic-info, .monthly-visitors-info, .monthly-visitors-info, .monthly-customers-info, .monthly-sales-info, .cost-monthly-info, .keyword-net-worth-info, .content-blueprint-info , .delete-row {display: table;float: left;height: 100%;margin: 0;padding: 0 10px;vertical-align: middle;}
+.checkbox-outer, .keyword-phraser-tittle, .ctr-info, .power-level-info, .power-goal-info, .monthly-organic-info, .monthly-visitors-info, .monthly-visitors-info, .monthly-customers-info, .monthly-sales-info, .cost-monthly-info, .keyword-net-worth-info, .content-blueprint-info , .delete-row {display: table;float: left;height: 100%;margin: 0;padding: 0 10px;vertical-align: middle;}
+
+.c-checkbox-outer, .c-keyword-phraser-tittle, .c-ctr-info, .c-power-level-info {display: inline-block;float: left;height: 100% !important;margin: 0;padding: 0 10px;vertical-align: middle;border-left:thin solid #e2e5e5 !important;border-top:thin solid #e2e5e5 !important;border-bottom:thin solid #e2e5e5 !important;border-right:0;}
+.c-power-goal-info {display: inline-block;float: left;height: 100% !important;margin: 0;padding: 0 10px;vertical-align: middle; border-left:thin solid #e2e5e5 !important;border-top:thin solid #e2e5e5 !important;border-bottom:thin solid #e2e5e5 !important;border-right:0;}
+
+.c-checkbox-outer-heading, .c-keyword-phraser-tittle-heading, .c-ctr-info-heading, .c-power-level-info-heading {display: table;float: left;height: 100% !important;margin: 0;padding: 0 10px;vertical-align: middle;border:none !important;}
+.c-power-goal-info-heading {display: table;float: left;height: 100% !important;margin: 0;padding: 0 10px;vertical-align: middle;border:none !important;}
 
 .keyword-phraser-heading .keyword-phraser-row li h2 {color: #000;font-size: 12px;font-weight: 600;line-height: normal;margin: 0;padding: 0;text-align: left;text-transform: none;}
 
@@ -1297,6 +1303,7 @@ width: 100%;}
 .project_name_sort input[type="checkbox"]:checked + label:before {border-color: transparent #005cb9 #005cb9 transparent;border-width: 3px;top: -2px;}
 
 .checkbox-outer input[type="checkbox"]:checked + label:before {border-color: transparent #005cb9 #005cb9 transparent;border-width: 3px;}
+.c-checkbox-outer input[type="checkbox"]:checked + label:before {border-color: transparent #005cb9 #005cb9 transparent;border-width: 3px;}
 
 .power-level-summary .checkbox-outer input[type="checkbox"]:checked + label:before {border-color: transparent #333 #333 transparent;border-width: 3px;}
 

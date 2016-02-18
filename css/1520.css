@@ -1,3 +1,7 @@
+body.wait *, body.wait {
+    cursor: wait !important;
+}
+
 .edit-project-window {
     position: fixed;
     top: 15%;

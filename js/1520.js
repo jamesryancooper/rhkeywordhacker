@@ -1,7 +1,8 @@
-var restURL = "http://fairmarketing.cloudapp.net/rest1.0/kh_endpoint.jsp?"
+//var restURL = "http://fairmarketing.cloudapp.net/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://fairmarketing.cloudapp.net/rest1.0/servlet/ssd.DownloadInventoryReport?"
-//var restURL = "http://localhost:8084/rest1.0/kh_endpoint.jsp?"
+var restURL = "http://localhost:8084/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://localhost:8084/rest1.0/servlet/ssd.DownloadInventoryReport"
+var desc = false;
 
 var sort_by = function(field, reverse, primer){
    var key = function (x) {return primer ? primer(x[field]) : x[field]};
@@ -399,7 +400,7 @@ function displayDashboardCards(sortMethod,flip)
         //if(completed == '1')
         if(true)
         {
-            cardHTML += "<li class=\"col-lg-4 matchheight element-item\">";
+            cardHTML += "<li class=\"col-lg-4 matchheight element-item\" id=\"project-card-"+projectID+"\">";
             cardHTML += "<div class=\"project-cart-box box-shadow-ot\">";
             cardHTML += "<div class=\"card-header\">";
             cardHTML += "<h2 style=\"clear:both;text-align:right;margin-top:-10px;\"><a style=\"cursor:pointer;\" class=\"edit-icon\" title=\"Edit Project\" onclick=\"displayProjectEditWindow('"+projectID+"');\"></a><a style=\"cursor:pointer;color:rgba(61,61,61,.25);\" title=\"Download\" class=\"download-icon\" onclick=\"javascript:void(0);\"></a><a style=\"cursor:pointer;\" class=\"delete-icon\" title=\"Delete Project\" onclick=\"displayProjectDeleteWindow('"+projectID+"');\"></a></h2>";
@@ -472,7 +473,7 @@ function loadProjectData()
                 {
                     //Save this to local storage so that it can be sent to the PDF printer service
                     $('#json').val(returnData);
-                    displayProjectInfo();
+                    displayProjectInfo('keywordID');
                 }
             }
         });
@@ -571,8 +572,166 @@ function unitTest()
     }*/
 }
 
-function displayProjectInfo()
+function sortKeywordCompetitors(selectedKeywordID,field,totalPowerLevel)
 {
+    $('body').addClass('wait');
+    
+    var returnData = $('#json').val();
+    var currSortMethod = $('#competitor-sort-method').val();
+    var sortMethod = $('#competitor-sort-reversed').val();
+    var reversed;
+    
+    //Find the data
+    var info = JSON.parse(returnData);
+    var keywordInfo = info.keywordData;
+    var thisCompetitorArray;
+    for(var i=0; i<keywordInfo.length; i++)
+    {
+        var keywordID = keywordInfo[i].keywordID;
+        if(keywordID == selectedKeywordID)
+        {
+            var thisEntry = keywordInfo[i];
+            thisCompetitorArray = thisEntry.competitorData;
+        }
+    }
+    
+    //Got the data, now let's sort it
+    if(field == 'google-rank')
+    {
+        if(field == currSortMethod)
+        {
+            if(sortMethod == "false")
+            {
+                reversed = true;
+            }
+            else
+            {
+                reversed = false;
+            }
+        }
+        thisCompetitorArray.sort(sort_by('positionRank', reversed, parseInt));
+    }
+    else if(field == 'url')
+    {
+        if(field == currSortMethod)
+        {
+            if(sortMethod == "false")
+            {
+                reversed = true;
+            }
+            else
+            {
+                reversed = false;
+            }
+        }
+        thisCompetitorArray.sort(sort_by('url', reversed, function(a){return a.toUpperCase()}));
+    }
+    else if(field == 'ctr')
+    {
+        if(field == currSortMethod)
+        {
+            if(sortMethod == "false")
+            {
+                reversed = true;
+            }
+            else
+            {
+                reversed = false;
+            }
+        }
+        thisCompetitorArray.sort(sort_by('traffic', reversed, parseFloat));
+    }
+    else if(field == 'power-level')
+    {
+        if(field == currSortMethod)
+        {
+            if(sortMethod == "false")
+            {
+                reversed = true;
+            }
+            else
+            {
+                reversed = false;
+            }
+        }
+        thisCompetitorArray.sort(sort_by('powerLevel', reversed, parseInt));
+    }
+    
+    //Save the new sort method and reversed status
+    $('#competitor-sort-method').val(field);
+    $('#competitor-sort-order').val(reversed);
+    
+    //Now re-draw the content for the competitors div
+    var competitorInnerHTML = "<h2 class=\"power-summary-heading\"><span class=\"tag-label\">them</span> COMPETITOR AVERAGE RANKING POWER LEVEL IS <span class=\"total-power-summery\" id=\"kwid-"+selectedKeywordID+"-total-power-summary\">"+totalPowerLevel+"</span></h2>"+
+                "<div class=\"divider\"></div>"+
+                "<ul class=\"power-summary-row power-summary-heading-row\">"+
+                    "<li class=\"checkbox-outer col-lg-1\"> &nbsp; </li>"+
+                    "<li class=\"keyword-phraser-tittle col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+selectedKeywordID+"','google-rank','"+totalPowerLevel+"');\">"+
+                        "<h2>Google Rank</h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>"+
+                    "</li>"+
+                    "<li class=\"power-goal-info col-lg-6\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+selectedKeywordID+"','url','"+totalPowerLevel+"');\">"+
+                        "<h2>Their URL</h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>"+
+                    "</li>"+
+                    "<li class=\"power-goal-info col-lg-1\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+selectedKeywordID+"','ctr','"+totalPowerLevel+"');\">"+
+                        "<h2>CTR<a class=\"info-icon\" title=\"Click Through Rate for the ranking position and current keyword.\"> </a></h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>"+
+                    "</li>"+
+                    "<li class=\"monthly-organic-info col-lg-1\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+selectedKeywordID+"','power-level','"+totalPowerLevel+"');\">"+
+                        "<h2>Power Level</h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>"+
+                    "</li>"+
+                "</ul>";
+        var showWarning = false;
+        
+        competitorInnerHTML += "<ul class=\"power-summary-row\" style=\"border:0;\" id=\"competitorsList\">";
+        for(var j=0; j<thisCompetitorArray.length; j++)
+        {
+            var thisCompetitor = thisCompetitorArray[j];
+            var competitorID = thisCompetitor.competitorID;
+            var competitorActive = thisCompetitor.active;
+            var competitorPositionRank = thisCompetitor.positionRank;
+            var competitorURL = thisCompetitor.url;
+                var competitorURLShort = competitorURL.substring(0,35)+"...";
+            var competitorCTR = Math.round(thisCompetitor.traffic);
+            //var competitorPowerLevel = Math.round((thisCompetitor.DA+thisCompetitor.PA)/2/10);
+            var competitorPowerLevel = thisCompetitor.powerLevel;
+            
+            if(competitorPowerLevel > 9)
+            {
+                showWarning = true;
+            }
+            var competitorCheckboxStatus = "";
+            if(competitorActive == 1)
+            {
+                competitorCheckboxStatus = "checked";
+            }
+            
+            competitorInnerHTML += "<ul class=\"power-summary-row\">"+
+                                "<li class=\"checkbox-outer col-lg-1\">"+
+                                    "<h2>"+
+                                        "<input type=\"checkbox\" "+competitorCheckboxStatus+" id=\"chk-content-all-c"+competitorID+"\" onchange=\"toggleCompetitor('"+competitorID+"',this.checked);\">"+
+                                        "<label for=\"chk-content-all-c"+competitorID+"\"></label>"+
+                                    "</h2>"+
+                                "</li>"+
+                                "<li class=\"col-lg-2\">"+
+                                    "<h2>"+competitorPositionRank+"</h2>"+
+                                "</li>"+
+                                "<li class=\"power-goal-info col-lg-6\">"+
+                                    "<h2 title=\""+competitorURL+"\">"+competitorURLShort+"</h2>"+
+                                "</li>"+
+                                "<li class=\"power-goal-info col-lg-1\">"+
+                                    "<h2>"+competitorCTR+"%</h2>"+
+                                "</li>"+
+                                "<li class=\"col-lg-1\">"+
+                                    "<h2>"+competitorPowerLevel+"</h2>"+
+                                "</li>"+
+                            "</ul>";
+        }
+    $('#competitors-table-'+selectedKeywordID).html(competitorInnerHTML);
+    $('body').removeClass('wait');
+}
+
+function displayProjectInfo(field)
+{
+    $('body').addClass('wait');
     var returnData = $('#json').val();
     var info = JSON.parse(returnData);
     
@@ -642,9 +801,144 @@ function displayProjectInfo()
         $('#kwNetWorth').html("<h2 class=\""+netWorthStyle+"\">"+keywordNetWorthString+"<span>KEYWORD NET-WORTH<a class=\"info-icon\" title=\"This is the projected return on your invested marketing dollars for all selected keywords in this project.\"></a></span></h2>");
         $('#dateDivBottom').html("<div class=\"project-date-card date_sort\"><i class=\"eagle-icon\"></i>"+runDate+"</div><a class=\"project-status-card  project_status_sort\" href=\"javascript:void(0);\">"+activeString+"</a>");
 
+    //Let's sort the keyword data by the specified field first
+    var currSortMethod = $('#keyword-sort-method').val();
+    var sortMethod = $('#keyword-sort-reversed').val();
+    var reversed;
+    
+    //Find the data
+    var keywordInfo = info.keywordData;
+    
+    //Got the data, now let's sort it
+    if(field == 'keyword')
+    {
+        if(field == currSortMethod)
+        {
+            if(sortMethod == "false")
+            {
+                reversed = true;
+            }
+            else
+            {
+                reversed = false;
+            }
+        }
+        keywordInfo.sort(sort_by('keyword', reversed, function(a){return a.toUpperCase()}));
+    }
+    else if(field == 'powerLevelGoal')
+    {
+        if(field == currSortMethod)
+        {
+            if(sortMethod == "false")
+            {
+                reversed = true;
+            }
+            else
+            {
+                reversed = false;
+            }
+        }
+        keywordInfo.sort(sort_by('powerLevelGoal', reversed, parseInt));
+    }
+    else if(field == 'searchVolume')
+    {
+        if(field == currSortMethod)
+        {
+            if(sortMethod == "false")
+            {
+                reversed = true;
+            }
+            else
+            {
+                reversed = false;
+            }
+        }
+        keywordInfo.sort(sort_by('searchVolume', reversed, parseInt));
+    }
+    else if(field == 'monthlyVisitors')
+    {
+        if(field == currSortMethod)
+        {
+            if(sortMethod == "false")
+            {
+                reversed = true;
+            }
+            else
+            {
+                reversed = false;
+            }
+        }
+        keywordInfo.sort(sort_by('monthlyVisitors', reversed, parseInt));
+    }
+    else if(field == 'monthlyCustomers')
+    {
+        if(field == currSortMethod)
+        {
+            if(sortMethod == "false")
+            {
+                reversed = true;
+            }
+            else
+            {
+                reversed = false;
+            }
+        }
+        keywordInfo.sort(sort_by('monthlyCustomers', reversed, parseInt));
+    }
+    else if(field == 'monthlySales')
+    {
+        if(field == currSortMethod)
+        {
+            if(sortMethod == "false")
+            {
+                reversed = true;
+            }
+            else
+            {
+                reversed = false;
+            }
+        }
+        keywordInfo.sort(sort_by('monthlySales', reversed, parseInt));
+    }
+    else if(field == 'costPerMonth')
+    {
+        if(field == currSortMethod)
+        {
+            if(sortMethod == "false")
+            {
+                reversed = true;
+            }
+            else
+            {
+                reversed = false;
+            }
+        }
+        keywordInfo.sort(sort_by('costPerMonth', reversed, parseInt));
+    }
+    else if(field == 'keywordNetWorth')
+    {
+        if(field == currSortMethod)
+        {
+            if(sortMethod == "false")
+            {
+                reversed = true;
+            }
+            else
+            {
+                reversed = false;
+            }
+        }
+        keywordInfo.sort(sort_by('keywordNetWorth', reversed, parseInt));
+    }
+    
+    //Save the new sort method and reversed status
+    $('#keyword-sort-method').val(field);
+    $('#keyword-sort-order').val(reversed);
+    
+
     //Fill in the keyword data here
     var accordianHTML = "";
-    var keywordInfo = info.keywordData;
+    //var keywordInfo = info.keywordData;
     for(var i=0; i<keywordInfo.length; i++)
     {
         var thisEntry = keywordInfo[i];
@@ -658,11 +952,18 @@ function displayProjectInfo()
         var totalPowerLevel = thisEntry.totalPowerLevel;     //Add back the client power level to the total power level for this keyword
         var keyword = thisEntry.keyword;
         
-        var monthlyVisitors = Math.round(searchVolume * avgCTR,0);
+        /*var monthlyVisitors = Math.round(searchVolume * avgCTR,0);
         var monthlyCustomers = Math.round(monthlyVisitors * customerConversionRate,0);
         var monthlySales = Math.round(monthlyCustomers * valuePerCustomer,0);
         var costPerMonth = Math.round((totalPowerLevel - clientPowerLevel) * costPerLevel, 0);
         var keywordNetWorth = (monthlySales - costPerMonth);
+        
+        var powerLevelGoal = Math.max(1,(totalPowerLevel - clientPowerLevel));*/
+        var monthlyVisitors = thisEntry.monthlyVisitors;
+        var monthlyCustomers = thisEntry.monthlyCustomers;
+        var monthlySales = thisEntry.monthlySales;
+        var costPerMonth = thisEntry.costPerMonth;
+        var keywordNetWorth = thisEntry.keywordNetWorth;
         
         var powerLevelGoal = Math.max(1,(totalPowerLevel - clientPowerLevel));
         
@@ -714,27 +1015,27 @@ function displayProjectInfo()
                             "</ul>";
         
         //Let's first build the "THEM" table so that we can determine if they hav a power level goal of 9 (need to know whether to show the warning message)
-        var competitorHTML = "<div class=\"col-lg-6 them-power-summary-section\">" +
+        var competitorHTML = "<div class=\"col-lg-6 them-power-summary-section\" id=\"competitors-table-"+keywordID+"\">" +
                 "<h2 class=\"power-summary-heading\"><span class=\"tag-label\">them</span> COMPETITOR AVERAGE RANKING POWER LEVEL IS <span class=\"total-power-summery\" id=\"kwid-"+keywordID+"-total-power-summary\">"+totalPowerLevel+"</span></h2>"+
                 "<div class=\"divider\"></div>"+
                 "<ul class=\"power-summary-row power-summary-heading-row\">"+
                     "<li class=\"checkbox-outer col-lg-1\"> &nbsp; </li>"+
-                    "<li class=\"keyword-phraser-tittle col-lg-2\">"+
-                        "<h2>Google Rank</h2>"+
+                    "<li class=\"keyword-phraser-tittle col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','google-rank','"+totalPowerLevel+"');\">"+
+                        "<h2>Google Rank</h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>"+
                     "</li>"+
-                    "<li class=\"power-goal-info col-lg-6\">"+
-                        "<h2>Their URL</h2>"+
+                    "<li class=\"power-goal-info col-lg-6\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','url','"+totalPowerLevel+"');\">"+
+                        "<h2>Their URL</h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>"+
                     "</li>"+
-                    "<li class=\"power-goal-info col-lg-1\">"+
-                        "<h2>CTR<a class=\"info-icon\" title=\"Click Through Rate for the ranking position and current keyword.\"> </a></h2>"+
+                    "<li class=\"power-goal-info col-lg-1\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','ctr','"+totalPowerLevel+"');\">"+
+                        "<h2>CTR<a class=\"info-icon\" title=\"Click Through Rate for the ranking position and current keyword.\"> </a></h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>"+
                     "</li>"+
-                    "<li class=\"monthly-organic-info col-lg-1\">"+
-                        "<h2>Power Level<a class=\"info-icon\" title=\"Represents the level of marketing effort required for each keyword.\"></a></h2>"+
+                    "<li class=\"monthly-organic-info col-lg-1\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','power-level','"+totalPowerLevel+"');\">"+
+                        "<h2>Power Level</h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>"+
                     "</li>"+
                 "</ul>";
-        
         var showWarning = false;
         
+        competitorHTML += "<ul class=\"power-summary-row\" style=\"border:0;\" id=\"competitorsList\">";
         for(var j=0; j<thisCompetitorArray.length; j++)
         {
             var thisCompetitor = thisCompetitorArray[j];
@@ -745,7 +1046,8 @@ function displayProjectInfo()
             var competitorURL = thisCompetitor.url;
                 var competitorURLShort = competitorURL.substring(0,35)+"...";
             var competitorCTR = Math.round(thisCompetitor.traffic);
-            var competitorPowerLevel = Math.round((thisCompetitor.DA+thisCompetitor.PA)/2/10);
+            //var competitorPowerLevel = Math.round((thisCompetitor.DA+thisCompetitor.PA)/2/10);
+            var competitorPowerLevel = thisCompetitor.powerLevel;
             
             if(competitorPowerLevel > 9)
             {
@@ -795,7 +1097,7 @@ function displayProjectInfo()
                                             "<h2>Your URL</h2>"+
                                         "</li>"+
                                         "<li class=\"monthly-organic-info col-lg-2\">"+
-                                            "<h2>Power Level</h2>"+
+                                            "<h2>Power Level<a class=\"info-icon\" title=\"Represents the level of marketing effort required for each keyword.\"> </a></h2>"+
                                         "</li>"+
                                     "</ul>"+
                                     "<ul class=\"power-summary-row\">"+
@@ -860,10 +1162,13 @@ function displayProjectInfo()
         }
     }
     $("#suggestedKeywordsList").html(suggestedKeywordsHTML);
+    $('body').removeClass('wait');
 }
 
 function toggleCompetitor(competitorID,checked)
 {
+    $('body').addClass('wait');
+
     var projectID = getURLParameter("pid");
     var active = "";
     if(checked)
@@ -883,6 +1188,7 @@ function toggleCompetitor(competitorID,checked)
                 if(info.status == "success")
                 {
                     refreshProjectData();
+                    $('body').removeClass('wait');
                 }
             }
         });
@@ -891,6 +1197,8 @@ function toggleCompetitor(competitorID,checked)
 
 function toggleKeyword(keywordID,checked)
 {
+    $('body').addClass('wait');
+
     var projectID = getURLParameter("pid");
     var active = "";
     if(checked)
@@ -910,6 +1218,7 @@ function toggleKeyword(keywordID,checked)
                 if(info.status == "success")
                 {
                     refreshProjectData();
+                    $('body').removeClass('wait');
                 }
             }
         });
@@ -1139,7 +1448,9 @@ function displayProjectEditWindow(projectID)
 function editKeywordHackerProject()
 {
     //Show the spinner
-    $("#edit-project-response").html("<div class='three-quarters-loader-small'></div>");
+    //$("#edit-project-response").html("<div class='three-quarters-loader-small'></div>");
+    $('body').addClass('wait');
+
     
     //Get the new values to update with
     var projectID = $('#edit-project-id').val();
@@ -1157,8 +1468,9 @@ function editKeywordHackerProject()
                 if(info.status == "success")
                 {
                     //On success, hide the window
-                    $("#edit-project-response").html("");
+                    //$("#edit-project-response").html("");
                     hideEditProject();
+                    $('body').removeClass('wait');
                     loadProjectDashboard(false);
                 }
             }
@@ -1201,7 +1513,8 @@ function displayProjectDeleteWindow(projectID)
 function deleteKeywordHackerProject()
 {
     //Show the spinner
-    $("#delete-project-response").html("<div class='three-quarters-loader-small'></div>");
+    //$("#delete-project-response").html("<div class='three-quarters-loader-small'></div>");
+    $('body').addClass('wait');
     
     //Get the new values to update with
     var projectID = $('#delete-project-id').val();
@@ -1214,9 +1527,11 @@ function deleteKeywordHackerProject()
                 if(info.status == "success")
                 {
                     //On success, hide the window
-                    $("#delete-project-response").html("");
+                    //$("#delete-project-response").html("");
                     hideDeleteProject();
-                    loadProjectDashboard(false);
+                    $('body').removeClass('wait');
+                    //loadProjectDashboard(false);
+                    $("#project-card-"+projectID).hide(400);
                 }
             }
         });
@@ -1349,6 +1664,8 @@ function removeKeywordInReport(element)
 
 function recalculateProject()
 {
+    $('body').addClass('wait');
+
     var projectID = getURLParameter("pid");
     if(projectID != '')
     {
@@ -1376,6 +1693,7 @@ function recalculateProject()
 
                 if(info.status == "success")
                 {
+                    $('body').removeClass('wait');
                     window.location = "dashboard.html";
                 }
             }

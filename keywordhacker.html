@@ -212,7 +212,6 @@
                                             
                                         </div>
 
-
                                         <div class="add-custom-keyword-outer">
                                             <div id="url-list">
                                                 <a href="#add-more-url" class="add-more-url" id="button-add-url">+ ADD CUSTOM KEYWORD</a>
@@ -223,6 +222,22 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
+                                        <div class="add-custom-keyword-outer">
+                                            <input type="hidden" id="keyword-count" value="0"/>
+                                            <div class="suggest-keywords-list">
+                                                <ul id="ctc">
+
+                                                </ul>
+                                            </div>
+                                            <div class="suggest-keywords-list">
+                                                <div id="submit-button-block">
+                                                    <a class="orange-btn btn pull-right" onclick="recalculateProject();">RECALCULATE PROJECT</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        
                                         <div class="suggest-keywords-list">
                                             <p class="suggest-keywords-label">+ ADD Suggested Keywords <span>(Click to add to list Above)</span></p>
                                             <label for="post-2" id="read-more-button-label" class="read-more-trigger" onclick="toggleReadMore();">SHOW MORE KEYWORDS</label>
@@ -401,8 +416,8 @@
 //			$(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child ul li.checkbox-outer input").attr('id', 'chk-content-'+text_of_li_new+parent_get);
             //		$(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child ul li.checkbox-outer label").attr('for','chk-content-'+text_of_li_new+parent_get);
             
-            //Here's where we call the REST service to add this to the project and set the status to incomplete
-            //addKeywordToProject(text_of_li);
+            //Here's where we add the keyword to the list
+            addKeywordInReport(text_of_li);
             
         });
 
@@ -506,8 +521,8 @@
             $(this).remove();
             $("a#button-add-url").show();
             
-            //Here's where we call the REST service to add this to the project and set the status to incomplete
-            //addKeywordToProject(url_val);
+            //Here's where we add the keyword to the list
+            addKeywordInReport(url_val);
         });
 
 

@@ -1,6 +1,6 @@
-//var restURL = "http://fairmarketing.cloudapp.net/rest1.0/kh_endpoint.jsp?"
+var restURL = "http://fairmarketing.cloudapp.net/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://fairmarketing.cloudapp.net/rest1.0/servlet/ssd.DownloadInventoryReport?"
-var restURL = "http://localhost:8084/rest1.0/kh_endpoint.jsp?"
+//var restURL = "http://localhost:8084/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://localhost:8084/rest1.0/servlet/ssd.DownloadInventoryReport"
 
 var sort_by = function(field, reverse, primer){
@@ -1062,25 +1062,6 @@ function refreshProjectInfo()
     }
 }
 
-function toggleSuggestedKeywords()
-{
-    var expanded = $('#viewMoreLabel').html();
-    if(expanded == "Hide")
-    {
-        //Hide the full list
-        document.getElementById('suggestedKeywordsListFull').style.display = "none";
-        document.getElementById('suggestedKeywordsList').style.display = "block";
-        $('#viewMoreLabel').html("Show More...");
-    }
-    else
-    {
-        //Show the full list
-        document.getElementById('suggestedKeywordsListFull').style.display = "block";
-        document.getElementById('suggestedKeywordsList').style.display = "none";
-        $('#viewMoreLabel').html("Hide");
-    }
-}
-
 function displayProjectEditWindow(projectID)
 {
     if(projectID != '')
@@ -1269,13 +1250,8 @@ $(".show-more a").each(function() {
     var $link = $(this);
     var $content = $link.parent().prev("div.text-content");
 
-    console.log($link);
-
     var visibleHeight = $content[0].clientHeight;
     var actualHide = $content[0].scrollHeight - 1;
-
-    console.log(actualHide);
-    console.log(visibleHeight);
 
     if (actualHide > visibleHeight) {
         $link.show();
@@ -1318,5 +1294,91 @@ function toggleReadMore()
     else
     {
         $('#read-more-button-label').html("SHOW MORE KEYWORDS");
+    }
+}
+
+function addKeywordInReport(keyword)
+{
+    var currentKeywordCount = $('#keyword-count').val();
+
+    if(keyword.trim() !== '')
+    {
+        var existingKeywords = $('#ctc').html();
+        var newKeywordCount = parseInt(currentKeywordCount)+1;
+        var newKeywords = existingKeywords + "<li id=\"keyword"+newKeywordCount+"\">"+keyword+"<span style=\"padding:5px;color:#ec1c24;font-weight:bold;cursor:pointer;\" id=\"remove-keyword"+newKeywordCount+"\" title=\"Remove\" onclick=\"removeKeywordInReport(this);\">X</span></li>";
+        $('#ctc').html(newKeywords);
+
+        $('#keyword-count').val(newKeywordCount);
+    }
+}
+
+function removeKeywordInReport(element)
+{
+    var currentKeywordCount = parseInt($('#keyword-count').val());
+    var id = element.getAttribute('id').replace('remove-keyword','');
+    var idValue = parseInt(id);
+    
+    var keywordContent = $('#keyword'+idValue).html();
+        keywordContent = keywordContent.replace("<span style=\"padding:5px;color:#ec1c24;font-weight:bold;cursor:pointer;\" id=\"remove-keyword"+idValue+"\" title=\"Remove\" onclick=\"removeKeywordInReport(this);\">X</span>","");
+        keywordContent = keywordContent.trim();
+    $('#keyword'+idValue).remove();
+    //Add it to the list of suggested in case they want it back
+    var suggestedList = $('#suggestedKeywordsList').html();
+    var stringToAdd = "<li class=\"read-more-target\">"+keywordContent+"</li>"
+    $('#suggestedKeywordsList').html(suggestedList+stringToAdd);
+    
+    if(idValue < currentKeywordCount)
+    {
+        var startingVal = idValue + 1;
+        //Re-number the items behind this one so that we have an accurate count
+        for(var i=startingVal; i<=currentKeywordCount; i++)
+        {
+            var newIDString = "keyword"+(i-1);
+            var newRemoveString = "remove-keyword"+(i-1);
+            $('#keyword'+i).attr("id",newIDString);
+            $('#remove-keyword'+i).attr("id",newRemoveString);
+        }
+    }
+    
+    $('#keyword-count').val(currentKeywordCount-1);
+}
+
+function recalculateProject()
+{
+    var projectID = getURLParameter("pid");
+    if(projectID != '')
+    {
+        var currentKeywordCount = parseInt($('#keyword-count').val());
+        var keywordsList = "";
+        for(var i=1; i<=currentKeywordCount; i++)
+        {
+            var keywordString = $('#keyword'+i).html();
+            var keywordEndLoc = keywordString.indexOf("<span");
+            var keyword = keywordString.substring(0,keywordEndLoc);
+            if(keywordsList == "")
+            {
+                //keywordsList = i+"="+keyword;
+                keywordsList = keyword;
+            }
+            else
+            {
+                //keywordsList += ";"+i+"="+keyword;
+                keywordsList += ";"+keyword;
+            }
+        }
+        
+        $.ajax({url: restURL, data: {'command':'addKeywordsToExistingProject','projectid':projectID,'keywords':keywordsList}, type: 'post', async: true, success: function postResponse(returnData){
+                var info = JSON.parse(returnData);
+
+                if(info.status == "success")
+                {
+                    window.location = "dashboard.html";
+                }
+            }
+        });
+    }
+    else
+    {
+        window.location = "dashboard.html";
     }
 }

@@ -1303,12 +1303,16 @@ function addKeywordInReport(keyword)
 
     if(keyword.trim() !== '')
     {
-        var existingKeywords = $('#ctc').html();
-        var newKeywordCount = parseInt(currentKeywordCount)+1;
-        var newKeywords = existingKeywords + "<li id=\"keyword"+newKeywordCount+"\">"+keyword+"<span style=\"padding:5px;color:#ec1c24;font-weight:bold;cursor:pointer;\" id=\"remove-keyword"+newKeywordCount+"\" title=\"Remove\" onclick=\"removeKeywordInReport(this);\">X</span></li>";
-        $('#ctc').html(newKeywords);
+        var kwArray = keyword.split(",");
+        for(var i=0; i<kwArray.length; i++)
+        {
+            var existingKeywords = $('#ctc').html();
+            var newKeywordCount = parseInt(currentKeywordCount)+1;
+            var newKeywords = existingKeywords + "<li id=\"keyword"+newKeywordCount+"\">"+kwArray[i].trim()+"<span style=\"padding:5px;color:#ec1c24;font-weight:bold;cursor:pointer;\" id=\"remove-keyword"+newKeywordCount+"\" title=\"Remove\" onclick=\"removeKeywordInReport(this);\">X</span></li>";
+            $('#ctc').html(newKeywords);
 
-        $('#keyword-count').val(newKeywordCount);
+            $('#keyword-count').val(newKeywordCount);
+        }
     }
 }
 

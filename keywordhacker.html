@@ -225,16 +225,14 @@
                                         </div>
                                         <div class="suggest-keywords-list">
                                             <p class="suggest-keywords-label">+ ADD Suggested Keywords <span>(Click to add to list Above)</span></p>
-                                            <ul id="suggestedKeywordsList">
-                                                
-                                            </ul>
-                                            <p class="suggest-keywords-label" style="cursor:pointer;" onclick="toggleSuggestedKeywords();" id="viewMoreLabel">View More...</p>
-                                            <ul id="suggestedKeywordsListFull" style="display:none;">
-                                                
-                                            </ul>
+                                            <label for="post-2" id="read-more-button-label" class="read-more-trigger" onclick="toggleReadMore();">SHOW MORE KEYWORDS</label>
+                                            <input type="checkbox" class="read-more-state" id="post-2"/>
+                                                <ul id="suggestedKeywordsList" class="read-more-wrap">
+
+                                                </ul>
                                         </div>
-                                        <div class="card-box-bottom" id="dateDivBottom">
-                                            </div>
+                                        
+                                        <div class="card-box-bottom" id="dateDivBottom"></div>
                                     </div>
                                 </div>
                             </div>
@@ -333,10 +331,8 @@
 
             //console.log(parent_get);
             var parent_id = "#" + parent_get;
-            //alert(parent_id);
 
-
-            $(this).hide();
+            $(this).hide(400);
             var text_of_li = $(this).html();
             //alert(text_of_li);
 

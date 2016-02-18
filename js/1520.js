@@ -245,7 +245,7 @@ function createKeywordHackerProject()
     }
 }
 
-function loadProjectDashboard()
+function loadProjectDashboard(flip)
 {
     var username = getCookie("username");
     if(username != '')
@@ -258,6 +258,8 @@ function loadProjectDashboard()
                     //Save this to local storage so that it can be used to populate the HTML using any sort method
                     $('#json').val(returnData);
                     var sortMethod = $('#curr_sort').val();
+                    //var reversed = $('#curr_sort_reversed').val();
+                    
                     //$('#curr_sort').val("runDate");
                     //$('#curr_sort_reversed').val("false");
                     
@@ -267,7 +269,7 @@ function loadProjectDashboard()
                     $('#dashboard-user-full-name').html("welcome <strong>"+userFullName+"</strong> <strong>[</strong> manage your missions below <strong>]</strong>");
                     
                     //Populate the cards based on a default sort of create date
-                    displayDashboardCards(sortMethod);
+                    displayDashboardCards(sortMethod,flip);
                 }
             }
         });
@@ -278,14 +280,14 @@ function loadProjectDashboard()
     }
 }
 
-function displayDashboardCards(sortMethod)
+function displayDashboardCards(sortMethod,flip)
 {
     var returnData = $('#json').val();
     //console.log(returnData);
     var currSortMethod = $('#curr_sort').val();
     var sortMethodReversed = $('#curr_sort_reversed').val();
     
-    var reversed = false;
+    var reversed;
     
     var info = JSON.parse(returnData);
     var data = info.data;
@@ -295,7 +297,7 @@ function displayDashboardCards(sortMethod)
     {
         if(sortMethod == currSortMethod)
         {
-            if(sortMethodReversed == "true")
+            if(sortMethodReversed == "true" && flip)
             {
                 reversed = false;
                 data.sort(date_sort_asc);
@@ -311,7 +313,7 @@ function displayDashboardCards(sortMethod)
     {
         if(sortMethod == currSortMethod)
         {
-            if(sortMethodReversed == "true")
+            if(sortMethodReversed == "true" && flip)
             {
                 reversed = false;
             }
@@ -326,7 +328,7 @@ function displayDashboardCards(sortMethod)
     {
         if(sortMethod == currSortMethod)
         {
-            if(sortMethodReversed == "true")
+            if(sortMethodReversed == "true" && flip)
             {
                 reversed = false;
             }
@@ -650,6 +652,7 @@ function displayProjectInfo()
         
         var keywordID = thisEntry.keywordID;
         var searchVolume = thisEntry.searchVolume;
+        var clientRanking = thisEntry.clientRanking;
         var keywordActive = thisEntry.active;
         var avgCTR = thisEntry.avgCTR;
         var totalPowerLevel = thisEntry.totalPowerLevel;     //Add back the client power level to the total power level for this keyword
@@ -803,7 +806,7 @@ function displayProjectInfo()
                                             "</h2>"+
                                         "</li>"+
                                         "<li class=\"col-lg-2\">"+
-                                            "<h2></h2>"+
+                                            "<h2>"+clientRanking+"</h2>"+
                                         "</li>"+
                                         "<li class=\"col-lg-7\">"+
                                             "<h2>"+clientURL+"</h2>"+
@@ -844,7 +847,6 @@ function displayProjectInfo()
     $('#keyword-phraser-accordion').html(accordianHTML);
     
     var suggestedKeywordsHTML = "";
-    var suggestedKeywordsHTMLFull = "";
     var suggestedKeywords = info.suggestedKeywords;
     for(var i=0; i<suggestedKeywords.length; i++)
     {
@@ -852,10 +854,12 @@ function displayProjectInfo()
         {
             suggestedKeywordsHTML += "<li>"+suggestedKeywords[i]+"</li>";
         }
-        suggestedKeywordsHTMLFull += "<li>"+suggestedKeywords[i]+"</li>";
+        else
+        {
+            suggestedKeywordsHTML += "<li class=\"read-more-target\">"+suggestedKeywords[i]+"</li>";
+        }
     }
     $("#suggestedKeywordsList").html(suggestedKeywordsHTML);
-    $("#suggestedKeywordsListFull").html(suggestedKeywordsHTMLFull);
 }
 
 function toggleCompetitor(competitorID,checked)
@@ -1148,24 +1152,37 @@ function displayProjectEditWindow(projectID)
                 }
             }
         });
-        
-
-            
     }
 }
 
 function editKeywordHackerProject()
 {
     //Show the spinner
-    $("#login-response").html("<div class='three-quarters-loader-small'></div>");
+    $("#edit-project-response").html("<div class='three-quarters-loader-small'></div>");
     
     //Get the new values to update with
-    
-    //Make the AJAX call
-    
-        //On success, hide the window
-        
-        //On error, show the error message
+    var projectID = $('#edit-project-id').val();
+    if(projectID != '')
+    {
+        var monthlyVisitors = $('#ex6SliderVal').val();
+        var payingCustomers = $('#ex7SliderVal').val();
+        var customerValue = $('#ex8SliderVal').val();
+        var costPerLevel = $('#ex9SliderVal').val();
+
+        //Make the AJAX call
+        $.ajax({url: restURL, data: {'command':'editKHProject','projectid':projectID,'monthlyVisitors':monthlyVisitors,'payingCustomers':payingCustomers,'customerValue':customerValue,'costPerLevel':costPerLevel}, type: 'post', async: true, success: function postResponse(returnData){
+                var info = JSON.parse(returnData);
+
+                if(info.status == "success")
+                {
+                    //On success, hide the window
+                    $("#edit-project-response").html("");
+                    hideEditProject();
+                    loadProjectDashboard(false);
+                }
+            }
+        });
+    }
 }
 
 function hideEditProject()
@@ -1184,6 +1201,7 @@ function cancelEditKeywordHackerProject()
 {
     //Set the id of the project back to 0
     $('#edit-project-id').val(0);
+    $("#edit-project-response").html("");
     
     //Hide the modal
     hideEditProject();
@@ -1195,32 +1213,110 @@ function displayProjectDeleteWindow(projectID)
     {
         //Set the id of the project we're working with
         $('#delete-project-id').val(projectID);
-        
-        document.getElementById("delete-project-window").style.display = "block";
-        document.getElementById("dimmer").style.display = "block";
+        showDeleteProject();
     }
 }
 
 function deleteKeywordHackerProject()
 {
     //Show the spinner
-    $("#login-response").html("<div class='three-quarters-loader-small'></div>");
+    $("#delete-project-response").html("<div class='three-quarters-loader-small'></div>");
     
     //Get the new values to update with
-    
-    //Make the AJAX call
-    
-        //On success, hide the window
-        
-        //On error, show the error message
+    var projectID = $('#delete-project-id').val();
+    if(projectID != '')
+    {
+        //Make the AJAX call
+        $.ajax({url: restURL, data: {'command':'deleteKHProject','projectid':projectID}, type: 'post', async: true, success: function postResponse(returnData){
+                var info = JSON.parse(returnData);
+
+                if(info.status == "success")
+                {
+                    //On success, hide the window
+                    $("#delete-project-response").html("");
+                    hideDeleteProject();
+                    loadProjectDashboard(false);
+                }
+            }
+        });
+    }
 }
 
 function cancelDeleteKeywordHackerProject()
 {
     //Set the id of the project back to 0
     $('#delete-project-id').val(0);
+    $("#delete-project-response").html("");
     
     //Hide the modal
     document.getElementById("dimmer").style.display = "none";
     document.getElementById("delete-project-window").style.display = "none";
+}
+
+function hideDeleteProject()
+{
+    document.getElementById("dimmer").style.display = "none";
+    document.getElementById("delete-project-window").style.display = "none";
+}
+
+function showDeleteProject()
+{
+    document.getElementById("delete-project-window").style.display = "block";
+    document.getElementById("dimmer").style.display = "block";
+}
+
+$(".show-more a").each(function() {
+    var $link = $(this);
+    var $content = $link.parent().prev("div.text-content");
+
+    console.log($link);
+
+    var visibleHeight = $content[0].clientHeight;
+    var actualHide = $content[0].scrollHeight - 1;
+
+    console.log(actualHide);
+    console.log(visibleHeight);
+
+    if (actualHide > visibleHeight) {
+        $link.show();
+    } else {
+        $link.hide();
+    }
+});
+
+$(".show-more a").on("click", function() {
+    var $link = $(this);
+    var $content = $link.parent().prev("div.text-content");
+    var linkText = $link.text();
+
+    $content.toggleClass("short-text, full-text");
+
+    $link.text(getShowLinkText(linkText));
+
+    return false;
+});
+
+function getShowLinkText(currentText) {
+    var newText = '';
+
+    if (currentText.toUpperCase() === "SHOW MORE") {
+        newText = "Show less";
+    } else {
+        newText = "Show more";
+    }
+
+    return newText;
+}
+
+function toggleReadMore()
+{
+    var content = $('#read-more-button-label').html();
+    if(content == "SHOW MORE KEYWORDS")
+    {
+        $('#read-more-button-label').html("SHOW FEWER KEYWORDS");
+    }
+    else
+    {
+        $('#read-more-button-label').html("SHOW MORE KEYWORDS");
+    }
 }

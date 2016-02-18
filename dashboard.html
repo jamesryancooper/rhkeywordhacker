@@ -42,8 +42,8 @@
     
     <script>
         function run(){
-            loadProjectDashboard();
-            setInterval(loadProjectDashboard, 60000);
+            loadProjectDashboard(false);
+            setInterval(loadProjectDashboard.bind(false), 60000);
         }
     </script>
     
@@ -116,13 +116,13 @@
                                 <ul>
                                     <li>Sort by:</li>
                                     <li>
-                                        <button class="sort-btns" data-sort-by="project_name_sort" onclick="displayDashboardCards('project');">Project</button>
+                                        <button class="sort-btns" data-sort-by="project_name_sort" onclick="displayDashboardCards('project',true);">Project</button>
                                     </li>
                                     <li>
-                                        <button class="sort-btns" data-sort-by="date_sort" onclick="displayDashboardCards('runDate');">Publish Date</button>
+                                        <button class="sort-btns" data-sort-by="date_sort" onclick="displayDashboardCards('runDate',true);">Publish Date</button>
                                     </li>
                                     <li>
-                                        <button class="sort-btns" data-sort-by="project_status_sort" onclick="displayDashboardCards('status');">Status</button>
+                                        <button class="sort-btns" data-sort-by="project_status_sort" onclick="displayDashboardCards('status',true);">Status</button>
                                     </li>
                                 </ul>
                             </div>
@@ -209,7 +209,29 @@
                 <a class="orange-btn btn pull-right" style="margin-right:10px;" onclick="editKeywordHackerProject();">UPDATE</a>
             </div>
         </form>
-        <div class="project-setup-input row"><span id="edit-project-response" class="col-lg-12" style="display:none;text-align:center;margin-top:10px;"></span></div>
+        <div class="project-setup-input row"><span id="edit-project-response" class="col-lg-12" style="text-align:center;"></span></div>
+    </div>
+    
+</div>
+
+<div id="delete-project-window" class="delete-project-window">
+    <input id="delete-project-id" type="hidden" value="0"/>
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-2" id="setup-box-outer">
+        <br/>
+        <h2 class="setup-heading" style="color:#337ab7;">Confirmation</h2>
+        <form class="project-setup-form">
+            
+            <div class="range-slider-section">
+                <p>Are you sure you want to delete this project?</p>
+            </div>
+
+            <div id="submit-button-block">
+                <a class="gray-btn btn pull-right" style="margin-left:10px;" onclick="cancelDeleteKeywordHackerProject();">CANCEL</a>
+                <a class="orange-btn btn pull-right" style="margin-right:10px;" onclick="deleteKeywordHackerProject();">Delete</a>
+            </div>
+        </form>
+        <div class="project-setup-input row"><span id="delete-project-response" class="col-lg-12" style="text-align:center;"></span></div>
     </div>
     
 </div>

@@ -172,6 +172,47 @@ function createKeywordHackerProject()
     var projectLocation = $('#project-location').val();
     var currentKeywordCount = parseInt($('#keyword-count').val());
     
+    var useGoogle;
+    var useBing;
+    var useYouTube;
+    var useAppStore;
+
+    if($('#use-google').is(':checked'))
+    {
+        useGoogle = 1;
+    }
+    else
+    {
+        useGoogle = 0;
+    }
+
+    if($('#use-bing').is(':checked'))
+    {
+        useBing = 1;
+    }
+    else
+    {
+        useBing = 0;
+    }
+
+    if($('#use-you-tube').is(':checked'))
+    {
+        useYouTube = 1;
+    }
+    else
+    {
+        useYouTube = 0;
+    }
+
+    if($('#use-app-store').is(':checked'))
+    {
+        useAppStore = 1;
+    }
+    else
+    {
+        useAppStore = 0;
+    }
+    
     var username = getCookie("username");
     if(username == "")
     {
@@ -229,7 +270,7 @@ function createKeywordHackerProject()
         
         
         //Once you have required info, create the project
-        $.ajax({url: restURL, data: {'command':'createKHProject','username':username,'projectURL':projectURL,'projectLocation':projectLocation,'keywords':keywordsList,'monthlyVisitors':monthlyVisitors,'payingCustomers':payingCustomers,'customerValue':customerValue,'costPerLevel':costPerLevel}, type: 'post', async: true, success: function postResponse(returnData){
+        $.ajax({url: restURL, data: {'command':'createKHProject','username':username,'projectURL':projectURL,'projectLocation':projectLocation,'keywords':keywordsList,'monthlyVisitors':monthlyVisitors,'payingCustomers':payingCustomers,'customerValue':customerValue,'costPerLevel':costPerLevel,'useGoogle':useGoogle,'useBing':useBing,'useYouTube':useYouTube,'useAppStore':useAppStore}, type: 'post', async: true, success: function postResponse(returnData){
                 var info = JSON.parse(returnData);
 
                 if(info.status == "success")

@@ -831,14 +831,14 @@ function displayProjectInfo(field)
             activeString = "INACTIVE";
         }
         
-        $('#projectTitle').html(clientURL);
+        $('#projectTitle').html(clientURL+"<span><a style=\"cursor:pointer;\" class=\"edit-icon\" title=\"Edit Project\" onclick=\"displayProjectEditWindow('"+projectID+"');\"></a></span>");
         $('#numKeywords').html(keywordCount);
         $('#geoLocation').html("<h2>"+geoLocation+"<!--<a class=\"edit-icon\" title=\"Edit Location\"></a>--></h2>");
         $('#searchVolume').html("<h2>"+numberWithCommas(searchVolume)+"<span>MO,SEARCH VOLUME<a class=\"info-icon\" title=\"This is the total sum of monthly search volume for all selected keywords in this project.\"></a></span></h2>");
         $('#projectedVisitors').html("<h2>"+numberWithCommas(incomingTraffic)+"<span>PROJECTED MO. VISITORS<a class=\"info-icon\" title=\"Calculated by applying the average CTR for your competitors to Mo. Search Volume.\"></a></span></h2>");
         $('#projectedCustomers').html("<h2>"+numberWithCommas(Math.round(incomingTraffic * (payingCustomers / monthlyVisitors),0))+"<span>PROJECTED MO. CUSTOMERS<a class=\"info-icon\" title=\"Calculated based on your conversion rate.\"></a></span></h2>");
         $('#projectedSales').html("<h2>$"+numberWithCommas(monthlySales)+"<span>PROJECTED MO. SALES<a class=\"info-icon\" title=\"Calculated based on your conversion rate and customer value.\"></a></span></h2>");
-        $('#costPerMonth').html("<h2>$"+numberWithCommas(costPerMonth)+"<a class=\"edit-icon\" title=\"Edit Costs\"></a><span>COST PER MONTH<a class=\"info-icon\" title=\"This is the total sum of monthly costs for all selected keywords in this project.\"></a></span></h2>");
+        $('#costPerMonth').html("<h2>$"+numberWithCommas(costPerMonth)+"<span>COST PER MONTH<a class=\"info-icon\" title=\"This is the total sum of monthly costs for all selected keywords in this project.\"></a></span></h2>");
         $('#kwNetWorth').html("<h2 class=\""+netWorthStyle+"\">"+keywordNetWorthString+"<span>KEYWORD NET-WORTH<a class=\"info-icon\" title=\"This is the projected return on your invested marketing dollars for all selected keywords in this project.\"></a></span></h2>");
         $('#dateDivBottom').html("<div class=\"project-date-card date_sort\"><i class=\"eagle-icon\"></i>"+runDate+"</div><a class=\"project-status-card  project_status_sort\" href=\"javascript:void(0);\">"+activeString+"</a>");
 
@@ -1366,14 +1366,14 @@ function refreshProjectInfo()
             activeString = "INACTIVE";
         }
         
-        $('#projectTitle').html(clientURL);
+        $('#projectTitle').html(clientURL+"<span><a style=\"cursor:pointer;\" class=\"edit-icon\" title=\"Edit Project\" onclick=\"displayProjectEditWindow('"+projectID+"');\"></a>/span>");
         $('#numKeywords').html(keywordCount);
         $('#geoLocation').html("<h2>"+geoLocation+"<!--<a class=\"edit-icon\" title=\"Edit Location\"></a>--></h2>");
         $('#searchVolume').html("<h2>"+numberWithCommas(searchVolume)+"<span>MO,SEARCH VOLUME<a class=\"info-icon\" title=\"This is the total sum of monthly search volume for all selected keywords in this project.\"></a></span></h2>");
         $('#projectedVisitors').html("<h2>"+numberWithCommas(incomingTraffic)+"<span>PROJECTED MO. VISITORS<a class=\"info-icon\" title=\"Calculated by applying the average CTR for your competitors to Mo. Search Volume.\"></a></span></h2>");
         $('#projectedCustomers').html("<h2>"+numberWithCommas(Math.round(incomingTraffic * (payingCustomers / monthlyVisitors),0))+"<span>PROJECTED MO. CUSTOMERS<a class=\"info-icon\" title=\"Calculated based on your conversion rate.\"></a></span></h2>");
         $('#projectedSales').html("<h2>$"+numberWithCommas(monthlySales)+"<span>PROJECTED MO. SALES<a class=\"info-icon\" title=\"Calculated based on your conversion rate and customer value.\"></a></span></h2>");
-        $('#costPerMonth').html("<h2>$"+numberWithCommas(costPerMonth)+"<a class=\"edit-icon\" title=\"Edit Costs\"></a><span>COST PER MONTH<a class=\"info-icon\" title=\"This is the total sum of monthly costs for all selected keywords in this project.\"></a></span></h2>");
+        $('#costPerMonth').html("<h2>$"+numberWithCommas(costPerMonth)+"<span>COST PER MONTH<a class=\"info-icon\" title=\"This is the total sum of monthly costs for all selected keywords in this project.\"></a></span></h2>");
         $('#kwNetWorth').html("<h2 class=\""+netWorthStyle+"\">"+keywordNetWorthString+"<span>KEYWORD NET-WORTH<a class=\"info-icon\" title=\"This is the projected return on your invested marketing dollars for all selected keywords in this project.\"></a></span></h2>");
         $('#dateDivBottom').html("<div class=\"project-date-card date_sort\"><i class=\"eagle-icon\"></i>"+runDate+"</div><a class=\"project-status-card  project_status_sort\" href=\"javascript:void(0);\">"+activeString+"</a>");
 
@@ -1525,7 +1525,7 @@ function displayProjectEditWindow(projectID)
     }
 }
 
-function editKeywordHackerProject()
+function editKeywordHackerProject(source)
 {
     //Show the spinner
     //$("#edit-project-response").html("<div class='three-quarters-loader-small'></div>");
@@ -1592,7 +1592,10 @@ function editKeywordHackerProject()
                     //$("#edit-project-response").html("");
                     hideEditProject();
                     $('body').removeClass('wait');
-                    loadProjectDashboard(false);
+                    if(source == "dashboard")
+                    {
+                        loadProjectDashboard(false);
+                    }
                 }
             }
         });

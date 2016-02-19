@@ -1127,7 +1127,7 @@ function displayProjectInfo(field)
         accordianHTML += "<div id=\"keyword-phraser-collapse"+i+"\" class=\"panel-collapse collapse \" role=\"tabpanel\" aria-labelledby=\"keyword-phraser-heading"+i+"\">"+
                             "<div class=\"power-level-summary\">"+
                                 "<div class=\"col-lg-6 you-power-summary-section\">"+
-                                    "<h2 class=\"power-summary-heading\"><span class=\"tag-label\">YOU</span> YOUR RANKING POWER IS <span class=\"total-power-summery\">"+clientPowerLevel+"</span></h2>"+
+                                    "<h2 class=\"power-summary-heading\"><span class=\"tag-label\">YOU</span> YOUR RANKING POWER LEVEL IS <span class=\"total-power-summery\">"+clientPowerLevel+"</span></h2>"+
                                     "<div class=\"divider\"></div>"+
                                     "<ul class=\"power-summary-row power-summary-heading-row\">"+
                                         "<li class=\"checkbox-outer col-lg-1\"> &nbsp; </li>"+

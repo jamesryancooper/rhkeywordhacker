@@ -1596,6 +1596,10 @@ function editKeywordHackerProject(source)
                     {
                         loadProjectDashboard(false);
                     }
+                    else if(source == "projects")
+                    {
+                        window.location.reload();
+                    }
                 }
             }
         });

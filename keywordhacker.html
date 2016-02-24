@@ -338,7 +338,7 @@
                     </div>
                 </div>
 
-                <div class="project-setup-input row"><label class="col-lg-6">What is the $ cost per keyword level for this project?</label>
+                <div class="project-setup-input row"><label class="col-lg-6">What is your average cost to produce one piece of marketing content?</label>
 
                     <div class="col-lg-6 project-setup-slider">
                         <input id="ex9" type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="25" data-slider-value="0"/>
@@ -684,6 +684,69 @@
             jQuery(this).parent().find('.panel-collapse').collapse(all)
         });
 
+        //range slider custom js
+        $("#ex6").slider();
+        $("#ex6").on("slide, slideStop", function (slideEvt) {
+            var slider_num_ex6 = numeral(slideEvt.value).format('0,0');
+            //var slider_num_ex6 = tooltip-inner;
+            $("#ex6SliderVal").val(slider_num_ex6);
+        });
+        $("#ex6SliderVal").change(function(){
+            var sliderVal = parseInt($("#ex6SliderVal").val().replace(",",""));
+            if(isNaN(sliderVal) || sliderVal < 0){ sliderVal = 0; }
+            $("#ex6").slider({
+                value: sliderVal
+                });
+            $("#ex6").slider('refresh');
+            $("#ex6SliderVal").val(numberWithCommas(sliderVal));
+        });
+
+
+        $("#ex7").slider();
+        $("#ex7").on("slide, slideStop", function (slideEvt) {
+            var slider_num_ex7 = numeral(slideEvt.value).format('0,0');
+            $("#ex7SliderVal").val(slider_num_ex7);
+        });
+        $("#ex7SliderVal").change(function(){
+            var sliderVal = parseInt($("#ex7SliderVal").val().replace(",",""));
+            if(isNaN(sliderVal) || sliderVal < 0){ sliderVal = 0; }
+            $("#ex7").slider({
+                value: sliderVal
+                });
+            $("#ex7").slider('refresh');
+            $("#ex7SliderVal").val(numberWithCommas(sliderVal));
+        });
+
+
+        $("#ex8").slider();
+        $("#ex8").on("slide, slideStop", function (slideEvt) {
+            var slider_num_ex8 = numeral(slideEvt.value).format('0,0');
+            $("#ex8SliderVal").val(slider_num_ex8);
+        });
+        $("#ex8SliderVal").change(function(){
+            var sliderVal = parseInt($("#ex8SliderVal").val().replace(",",""));
+            if(isNaN(sliderVal) || sliderVal < 0){ sliderVal = 0; }
+            $("#ex8").slider({
+                value: sliderVal
+                });
+            $("#ex8").slider('refresh');
+            $("#ex8SliderVal").val(numberWithCommas(sliderVal));
+        });
+        
+        $("#ex9").slider();
+        $("#ex9").on("slide, slideStop", function (slideEvt) {
+            var slider_num_ex9 = numeral(slideEvt.value).format('0,0');
+            $("#ex9SliderVal").val(slider_num_ex9);
+        });
+        $("#ex9SliderVal").change(function(){
+            var sliderVal = parseInt($("#ex9SliderVal").val().replace(",",""));
+            if(isNaN(sliderVal) || sliderVal < 0){ sliderVal = 0; }
+            $("#ex9").slider({
+                value: sliderVal
+                });
+            $("#ex9").slider('refresh');
+            $("#ex9SliderVal").val(numberWithCommas(sliderVal));
+        });
 
     });
 </script>

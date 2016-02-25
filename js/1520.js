@@ -176,6 +176,8 @@ function createKeywordHackerProject()
     var useBing;
     var useYouTube;
     var useAppStore;
+    var useLocal;
+    var useNational;
 
     if($('#use-google').is(':checked'))
     {
@@ -211,6 +213,24 @@ function createKeywordHackerProject()
     else
     {
         useAppStore = 0;
+    }
+    
+    if($('#use-local').is(':checked'))
+    {
+        useLocal = 1;
+    }
+    else
+    {
+        useLocal = 0;
+    }
+    
+    if($('#use-national').is(':checked'))
+    {
+        useNational = 1;
+    }
+    else
+    {
+        useNational = 0;
     }
     
     var username = getCookie("username");
@@ -270,7 +290,7 @@ function createKeywordHackerProject()
         
         
         //Once you have required info, create the project
-        $.ajax({url: restURL, data: {'command':'createKHProject','username':username,'projectURL':projectURL,'projectLocation':projectLocation,'keywords':keywordsList,'monthlyVisitors':monthlyVisitors,'payingCustomers':payingCustomers,'customerValue':customerValue,'costPerLevel':costPerLevel,'useGoogle':useGoogle,'useBing':useBing,'useYouTube':useYouTube,'useAppStore':useAppStore}, type: 'post', async: true, success: function postResponse(returnData){
+        $.ajax({url: restURL, data: {'command':'createKHProject','username':username,'projectURL':projectURL,'projectLocation':projectLocation,'keywords':keywordsList,'monthlyVisitors':monthlyVisitors,'payingCustomers':payingCustomers,'customerValue':customerValue,'costPerLevel':costPerLevel,'useGoogle':useGoogle,'useBing':useBing,'useYouTube':useYouTube,'useAppStore':useAppStore,'useLocal':useLocal,'useNational':useNational}, type: 'post', async: true, success: function postResponse(returnData){
                 var info = JSON.parse(returnData);
 
                 if(info.status == "success")
@@ -1581,9 +1601,27 @@ function editKeywordHackerProject(source)
         {
             useAppStore = 0;
         }
+        
+        if($('#use-local').is(':checked'))
+        {
+            useLocal = 1;
+        }
+        else
+        {
+            useLocal = 0;
+        }
+
+        if($('#use-national').is(':checked'))
+        {
+            useNational = 1;
+        }
+        else
+        {
+            useNational = 0;
+        }
 
         //Make the AJAX call
-        $.ajax({url: restURL, data: {'command':'editKHProject','projectid':projectID,'monthlyVisitors':monthlyVisitors,'payingCustomers':payingCustomers,'customerValue':customerValue,'costPerLevel':costPerLevel,'useGoogle':useGoogle,'useBing':useBing,'useYouTube':useYouTube,'useAppStore':useAppStore}, type: 'post', async: true, success: function postResponse(returnData){
+        $.ajax({url: restURL, data: {'command':'editKHProject','projectid':projectID,'monthlyVisitors':monthlyVisitors,'payingCustomers':payingCustomers,'customerValue':customerValue,'costPerLevel':costPerLevel,'useGoogle':useGoogle,'useBing':useBing,'useYouTube':useYouTube,'useAppStore':useAppStore,'useLocal':useLocal,'useNational':useNational}, type: 'post', async: true, success: function postResponse(returnData){
                 var info = JSON.parse(returnData);
 
                 if(info.status == "success")
@@ -1831,4 +1869,10 @@ function recalculateProject()
     {
         window.location = "dashboard.html";
     }
+}
+
+function toggleLocalNational(optionToUncheck)
+{
+    $('#use-'+optionToUncheck).prop('checked',false);
+    
 }

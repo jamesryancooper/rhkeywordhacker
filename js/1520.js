@@ -440,15 +440,18 @@ function displayDashboardCards(sortMethod,flip)
 
         var keywordNetWorthString = "";
         var anchorAhref = "";
+        var plSum = "";
         if(completed != 1)
         {
             keywordNetWorthString = "<span style=\"color:red;display:block;\" class=\"loader__dot\">calculating...</span>";
             anchorAhref = "onclick=\"'';\"";
+            plSum = "--";
         }
         else
         {
             keywordNetWorthString = "$"+keywordNetWorth;
             anchorAhref = "onclick=\"window.location='keywordhacker.html?pid="+projectID+"';\"";
+            plSum = totalPowerLevel;
         }
 
         if(active != '1')
@@ -475,7 +478,7 @@ function displayDashboardCards(sortMethod,flip)
             cardHTML += "<div class=\"col-lg-10 module-details-outer\">";
             cardHTML += "<div class=\"col-lg-6  module-details-left\">";
             cardHTML += "<h2 class=\"module-heading\"># of keywords<span>"+numberOfKeywords+"</span></h2>";
-            cardHTML += "<h2 class=\"module-heading\">Power level sum<span>"+totalPowerLevel+"</span></h2>";
+            cardHTML += "<h2 class=\"module-heading\">Power level sum<span>"+plSum+"</span></h2>";
             cardHTML += "</div>";
             cardHTML += "<div class=\"col-lg-6 module-details-right\">";
             cardHTML += "<h2 class=\"module-heading\">Keyword net worth<span>"+keywordNetWorthString+"</span></h2>";

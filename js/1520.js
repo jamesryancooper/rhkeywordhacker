@@ -745,7 +745,8 @@ function sortKeywordCompetitors(selectedKeywordID,field,totalPowerLevel)
                 "</ul>";
         var showWarning = false;
         
-        competitorInnerHTML += "<ul class=\"power-summary-row\" style=\"border:0;\" id=\"competitorsList\">";
+        //competitorInnerHTML += "<ul class=\"power-summary-row\" style=\"border:0;\" id=\"competitorsList\">";
+        competitorInnerHTML += "<div id=\"competitorsList\">";
         for(var j=0; j<thisCompetitorArray.length; j++)
         {
             var thisCompetitor = thisCompetitorArray[j];
@@ -789,6 +790,7 @@ function sortKeywordCompetitors(selectedKeywordID,field,totalPowerLevel)
                                 "</li>"+
                             "</ul>";
         }
+        competitorInnerHTML += "</div>";
     $('#competitors-table-'+selectedKeywordID).html(competitorInnerHTML);
     $('body').removeClass('wait');
 }
@@ -1073,8 +1075,8 @@ function displayProjectInfo(field)
                                 "<li class=\"content-blueprint-info width-10\">"+
                                     "<h2><a class=\"blueprint-links\">CREATE BLUEPRINT </a></h2>"+
                                 "</li>"+
-                                "<li class=\"delete-row width-2-5\">"+
-                                    "<h2><span class=\"delete-icon\"></span></h2>"+
+                                "<li class=\"checkbox-outer width-2-5\">"+
+                                    "<h2><span class=\"delete-icon\" title=\"Delete Keyword\" onclick=\"displayKeywordDeleteWindow('"+keywordID+"');\"></span></h2>"+
                                 "</li>"+
                             "</ul>";
         
@@ -1099,7 +1101,8 @@ function displayProjectInfo(field)
                 "</ul>";
         var showWarning = false;
         
-        competitorHTML += "<ul class=\"power-summary-row\" style=\"border:0;\" id=\"competitorsList\">";
+        //competitorHTML += "<ul class=\"power-summary-row-hidden\" id=\"competitorsList\">";
+        competitorHTML += "<div id=\"competitorsList\">";
         for(var j=0; j<thisCompetitorArray.length; j++)
         {
             var thisCompetitor = thisCompetitorArray[j];
@@ -1108,7 +1111,7 @@ function displayProjectInfo(field)
             var competitorActive = thisCompetitor.active;
             var competitorPositionRank = thisCompetitor.positionRank;
             var competitorURL = thisCompetitor.url;
-                var competitorURLShort = competitorURL.substring(0,35)+"...";
+                var competitorURLShort = competitorURL.substring(0,45)+"...";
             var competitorCTR = Math.round(thisCompetitor.traffic);
             //var competitorPowerLevel = Math.round((thisCompetitor.DA+thisCompetitor.PA)/2/10);
             var competitorPowerLevel = thisCompetitor.powerLevel;
@@ -1210,6 +1213,7 @@ function displayProjectInfo(field)
                                             "</div>";
     }
     
+    document.getElementById('main-panel').style.display = "";
     $('#keyword-phraser-accordion').html(accordianHTML);
     
     var suggestedKeywordsHTML = "";
@@ -1226,6 +1230,7 @@ function displayProjectInfo(field)
         }
     }
     $("#suggestedKeywordsList").html(suggestedKeywordsHTML);
+    document.getElementById('loading_spinner').style.display = "none";
     $('body').removeClass('wait');
 }
 
@@ -1878,4 +1883,48 @@ function toggleLocalNational(optionToUncheck)
 {
     $('#use-'+optionToUncheck).prop('checked',false);
     
+}
+
+function displayKeywordDeleteWindow(keywordID)
+{
+    if(keywordID != '')
+    {
+        //Set the id of the project we're working with
+        $('#delete-keyword-id').val(keywordID);
+        showDeleteProject();
+    }
+}
+
+function deleteKeyword()
+{
+    var projectID = getURLParameter("pid");
+    var keywordID = $("#delete-keyword-id").val();
+    
+    if(keywordID != '' && projectID != '')
+    {
+        $('body').addClass('wait');
+        $.ajax({url: restURL, data: {'command':'deleteKeyword','projectid':projectID,'keywordid':keywordID,'active':active}, type: 'post', async: true, success: function postResponse(returnData){
+                var info = JSON.parse(returnData);
+
+                if(info.status == "success")
+                {
+                    hideDeleteProject();
+                    refreshProjectData();
+                    $('body').removeClass('wait');
+                }
+            }
+        });
+    }
+}
+
+function expandAll(el)
+{
+    var all = 'show';
+    jQuery(el).parent().parent().find('.panel-collapse').collapse(all);
+}
+
+function collapseAll(el)
+{
+    var all = 'hide';
+    jQuery(el).parent().parent().find('.panel-collapse').collapse(all);
 }

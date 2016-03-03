@@ -1928,3 +1928,10 @@ function collapseAll(el)
     var all = 'hide';
     jQuery(el).parent().parent().find('.panel-collapse').collapse(all);
 }
+
+function logout()
+{
+    document.cookie = "username=";
+    document.cookie = "userFullName=";
+    window.location = "index.html";
+}

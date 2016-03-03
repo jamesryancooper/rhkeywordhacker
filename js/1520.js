@@ -1908,8 +1908,8 @@ function deleteKeyword()
 
                 if(info.status == "success")
                 {
-                    hideDeleteProject();
                     loadProjectData();
+                    hideDeleteProject();
                     $('body').removeClass('wait');
                 }
             }

@@ -1909,7 +1909,7 @@ function deleteKeyword()
                 if(info.status == "success")
                 {
                     hideDeleteProject();
-                    refreshProjectData();
+                    loadProjectData();
                     $('body').removeClass('wait');
                 }
             }

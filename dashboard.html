@@ -58,9 +58,12 @@
     <nav id="mainmenu" class="navbar navbar-fixed-top main-menu" role="navigation">
         <!-- LOGO CONTAINER -->
         <div class="logo-cont logo-outer">
-            <a class="navbar-brand" data-text="RANKHACKER" href="#header"><img src="images/logo-main.png" alt="site-logo"> </a>
-            <span style="float:left;"><img src="images/icon-keyword_hacker_small.png" alt="kwhacker" class="module-icon"></span><span class="module-icon-label"><strong>KEYWORD</strong> HACKER</span>
-            <span style="float:left;"><img src="images/icon-content_hacker_small.png" alt="contenthacker" class="module-icon"></span><span class="module-icon-label"><strong>CONTENT</strong> HACKER</span>
+            <a class="navbar-brand" data-text="RANKHACKER" onclick="gotoRHStorefront();" style="cursor:pointer;"><img src="images/logo-main.png" alt="site-logo" onclick="gotoRHStorefront();" style="cursor:pointer;"> </a>
+            <!--<span style="float:left;"><img src="images/icon-keyword_hacker_small.png" alt="kwhacker" class="module-icon" onclick="gotoKHDashboard();"></span><span class="module-icon-label" onclick="gotoKHDashboard();"><strong>KEYWORD</strong> HACKER</span>
+            <span style="float:left;"><img src="images/icon-content_hacker_small.png" alt="contenthacker" class="module-icon"></span><span class="module-icon-label"><strong>CONTENT</strong> HACKER</span>-->
+            <div class="dashboard-status"><i class="white_eagle-rh"></i><a style="cursor:default;">Dashboard Activated</a></div>
+            <div class="dashboard-status"><img src="images/keyword-hacker-icon-white.png" alt="kwhacker" style="cursor:pointer;" class="module-icon" onclick="gotoKHDashboard();"><a class="module-icon-label" style="cursor:pointer;" onclick="gotoKHDashboard();">Keyword Hacker</a></div>
+            <div class="dashboard-status"><img src="images/content-hacker-icon-white.png" style="cursor:default;" alt="contenthacker" class="module-icon"><a class="module-icon-label" style="cursor:default;">Content Hacker</a></div>
         </div>
         <div class="logo-cont logo-outer-2">
             <span class="logout-link" onclick="logout();">LOGOUT</span>
@@ -93,14 +96,15 @@
                 <div class="col-lg-12 padding-box">
                     <div class="col-lg-6 view-option-outer">
                         <ul>
-                            <li class="black-box-rh"></li>
+                            <li class="black_eagle-rh"></li>
+                            <li><a href="dashboard.html">Projects</a></li>
                             <!--li class="active"><a href="#">Project View </a> </li>
                             <li><a href="#"> Research View</a> </li-->
                         </ul>
                     </div>
                     <div class="col-lg-6 rh-actions-menu pull-right">
                         <ul>
-                            <li><a href="" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Download selected projects" data-original-title="" title="">Download</a></li>
+                            <!--<li><a href="" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Download selected projects" data-original-title="" title="">Download</a></li>-->
                             <li>
                                 <button id="create-new-project" class="btn btn-orange btn-round" onclick="gotoCreateProject();"><i class="fa fa-plus"></i><span>Create New</span></button>
                             </li>
@@ -115,9 +119,9 @@
                     <div class="big-demo go-wide" data-js-module="sorting-demo">
                         <div class="row">
                             <div class="bread-comb-outer col-lg-6">
-                                <ul>
+                                <!--<ul>
                                     <li><a href="dashboard.html">Projects</a></li>
-                                </ul>
+                                </ul>-->
                             </div>
                             <div class="sort-navigation col-lg-6 text-right  button-group sort-by-button-group  card-sort-menu">
                                 <ul>

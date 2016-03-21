@@ -1920,6 +1920,22 @@ function addKeywordInReport(keyword)
             $('#ctc').html(newKeywords);
 
             $('#keyword-count').val(newKeywordCount);
+            
+            //Show the submit button, dynamically update the text for it, and flash it twice
+            if(newKeywordCount == 1)
+            {
+                $("#add-keywords-button").show(100,function(){});
+                $("#add-keywords-button").fadeTo(0,0.65,function(){});
+                $("#add-keywords-button").html("ADD "+newKeywordCount+" KEYWORDS");
+                $("#add-keywords-button").fadeTo(500,1.0,function(){});
+            }
+            else
+            {
+                $("#add-keywords-button").fadeTo(500,0.65,function(){});
+                $("#add-keywords-button").html("ADD "+newKeywordCount+" KEYWORDS");
+                $("#add-keywords-button").fadeTo(500,1.0,function(){});
+            }
+            
         }
     }
 }
@@ -1953,6 +1969,19 @@ function removeKeywordInReport(element)
     }
     
     $('#keyword-count').val(currentKeywordCount-1);
+    
+    //Show the submit button, dynamically update the text for it, and flash it twice
+    if((currentKeywordCount-1)>0)
+    {
+        $("#add-keywords-button").fadeTo(500,0.65,function(){});
+        $("#add-keywords-button").html("ADD "+(currentKeywordCount-1)+" KEYWORDS");
+        $("#add-keywords-button").fadeTo(500,1.0,function(){});
+    }
+    else
+    {
+        $("#add-keywords-button").html("");
+        $("#add-keywords-button").hide(100,function(){});
+    }
 }
 
 function recalculateProject()

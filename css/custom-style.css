@@ -1075,11 +1075,11 @@ width: 100%;}
 
 .keyword-phraser-row-outer {float: left;margin: 0;padding: 0;width: 100%;}
 
-.suggest-keywords-list ul li {background-color: #d0d2d3;border: medium none;border-radius: 10px;color: #6f7273;cursor: pointer;float: left;font-family: "Montserrat",sans-serif;font-size: 18px;font-weight: normal;height: 40px;line-height: 40px;margin: 0 5px 10px 0;min-width: 120px;padding: 0 5px;position: relative;text-align: left;width: auto;}
+.suggest-keywords-list ul li {background-color: #d0d2d3;border: medium none;border-radius: 10px;color: #6f7273;cursor:pointer;float: left;font-family: "Montserrat",sans-serif;font-size: 18px;font-weight: normal;line-height: 40px;margin: 0 5px 10px 0;padding: 0 10px;position: relative;text-align: left;width: auto;}
 
 .suggest-keywords-list {float: left;margin: 0;padding: 0;width: 100%;}
 
-.suggest-keywords-list ul {float: left;margin: 0;padding: 0;width: 100%;}
+.suggest-keywords-list ul {float: left;margin-bottom: 25px;margin-top:0;margin-left:0;margin-right:0;padding: 0;width: 100%;}
 
 .suggest-keywords-label {color: #3f3c3c;float: left;font-size: 14px;margin: 0 0 10px;padding: 0;text-transform: uppercase;width: 100%;}
 
@@ -1304,7 +1304,7 @@ width: 100%;}
 
 .project_name_sort input[type="checkbox"]:checked + label:before {border-color: transparent #005cb9 #005cb9 transparent;border-width: 3px;top: -2px;}
 
-.checkbox-outer input[type="checkbox"]:checked + label:before {border-color: transparent #005cb9 #005cb9 transparent;border-width: 3px;}
+.checkbox-outer input[type="checkbox"]:checked + label:before {border-color: transparent #088D0C #088D0C transparent;border-width: 3px;}
 .c-checkbox-outer input[type="checkbox"]:checked + label:before {border-color: transparent #005cb9 #005cb9 transparent;border-width: 3px;}
 
 .power-level-summary .checkbox-outer input[type="checkbox"]:checked + label:before {border-color: transparent #333 #333 transparent;border-width: 3px;}

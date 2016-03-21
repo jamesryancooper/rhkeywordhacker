@@ -39,6 +39,7 @@
     <!--1520 files-->
     <script src="js/bootstrap-slider.js"></script>
     <script src="js/1520.js"></script>
+    <script src="js/readmore.js"></script>
     <link href="css/1520.css" rel="stylesheet" id="theme-change">
     <link href="css/spinner.css" rel="stylesheet" id="theme-change">
     
@@ -99,7 +100,6 @@
                         <ul>
                             <li class="black_eagle-rh"></li>
                             <li><a href="dashboard.html">Projects</a></li>
-                            >
                             <li><a>Keyword Hacker</a></li>
                         </ul>
                     </div>
@@ -231,7 +231,7 @@
 
                                         <div class="add-custom-keyword-outer">
                                             <div id="url-list">
-                                                <a href="#add-more-url" class="add-more-url" id="button-add-url">+ ADD CUSTOM KEYWORD</a>
+                                                <a href="#add-more-url" class="add-more-url" id="button-add-url">ENTER KEYWORD PHRASE</a>
                                             </div>
                                             <div id="url-box-template">
                                                 <div class="url-box">
@@ -248,20 +248,22 @@
                                                 </ul>
                                             </div>
                                             <div class="suggest-keywords-list">
-                                                <div id="submit-button-block">
-                                                    <a class="orange-btn btn pull-right" onclick="recalculateProject();">RECALCULATE PROJECT</a>
+                                                <div id="submit-button-block" style="opacity:0.0;">
+                                                    <a class="orange-btn btn pull-right" onclick="recalculateProject();" id="add-keywords-button"></a>
                                                 </div>
                                             </div>
                                         </div>
                                         
                                         
                                         <div class="suggest-keywords-list">
-                                            <p class="suggest-keywords-label">+ ADD Suggested Keywords <span>(Click to add to list Above)</span></p>
-                                            <label for="post-2" id="read-more-button-label" class="read-more-trigger" onclick="toggleReadMore();">SHOW MORE KEYWORDS</label>
+                                            <p class="suggest-keywords-label">+ Click to Add Suggested Keywords</p>
+                                            <!--<label for="post-2" id="read-more-button-label" class="read-more-trigger" onclick="toggleReadMore();">SHOW MORE KEYWORDS</label>-->
                                             <input type="checkbox" class="read-more-state" id="post-2"/>
                                                 <ul id="suggestedKeywordsList" class="read-more-wrap">
 
                                                 </ul>
+                                            
+                                            <div class="show-more-text" id="show-more-text">SHOW MORE KEYWORDS</div><div class="show-more-button"><label for="post-2" id="read-more-button-label" class="read-more-trigger" onclick="toggleReadMore();"></label></div>
                                         </div>
                                         
                                         <div class="card-box-bottom" id="dateDivBottom"></div>
@@ -472,17 +474,18 @@
 <script src="js/jquery.matchHeight-min.js"></script>
 <script src="js/isotope.pkgd.min.js"></script>
 <script src="js/bootstrap-slider.js"></script>
+<script src="js/readmore.js"></script>
 <script type="text/javascript">
     jQuery(function ($) {
         $('.matchheight').matchHeight();
     });
 </script>
+
 <script>
     $(document).ready(function () {
 
     //Active the project table
     $('#projectResearchDiv').click();
-
 
         $(".project-row-outer div").on("click", ".collapsenew", function () {
             

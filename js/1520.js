@@ -551,7 +551,7 @@ function displayDashboardCards(sortMethod,flip)
             cardHTML += chHTML;
             
             cardHTML += "<div class=\"card-box-bottom\">";
-            cardHTML += "<div class=\"project-date-card date_sort\"><i class=\"eagle-icon\"></i>"+runDate+"</div>";
+            cardHTML += "<div class=\"project-date-card date_sort\"><i class=\"eagle-icon\"></i>Initiated "+runDate+"</div>";
             cardHTML += "<a style=\"cursor:pointer;\" "+anchorAhref+" class=\"project-status-card  project_status_sort \" href=\"javascript:void(0);\"> "+activeString+" </a>";
             cardHTML += "</div>";
             cardHTML += "</div>";
@@ -923,7 +923,7 @@ function displayProjectInfo(field)
         $('#projectedSales').html("<h2>$"+numberWithCommas(monthlySales)+"<span>PROJECTED MO. SALES</span></h2>");
         $('#costPerMonth').html("<h2>$"+numberWithCommas(costPerMonth)+"<span>COST PER MONTH</span></h2>");
         $('#kwNetWorth').html("<h2 class=\""+netWorthStyle+"\">"+keywordNetWorthString+"<span>KEYWORD NET-WORTH</span></h2>");
-        $('#dateDivBottom').html("<div class=\"project-date-card date_sort\"><i class=\"eagle-icon\"></i>"+runDate+"</div><a class=\"project-status-card  project_status_sort\" href=\"javascript:void(0);\">"+activeString+"</a>");
+        $('#dateDivBottom').html("<div class=\"project-date-card date_sort\"><i class=\"eagle-icon\"></i>Initiated "+runDate+"</div><a class=\"project-status-card  project_status_sort\" href=\"javascript:void(0);\">"+activeString+"</a>");
 
     //Let's sort the keyword data by the specified field first
     var currSortMethod = $('#keyword-sort-method').val();
@@ -1092,14 +1092,22 @@ function displayProjectInfo(field)
         var powerLevelGoal = Math.max(1,(totalPowerLevel - clientPowerLevel));
         
         var keywordCheckboxStatus = "";
+        var rowBGText = "";
         if(keywordActive == 1)
         {
             keywordCheckboxStatus = "checked";
+            //rowBGText = " style=\"background-color:#fff;\"";
+            rowBGText = " style=\"opacity:1.0;\"";
+        }
+        else
+        {
+            //rowBGText = " style=\"background-color:#b3b3b3;\"";
+            rowBGText = " style=\"opacity:0.33;\"";
         }
         
         //Add the header info for the accordian HTML
-        accordianHTML += "<div class=\"panel panel-default keyword-phraser-row\">"+
-                            "<ul role=\"tab\" id=\"keyword-phraser-heading"+i+"\">"+
+        accordianHTML += "<div id=\"kw-panel-div"+keywordID+"\" class=\"panel panel-default keyword-phraser-row\">"+
+                            "<ul role=\"tab\" id=\"keyword-phraser-heading"+keywordID+"\""+rowBGText+">"+
                                 "<li class=\"checkbox-outer width-2-5\">"+
                                     "<h2>"+
                                         "<input type=\"checkbox\" "+keywordCheckboxStatus+" id=\"chk-content-all-kw"+keywordID+"\" onchange=\"toggleKeyword('"+keywordID+"',this.checked);\">"+
@@ -1130,10 +1138,10 @@ function displayProjectInfo(field)
                                 "<li class=\"keyword-net-worth-info width-7\" id=\"kwid-"+keywordID+"-kw-net-worth\">"+
                                     "<h2 class=\"\">$"+numberWithCommas(keywordNetWorth)+"</h2>"+
                                 "</li>"+
-                                "<li class=\"content-blueprint-info width-10\">"+
+                                "<li class=\"keyword-net-worth-info width-10\">"+
                                     "<h2><a class=\"blueprint-links\">CREATE BLUEPRINT </a></h2>"+
                                 "</li>"+
-                                "<li class=\"checkbox-outer width-2-5\">"+
+                                "<li class=\"content-blueprint-info width-2-5\">"+
                                     "<h2><span class=\"delete-icon\" title=\"Delete Keyword\" onclick=\"displayKeywordDeleteWindow('"+keywordID+"');\"></span></h2>"+
                                 "</li>"+
                             "</ul>";
@@ -1278,7 +1286,7 @@ function displayProjectInfo(field)
     var suggestedKeywords = info.suggestedKeywords;
     for(var i=0; i<suggestedKeywords.length; i++)
     {
-        if(i<25)
+        if(i<35)
         {
             suggestedKeywordsHTML += "<li>"+suggestedKeywords[i]+"</li>";
         }
@@ -1339,6 +1347,18 @@ function toggleKeyword(keywordID,checked)
     
     if(keywordID != '' && projectID != '')
     {
+        //Change the background color if it's inactive
+        if(active == "0")
+        {
+            //$("#keyword-phraser-heading"+keywordID).css('background-color','#b3b3b3');
+            $("#keyword-phraser-heading"+keywordID).fadeTo(400,0.33,function(){});
+        }
+        else
+        {
+            //$("#keyword-phraser-heading"+keywordID).css('background-color','#fff');
+            $("#keyword-phraser-heading"+keywordID).fadeTo(400,1.0,function(){});
+        }
+        
         $.ajax({url: restURL, data: {'command':'toggleKeywordActive','projectid':projectID,'keywordid':keywordID,'active':active}, type: 'post', async: true, success: function postResponse(returnData){
                 var info = JSON.parse(returnData);
 
@@ -1467,7 +1487,7 @@ function refreshProjectInfo()
         $('#projectedSales').html("<h2>$"+numberWithCommas(monthlySales)+"<span>PROJECTED MO. SALES</span></h2>");
         $('#costPerMonth').html("<h2>$"+numberWithCommas(costPerMonth)+"<span>COST PER MONTH</span></h2>");
         $('#kwNetWorth').html("<h2 class=\""+netWorthStyle+"\">"+keywordNetWorthString+"<span>KEYWORD NET-WORTH</span></h2>");
-        $('#dateDivBottom').html("<div class=\"project-date-card date_sort\"><i class=\"eagle-icon\"></i>"+runDate+"</div><a class=\"project-status-card  project_status_sort\" href=\"javascript:void(0);\">"+activeString+"</a>");
+        $('#dateDivBottom').html("<div class=\"project-date-card date_sort\"><i class=\"eagle-icon\"></i>Initiated "+runDate+"</div><a class=\"project-status-card  project_status_sort\" href=\"javascript:void(0);\">"+activeString+"</a>");
 
     //Fill in the keyword data here
     var accordianHTML = "";
@@ -1861,16 +1881,29 @@ function getShowLinkText(currentText) {
 
 function toggleReadMore()
 {
-    var content = $('#read-more-button-label').html();
-    if(content == "SHOW MORE KEYWORDS")
+    var content = $('#show-more-text').html();
+    if(content.includes("SHOW MORE KEYWORDS"))
     {
-        $('#read-more-button-label').html("SHOW FEWER KEYWORDS");
+        $('#show-more-text').html("SHOW FEWER KEYWORDS");
+        $('#read-more-button-label').removeClass("read-more-trigger");
+        $('#read-more-button-label').addClass("read-less-trigger");
     }
     else
     {
-        $('#read-more-button-label').html("SHOW MORE KEYWORDS");
+        $('#show-more-text').html("SHOW MORE KEYWORDS");
+        $('#read-more-button-label').removeClass("read-less-trigger");
+        $('#read-more-button-label').addClass("read-more-trigger");
     }
 }
+
+/*function toggleShowMore()
+{
+    $('article').readmore({
+        speed: 75,
+        moreLink: '<a href="#" class="read-more-trigger">SHOW MORE KEYWORDS</a>',
+        lessLink: '<a href="#" class="read-less-trigger">SHOW FEWER KEYWORDS</a>'
+    });
+}*/
 
 function addKeywordInReport(keyword)
 {

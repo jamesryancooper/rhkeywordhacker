@@ -908,7 +908,7 @@ function displayProjectInfo(field)
             activeString = "INACTIVE";
         }
         
-        $('#projectTitle').html(clientURL+"<span><a style=\"cursor:pointer;margin-left:7px;\" class=\"edit-icon\" title=\"Edit Project\" onclick=\"displayProjectEditWindow('"+projectID+"');\"></a><a style=\"cursor:pointer;margin-left:7px;margin-top:3px;color:rgba(61,61,61,.25);\" title=\"Download\" class=\"download-icon\" onclick=\"javascript:void(0);\"></a></span>");
+        $('#projectTitle').html(clientURL+"<span><a style=\"cursor:pointer;margin-left:7px;\" class=\"edit-icon\" title=\"Edit Project\" onclick=\"displayProjectEditWindow('"+projectID+"');\"></a><a style=\"cursor:pointer;margin-left:7px;margin-top:3px;color:rgba(61,61,61,.25);\" title=\"Download\" class=\"download-icon\" onclick=\"saveTextAsFile();\"></a></span>");
         $('#numKeywords').html(keywordCount);
         $('#geoLocation').html("<h2>"+geoLocation+"<!--<a class=\"edit-icon\" title=\"Edit Location\"></a>--></h2>");
         /*$('#searchVolume').html("<h2>"+numberWithCommas(searchVolume)+"<span>MO,SEARCH VOLUME<a class=\"info-icon\" title=\"This is the total sum of monthly search volume for all selected keywords in this project.\"></a></span></h2>");
@@ -2094,4 +2094,145 @@ function gotoRHStorefront()
 function gotoKHDashboard()
 {
     window.location = "dashboard.html";
+}
+
+function saveTextAsFile()
+{
+    var textToWrite = getProjectCSVData();
+    var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
+    var fileNameToSaveAs = "report.csv";
+      var downloadLink = document.createElement("a");
+    downloadLink.download = fileNameToSaveAs;
+    downloadLink.innerHTML = "Download File";
+    if (window.webkitURL != null)
+    {
+        // Chrome allows the link to be clicked
+        // without actually adding it to the DOM.
+        downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+    }
+    else
+    {
+        // Firefox requires the link to be added to the DOM
+        // before it can be clicked.
+        downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+        downloadLink.onclick = document.body.removeChild(event.target);
+        downloadLink.style.display = "none";
+        document.body.appendChild(downloadLink);
+    }
+
+    downloadLink.click();
+}
+
+function getProjectCSVData()
+{
+    var field = "keywordID";
+    var output = "project summary\n";
+    output += "project name,number of keywords selected,location,monthly search volume,projected monthly visitors,projected monthly customers,projected monthly sales,cost per month,keyword net-worth\n";
+    
+    var projectData = $('#json').val();
+    var info = JSON.parse(projectData);
+    
+    //Fill in the project data here
+    var projectInfo = info.projectSummary;
+        var projectID = projectInfo.projectID;
+        var runDate = projectInfo.runDate;
+        var costPerLevel = projectInfo.costPerLevel;
+        var searchVolume = projectInfo.searchVolume;
+        var clientURL = projectInfo.clientURL;
+        var valuePerCustomer = projectInfo.valuePerCustomer;
+        var active = projectInfo.active;
+        var completed = projectInfo.completed;
+        var clientDA = projectInfo.clientDA;
+        var clientPA = projectInfo.clientPA;
+        var clientPowerLevel = Math.max(1,Math.round((clientDA+clientPA)/2/10,0));
+        var totalPowerLevel = projectInfo.totalPowerLevel
+        var incomingTraffic = Math.round(projectInfo.incomingTraffic,0);
+        var runDateRaw = projectInfo.runDateRaw;
+        var keywordCount = projectInfo.keywordCount;
+        var geoLocation = projectInfo.geoLocation;
+        var monthlyVisitors = projectInfo.monthlyVisitors;
+        var payingCustomers = projectInfo.payingCustomers;
+        
+        var monthlyCustomers = Math.round(incomingTraffic * (payingCustomers / monthlyVisitors),0);
+        var monthlySales = Math.round(monthlyCustomers * valuePerCustomer,0);
+        var costPerMonth = Math.round((totalPowerLevel * costPerLevel),0);
+        var keywordNetWorth = (monthlySales - costPerMonth);
+        
+        var customerConversionRate = (payingCustomers / monthlyVisitors);
+        
+    output += clientURL+","+keywordCount+",\""+geoLocation+"\","+searchVolume+","+monthlyVisitors+","+monthlyCustomers+",$"+monthlySales+",$"+costPerMonth+",$"+keywordNetWorth+"\n";
+    output += "\n";
+    output += "keyword summaries\n";
+    output += "keyword selected,keyword,power level goal,monthly organic search volume,projected monthly visitors,projected monthly customers,projected monthly sales,cost per month,keyword net-worth\n";
+    
+    //Find the data
+    var keywordInfo = info.keywordData;    
+
+    //Fill in the keyword summary data here
+    for(var i=0; i<keywordInfo.length; i++)
+    {
+        var thisEntry = keywordInfo[i];
+        var thisCompetitorArray = thisEntry.competitorData;
+        
+        var keywordID = thisEntry.keywordID;
+        var searchVolume = thisEntry.searchVolume;
+        var clientRanking = thisEntry.clientRanking;
+        var keywordActive = thisEntry.active;
+        var avgCTR = thisEntry.avgCTR;
+        var totalPowerLevel = thisEntry.totalPowerLevel;     //Add back the client power level to the total power level for this keyword
+        var keyword = thisEntry.keyword;
+        var monthlyVisitors = thisEntry.monthlyVisitors;
+        var monthlyCustomers = thisEntry.monthlyCustomers;
+        var monthlySales = thisEntry.monthlySales;
+        var costPerMonth = thisEntry.costPerMonth;
+        var keywordNetWorth = thisEntry.keywordNetWorth;
+        
+        var powerLevelGoal = Math.max(1,(totalPowerLevel - clientPowerLevel));
+        
+        output += keywordActive+","+keyword+","+powerLevelGoal+","+searchVolume+","+monthlyVisitors+","+monthlyCustomers+",$"+monthlySales+",$"+costPerMonth+",$"+keywordNetWorth+"\n";
+    }
+    
+    output += "\n";
+    output += "keyword details\n";
+    output += "keyword,client google rank,client url,client power level,competitor selected,competitor google rank,competitor url,competitor ctr,competitor power level\n";
+    
+    //Fill in the competitor detail data here
+    for(var i=0; i<keywordInfo.length; i++)
+    {
+        var thisEntry = keywordInfo[i];
+        var thisCompetitorArray = thisEntry.competitorData;
+        
+        var keywordID = thisEntry.keywordID;
+        var searchVolume = thisEntry.searchVolume;
+        var clientRanking = thisEntry.clientRanking;
+        var keywordActive = thisEntry.active;
+        var avgCTR = thisEntry.avgCTR;
+        var totalPowerLevel = thisEntry.totalPowerLevel;     //Add back the client power level to the total power level for this keyword
+        var keyword = thisEntry.keyword;
+        var monthlyVisitors = thisEntry.monthlyVisitors;
+        var monthlyCustomers = thisEntry.monthlyCustomers;
+        var monthlySales = thisEntry.monthlySales;
+        var costPerMonth = thisEntry.costPerMonth;
+        var keywordNetWorth = thisEntry.keywordNetWorth;
+        
+        var powerLevelGoal = Math.max(1,(totalPowerLevel - clientPowerLevel));
+        
+        for(var j=0; j<thisCompetitorArray.length; j++)
+        {
+            var thisCompetitor = thisCompetitorArray[j];
+            
+            var competitorID = thisCompetitor.competitorID;
+            var competitorActive = thisCompetitor.active;
+            var competitorPositionRank = thisCompetitor.positionRank;
+            var competitorURL = thisCompetitor.url;
+                var competitorURLShort = competitorURL.substring(0,45)+"...";
+            var competitorCTR = Math.round(thisCompetitor.traffic);
+            //var competitorPowerLevel = Math.round((thisCompetitor.DA+thisCompetitor.PA)/2/10);
+            var competitorPowerLevel = thisCompetitor.powerLevel;
+            
+            output += keyword+","+clientRanking+","+clientURL+","+clientPowerLevel+","+competitorActive+","+competitorPositionRank+","+competitorURL+","+competitorCTR+"%,"+competitorPowerLevel+"\n";
+        }
+    }
+    
+    return output;
 }

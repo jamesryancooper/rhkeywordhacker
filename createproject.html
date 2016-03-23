@@ -126,13 +126,13 @@
                                 <ul style="margin-left:-25px;">
                                     <li class="checkbox-outer col-lg-4 col-md-4">
                                         <h2 style="vertical-align:middle;">
-                                            <input type="checkbox" id="use-google" value="1" checked>
+                                            <input type="checkbox" id="use-google" value="1" checked onclick="checkRequiredEngine('google','bing');">
                                             <label for="use-google" style="font-size:13px;">Google</label>
                                         </h2>
                                     </li>
                                     <li class="checkbox-outer col-lg-4 col-md-4">
                                         <h2 style="vertical-align:middle;">
-                                            <input type="checkbox" id="use-bing" value="1" checked>
+                                            <input type="checkbox" id="use-bing" value="1" checked onclick="checkRequiredEngine('bing','google');">
                                             <label for="use-bing" style="font-size:13px;">Bing+Yahoo</label>
                                         </h2>
                                     </li>
@@ -165,13 +165,13 @@
                                 <ul style="margin-left:-33px;">
                                     <li class="checkbox-outer col-lg-4 col-md-4">
                                         <h2 style="vertical-align:middle;">
-                                            <input type="checkbox" id="use-local" value="1" checked onclick="toggleLocalNational('national');">
+                                            <input type="checkbox" id="use-local" value="1" checked onclick="toggleLocalNational('local','national');">
                                             <label for="use-local" style="font-size:13px;">Local</label>
                                         </h2>
                                     </li>
                                     <li class="checkbox-outer col-lg-4 col-md-4">
                                         <h2 style="vertical-align:middle;">
-                                            <input type="checkbox" id="use-national" value="1" onclick="toggleLocalNational('local');">
+                                            <input type="checkbox" id="use-national" value="1" onclick="toggleLocalNational('national','local');">
                                             <label for="use-national" style="font-size:13px;">National</label>
                                         </h2>
                                     </li>

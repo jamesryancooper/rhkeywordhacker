@@ -2027,10 +2027,25 @@ function recalculateProject()
     }
 }
 
-function toggleLocalNational(optionToUncheck)
+function toggleLocalNational(optionToCheck,optionToUncheck)
 {
-    $('#use-'+optionToUncheck).prop('checked',false);
+    if($('#use-'+optionToCheck).prop('checked'))
+    {
+        $('#use-'+optionToUncheck).prop('checked',false);
+    }
+    else
+    {
+        $('#use-'+optionToUncheck).prop('checked',true);
+    }
     
+}
+
+function checkRequiredEngine(workingEngine,defaultEngine)
+{
+    if(!$('#use-'+workingEngine).prop('checked') && !$('#use-'+defaultEngine).prop('checked'))
+    {
+        $('#use-'+defaultEngine).prop('checked',true);
+    }
 }
 
 function displayKeywordDeleteWindow(keywordID)

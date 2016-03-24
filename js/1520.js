@@ -431,6 +431,7 @@ function displayDashboardCards(sortMethod,flip)
         var totalPowerLevel = entry.totalPowerLevel;
         var incomingTraffic = Math.round(entry.incomingTraffic,0);
         var projectTitle = entry.projectTitle;
+        var currencyHexCode = entry.currencyHexCode;
 
         var activeString = "ACTIVE";
         
@@ -451,7 +452,7 @@ function displayDashboardCards(sortMethod,flip)
         }
         else
         {
-            keywordNetWorthString = "$"+keywordNetWorth;
+            keywordNetWorthString = currencyHexCode+keywordNetWorth;
             anchorAhref = "onclick=\"window.location='keywordhacker.html?pid="+projectID+"';\"";
             plSum = totalPowerLevel;
         }
@@ -480,7 +481,7 @@ function displayDashboardCards(sortMethod,flip)
             rhHTML += "</div>";
             rhHTML += "<div class=\"col-lg-6 module-details-right\">";
             rhHTML += "<h2 class=\"module-heading\">Keyword net worth<span>"+keywordNetWorthString+"</span></h2>";
-            rhHTML += "<h2 class=\"module-heading\">Marketing costs<span>$"+marketingCosts+"</span></h2>";
+            rhHTML += "<h2 class=\"module-heading\">Marketing costs<span>"+currencyHexCode+marketingCosts+"</span></h2>";
             rhHTML += "</div>";
             rhHTML += "</div>";
             rhHTML += "</div>";
@@ -873,6 +874,7 @@ function displayProjectInfo(field)
         var geoLocation = projectInfo.geoLocation;
         var monthlyVisitors = projectInfo.monthlyVisitors;
         var payingCustomers = projectInfo.payingCustomers;
+        var currencyHexCode = projectInfo.currencyHexCode;
         
         var monthlyCustomers = Math.round(incomingTraffic * (payingCustomers / monthlyVisitors),0);
         var monthlySales = Math.round(monthlyCustomers * valuePerCustomer,0);
@@ -895,7 +897,7 @@ function displayProjectInfo(field)
         }
         else
         {
-            keywordNetWorthString = "$"+numberWithCommas(keywordNetWorth);
+            keywordNetWorthString = currencyHexCode+numberWithCommas(keywordNetWorth);
         }
         
         var activeString = "";
@@ -920,8 +922,8 @@ function displayProjectInfo(field)
         $('#searchVolume').html("<h2>"+numberWithCommas(searchVolume)+"<span>MO,SEARCH VOLUME</span></h2>");
         $('#projectedVisitors').html("<h2>"+numberWithCommas(incomingTraffic)+"<span>PROJECTED MO. VISITORS</span></h2>");
         $('#projectedCustomers').html("<h2>"+numberWithCommas(Math.round(incomingTraffic * (payingCustomers / monthlyVisitors),0))+"<span>PROJECTED MO. CUSTOMERS</span></h2>");
-        $('#projectedSales').html("<h2>$"+numberWithCommas(monthlySales)+"<span>PROJECTED MO. SALES</span></h2>");
-        $('#costPerMonth').html("<h2>$"+numberWithCommas(costPerMonth)+"<span>COST PER MONTH</span></h2>");
+        $('#projectedSales').html("<h2>"+currencyHexCode+numberWithCommas(monthlySales)+"<span>PROJECTED MO. SALES</span></h2>");
+        $('#costPerMonth').html("<h2>"+currencyHexCode+numberWithCommas(costPerMonth)+"<span>COST PER MONTH</span></h2>");
         $('#kwNetWorth').html("<h2 class=\""+netWorthStyle+"\">"+keywordNetWorthString+"<span>KEYWORD NET-WORTH</span></h2>");
         $('#dateDivBottom').html("<div class=\"project-date-card date_sort\"><i class=\"eagle-icon\"></i>Initiated "+runDate+"</div><a class=\"project-status-card  project_status_sort\" href=\"javascript:void(0);\">"+activeString+"</a>");
 
@@ -1130,13 +1132,13 @@ function displayProjectInfo(field)
                                     "<h2>"+numberWithCommas(monthlyCustomers)+"</h2>"+
                                 "</li>"+
                                 "<li class=\"monthly-sales-info width-10\" id=\"kwid-"+keywordID+"-monthly-sales\">"+
-                                    "<h2>$"+numberWithCommas(monthlySales)+"</h2>"+
+                                    "<h2>"+currencyHexCode+numberWithCommas(monthlySales)+"</h2>"+
                                 "</li>"+
                                 "<li class=\"cost-monthly-info width-7\" id=\"kwid-"+keywordID+"-cost-per-month\">"+
-                                    "<h2>$"+numberWithCommas(costPerMonth)+"</h2>"+
+                                    "<h2>"+currencyHexCode+numberWithCommas(costPerMonth)+"</h2>"+
                                 "</li>"+
                                 "<li class=\"keyword-net-worth-info width-7\" id=\"kwid-"+keywordID+"-kw-net-worth\">"+
-                                    "<h2 class=\"\">$"+numberWithCommas(keywordNetWorth)+"</h2>"+
+                                    "<h2 class=\"\">"+currencyHexCode+numberWithCommas(keywordNetWorth)+"</h2>"+
                                 "</li>"+
                                 "<li class=\"keyword-net-worth-info width-10\">"+
                                     "<h2><a class=\"blueprint-links\">CREATE BLUEPRINT </a></h2>"+
@@ -1437,6 +1439,7 @@ function refreshProjectInfo()
         var geoLocation = projectInfo.geoLocation;
         var monthlyVisitors = projectInfo.monthlyVisitors;
         var payingCustomers = projectInfo.payingCustomers;
+        var currencyHexCode = projectInfo.currencyHexCode;
         
         var monthlyCustomers = Math.round(incomingTraffic * (payingCustomers / monthlyVisitors),0);
         var monthlySales = Math.round(monthlyCustomers * valuePerCustomer,0);
@@ -1459,7 +1462,7 @@ function refreshProjectInfo()
         }
         else
         {
-            keywordNetWorthString = "$"+numberWithCommas(keywordNetWorth);
+            keywordNetWorthString = currencyHexCode+numberWithCommas(keywordNetWorth);
         }
         
         var activeString = "";
@@ -1484,8 +1487,8 @@ function refreshProjectInfo()
         $('#searchVolume').html("<h2>"+numberWithCommas(searchVolume)+"<span>MO,SEARCH VOLUME</span></h2>");
         $('#projectedVisitors').html("<h2>"+numberWithCommas(incomingTraffic)+"<span>PROJECTED MO. VISITORS</span></h2>");
         $('#projectedCustomers').html("<h2>"+numberWithCommas(Math.round(incomingTraffic * (payingCustomers / monthlyVisitors),0))+"<span>PROJECTED MO. CUSTOMERS</span></h2>");
-        $('#projectedSales').html("<h2>$"+numberWithCommas(monthlySales)+"<span>PROJECTED MO. SALES</span></h2>");
-        $('#costPerMonth').html("<h2>$"+numberWithCommas(costPerMonth)+"<span>COST PER MONTH</span></h2>");
+        $('#projectedSales').html("<h2>"+currencyHexCode+numberWithCommas(monthlySales)+"<span>PROJECTED MO. SALES</span></h2>");
+        $('#costPerMonth').html("<h2>"+currencyHexCode+numberWithCommas(costPerMonth)+"<span>COST PER MONTH</span></h2>");
         $('#kwNetWorth').html("<h2 class=\""+netWorthStyle+"\">"+keywordNetWorthString+"<span>KEYWORD NET-WORTH</span></h2>");
         $('#dateDivBottom').html("<div class=\"project-date-card date_sort\"><i class=\"eagle-icon\"></i>Initiated "+runDate+"</div><a class=\"project-status-card  project_status_sort\" href=\"javascript:void(0);\">"+activeString+"</a>");
 
@@ -1516,8 +1519,8 @@ function refreshProjectInfo()
         $('#kwid-'+keywordID+'-search-volume').html("<h2>"+numberWithCommas(searchVolume)+"</h2>");
         $('#kwid-'+keywordID+'-monthly-visitors').html("<h2>"+numberWithCommas(monthlyVisitors)+"</h2>");
         $('#kwid-'+keywordID+'-monthly-customers').html("<h2>"+numberWithCommas(monthlyCustomers)+"</h2>");
-        $('#kwid-'+keywordID+'-monthly-sales').html("<h2>$"+numberWithCommas(monthlySales)+"</h2>");
-        $('#kwid-'+keywordID+'-cost-per-month').html("<h2>$"+numberWithCommas(costPerMonth)+"</h2>");
+        $('#kwid-'+keywordID+'-monthly-sales').html("<h2>"+currencyHexCode+numberWithCommas(monthlySales)+"</h2>");
+        $('#kwid-'+keywordID+'-cost-per-month').html("<h2>"+currencyHexCode+numberWithCommas(costPerMonth)+"</h2>");
         $('#kwid-'+keywordID+'-kw-net-worth').html("<h2 class=\"\">$"+numberWithCommas(keywordNetWorth)+"</h2>");
         $('#kwid-'+keywordID+'-plg-2').html(powerLevelGoal);
         $('#kwid-'+keywordID+'-total-power-summary').html(totalPowerLevel);

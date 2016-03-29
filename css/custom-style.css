@@ -1181,7 +1181,7 @@ width: 100%;}
 
 .keyword-phraser-row.active .delete-row {padding: 0 !important;}
 
-.keyword-phraser-row .panel-collapse {float: left;height: auto !important;margin: 0;padding: 0;width: 100%;}
+.keyword-phraser-row .panel-collapse {float: left;height: auto !important;margin: 0;padding: 0;width: 100%; border-left:1px solid #ddd; border-right:1px solid #ddd; border-bottom:1px solid #ddd; }
 
 #template , .delete-row .delete-icon {display:none;}
 

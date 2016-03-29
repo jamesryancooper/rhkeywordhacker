@@ -257,7 +257,7 @@ cursor:pointer;
     border: 1px solid #1b3a5f;
     color: #000000;
     font-size: 14px;
-    height: 210px;
+    height: 420px;
     padding: 5px 5px;
     text-align: left;
     margin-top: 12px;
@@ -265,6 +265,7 @@ cursor:pointer;
     margin-right: auto;
     width: 350px;
     cursor: pointer;
+    overflow-y: auto;
 }
 
 .tt-suggestion {

@@ -43,7 +43,7 @@
     <script>
         function run(){
             loadProjectDashboard(false);
-            setInterval(loadProjectDashboard.bind(false), 30000);
+            setInterval(loadProjectDashboard.bind(false), 15000);
         }
     </script>
     
@@ -61,9 +61,9 @@
             <a class="navbar-brand" data-text="RANKHACKER" onclick="gotoRHStorefront();" style="cursor:pointer;"><img src="images/logo-main.png" alt="site-logo" onclick="gotoRHStorefront();" style="cursor:pointer;"> </a>
             <!--<span style="float:left;"><img src="images/icon-keyword_hacker_small.png" alt="kwhacker" class="module-icon" onclick="gotoKHDashboard();"></span><span class="module-icon-label" onclick="gotoKHDashboard();"><strong>KEYWORD</strong> HACKER</span>
             <span style="float:left;"><img src="images/icon-content_hacker_small.png" alt="contenthacker" class="module-icon"></span><span class="module-icon-label"><strong>CONTENT</strong> HACKER</span>-->
-            <div class="dashboard-status"><i class="white_eagle-rh"></i><a style="cursor:default;">Dashboard Activated</a></div>
+            <!--<div class="dashboard-status"><i class="white_eagle-rh"></i><a style="cursor:default;">Dashboard Activated</a></div>
             <div class="dashboard-status"><img src="images/keyword-hacker-icon-white.png" alt="kwhacker" style="cursor:pointer;" class="module-icon" onclick="gotoKHDashboard();"><a class="module-icon-label" style="cursor:pointer;" onclick="gotoKHDashboard();">Keyword Hacker</a></div>
-            <div class="dashboard-status"><img src="images/content-hacker-icon-white.png" style="cursor:default;" alt="contenthacker" class="module-icon"><a class="module-icon-label" style="cursor:default;">Content Hacker</a></div>
+            <div class="dashboard-status"><img src="images/content-hacker-icon-white.png" style="cursor:default;" alt="contenthacker" class="module-icon"><a class="module-icon-label" style="cursor:default;">Content Hacker</a></div>-->
         </div>
         <div class="logo-cont logo-outer-2">
             <span class="logout-link" onclick="logout();">LOGOUT</span>
@@ -246,12 +246,12 @@
                     </div>
                 </div>
 
-                <div class="project-setup-input row"><label class="col-lg-6">What is the one-time $ value of ONE paying customer? (average is okay)</label>
+                <div class="project-setup-input row"><label class="col-lg-6">What is the one-time <span id="currency-code-1">$</span> value of ONE paying customer? (average is okay)</label>
 
                     <div class="col-lg-6 project-setup-slider">
                         <input id="ex8" type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="25" data-slider-value="0"/>
 
-                        <div id="ex8CurrentSliderValLabel" class="range-slider-value"><span class="range-title">$</span>
+                        <div id="ex8CurrentSliderValLabel" class="range-slider-value"><span class="range-title" id="currency-code-2">$</span>
                             <input id="ex8SliderVal" type="text" class="range-count" value="0"/></div>
                     </div>
                 </div>
@@ -261,7 +261,7 @@
                     <div class="col-lg-6 project-setup-slider">
                         <input id="ex9" type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="25" data-slider-value="0"/>
 
-                        <div id="ex9CurrentSliderValLabel" class="range-slider-value"><span class="range-title">$</span>
+                        <div id="ex9CurrentSliderValLabel" class="range-slider-value"><span class="range-title" id="currency-code-3">$</span>
                             <input id="ex9SliderVal" type="text" class="range-count" value="0"/></div>
                     </div>
                 </div>

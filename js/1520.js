@@ -1,7 +1,7 @@
-var restURL = "http://fairmarketing.cloudapp.net/rest1.0/kh_endpoint.jsp?"
+//var restURL = "http://fairmarketing.cloudapp.net/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://fairmarketing.cloudapp.net/rest1.0/servlet/ssd.DownloadInventoryReport?"
 var rhURL = "http://fairmarketing.cloudapp.net/rhstorefront/";
-//var restURL = "http://localhost:8084/rest1.0/kh_endpoint.jsp?"
+var restURL = "http://localhost:8084/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://localhost:8084/rest1.0/servlet/ssd.DownloadInventoryReport"
 var desc = false;
 
@@ -328,9 +328,14 @@ function loadProjectDashboard(flip)
                     //$('#curr_sort_reversed').val("false");
                     
                     var userFullName = info.userFullName;
+                    var userLastName = userFullName.substring(userFullName.indexOf(" ")+1,userFullName.length);
+                    if(userLastName == '')
+                    {
+                        userLastName = "Anderson";
+                    }
                     
                     //Set the welcome message
-                    $('#dashboard-user-full-name').html("welcome <strong>"+userFullName+"</strong> <strong>[</strong> manage your missions below <strong>]</strong>");
+                    $('#dashboard-user-full-name').html("welcome <strong>agent "+userLastName+"</strong> <strong>[</strong> manage your missions below <strong>]</strong>");
                     
                     //Populate the cards based on a default sort of create date
                     displayDashboardCards(sortMethod,flip);
@@ -411,7 +416,7 @@ function displayDashboardCards(sortMethod,flip)
     
     
     var finalOutput = "";
-    var cardHTML = "<ul class=\"row grid\">";
+    var cardHTML = "";
     
     var numProjects = info.projectsCount;
     
@@ -463,7 +468,7 @@ function displayDashboardCards(sortMethod,flip)
         }
 
         var rhActive = 1;
-        var chActive = 0;
+        var chActive = 1;
         var rhHTML = "";
         var chHTML = "";
         
@@ -473,15 +478,15 @@ function displayDashboardCards(sortMethod,flip)
             rhHTML += "<h2 class=\"module-heading text-left\">KEYWORD HACKER MODULE</h2>";
             rhHTML += "<div class=\"module-detail-section\">";
             rhHTML += "<div class=\"row\">";
-            rhHTML += "<div class=\"col-lg-2 project-icon\"><i class=\"black-box-rh\"> </i></div>";
+            rhHTML += "<div class=\"col-lg-2 project-icon\"><img src=\"images/icon-keyword_hacker.png\" alt=\"Keyword Hacker\" class=\"dashboard-icon\"></div>";
             rhHTML += "<div class=\"col-lg-10 module-details-outer\">";
             rhHTML += "<div class=\"col-lg-6  module-details-left\">";
             rhHTML += "<h2 class=\"module-heading\"># of keywords<span>"+numberOfKeywords+"</span></h2>";
-            rhHTML += "<h2 class=\"module-heading\">Power level sum<span>"+plSum+"</span></h2>";
+            rhHTML += "<h2 class=\"module-heading\">Marketing costs<span>"+currencyHexCode+marketingCosts+"</span></h2>";
             rhHTML += "</div>";
             rhHTML += "<div class=\"col-lg-6 module-details-right\">";
             rhHTML += "<h2 class=\"module-heading\">Keyword net worth<span>"+keywordNetWorthString+"</span></h2>";
-            rhHTML += "<h2 class=\"module-heading\">Marketing costs<span>"+currencyHexCode+marketingCosts+"</span></h2>";
+            rhHTML += "<h2 class=\"module-heading\">Power level goal<span>"+plSum+"</span></h2>";
             rhHTML += "</div>";
             rhHTML += "</div>";
             rhHTML += "</div>";
@@ -505,18 +510,19 @@ function displayDashboardCards(sortMethod,flip)
         if(chActive == 1)
         {
             chHTML += "<a style=\"cursor:default;\" class=\"module-link content-hacker-module\">";
+            chHTML += "<img src=\"images/card_down_arrow.png\" class=\"module-card-arrow\">";
             chHTML += "<h2 class=\"module-heading text-left\">Content Hacker Module</h2>";
             chHTML += "<div class=\"module-detail-section\">";
             chHTML += "<div class=\"row\">";
-            chHTML += "<div class=\"col-lg-2 project-icon\"><i class=\"black-box-rh\"> <span class=\"notification-count\"></span></i></div>";
+            chHTML += "<div class=\"col-lg-2 project-icon\"><img src=\"images/icon-content_hacker.png\" alt=\"Keyword Hacker\" class=\"dashboard-icon\"><!--<span class=\"dashboard-card-notification-count\"></span>--></div>";
             chHTML += "<div class=\"col-lg-10 module-details-outer\">";
             chHTML += "<div class=\"col-lg-6  module-details-left\">";
-            chHTML += "<h2 class=\"module-heading\"># of blueprints<span>--</span></h2>";
-            chHTML += "<h2 class=\"module-heading\">Content Goal<span>--</span></h2>";
+            chHTML += "<h2 class=\"module-heading\"># of reports<span>--</span></h2>";
+            chHTML += "<h2 class=\"module-heading\">pg one rankings<span>--</span></h2>";
             chHTML += "</div>";
             chHTML += "<div class=\"col-lg-6 module-details-right\">";
-            chHTML += "<h2 class=\"module-heading\">PG one rankings<span>--</span></h2>";
-            chHTML += "<h2 class=\"module-heading\">Content Budget<span>--</span></h2>";
+            chHTML += "<h2 class=\"module-heading\"># of bluprints<span>--</span></h2>";
+            chHTML += "<h2 class=\"module-heading\">budget/content goal<span>--</span></h2>";
             chHTML += "</div>";
             chHTML += "</div>";
             chHTML += "</div>";
@@ -526,6 +532,7 @@ function displayDashboardCards(sortMethod,flip)
         else
         {
             chHTML += "<a style=\"cursor:default;\" class=\"module-link content-hacker-module\">";
+            chHTML += "<img src=\"images/card_down_arrow.png\" class=\"module-card-arrow\">";
             chHTML += "<h2 class=\"module-heading text-left\">Content Hacker Module</h2>";
             chHTML += "<div class=\"module-detail-section\">";
             chHTML += "<div class=\"row\">";
@@ -561,13 +568,15 @@ function displayDashboardCards(sortMethod,flip)
     }
 
     var addMoreHTML = "<li class=\"col-lg-4 matchheight\">" +
-                        "<div class=\"active-link-outer\"><span class=\"active-new-project-link\"> <a style=\"cursor:pointer;\" onclick=\"gotoCreateProject();\">[ Activate New Project ]</a> </span></div>" +
-                        "</li>" +
-                    "</ul>";
+                        "<div class=\"active-link-outer\"><span class=\"active-new-project-link\" style=\"padding-top:210px;\"> <a style=\"cursor:pointer;\" onclick=\"gotoCreateProject();\">[ Activate New Project ]</a> </span></div>" +
+                        "</li>";
 
-    finalOutput = cardHTML+addMoreHTML;
+    finalOutput = "<ul class=\"row grid\">"+addMoreHTML+cardHTML+"</ul>";
 
     $('#card-container').html(finalOutput);
+    
+    /*var fullHTML = $("#body").html();
+    console.log(fullHTML);*/
 }
 
 function loadProjectData()
@@ -909,6 +918,10 @@ function displayProjectInfo(field)
         {
             activeString = "INACTIVE";
         }
+        
+        $('#currency-code-1').html(currencyHexCode);
+        $('#currency-code-2').html(currencyHexCode);
+        $('#currency-code-3').html(currencyHexCode);
         
         $('#projectTitle').html(clientURL+"<span><a style=\"cursor:pointer;margin-left:7px;\" class=\"edit-icon\" title=\"Edit Project\" onclick=\"displayProjectEditWindow('"+projectID+"');\"></a><a style=\"cursor:pointer;margin-left:7px;margin-top:3px;color:rgba(61,61,61,.25);\" title=\"Download\" class=\"download-icon\" onclick=\"saveTextAsFile();\"></a></span>");
         $('#numKeywords').html(keywordCount);
@@ -1300,6 +1313,9 @@ function displayProjectInfo(field)
     $("#suggestedKeywordsList").html(suggestedKeywordsHTML);
     document.getElementById('loading_spinner').style.display = "none";
     $('body').removeClass('wait');
+    
+    /*var fullHTML = $('#body').html();
+    console.log(fullHTML);*/
 }
 
 function toggleCompetitor(competitorID,checked)
@@ -1554,10 +1570,15 @@ function displayProjectEditWindow(projectID)
                     var useAppStore = projectInfo.useAppStore;
                     var useLocal = projectInfo.useLocal;
                     var useNational = projectInfo.useNational;
+                    var currencyHexCode = projectInfo.currencyHexCode;
                     
                     //Update the inputs with the appropriate values
                     $('#project-url').html(projectURL);
                     $('#project-location').html(geoLocation);
+                    $('#currency-code-1').html(currencyHexCode);
+                    $('#currency-code-2').html(currencyHexCode);
+                    $('#currency-code-3').html(currencyHexCode);
+                    
                     if(useGoogle == 1)
                     {
                         $('#use-google').prop('checked',true);
@@ -2395,10 +2416,5 @@ function saveTextAsFileFromDashboard(projectID)
             }
         }
     });
-    
-}
-
-function getProjectCSVDataFromDashboard(projectID)
-{
     
 }

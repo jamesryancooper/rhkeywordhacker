@@ -215,12 +215,12 @@
                                     </div>
                                 </div>
 
-                                <div class="project-setup-input row"><label class="col-lg-6">What is the one-time $ value of ONE paying customer? (average is okay)</label>
+                                <div class="project-setup-input row"><label class="col-lg-6">What is the one-time <span id="currency-code-1">$</span> value of ONE paying customer? (average is okay)</label>
 
                                     <div class="col-lg-6 project-setup-slider">
                                         <input id="ex8" type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="25" data-slider-value="0"/>
 
-                                        <div id="ex8CurrentSliderValLabel" class="range-slider-value"><span class="range-title">$</span>
+                                        <div id="ex8CurrentSliderValLabel" class="range-slider-value"><span class="range-title" id="currency-code-2">$</span>
                                             <input id="ex8SliderVal" type="text" class="range-count" value="0"/></div>
                                     </div>
                                 </div>
@@ -230,7 +230,7 @@
                                     <div class="col-lg-6 project-setup-slider">
                                         <input id="ex9" type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="25" data-slider-value="0"/>
 
-                                        <div id="ex9CurrentSliderValLabel" class="range-slider-value"><span class="range-title">$</span>
+                                        <div id="ex9CurrentSliderValLabel" class="range-slider-value"><span class="range-title" id="currency-code-3">$</span>
                                             <input id="ex9SliderVal" type="text" class="range-count" value="0"/></div>
                                     </div>
                                 </div>
@@ -355,7 +355,41 @@
 $('#scrollable-dropdown-menu .typeahead').typeahead(null, {
   name: 'countries',
   limit: 20,
-  source: substringMatcher(regions)
+  source: substringMatcher(regions)/*,
+  afterSelect: function(item){
+        console.log("got here");
+        var userLocale = $("#project-location").val();
+        var beginLoc = userLocale.indexOf("[");
+        var endLoc = userLocale.length - 1;
+        var country = userLocale.substring(beginLoc,endLoc);
+        console.log(country);
+  }*/
+});
+
+$('#scrollable-dropdown-menu .typeahead').on(
+    {
+        'typeahead:selected': function(e, datum) {
+            var beginLoc = datum.indexOf("[")+1;
+            var endLoc = datum.length - 1;
+            var country = datum.substring(beginLoc,endLoc);
+            var countryLoc = countries.indexOf(country);
+            var currencyCode = currencies[countryLoc];
+            $("#currency-code-1").html(currencyCode);
+            $("#currency-code-2").html(currencyCode);
+            $("#currency-code-3").html(currencyCode);
+            //console.log(country);
+        },
+        'typeahead:autocompleted': function(e, datum) {
+            var beginLoc = datum.indexOf("[")+1;
+            var endLoc = datum.length - 1;
+            var country = datum.substring(beginLoc,endLoc);
+            var countryLoc = countries.indexOf(country);
+            var currencyCode = currencies[countryLoc];
+            $("#currency-code-1").html(currencyCode);
+            $("#currency-code-2").html(currencyCode);
+            $("#currency-code-3").html(currencyCode);
+            //console.log(country);
+        }
 });
 
 /*$('#the-basics .typeahead').typeahead({

@@ -1236,7 +1236,9 @@ width: 100%;}
 
 .project_name_sort input {float: left;margin-right: 15px;margin-top: 6px !important;}
 
-.keyword-hacker-module, .content-hacker-module {border-bottom: 1px solid #eff1f0;float: left;margin: 0;min-height: 185px;padding: 20px 25px;width: 100%;}
+.keyword-hacker-module {border-bottom: 4px solid #eff1f0;float: left;margin: 0;min-height: 185px;padding: 20px 25px;width: 100%;}
+
+.content-hacker-module {border-bottom: 1px solid #eff1f0;float: left;margin: 0;min-height: 185px;padding: 20px 25px;width: 100%; position: relative;}
 
 .module-heading {color: #a6a8ab;float: left;font-size: 14px;font-weight: 300 ;margin: 0;padding: 0;line-height: normal;width: 100%;}
 
@@ -1492,3 +1494,23 @@ width: 100%;}
     border-right: 1px solid #e2e3e4;
     border-bottom: 1px solid #e2e3e4;
 }
+
+.dashboard-icon {
+    margin-top:0;
+    margin-left:5px;
+    margin-right:0;
+    height:45px;
+    width:auto;
+    cursor:pointer;
+}
+
+.module-card-arrow {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    width: 65px;
+    height: 30px;
+    opacity: 0.7;
+}
+
+.dashboard-card-notification-count {background-color: #ee1d23;border-radius: 100%;color: #fff;float: right;font-size: 12px;font-style: normal;font-weight: 300;height: 25px;line-height: 25px;margin: -8px -15px 0 0;text-align: center;width: 25px; z-index: 999; position:absolute;}

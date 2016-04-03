@@ -18395,3 +18395,6 @@ var regions = ["Anchorage, Alaska [United States]",
 "Viransehir [Turkey]",
 "Yozgat [Turkey]",
 "Zonguldak [Turkey]"];
+
+var countries = ["Argentina","Australia","Belgium","Brazil","Canada","Denmark","Finland","France","Germany","Hong Kong","Hungary","India","Ireland","Israel","Italy","Japan","Mexico","Netherlands","Norway","Poland","Russian Federation","Singapore","Spain","Sweden","Switzerland","Turkey","United Kingdom","United States"];
+var currencies = ["&#x24;","&#x24;","&#x20AC;","&#x52;&#x24;","&#x24;","&#x6B;&#x72;","&#x20AC;","&#x20AC;","&#x20AC;","&#x24;","&#x46;&#x74;","&#x20A8;","&#x20AC;","&#x20AA;","&#x20AC;","&#xA5;","&#x24;","&#x192;","&#x6B;&#x72;","&#x7A;&#x142;","&#x440;&#x443;&#x431;","&#x24;","&#x20AC;","&#x6B;&#x72;","&#x43;&#x48;&#x46;","&#x20A4;","&#xA3;","&#x24;"];

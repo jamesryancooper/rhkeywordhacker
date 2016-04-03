@@ -1,0 +1,817 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- =========================
+          BASIC PAGE INFORMATION
+    ============================== -->
+    <title>RankHacker - The intelligent content strategy platform!</title>
+    <meta name="description" content="Intelligently generate an actionable content strategy complete with publication calendar to beat your competition.">
+    <meta name="keywords" content="content strategy, content roadmap, content calendar">
+    <meta name="author" content="fairmarketing.com">
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- =========================
+         FONTS
+    ============================== -->
+    <link href="fonts/font-awesome/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
+    <!--<link href="fonts/font-family.css" rel='stylesheet' type='text/css'>-->
+    <link href='https://fonts.googleapis.com/css?family=Nixie+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- =========================
+         STYLESHEETS
+    ============================== -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/materialize.css" rel="stylesheet" id="theme-change">
+    <link href="css/custom-style.css" rel="stylesheet" id="theme-change">
+    <link href="css/rankhacker.css" rel="stylesheet" id="theme-change">
+    <link href="css/bootstrap-slider.min.css" rel="stylesheet" id="theme-change">
+
+
+    <!--google js file-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
+    
+    <!--1520 files-->
+    <script src="js/bootstrap-slider.js"></script>
+    <script src="js/1520.js"></script>
+    <script src="js/readmore.js"></script>
+    <link href="css/1520.css" rel="stylesheet" id="theme-change">
+    <link href="css/spinner.css" rel="stylesheet" id="theme-change">
+    
+    <script>
+        function run(){
+            //loadProjectData();
+            //setInterval(loadProjectData, 60000);
+        }
+    </script>
+</head>
+
+<body id="body" class="page-loading home noisy" onload="run();">
+
+
+<!-- =========================
+     MAIN MENU
+============================== -->
+<div id="rank-header-outer">
+    <nav id="mainmenu" class="navbar navbar-fixed-top main-menu" role="navigation">
+        <!-- LOGO CONTAINER -->
+        <div class="logo-cont logo-outer">
+            <a class="navbar-brand" data-text="RANKHACKER" href="#header"><img src="images/logo-main.png" alt="site-logo"></a>
+            <!--<span style="float:left;"><img src="images/icon-keyword_hacker_small.png" alt="kwhacker" class="module-icon" onclick="gotoKHDashboard();"></span><span class="module-icon-label" onclick="gotoKHDashboard();"><strong>KEYWORD</strong> HACKER</span>
+            <span style="float:left;"><img src="images/icon-content_hacker_small.png" alt="contenthacker" class="module-icon"></span><span class="module-icon-label"><strong>CONTENT</strong> HACKER</span>-->
+            <div class="dashboard-status"><i class="white_eagle-rh"></i><a style="cursor:default;">Dashboard Activated</a></div>
+            <div class="dashboard-status"><img src="images/keyword-hacker-icon-white.png" alt="kwhacker" style="cursor:pointer;" class="module-icon" onclick="gotoKHDashboard();"><a class="module-icon-label" style="cursor:pointer;" onclick="gotoKHDashboard();">Keyword Hacker</a></div>
+            <div class="dashboard-status"><img src="images/content-hacker-icon-white.png" style="cursor:default;" alt="contenthacker" class="module-icon"><a class="module-icon-label" style="cursor:default;">Content Hacker</a></div>
+        </div>
+        <div class="logo-cont logo-outer-2">
+            <span class="logout-link" onclick="logout();">LOGOUT</span>
+        </div>
+    </nav>
+</div>
+
+<!-- =========================
+     HEADER
+============================== -->
+<section id="header" class="blurable">
+    <div id="report-bg" class="piece "></div>
+    <!--div class="piece scanlines noclick"></div>
+    <div id="hacker-text" class="piece glow noclick"></div>
+    <div id="crt-output" class="piece output noopacity"></div-->
+
+    <div class="overlay interface-outer">
+        <div class="projects">
+            <div class="row row-v-spacing"></div>
+            <div id="dashboard-header" class="col-lg-10 col-md-offset-1 ">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="head-info-box">
+                            <h4 class="welcome-text"> WELCOME TO THE KEYWORD HACKER MODULE</h4>
+
+                            <h2 class="page-info">the <strong>mission</strong> <strong>[</strong> Review <strong>Keyword Net-Worth<sup>TM</sup></strong> and select phrases that meet or exceed your sales goal <strong>]</strong></h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 padding-box">
+                    <div class="col-lg-6 view-option-outer">
+                        <ul>
+                            <li class="black_eagle-rh"></li>
+                            <li><a href="dashboard.html">Projects</a></li>
+                            <li><a>Keyword Hacker</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6 rh-actions-menu pull-right">
+                        <!--<ul>
+                            <li><a data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Download selected projects" data-original-title="" title="">Download</a></li>
+                            <li>
+                                <button id="create-new-project" class="btn btn-orange btn-round" onclick="gotoCreateProject();"><i class="fa fa-plus"></i><span>Create New</span></button>
+                            </li>
+                        </ul>-->
+                    </div>
+                </div>
+                <div id="shadow"></div>
+            </div>
+            <div class="col-lg-10 col-md-offset-1">
+                <div class="padding-box">
+                    <div class="bread-comb-outer">
+                        <!--<ul>
+                            <li><a href="dashboard.html">Projects</a></li>
+                            >
+                            <li><a href="keywordhacker.html">Keyword hacker</a></li>
+                        </ul>-->
+                    </div>
+                    <div class="row-v-spacing keyword-hacker-info-box">
+
+
+                        <div id="project-row-accordion" role="tablist" aria-multiselectable="true" style="margin-top:-30px;">
+
+                            <div class="three-quarters-loader" id="loading_spinner" style="margin-top: 105px; display: none;"></div>
+                            
+                            <div class="panel panel-default project-row-outer" id="main-panel">
+                                <div role="tab" id="project-headingOne">
+                                    <div id="projectResearchDiv" class="collapsenew" data-toggle="collapse" href="#project-collapseOne" data-parent="#project-row-accordion" aria-expanded="true" aria-controls="project-collapseOne">
+                                        <h2 class="project-name" id="projectTitle">www.germanautocenter.com<span><a style="cursor:pointer;margin-left:7px;" class="edit-icon" title="Edit Project" onclick="displayProjectEditWindow('40');"></a><a style="cursor:pointer;margin-left:7px;margin-top:3px;color:rgba(61,61,61,.25);" title="Download" class="download-icon" onclick="saveTextAsFile();"></a></span></h2>
+                                        <ul class="kerword-project-row">
+                                            <li class="keyword-items"><b class="fa-2x green-text"><span id="numKeywords">1</span></b>
+
+                                                <div class="keyword-item-info">
+                                                    <h2 class="calculator-text">PROJECT<br> KEYWORDS<br> SELECTED</h2>
+                                                </div>
+                                            </li>
+                                            <li class="keyword-items"><i class="keyword-item-icon rh-google-icon"></i>
+
+                                                <div class="keyword-item-info">
+                                                    <span id="geoLocation"><h2>Austin, Texas<!--<a class="edit-icon" title="Edit Location"></a>--></h2></span><span>LOCATION</span>
+                                                </div>
+                                            </li>
+                                            <li class="keyword-items"><i class="keyword-item-icon rh-search-vol-icon"></i>
+
+                                                <div class="keyword-item-info">
+                                                    <span id="searchVolume"><h2>15<span>MO,SEARCH VOLUME</span></h2></span>
+                                                </div>
+                                            </li>
+                                            <li class="keyword-items"><i class="keyword-item-icon rh-mo-visitor-icon"></i>
+
+                                                <div class="keyword-item-info">
+                                                    <span id="projectedVisitors"><h2>7<span>PROJECTED MO. VISITORS</span></h2></span>
+                                                </div>
+                                            </li>
+                                            <li class="keyword-items"><i class="keyword-item-icon rh-mo-saler-customer"></i>
+
+                                                <div class="keyword-item-info">
+                                                    <span id="projectedCustomers"><h2>0<span>PROJECTED MO. CUSTOMERS</span></h2></span>
+                                                </div>
+                                            </li>
+                                            <li class="keyword-items"><i class="keyword-item-icon rh-mo-saler-icon"></i>
+
+                                                <div class="keyword-item-info">
+                                                    <span id="projectedSales"><h2>$0<span>PROJECTED MO. SALES</span></h2></span>
+                                                </div>
+                                            </li>
+                                            <li class="keyword-items"><i class="keyword-item-icon rh-dolor-icon"></i>
+
+                                                <div class="keyword-item-info">
+                                                    <span id="costPerMonth"><h2>$1,575<span>COST PER MONTH</span></h2></span>
+                                                </div>
+                                            </li>
+                                            <li class="keyword-items"><i class="keyword-item-icon rh-money-icon"></i>
+
+                                                <div class="keyword-item-info">
+                                                    <span id="kwNetWorth"><h2 class="red-text">$-1,575<span>KEYWORD NET-WORTH</span></h2></span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div id="project-collapseOne" class="panel-collapse  keyword-phraser-section collapse in" role="tabpanel" aria-labelledby="project-headingOne" aria-expanded="true">
+                                    <!--<span class="expand-collapse"><a onclick="expandAll(this);" style="color:#000;cursor:pointer;">EXPAND ALL</a>&nbsp;/&nbsp;<a onclick="collapseAll(this);" style="color:#000;cursor:pointer;">COLLAPSE ALL</a></span>-->
+
+                                    <div class="keyword-phraser-heading">
+                                        <ul class="keyword-phraser-row">
+                                            <li class="checkbox-outer width-2-5"> &nbsp; </li>
+                                            <li class="keyword-phraser-tittle width-20" style="cursor:pointer;" onclick="displayProjectInfo('keyword');">
+                                                <h2>Keyword<br>Phrases</h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
+                                            </li>
+                                            <li class="power-goal-info width-7" style="cursor:pointer;" onclick="displayProjectInfo('powerLevelGoal');">
+                                                <h2>Power<br>Level Goal<a title="Represents the level of marketing effort required for each keyword. A lower Power Level Goal is preferable since it suggests that less effort is required to meet your goals." class="info-icon"> </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
+                                            </li>
+                                            <li class="monthly-organic-info width-10" style="cursor:pointer;" onclick="displayProjectInfo('searchVolume');">
+                                                <h2>Monthly Organic<br>Search Volume<a title="The monthly average searches for each keyword." class="info-icon"> </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
+                                            </li>
+                                            <li class="monthly-visitors-info width-10" style="cursor:pointer;" onclick="displayProjectInfo('monthlyVisitors');">
+                                                <h2>Projected<br>Monthly Visitors<a title="Applying each keyword's average Click Through Rate to the Monthly Organic Search Volume. Assumes a page one ranking position." class="info-icon"> </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
+                                            </li>
+                                            <li class="monthly-customers-info width-12" style="cursor:pointer;" onclick="displayProjectInfo('monthlyCustomers');">
+                                                <h2>Projected<br>Monthly Customers<a title="Applying your website's current Conversion Rate to Projected Monthly Visitors." class="info-icon"> </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
+                                            </li>
+                                            <li class="monthly-sales-info width-10" style="cursor:pointer;" onclick="displayProjectInfo('monthlySales');">
+                                                <h2>Projected<br>Monthly Sales<a title="Applying the one-time customer value to the Projected Monthly Customers." class="info-icon"> </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
+                                            </li>
+                                            <li class="cost-monthly-info width-7" style="cursor:pointer;" onclick="displayProjectInfo('costPerMonth');">
+                                                <h2>Cost<br>Per Month<a title="Marketing cost for this keyword." class="info-icon"> </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
+                                            </li>
+                                            <li class="keyword-net-worth-info width-7" style="cursor:pointer;" onclick="displayProjectInfo('keywordNetWorth');">
+                                                <h2>Keyword<br>Net-Worth<a title="Projected return on your invested marketing dollars for this keyword." class="info-icon"> </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
+                                            </li>
+                                            <li class="content-blueprint-info width-10">
+                                                <h2>Content<br>Blueprint<a title="Generate a Content Blueprint for each keyword." class="info-icon"> </a></h2>
+                                            </li>
+                                            <li class="checkbox-outer width-2-5">&nbsp;</li>
+                                        </ul>
+                                    </div>
+                                    <div class="keyword-phraser-row-outer">
+                                        <div id="keyword-phraser-accordion" class="phraser-accordion-outer" role="tablist" aria-multiselectable="true"><div id="kw-panel-div274" class="panel panel-default keyword-phraser-row"><ul role="tab" id="keyword-phraser-heading274" style="opacity:1.0;"><li class="checkbox-outer width-2-5"><h2><input type="checkbox" checked="" id="chk-content-all-kw274" onchange="toggleKeyword('274',this.checked);"><label for="chk-content-all-kw274"></label></h2></li><li class="keyword-phraser-tittle width-20"><h2><a data-toggle="collapse" data-parent="#keyword-phraser-accordion" href="#keyword-phraser-collapse0" aria-expanded="true" aria-controls="keyword-phraser-collapse0">european car repair</a></h2></li><li class="power-goal-info width-7" id="kwid-274-plg-1"><h2>3<a data-toggle="collapse" data-parent="#keyword-phraser-accordion" href="#keyword-phraser-collapse0" aria-expanded="true" aria-controls="keyword-phraser-collapse0" class="rh-view-icon"> </a></h2></li><li class="monthly-organic-info width-10" id="kwid-274-search-volume"><h2>15</h2></li><li class="monthly-visitors-info width-10" id="kwid-274-monthly-visitors"><h2>7</h2></li><li class="monthly-customers-info width-12" id="kwid-274-monthly-customers"><h2>0</h2></li><li class="monthly-sales-info width-10" id="kwid-274-monthly-sales"><h2>$0</h2></li><li class="cost-monthly-info width-7" id="kwid-274-cost-per-month"><h2>$1,575</h2></li><li class="keyword-net-worth-info width-7" id="kwid-274-kw-net-worth"><h2 class="">$-1,575</h2></li><li class="keyword-net-worth-info width-10"><h2><a class="blueprint-links">CREATE BLUEPRINT </a></h2></li><li class="content-blueprint-info width-2-5"><h2><span class="delete-icon" title="Delete Keyword" onclick="displayKeywordDeleteWindow('274');"></span></h2></li></ul><div id="keyword-phraser-collapse0" class="panel-collapse collapse " role="tabpanel" aria-labelledby="keyword-phraser-heading0"><div class="power-level-summary"><div class="col-lg-6 you-power-summary-section"><h2 class="power-summary-heading"><span class="tag-label">YOU</span> YOUR RANKING POWER LEVEL IS <span class="total-power-summery">2</span></h2><div class="divider"></div><ul class="power-summary-row power-summary-heading-row"><li class="checkbox-outer col-lg-1"> &nbsp; </li><li class="keyword-phraser-tittle col-lg-2"><h2>Google Rank</h2></li><li class="power-goal-info col-lg-7"><h2>Your URL</h2></li><li class="monthly-organic-info col-lg-2"><h2>Power Level<a class="info-icon" title="Represents the level of marketing effort required for each keyword."> </a></h2></li></ul><ul class="power-summary-row"><li class="checkbox-outer col-lg-1"><h2><input type="checkbox" checked="" disabled="" id="chk-content-all2"><label for="chk-content-all2"></label></h2></li><li class="col-lg-2"><h2>0</h2></li><li class="col-lg-7"><h2>www.germanautocenter.com</h2></li><li class="col-lg-2"><h2>2</h2></li></ul><div class="power-goal-section"><div class="col-lg-3 goal-img"><img src="images/goal-img.png" alt=""></div><div class="goal-details col-lg-9"><h1>Power Level Goal is <span id="kwid-274-plg-2">3</span></h1><h3>We've subtracted your power level from the average of your competitors' to determine your Power Level Goal.</h3><p>This number is derrived from both domain and page authority scores and is best used as a guide to determine your SEO marketing agression. For example if your PLG=3, then you may consider creating 3 pieces of content per month (or build 3 backlinks per month).</p></div></div></div><div class="col-lg-6 them-power-summary-section" id="competitors-table-274"><h2 class="power-summary-heading"><span class="tag-label">them</span> COMPETITOR AVERAGE RANKING POWER LEVEL IS <span class="total-power-summery" id="kwid-274-total-power-summary">5</span></h2><div class="divider"></div><ul class="power-summary-row power-summary-heading-row"><li class="checkbox-outer col-lg-1"> &nbsp; </li><li class="keyword-phraser-tittle col-lg-2" style="cursor:pointer;" onclick="sortKeywordCompetitors('274','google-rank','5');"><h2>Google Rank</h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i></li><li class="power-goal-info col-lg-6" style="cursor:pointer;" onclick="sortKeywordCompetitors('274','url','5');"><h2>Their URL</h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i></li><li class="power-goal-info col-lg-1" style="cursor:pointer;" onclick="sortKeywordCompetitors('274','ctr','5');"><h2>CTR<a class="info-icon" title="Click Through Rate for the ranking position and current keyword."> </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i></li><li class="monthly-organic-info col-lg-1" style="cursor:pointer;" onclick="sortKeywordCompetitors('274','power-level','5');"><h2>Power Level</h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i></li></ul><div id="competitorsList"><ul class="power-summary-row"><li class="checkbox-outer col-lg-1"><h2><input type="checkbox" checked="" id="chk-content-all-c33912" onchange="toggleCompetitor('33912',this.checked);"><label for="chk-content-all-c33912"></label></h2></li><li class="col-lg-2"><h2>1</h2></li><li class="power-goal-info col-lg-6"><h2 title="http://www.europeancarrepairs.com/">http://www.europeancarrepairs.com/...</h2></li><li class="power-goal-info col-lg-1"><h2>0%</h2></li><li class="col-lg-1"><h2>2</h2></li></ul><ul class="power-summary-row"><li class="checkbox-outer col-lg-1"><h2><input type="checkbox" checked="" id="chk-content-all-c33913" onchange="toggleCompetitor('33913',this.checked);"><label for="chk-content-all-c33913"></label></h2></li><li class="col-lg-2"><h2>2</h2></li><li class="power-goal-info col-lg-6"><h2 title="http://www.yelp.com/biz/european-car-repair-sunnyvale-2">http://www.yelp.com/biz/european-car-repair-s...</h2></li><li class="power-goal-info col-lg-1"><h2>0%</h2></li><li class="col-lg-1"><h2>7</h2></li></ul><ul class="power-summary-row"><li class="checkbox-outer col-lg-1"><h2><input type="checkbox" checked="" id="chk-content-all-c33914" onchange="toggleCompetitor('33914',this.checked);"><label for="chk-content-all-c33914"></label></h2></li><li class="col-lg-2"><h2>3</h2></li><li class="power-goal-info col-lg-6"><h2 title="http://www.yelp.com/biz/european-auto-repair-sunnyvale">http://www.yelp.com/biz/european-auto-repair-...</h2></li><li class="power-goal-info col-lg-1"><h2>0%</h2></li><li class="col-lg-1"><h2>5</h2></li></ul><ul class="power-summary-row"><li class="checkbox-outer col-lg-1"><h2><input type="checkbox" id="chk-content-all-c33915" onchange="toggleCompetitor('33915',this.checked);"><label for="chk-content-all-c33915"></label></h2></li><li class="col-lg-2"><h2>4</h2></li><li class="power-goal-info col-lg-6"><h2 title="http://www.european-auto-service.com/">http://www.european-auto-service.com/...</h2></li><li class="power-goal-info col-lg-1"><h2>0%</h2></li><li class="col-lg-1"><h2>2</h2></li></ul><ul class="power-summary-row"><li class="checkbox-outer col-lg-1"><h2><input type="checkbox" id="chk-content-all-c33916" onchange="toggleCompetitor('33916',this.checked);"><label for="chk-content-all-c33916"></label></h2></li><li class="col-lg-2"><h2>5</h2></li><li class="power-goal-info col-lg-6"><h2 title="http://european-autos.com/">http://european-autos.com/...</h2></li><li class="power-goal-info col-lg-1"><h2>0%</h2></li><li class="col-lg-1"><h2>0</h2></li></ul><ul class="power-summary-row"><li class="checkbox-outer col-lg-1"><h2><input type="checkbox" id="chk-content-all-c33917" onchange="toggleCompetitor('33917',this.checked);"><label for="chk-content-all-c33917"></label></h2></li><li class="col-lg-2"><h2>6</h2></li><li class="power-goal-info col-lg-6"><h2 title="http://europeancarcaretx.com/">http://europeancarcaretx.com/...</h2></li><li class="power-goal-info col-lg-1"><h2>0%</h2></li><li class="col-lg-1"><h2>1</h2></li></ul><ul class="power-summary-row"><li class="checkbox-outer col-lg-1"><h2><input type="checkbox" id="chk-content-all-c33918" onchange="toggleCompetitor('33918',this.checked);"><label for="chk-content-all-c33918"></label></h2></li><li class="col-lg-2"><h2>7</h2></li><li class="power-goal-info col-lg-6"><h2 title="http://www.europeanautorepairwalnutcreek.com/">http://www.europeanautorepairwalnutcreek.com/...</h2></li><li class="power-goal-info col-lg-1"><h2>0%</h2></li><li class="col-lg-1"><h2>2</h2></li></ul><ul class="power-summary-row"><li class="checkbox-outer col-lg-1"><h2><input type="checkbox" id="chk-content-all-c33919" onchange="toggleCompetitor('33919',this.checked);"><label for="chk-content-all-c33919"></label></h2></li><li class="col-lg-2"><h2>8</h2></li><li class="power-goal-info col-lg-6"><h2 title="http://www.easatlanta.com/">http://www.easatlanta.com/...</h2></li><li class="power-goal-info col-lg-1"><h2>0%</h2></li><li class="col-lg-1"><h2>1</h2></li></ul><ul class="power-summary-row"><li class="checkbox-outer col-lg-1"><h2><input type="checkbox" id="chk-content-all-c33920" onchange="toggleCompetitor('33920',this.checked);"><label for="chk-content-all-c33920"></label></h2></li><li class="col-lg-2"><h2>9</h2></li><li class="power-goal-info col-lg-6"><h2 title="http://eurotechaz.com/">http://eurotechaz.com/...</h2></li><li class="power-goal-info col-lg-1"><h2>0%</h2></li><li class="col-lg-1"><h2>2</h2></li></ul><ul class="power-summary-row"><li class="checkbox-outer col-lg-1"><h2><input type="checkbox" id="chk-content-all-c33921" onchange="toggleCompetitor('33921',this.checked);"><label for="chk-content-all-c33921"></label></h2></li><li class="col-lg-2"><h2>10</h2></li><li class="power-goal-info col-lg-6"><h2 title="http://www.salinaseuropeanauto.com/">http://www.salinaseuropeanauto.com/...</h2></li><li class="power-goal-info col-lg-1"><h2>0%</h2></li><li class="col-lg-1"><h2>0</h2></li></ul></div></div></div></div></div></div>
+
+                                        <div class="add-custom-keyword-outer">
+                                            <div id="url-list">
+                                                <a href="#add-more-url" class="add-more-url" id="button-add-url">ENTER KEYWORD PHRASE</a>
+                                            </div>
+                                            <div id="url-box-template">
+                                                <div class="url-box">
+                                                    <input id="custom-url" class="url-input" value="" type="text" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="add-custom-keyword-outer">
+                                            <input type="hidden" id="keyword-count" value="0">
+                                            <div class="suggest-keywords-list">
+                                                <ul id="ctc">
+
+                                                </ul>
+                                            </div>
+                                            <div class="suggest-keywords-list">
+                                                <div id="submit-button-block">
+                                                    <a class="orange-btn btn pull-right" onclick="recalculateProject();" id="add-keywords-button" style="opacity:0.0;">ADD 0 KEYWORDS</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <div class="suggest-keywords-list">
+                                            <p class="suggest-keywords-label">+ Click to Add Suggested Keywords</p>
+                                            <!--<label for="post-2" id="read-more-button-label" class="read-more-trigger" onclick="toggleReadMore();">SHOW MORE KEYWORDS</label>-->
+                                            <input type="checkbox" class="read-more-state" id="post-2">
+                                                <ul id="suggestedKeywordsList" class="read-more-wrap"><li>audi auto repair</li><li>authority auto</li><li>auto care european</li><li>auto repair boca raton</li><li>auto repair carrollton tx</li><li>auto repair cincinnati</li><li>auto repair cincinnati oh</li><li>auto repair las vegas</li><li>auto repair murfreesboro tn</li><li>auto repair prescott az</li><li>auto repair redmond wa</li><li>auto repair salinas ca</li><li>auto repair sunnyvale</li><li>auto technicians</li><li>auto works</li><li>automotive repair murfreesboro tn</li><li>automotive specialists</li><li>autoworks</li><li>bmw mechanic las vegas</li><li>bmw repair cincinnati</li><li>bmw repair las vegas</li><li>bmw repair nashville</li><li>bmw repair plano</li><li>bmw repair sunnyvale</li><li>bmw repair walnut creek</li><li>bmw service las vegas</li><li>bmw service nashville</li><li>boca raton auto repair</li><li>car authority</li><li>carrollton auto repair</li><li>carrollton automotive</li><li>carrollton car care</li><li>dallas auto repair</li><li>dallas european auto</li><li>desert bmw</li><li class="read-more-target">desert oasis</li><li class="read-more-target">desert oasis las vegas</li><li class="read-more-target">eastside european</li><li class="read-more-target">euro auto care</li><li class="read-more-target">euro auto repair</li><li class="read-more-target">euro auto specialist</li><li class="read-more-target">euro car repair</li><li class="read-more-target">european auto</li><li class="read-more-target">european auto care</li><li class="read-more-target">european auto mechanic</li><li class="read-more-target">european auto repair</li><li class="read-more-target">european auto repair center boca raton</li><li class="read-more-target">european auto repair shop</li><li class="read-more-target">european auto repair sunnyvale</li><li class="read-more-target">european auto service</li><li class="read-more-target">european auto services</li><li class="read-more-target">european auto shop</li><li class="read-more-target">european auto specialist</li><li class="read-more-target">european auto specialists</li><li class="read-more-target">european auto tech</li><li class="read-more-target">european auto werks</li><li class="read-more-target">european auto works</li><li class="read-more-target">european auto works sunnyvale</li><li class="read-more-target">european automotive</li><li class="read-more-target">european automotive repair</li><li class="read-more-target">european automotive specialists</li><li class="read-more-target">european autos</li><li class="read-more-target">european car</li><li class="read-more-target">european car authority</li><li class="read-more-target">european car care</li><li class="read-more-target">european car center</li><li class="read-more-target">european car garage</li><li class="read-more-target">european car mechanic</li><li class="read-more-target">european car repair las vegas</li><li class="read-more-target">european car repair shop</li><li class="read-more-target">european car repair sunnyvale</li><li class="read-more-target">european car repairs</li><li class="read-more-target">european car service</li><li class="read-more-target">european car shop</li><li class="read-more-target">european car shops</li><li class="read-more-target">european car specialist</li><li class="read-more-target">european mechanic</li><li class="read-more-target">european mechanic shop</li><li class="read-more-target">european motor cars las vegas</li><li class="read-more-target">european motors</li><li class="read-more-target">european motors las vegas</li><li class="read-more-target">european motors plano</li><li class="read-more-target">european repair</li><li class="read-more-target">european repair shops</li><li class="read-more-target">europeanauto</li><li class="read-more-target">europeancar</li><li class="read-more-target">german motors las vegas</li><li class="read-more-target">import auto maintenance nashville</li><li class="read-more-target">import auto repair nashville</li><li class="read-more-target">import auto technicians</li><li class="read-more-target">independent volvo walnut creek</li><li class="read-more-target">las vegas bmw repair</li><li class="read-more-target">las vegas mercedes repair</li><li class="read-more-target">mercedes auto shop</li><li class="read-more-target">mercedes benz repair las vegas</li><li class="read-more-target">mercedes repair boca raton</li><li class="read-more-target">mercedes repair dallas</li><li class="read-more-target">mercedes repair las vegas</li><li class="read-more-target">mercedes service las vegas</li><li class="read-more-target">oasis desert</li><li class="read-more-target">porsche repair las vegas</li><li class="read-more-target">redmond european</li><li class="read-more-target">saab nashville</li><li class="read-more-target">saab shop</li><li class="read-more-target">service engine soon bmw</li><li class="read-more-target">sunnyvale auto</li><li class="read-more-target">sunnyvale auto repair</li><li class="read-more-target">volvo repair nashville</li></ul>
+                                            
+                                            <div class="show-more-text" id="show-more-text">SHOW MORE KEYWORDS</div><div class="show-more-button"><label for="post-2" id="read-more-button-label" class="read-more-trigger" onclick="toggleReadMore();"></label></div>
+                                        </div>
+                                        
+                                        <div class="card-box-bottom" id="dateDivBottom"><div class="project-date-card date_sort"><i class="eagle-icon"></i>Initiated March 1, 2016</div><a class="project-status-card  project_status_sort" href="javascript:void(0);">ACTIVE</a></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<!-- Edit project modal -->
+<div id="dimmer" class="dimmer"></div>
+
+<div id="edit-project-window" class="edit-project-window">
+    <input id="edit-project-id" type="hidden" value="0">
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-2" id="setup-box-outer">
+        <br>
+        <h2 class="setup-heading" style="color:#337ab7;">Edit Project-Level Information</h2>
+        <form class="project-setup-form">
+            <div class="project-setup-input row"><label class="col-lg-3 col-md-3">Project URL</label><label id="project-url" style="color:rgba(61,61,61,.8);"></label></div>
+            <div class="project-setup-input row" style="margin-top:-10px;"><label class="col-lg-3 col-md-3">Location</label><label id="project-location" style="color:rgba(61,61,61,.8);"></label></div>
+            
+            <div class="project-setup-input row">
+                <label class="col-lg-3 col-md-3">Search Engines</label>
+                <span class="col-lg-9 col-md-9" style="margin-top:-25px;margin-bottom:25px;">
+                <ul style="margin-left:-45px;">
+                    <li class="checkbox-outer col-lg-3 col-md-3">
+                        <h2 style="vertical-align:middle;">
+                            <input type="checkbox" id="use-google" value="1" checked="" onclick="checkRequiredEngine('google','bing');">
+                            <label for="use-google" style="font-size:13px;">Google</label>
+                        </h2>
+                    </li>
+                    <li class="checkbox-outer col-lg-3 col-md-3">
+                        <h2 style="vertical-align:middle;">
+                            <input type="checkbox" id="use-bing" value="1" checked="" onclick="checkRequiredEngine('bing','google');">
+                            <label for="use-bing" style="font-size:13px;">Bing+Yahoo</label>
+                        </h2>
+                    </li>
+                    <li class="checkbox-outer col-lg-3 col-md-3" style="display:none;">
+                        <h2 style="vertical-align:middle;">
+                            <input type="checkbox" id="use-you-tube" value="1">
+                            <label for="use-you-tube" style="font-size:13px;">You Tube</label>
+                        </h2>
+                    </li>
+                    <li class="checkbox-outer col-lg-3 col-md-3" style="display:none;">
+                        <h2 style="vertical-align:middle;">
+                            <input type="checkbox" id="use-app-store" value="1">
+                            <label for="use-app-store" style="font-size:13px;">App Store</label>
+                        </h2>
+                    </li>
+                </ul>
+                </span>
+            </div>
+            
+            <div class="project-setup-input row">
+                <label class="col-lg-3 col-md-3">Search Volume</label>
+                <span class="col-lg-9 col-md-9" style="margin-top:-25px;margin-bottom:25px;">
+                <ul style="margin-left:-53px;">
+                    <li class="checkbox-outer col-lg-3 col-md-3">
+                        <h2 style="vertical-align:middle;">
+                            <input type="checkbox" id="use-local" value="1" checked="" onclick="toggleLocalNational('local','national');">
+                            <label for="use-local" style="font-size:13px;">Local</label>
+                        </h2>
+                    </li>
+                    <li class="checkbox-outer col-lg-3 col-md-3">
+                        <h2 style="vertical-align:middle;">
+                            <input type="checkbox" id="use-national" value="1" onclick="toggleLocalNational('national','local');">
+                            <label for="use-national" style="font-size:13px;">National</label>
+                        </h2>
+                    </li>
+                </ul>
+                </span>
+            </div>
+            
+
+            <div class="range-slider-section">
+                <div class="project-setup-input row"><label class="col-lg-6">How many visitors currently land on your website each month?</label>
+
+                    <div class="col-lg-6 project-setup-slider">
+                        <div class="slider slider-horizontal" id=""><div class="slider-track"><div class="slider-track-low" style="left: 0px; width: 0%;"></div><div class="slider-selection" style="left: 0%; width: 0%;"></div><div class="slider-track-high" style="right: 0px; width: 100%;"></div><div class="slider-handle min-slider-handle round" role="slider" aria-valuemin="0" aria-valuemax="100000" aria-valuenow="0" tabindex="0" style="left: 0%;"></div><div class="slider-handle max-slider-handle round hide" role="slider" aria-valuemin="0" aria-valuemax="100000" aria-valuenow="0" tabindex="0" style="left: 0%;"></div></div><div class="tooltip tooltip-main top" role="presentation" style="left: 0%; margin-left: 0px;"><div class="tooltip-arrow"></div><div class="tooltip-inner">0</div></div><div class="tooltip tooltip-min top" role="presentation"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div><div class="tooltip tooltip-max top" role="presentation"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div></div><input id="ex6" type="text" data-slider-min="0" data-slider-max="100000" data-slider-step="1000" data-slider-value="0" data-value="0" value="0" style="display: none;">
+
+                        <div id="ex6CurrentSliderValLabel" class="range-slider-value"><span class="range-title">V</span><input id="ex6SliderVal" type="text" class="range-count" value="0"></div>
+                    </div>
+                </div>
+
+                <div class="project-setup-input row"><label class="col-lg-6">How many of the above visitors convert to actual paying customers?</label>
+
+                    <div class="col-lg-6 project-setup-slider">
+                        <div class="slider slider-horizontal" id=""><div class="slider-track"><div class="slider-track-low" style="left: 0px; width: 0%;"></div><div class="slider-selection" style="left: 0%; width: 0%;"></div><div class="slider-track-high" style="right: 0px; width: 100%;"></div><div class="slider-handle min-slider-handle round" role="slider" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="0" tabindex="0" style="left: 0%;"></div><div class="slider-handle max-slider-handle round hide" role="slider" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="0" tabindex="0" style="left: 0%;"></div></div><div class="tooltip tooltip-main top" role="presentation" style="left: 0%; margin-left: 0px;"><div class="tooltip-arrow"></div><div class="tooltip-inner">0</div></div><div class="tooltip tooltip-min top" role="presentation"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div><div class="tooltip tooltip-max top" role="presentation"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div></div><input id="ex7" type="text" data-slider-min="0" data-slider-max="1000" data-slider-step="10" data-slider-value="0" data-value="0" value="0" style="display: none;">
+
+                        <div id="ex7CurrentSliderValLabel" class="range-slider-value"><span class="range-title">P</span>
+                            <input id="ex7SliderVal" type="text" class="range-count" value="0"></div>
+                    </div>
+                </div>
+
+                <div class="project-setup-input row"><label class="col-lg-6">What is the one-time <span id="currency-code-1">$</span> value of ONE paying customer? (average is okay)</label>
+
+                    <div class="col-lg-6 project-setup-slider">
+                        <div class="slider slider-horizontal" id=""><div class="slider-track"><div class="slider-track-low" style="left: 0px; width: 0%;"></div><div class="slider-selection" style="left: 0%; width: 0%;"></div><div class="slider-track-high" style="right: 0px; width: 100%;"></div><div class="slider-handle min-slider-handle round" role="slider" aria-valuemin="0" aria-valuemax="5000" aria-valuenow="0" tabindex="0" style="left: 0%;"></div><div class="slider-handle max-slider-handle round hide" role="slider" aria-valuemin="0" aria-valuemax="5000" aria-valuenow="0" tabindex="0" style="left: 0%;"></div></div><div class="tooltip tooltip-main top" role="presentation" style="left: 0%; margin-left: 0px;"><div class="tooltip-arrow"></div><div class="tooltip-inner">0</div></div><div class="tooltip tooltip-min top" role="presentation"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div><div class="tooltip tooltip-max top" role="presentation"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div></div><input id="ex8" type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="25" data-slider-value="0" data-value="0" value="0" style="display: none;">
+
+                        <div id="ex8CurrentSliderValLabel" class="range-slider-value"><span class="range-title" id="currency-code-2">$</span>
+                            <input id="ex8SliderVal" type="text" class="range-count" value="0"></div>
+                    </div>
+                </div>
+
+                <div class="project-setup-input row"><label class="col-lg-6">What is your average cost to produce one piece of marketing content?</label>
+
+                    <div class="col-lg-6 project-setup-slider">
+                        <div class="slider slider-horizontal" id=""><div class="slider-track"><div class="slider-track-low" style="left: 0px; width: 0%;"></div><div class="slider-selection" style="left: 0%; width: 0%;"></div><div class="slider-track-high" style="right: 0px; width: 100%;"></div><div class="slider-handle min-slider-handle round" role="slider" aria-valuemin="0" aria-valuemax="5000" aria-valuenow="0" tabindex="0" style="left: 0%;"></div><div class="slider-handle max-slider-handle round hide" role="slider" aria-valuemin="0" aria-valuemax="5000" aria-valuenow="0" tabindex="0" style="left: 0%;"></div></div><div class="tooltip tooltip-main top" role="presentation" style="left: 0%; margin-left: 0px;"><div class="tooltip-arrow"></div><div class="tooltip-inner">0</div></div><div class="tooltip tooltip-min top" role="presentation"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div><div class="tooltip tooltip-max top" role="presentation"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div></div><input id="ex9" type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="25" data-slider-value="0" data-value="0" value="0" style="display: none;">
+
+                        <div id="ex9CurrentSliderValLabel" class="range-slider-value"><span class="range-title" id="currency-code-3">$</span>
+                            <input id="ex9SliderVal" type="text" class="range-count" value="0"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="submit-button-block">
+                <a class="gray-btn btn pull-right" style="margin-left:10px;" onclick="cancelEditKeywordHackerProject();">CANCEL</a>
+                <a class="orange-btn btn pull-right" style="margin-right:10px;" onclick="editKeywordHackerProject('projects');">UPDATE</a>
+            </div>
+        </form>
+        <div class="project-setup-input row"><span id="edit-project-response" class="col-lg-12" style="text-align:center;"></span></div>
+    </div>
+    
+</div>
+    
+<div id="delete-project-window" class="delete-project-window">
+    <input id="delete-keyword-id" type="hidden" value="0">
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-2" id="setup-box-outer">
+        <br>
+        <h2 class="setup-heading" style="color:#337ab7;">Confirmation</h2>
+        <form class="project-setup-form">
+            
+            <div class="range-slider-section">
+                <p>Are you sure you want to delete this keyword?</p>
+            </div>
+
+            <div id="submit-button-block">
+                <a class="gray-btn btn pull-right" style="margin-left:10px;" onclick="cancelDeleteKeywordHackerProject();">CANCEL</a>
+                <a class="orange-btn btn pull-right" style="margin-right:10px;" onclick="deleteKeyword();">Delete</a>
+            </div>
+        </form>
+        <div class="project-setup-input row"><span id="delete-project-response" class="col-lg-12" style="text-align:center;"></span></div>
+    </div>
+    
+</div>
+
+</section>
+
+<!-- =========================
+     FOOTER
+============================== -->
+<!-- Footer start here -->
+<footer id="interface-footer">
+    <div class="col-lg-10 col-lg-offset-1">
+        <div class="row">
+            <!--Footer left section start here-->
+            <div class="footer-link col-lg-4">
+                <ul class="text-left">
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#"> Privacy Policy</a></li>
+                    <li><a href="#">agent@rankhacker.com </a></li>
+                </ul>
+            </div>
+            <!--footer left section close here-->
+            <!--footer center socail icon section start here-->
+            <div class="footer-socail-icon col-lg-4 ">
+                <ul class="text-center">
+                    <li><a href="#"> <i class="fa fa-facebook"></i> </a></li>
+                    <li><a href="#"> <i class="fa fa-twitter"></i> </a></li>
+                    <li><a href="#"> <i class="fa fa-google-plus"></i> </a></li>
+                    <li><a href="#"> <i class="fa fa-vimeo-square"></i> </a></li>
+                    <li><a href="#"> <i class="fa fa-youtube-play"></i> </a></li>
+                    <li><a href="#"> <i class="fa fa-instagram"></i> </a></li>
+                </ul>
+            </div>
+            <!--footer center socail icon section close here-->
+            <!--copyright section start here-->
+            <div class="copy-right-section col-lg-4 text-right"> © 2015 All Rights Reserved</div>
+            <!--copyright section close here-->
+        </div>
+    </div>
+</footer>
+<!--Footer close here-->
+
+<!-- =========================
+     JS SCRIPTS
+============================== -->
+<!-- JQUERY -->
+
+<style>.instruction-note {
+}
+
+.display {
+}</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+
+<!-- BOOTSTRAP SCRIPTS -->
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="js/jquery.matchHeight-min.js"></script>
+<script src="js/isotope.pkgd.min.js"></script>
+<script src="js/bootstrap-slider.js"></script>
+<script src="js/readmore.js"></script>
+<script type="text/javascript">
+    jQuery(function ($) {
+        $('.matchheight').matchHeight();
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+
+    //Active the project table
+    //$('#projectResearchDiv').click();
+
+        $(".project-row-outer div").on("click", ".collapsenew", function () {
+            
+            $(this).addClass("select");
+            $(this).removeAttr("href");
+            
+            /*var el = $(this).parent();
+            console.log($(el).html());*/
+            /*if ($(this).hasClass("collapsed")) {
+                $(".project-view-nav").removeClass("active");
+                $(".research-view-nav").addClass("active");
+            } else {
+                $(".project-view-nav").addClass("active");
+                $(".research-view-nav").removeClass("active");
+            }*/
+        });
+        
+        $(".keyword-phraser-row-outer .suggest-keywords-list ul ").on("click", "li", function () {
+            var parent_get = $(this).parents().find(".keyword-phraser-section.collapse.in").attr('id');
+            //jQuery('.phraser-accordion-outer .keyword-phraser-row').removeClass('active');
+            //jQuery('.phraser-accordion-outer .keyword-phraser-row .collapse').removeClass('in');
+
+            //console.log(parent_get);
+            var parent_id = "#" + parent_get;
+
+            $(this).hide(400);
+            var text_of_li = $(this).html();
+            //alert(text_of_li);
+
+
+            //$("#template .keyword-phraser-row").clone().appendTo(parent_id + " .phraser-accordion-outer");
+            //$(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child .keyword-phraser-tittle h2 a").html(text_of_li);
+
+            var text_of_li_new_old = text_of_li.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '');
+            var text_of_li_new = text_of_li_new_old.substring(0, 5);
+
+            //alert(text_of_li_new);
+
+            var id_of_ul = $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul").attr('id');
+            var id_of_ul_div = $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul").next('div').attr('id');
+            var id_of_ul_div_attr = $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul").next('div').attr('aria-labelledby');
+            var id_of_ul_aria_controls = $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul li.power-goal-info h2 a").attr('aria-controls');
+            var id_of_ul_aria_labelledby = $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul li.power-goal-info h2 a").attr('href');
+            var id_of_ul_aria_controls = $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul li.keyword-phraser-tittle h2 a").attr('href');
+            var id_of_ul_aria_controls = $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul li.keyword-phraser-tittle h2 a").attr('aria-controls');
+            var id_phraser_accordion = $(parent_id + " .phraser-accordion-outer").attr('id');
+
+            //alert(id_of_ul);
+
+
+            $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul").attr('id', id_of_ul + text_of_li_new + parent_get);
+            $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul").next('div').attr('id', id_of_ul_div + text_of_li_new + parent_get);
+            $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul").next('div').attr('aria-labelledby', id_of_ul_div_attr + text_of_li_new + parent_get);
+            $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul li.power-goal-info h2 a").attr('aria-controls', id_of_ul_aria_controls + text_of_li_new + parent_get);
+            $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul li.power-goal-info h2 a").attr('href', id_of_ul_aria_labelledby + text_of_li_new + parent_get);
+            $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul li.keyword-phraser-tittle h2 a").attr('aria-controls', id_of_ul_aria_controls + text_of_li_new + parent_get);
+            $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul li.keyword-phraser-tittle h2 a").attr('href', id_of_ul_aria_labelledby + text_of_li_new + parent_get);
+
+            $(parent_id + " .phraser-accordion-outer").attr('id', id_phraser_accordion + parent_get);
+            $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul li.power-goal-info h2 a").attr('data-parent', '#' + id_phraser_accordion + parent_get);
+            $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul li.keyword-phraser-tittle h2 a").attr('data-parent', '#' + id_phraser_accordion + parent_get);
+
+            var chkflag = 1;
+            $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul li.checkbox-outer").each(function () {
+                chkflag++;
+                $(this).find('input').attr('id', 'chk-content-' + text_of_li_new + parent_get + chkflag);
+                $(this).find('label').attr('for', 'chk-content-' + text_of_li_new + parent_get + chkflag);
+            });
+
+            /*jQuery(parent_id+" .phraser-accordion-outer .keyword-phraser-row .keyword-phraser-tittle a").on('click', function(){
+             //jQuery('.phraser-accordion-outer .keyword-phraser-row').removeClass('active');
+             //jQuery('.phraser-accordion-outer .keyword-phraser-row .keyword-phraser-tittle a').removeClass('collapsed');
+             //jQuery('.phraser-accordion-outer .keyword-phraser-row .collapse').removeClass('in');
+             var href_val = jQuery(this).attr("aria-controls");
+
+             //jQuery('.phraser-accordion-outer .keyword-phraser-row .keyword-phraser-tittle a').toggleClass('collapsed');
+             jQuery(this).toggleClass('collapsed');
+             //if(jQuery(this).hasClass('collapsed')){
+
+             //}
+             jQuery('.phraser-accordion-outer .keyword-phraser-row').removeClass('active');
+             //jQuery('.phraser-accordion-outer .keyword-phraser-row .keyword-phraser-tittle a').removeClass('collapsed');
+             jQuery('.phraser-accordion-outer .keyword-phraser-row .collapse').removeClass('in');
+             jQuery(this).parents(".keyword-phraser-row").addClass('active');
+             //jQuery(this).parents(".keyword-phraser-row").children(".panel-collapse.collapse").addClass('in');
+
+
+             });*/
+            //	..attr('id', 'chk-content-'+text_of_li_new+parent_get);
+
+
+//			$(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child ul li.checkbox-outer input").attr('id', 'chk-content-'+text_of_li_new+parent_get);
+            //		$(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child ul li.checkbox-outer label").attr('for','chk-content-'+text_of_li_new+parent_get);
+            
+            //Here's where we add the keyword to the list
+            addKeywordInReport(text_of_li);
+            
+        });
+
+
+        $("a#button-add-url").on("click", function (event) {
+            event.preventDefault();
+
+            $(this).hide();
+            var url_box = $("#url-box-template").html();
+            $(this).parent().before(url_box);
+            //toggle_add_more();
+            $('#custom-url').focus();
+        });
+
+        $('.add-custom-keyword-outer').on('keypress', '.url-input', function (e) {
+            if (e.which == 13) {
+                $(this).blur();
+            }
+        });
+
+        $('.add-custom-keyword-outer').on('blur', '.url-input', function () {
+            var parent_get = $(this).parents().find(".keyword-phraser-section.collapse.in").attr('id');
+            //console.log(parent_get);
+            var parent_id = "#" + parent_get;
+            var url_val = $(this).val();
+            if (url_val == "") {
+
+            } else {
+                /*$("#template .keyword-phraser-row").clone().appendTo(parent_id + " .phraser-accordion-outer");
+                $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child .keyword-phraser-tittle h2 a").html(url_val);
+                //$(this).parent().parent().parent().find(".suggest-keywords-list ul").append('<li>'+url_val+'</li>');
+                //jQuery('.phraser-accordion-outer .keyword-phraser-row').removeClass('active');
+                //jQuery('.phraser-accordion-outer .keyword-phraser-row .collapse').removeClass('in');
+
+                var text_of_li = url_val;
+                //alert(text_of_li);
+                //console.log(text_of_li);
+
+
+                //$("#template .keyword-phraser-row").clone().appendTo(parent_id+" .phraser-accordion-outer");
+                //$(parent_id+" .phraser-accordion-outer .keyword-phraser-row:last-child .keyword-phraser-tittle h2 a").html(text_of_li);
+
+                var text_of_li_new_old = text_of_li.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '');
+                var text_of_li_new = text_of_li_new_old.substring(0, 5);
+                //console.log(text_of_li_new);
+
+                //alert(text_of_li_new);
+
+                var id_of_ul = $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul").attr('id');
+                var id_of_ul_div = $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul").next('div').attr('id');
+                var id_of_ul_div_attr = $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul").next('div').attr('aria-labelledby');
+                var id_of_ul_aria_controls = $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul li.power-goal-info h2 a").attr('aria-controls');
+                var id_of_ul_aria_labelledby = $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul li.power-goal-info h2 a").attr('href');
+                var id_of_ul_aria_controls = $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul li.keyword-phraser-tittle h2 a").attr('href');
+                var id_of_ul_aria_controls = $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul li.keyword-phraser-tittle h2 a").attr('aria-controls');
+                var id_phraser_accordion = $(parent_id + " .phraser-accordion-outer").attr('id');
+
+                //alert(id_of_ul);
+
+
+                $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul").attr('id', id_of_ul + text_of_li_new + parent_get);
+                $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul").next('div').attr('id', id_of_ul_div + text_of_li_new + parent_get);
+                $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul").next('div').attr('aria-labelledby', id_of_ul_div_attr + text_of_li_new + parent_get);
+                $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul li.power-goal-info h2 a").attr('aria-controls', id_of_ul_aria_controls + text_of_li_new + parent_get);
+                $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul li.power-goal-info h2 a").attr('href', id_of_ul_aria_labelledby + text_of_li_new + parent_get);
+                $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul li.keyword-phraser-tittle h2 a").attr('aria-controls', id_of_ul_aria_controls + text_of_li_new + parent_get);
+                $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul li.keyword-phraser-tittle h2 a").attr('href', id_of_ul_aria_labelledby + text_of_li_new + parent_get);
+
+                $(parent_id + " .phraser-accordion-outer").attr('id', id_phraser_accordion + parent_get);
+                $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul li.power-goal-info h2 a").attr('data-parent', '#' + id_phraser_accordion + parent_get);
+                $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul li.keyword-phraser-tittle h2 a").attr('data-parent', '#' + id_phraser_accordion + parent_get);
+
+                var chkflag = 1;
+                $(parent_id + " .phraser-accordion-outer .keyword-phraser-row:last-child ul li.checkbox-outer").each(function () {
+                    chkflag++;
+                    $(this).find('input').attr('id', 'chk-content-' + text_of_li_new + parent_get + chkflag);
+                    $(this).find('label').attr('for', 'chk-content-' + text_of_li_new + parent_get + chkflag);
+                });*/
+
+                /*jQuery(parent_id+" .phraser-accordion-outer .keyword-phraser-row .keyword-phraser-tittle a").on('click', function(){
+                 //jQuery('.phraser-accordion-outer .keyword-phraser-row').removeClass('active');
+                 //jQuery('.phraser-accordion-outer .keyword-phraser-row .keyword-phraser-tittle a').removeClass('collapsed');
+                 //jQuery('.phraser-accordion-outer .keyword-phraser-row .collapse').removeClass('in');
+                 var href_val = jQuery(this).attr("aria-controls");
+
+                 //jQuery('.phraser-accordion-outer .keyword-phraser-row .keyword-phraser-tittle a').toggleClass('collapsed');
+                 jQuery(this).toggleClass('collapsed');
+                 if(jQuery(this).hasClass('collapsed')){
+                 jQuery('.phraser-accordion-outer .keyword-phraser-row').removeClass('active');
+                 jQuery('.phraser-accordion-outer .keyword-phraser-row .keyword-phraser-tittle a').toggleClass('collapsed');
+                 jQuery('.phraser-accordion-outer .keyword-phraser-row .collapse').removeClass('in');
+                 }
+                 jQuery(this).parents(".keyword-phraser-row").toggleClass('active');
+                 //jQuery(this).parents(".keyword-phraser-row").children(".panel-collapse.collapse").addClass('in');
+
+
+                 });*/
+
+
+            }
+            $(this).remove();
+            $("a#button-add-url").show();
+            
+            //Here's where we add the keyword to the list
+            addKeywordInReport(url_val);
+        });
+
+
+        // Add active class in phraser-accordion-outer
+        jQuery('.phraser-accordion-outer').on('shown.bs.collapse', function () {
+
+            jQuery('.phraser-accordion-outer .keyword-phraser-row').each(function (i) {
+
+                if (jQuery(this).children('div[aria-expanded="true"]').length != 0) {
+                    jQuery(this).addClass('active');
+                }
+            });
+
+
+            jQuery('.phraser-accordion-outer').each(function (i) {
+
+                var rows = jQuery(this).find('.keyword-phraser-row').length;
+                var expanded = jQuery(this).find('div[aria-expanded="true"]').length;
+                if (rows == expanded) {
+                    jQuery(this).parent().parent().find('.instruction-note').text('COLLAPSE ALL');
+                }
+            });
+        });
+
+
+        jQuery('.phraser-accordion-outer').on('hidden.bs.collapse', function () {
+
+            jQuery('.phraser-accordion-outer .keyword-phraser-row').each(function (i) {
+                if (jQuery(this).children('div[aria-expanded="false"]').length != 0) {
+                    jQuery(this).removeClass('active');
+                }
+            });
+//		jQuery('.phraser-accordion-outer .keyword-phraser-row').removeClass('active');
+
+
+            jQuery('.phraser-accordion-outer').each(function (i) {
+
+                var rows = jQuery(this).find('.keyword-phraser-row').length;
+                var expanded = jQuery(this).find('div[aria-expanded="true"]').length;
+                if (rows > expanded) {
+                    jQuery(this).parent().parent().find('.instruction-note').text('EXPAND ALL');
+                }
+            });
+
+
+        });
+
+
+        /*jQuery('.instruction-note').click(function () {
+            var all = 'hide';
+            if ('EXPAND ALL' == jQuery(this).text()) {
+                all = 'show';
+            }
+            jQuery(this).parent().find('.panel-collapse').collapse(all)
+        });*/
+
+        //range slider custom js
+        $("#ex6").slider();
+        $("#ex6").on("slide, slideStop", function (slideEvt) {
+            var slider_num_ex6 = numeral(slideEvt.value).format('0,0');
+            //var slider_num_ex6 = tooltip-inner;
+            $("#ex6SliderVal").val(slider_num_ex6);
+        });
+        $("#ex6SliderVal").change(function(){
+            var sliderVal = parseInt($("#ex6SliderVal").val().replace(",",""));
+            if(isNaN(sliderVal) || sliderVal < 0){ sliderVal = 0; }
+            $("#ex6").slider({
+                value: sliderVal
+                });
+            $("#ex6").slider('refresh');
+            $("#ex6SliderVal").val(numberWithCommas(sliderVal));
+        });
+
+
+        $("#ex7").slider();
+        $("#ex7").on("slide, slideStop", function (slideEvt) {
+            var slider_num_ex7 = numeral(slideEvt.value).format('0,0');
+            $("#ex7SliderVal").val(slider_num_ex7);
+        });
+        $("#ex7SliderVal").change(function(){
+            var sliderVal = parseInt($("#ex7SliderVal").val().replace(",",""));
+            if(isNaN(sliderVal) || sliderVal < 0){ sliderVal = 0; }
+            $("#ex7").slider({
+                value: sliderVal
+                });
+            $("#ex7").slider('refresh');
+            $("#ex7SliderVal").val(numberWithCommas(sliderVal));
+        });
+
+
+        $("#ex8").slider();
+        $("#ex8").on("slide, slideStop", function (slideEvt) {
+            var slider_num_ex8 = numeral(slideEvt.value).format('0,0');
+            $("#ex8SliderVal").val(slider_num_ex8);
+        });
+        $("#ex8SliderVal").change(function(){
+            var sliderVal = parseInt($("#ex8SliderVal").val().replace(",",""));
+            if(isNaN(sliderVal) || sliderVal < 0){ sliderVal = 0; }
+            $("#ex8").slider({
+                value: sliderVal
+                });
+            $("#ex8").slider('refresh');
+            $("#ex8SliderVal").val(numberWithCommas(sliderVal));
+        });
+        
+        $("#ex9").slider();
+        $("#ex9").on("slide, slideStop", function (slideEvt) {
+            var slider_num_ex9 = numeral(slideEvt.value).format('0,0');
+            $("#ex9SliderVal").val(slider_num_ex9);
+        });
+        $("#ex9SliderVal").change(function(){
+            var sliderVal = parseInt($("#ex9SliderVal").val().replace(",",""));
+            if(isNaN(sliderVal) || sliderVal < 0){ sliderVal = 0; }
+            $("#ex9").slider({
+                value: sliderVal
+                });
+            $("#ex9").slider('refresh');
+            $("#ex9SliderVal").val(numberWithCommas(sliderVal));
+        });
+
+    });
+</script>
+
+<input type="hidden" id="json" value="
+{&quot;keywordData&quot;:[{&quot;keywordID&quot;:274,&quot;searchVolume&quot;:15,&quot;keywordNetWorth&quot;:-1575,&quot;active&quot;:1,&quot;totalPowerLevel&quot;:5,&quot;monthlySales&quot;:0,&quot;monthlyCustomers&quot;:0,&quot;clientRanking&quot;:0,&quot;competitorData&quot;:[{&quot;PA&quot;:23.3126163482666,&quot;positionRank&quot;:1,&quot;searchVolume&quot;:0,&quot;competitorID&quot;:33912,&quot;active&quot;:1,&quot;powerLevel&quot;:2,&quot;DA&quot;:10.705632209777832,&quot;url&quot;:&quot;http://www.europeancarrepairs.com/&quot;,&quot;traffic&quot;:0},{&quot;PA&quot;:47.21022415161133,&quot;positionRank&quot;:2,&quot;searchVolume&quot;:0,&quot;competitorID&quot;:33913,&quot;active&quot;:1,&quot;powerLevel&quot;:7,&quot;DA&quot;:92.97824096679688,&quot;url&quot;:&quot;http://www.yelp.com/biz/european-car-repair-sunnyvale-2&quot;,&quot;traffic&quot;:0},{&quot;PA&quot;:1,&quot;positionRank&quot;:3,&quot;searchVolume&quot;:0,&quot;competitorID&quot;:33914,&quot;active&quot;:1,&quot;powerLevel&quot;:5,&quot;DA&quot;:92.97824096679688,&quot;url&quot;:&quot;http://www.yelp.com/biz/european-auto-repair-sunnyvale&quot;,&quot;traffic&quot;:0},{&quot;PA&quot;:28.848215103149414,&quot;positionRank&quot;:4,&quot;searchVolume&quot;:0,&quot;competitorID&quot;:33915,&quot;active&quot;:0,&quot;powerLevel&quot;:2,&quot;DA&quot;:15.743630409240723,&quot;url&quot;:&quot;http://www.european-auto-service.com/&quot;,&quot;traffic&quot;:0},{&quot;PA&quot;:1,&quot;positionRank&quot;:5,&quot;searchVolume&quot;:0,&quot;competitorID&quot;:33916,&quot;active&quot;:0,&quot;powerLevel&quot;:0,&quot;DA&quot;:7.701666831970215,&quot;url&quot;:&quot;http://european-autos.com/&quot;,&quot;traffic&quot;:0},{&quot;PA&quot;:21.05559730529785,&quot;positionRank&quot;:6,&quot;searchVolume&quot;:0,&quot;competitorID&quot;:33917,&quot;active&quot;:0,&quot;powerLevel&quot;:1,&quot;DA&quot;:5.466159820556641,&quot;url&quot;:&quot;http://europeancarcaretx.com/&quot;,&quot;traffic&quot;:0},{&quot;PA&quot;:24.92009162902832,&quot;positionRank&quot;:7,&quot;searchVolume&quot;:0,&quot;competitorID&quot;:33918,&quot;active&quot;:0,&quot;powerLevel&quot;:2,&quot;DA&quot;:10.064908027648926,&quot;url&quot;:&quot;http://www.europeanautorepairwalnutcreek.com/&quot;,&quot;traffic&quot;:0},{&quot;PA&quot;:22.549861907958984,&quot;positionRank&quot;:8,&quot;searchVolume&quot;:0,&quot;competitorID&quot;:33919,&quot;active&quot;:0,&quot;powerLevel&quot;:1,&quot;DA&quot;:7.244334697723389,&quot;url&quot;:&quot;http://www.easatlanta.com/&quot;,&quot;traffic&quot;:0},{&quot;PA&quot;:27.223413467407227,&quot;positionRank&quot;:9,&quot;searchVolume&quot;:0,&quot;competitorID&quot;:33920,&quot;active&quot;:0,&quot;powerLevel&quot;:2,&quot;DA&quot;:16.043981552124023,&quot;url&quot;:&quot;http://eurotechaz.com/&quot;,&quot;traffic&quot;:0},{&quot;PA&quot;:1,&quot;positionRank&quot;:10,&quot;searchVolume&quot;:0,&quot;competitorID&quot;:33921,&quot;active&quot;:0,&quot;powerLevel&quot;:0,&quot;DA&quot;:5.421977519989014,&quot;url&quot;:&quot;http://www.salinaseuropeanauto.com/&quot;,&quot;traffic&quot;:0}],&quot;costPerMonth&quot;:1575,&quot;competitorsPowerLevel&quot;:2,&quot;avgCTR&quot;:0.46950000524520874,&quot;keyword&quot;:&quot;european car repair&quot;,&quot;powerLevelGoal&quot;:3,&quot;monthlyVisitors&quot;:7}],&quot;suggestedKeywords&quot;:[&quot;audi auto repair&quot;,&quot;authority auto&quot;,&quot;auto care european&quot;,&quot;auto repair boca raton&quot;,&quot;auto repair carrollton tx&quot;,&quot;auto repair cincinnati&quot;,&quot;auto repair cincinnati oh&quot;,&quot;auto repair las vegas&quot;,&quot;auto repair murfreesboro tn&quot;,&quot;auto repair prescott az&quot;,&quot;auto repair redmond wa&quot;,&quot;auto repair salinas ca&quot;,&quot;auto repair sunnyvale&quot;,&quot;auto technicians&quot;,&quot;auto works&quot;,&quot;automotive repair murfreesboro tn&quot;,&quot;automotive specialists&quot;,&quot;autoworks&quot;,&quot;bmw mechanic las vegas&quot;,&quot;bmw repair cincinnati&quot;,&quot;bmw repair las vegas&quot;,&quot;bmw repair nashville&quot;,&quot;bmw repair plano&quot;,&quot;bmw repair sunnyvale&quot;,&quot;bmw repair walnut creek&quot;,&quot;bmw service las vegas&quot;,&quot;bmw service nashville&quot;,&quot;boca raton auto repair&quot;,&quot;car authority&quot;,&quot;carrollton auto repair&quot;,&quot;carrollton automotive&quot;,&quot;carrollton car care&quot;,&quot;dallas auto repair&quot;,&quot;dallas european auto&quot;,&quot;desert bmw&quot;,&quot;desert oasis&quot;,&quot;desert oasis las vegas&quot;,&quot;eastside european&quot;,&quot;euro auto care&quot;,&quot;euro auto repair&quot;,&quot;euro auto specialist&quot;,&quot;euro car repair&quot;,&quot;european auto&quot;,&quot;european auto care&quot;,&quot;european auto mechanic&quot;,&quot;european auto repair&quot;,&quot;european auto repair center boca raton&quot;,&quot;european auto repair shop&quot;,&quot;european auto repair sunnyvale&quot;,&quot;european auto service&quot;,&quot;european auto services&quot;,&quot;european auto shop&quot;,&quot;european auto specialist&quot;,&quot;european auto specialists&quot;,&quot;european auto tech&quot;,&quot;european auto werks&quot;,&quot;european auto works&quot;,&quot;european auto works sunnyvale&quot;,&quot;european automotive&quot;,&quot;european automotive repair&quot;,&quot;european automotive specialists&quot;,&quot;european autos&quot;,&quot;european car&quot;,&quot;european car authority&quot;,&quot;european car care&quot;,&quot;european car center&quot;,&quot;european car garage&quot;,&quot;european car mechanic&quot;,&quot;european car repair las vegas&quot;,&quot;european car repair shop&quot;,&quot;european car repair sunnyvale&quot;,&quot;european car repairs&quot;,&quot;european car service&quot;,&quot;european car shop&quot;,&quot;european car shops&quot;,&quot;european car specialist&quot;,&quot;european mechanic&quot;,&quot;european mechanic shop&quot;,&quot;european motor cars las vegas&quot;,&quot;european motors&quot;,&quot;european motors las vegas&quot;,&quot;european motors plano&quot;,&quot;european repair&quot;,&quot;european repair shops&quot;,&quot;europeanauto&quot;,&quot;europeancar&quot;,&quot;german motors las vegas&quot;,&quot;import auto maintenance nashville&quot;,&quot;import auto repair nashville&quot;,&quot;import auto technicians&quot;,&quot;independent volvo walnut creek&quot;,&quot;las vegas bmw repair&quot;,&quot;las vegas mercedes repair&quot;,&quot;mercedes auto shop&quot;,&quot;mercedes benz repair las vegas&quot;,&quot;mercedes repair boca raton&quot;,&quot;mercedes repair dallas&quot;,&quot;mercedes repair las vegas&quot;,&quot;mercedes service las vegas&quot;,&quot;oasis desert&quot;,&quot;porsche repair las vegas&quot;,&quot;redmond european&quot;,&quot;saab nashville&quot;,&quot;saab shop&quot;,&quot;service engine soon bmw&quot;,&quot;sunnyvale auto&quot;,&quot;sunnyvale auto repair&quot;,&quot;volvo repair nashville&quot;],&quot;userFullName&quot;:&quot;Hari Patel&quot;,&quot;projectSummary&quot;:{&quot;runDate&quot;:&quot;March 1, 2016&quot;,&quot;costPerLevel&quot;:525,&quot;searchVolume&quot;:15,&quot;clientURL&quot;:&quot;www.germanautocenter.com&quot;,&quot;valuePerCustomer&quot;:3250,&quot;active&quot;:1,&quot;completed&quot;:1,&quot;totalPowerLevel&quot;:3,&quot;clientDA&quot;:14.692843437194824,&quot;incomingTraffic&quot;:7.042500019073486,&quot;runDateRaw&quot;:&quot;2016-03-01 20:43:18.913&quot;,&quot;keywordCount&quot;:1,&quot;geoLocation&quot;:&quot;Austin, Texas&quot;,&quot;currencyHexCode&quot;:&quot;&amp;#x24;&quot;,&quot;clientPA&quot;:26.023164749145508,&quot;projectID&quot;:40,&quot;username&quot;:&quot;hari.patel@1520holdings.com&quot;,&quot;monthlyVisitors&quot;:18000,&quot;payingCustomers&quot;:100},&quot;status&quot;:&quot;success&quot;}">
+<input type="hidden" id="competitor-sort-method" value="google-rank">
+<input type="hidden" id="competitor-sort-reversed" value="false">
+
+<input type="hidden" id="keyword-sort-method" value="keywordID">
+<input type="hidden" id="keyword-sort-reversed" value="false">
+
+</body>
+</html>

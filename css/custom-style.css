@@ -1110,11 +1110,11 @@ width: 100%;}
 
 .keyword-phraser-heading .keyword-phraser-row {padding: 10px 0;}
 
-.power-level-summary {float: left;margin: 0;padding: 20px 0 50px;width: 100%;}
+.power-level-summary {float: left;margin: 0;padding: 20px 0 50px;width: 100%;margin-top:20px;}
 
 .keyword-phraser-row .power-summary-row.power-summary-heading-row li h2 {color: #000;font-size: 12px;font-weight: 600;line-height: normal;margin: 0;padding: 0;text-align: left;text-transform: none;}
 
-.power-summary-row {background: rgba(0, 0, 0, 0) none repeat scroll 0 0 !important;border-left: 1px solid #e2e5e5;border-right: 1px solid #e2e5e5;border-bottom: 1px solid #e2e5e5;height: 35px !important;}
+.power-summary-row {background: rgba(0, 0, 0, 0) none repeat scroll 0 0 !important;border-left: 1px solid #e2e5e5;border-right: 1px solid #e2e5e5;border-bottom: 1px solid #e2e5e5;height: 45px !important;}
 
 .power-summary-row li {border: medium none;display: table;height: 100% !important;}
 
@@ -1146,11 +1146,13 @@ width: 100%;}
 
 .you-power-summary-section .total-power-summery  , .you-power-summary-section  .power-summary-heading{color: #418dd9;}
 
-.power-goal-section , .warrining-message{float: left;margin: 0;width: 100%;padding: 15px;}
+.power-goal-section , .warrining-message{float: left;margin-top: 10px;width: 100%;padding: 15px;}
 
 .goal-details h1 , .goal-details h3  , .goal-details p{float: left;margin: 0;padding: 0;width: 100%;line-height: normal;}
 
-.goal-details h1 {color: #bbbdbf;font-size: 30px;font-weight: bold;margin: 0;}
+.goal-details h1 {color: #005cb9;font-size: 30px;font-weight: bold;margin: 0;}
+
+.goal-details h2 {color: #005cb9;font-size: 22px;font-weight:bold; margin:0;}
 
 .goal-details h3 {color: #8b8c8b;font-size: 22px;margin: 15px 0 0;}
 
@@ -1162,9 +1164,10 @@ width: 100%;}
 
 .power-goal-section {margin: 35px 0;}
 
-.warrining-message {background: #f5f3b5 none repeat scroll 0 0;padding: 15px;}
+//.warrining-message {background: #f5f3b5 none repeat scroll 0 0;padding: 15px;}
+.warrining-message {background: #d9534f none repeat scroll 0 0;padding: 15px; vertical-align:middle;}
 
-.warrining-message h2 {color: #272422;font-size: 22px;margin: 0 0 10px;text-align: left;text-transform: none;}
+.warrining-message h2 {color: #fff;font-size: 22px;margin-top: 12px;text-align: left;text-transform: none;}
 
 .warrining-message ul {background: rgba(0, 0, 0, 0) none repeat scroll 0 0 !important;border: medium none;height: auto !important;list-style: outside none disc;margin: 0 !important;}
 
@@ -1603,3 +1606,10 @@ width: 100%;}
 .keyword-phraser-row .power-summary-row-highlight li h2 {color: #808080;display: table-cell;font-size: 12px;font-weight: normal;line-height: normal;margin: 0;padding: 0;text-align: left;vertical-align: middle;text-transform:none;}
 
 .power-summary-row-highlight.power-summary-heading-row {border-bottom: 1px solid #e2e5e5 !important;}
+
+.their-power-level-box {background-image: url("../images/left_calc_box.png");background-repeat: no-repeat;cursor: default;display: inline-block;font-weight: bold;height: 89px;width:121px;left: 0;margin-left: 0;position: relative;top: 0;font-size:60px;color:#808080;padding-top:3px;padding-left:30px;}
+.your-power-level-box {background-image: url("../images/middle_calc_box.png");background-repeat: no-repeat;cursor: default;display: inline-block;font-weight: bold;height: 89px;width:121px;left: 0;margin-left: -5px;position: relative;top: 0;font-size:60px;color:#808080;padding-top:3px;padding-left:18px;}
+.net-power-level-box {background-image: url("../images/right_calc_box.png");background-repeat: no-repeat;cursor: default;display: inline-block;font-weight: bold;height: 89px;width:121px;left: 0;margin-left: -20px;position: relative;top: 0;font-size:60px;color:#005cb9;padding-top:3px;padding-left:18px;}
+
+.get-the-hack-statement {text-align:left; float:left; font-size:20px; color:#005cb9; font-weight:bold;}
+.get-the-hack-button {border:1px solid #088D0C;margin-left:15px; padding:10px; color:#088D0C;font-size:20px; cursor:pointer;}

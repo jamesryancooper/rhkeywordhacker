@@ -705,7 +705,7 @@ function unitTest()
     }*/
 }
 
-function sortKeywordCompetitors(selectedKeywordID,field,totalPowerLevel)
+function sortKeywordCompetitors(selectedKeywordID,field,totalPowerLevel,avgRank,avgCTR,clientRanking,clientURL,clientPowerLevel,powerLevelGoal)
 {
     $('body').addClass('wait');
     
@@ -795,23 +795,23 @@ function sortKeywordCompetitors(selectedKeywordID,field,totalPowerLevel)
     $('#competitor-sort-order').val(reversed);
     
     //Now re-draw the content for the competitors div
-    var competitorInnerHTML = "<h2 class=\"power-summary-heading\"><span class=\"tag-label\">them</span> COMPETITOR AVERAGE RANKING POWER LEVEL IS <span class=\"total-power-summery\" id=\"kwid-"+selectedKeywordID+"-total-power-summary\">"+totalPowerLevel+"</span></h2>"+
-                "<div class=\"divider\"></div>"+
-                "<ul class=\"power-summary-row power-summary-heading-row\">"+
-                    "<li class=\"checkbox-outer col-lg-1\"> &nbsp; </li>"+
-                    "<li class=\"keyword-phraser-tittle col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+selectedKeywordID+"','google-rank','"+totalPowerLevel+"');\">"+
-                        "<h2>Google Rank</h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>"+
-                    "</li>"+
-                    "<li class=\"power-goal-info col-lg-6\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+selectedKeywordID+"','url','"+totalPowerLevel+"');\">"+
-                        "<h2>Their URL</h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>"+
-                    "</li>"+
-                    "<li class=\"power-goal-info col-lg-1\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+selectedKeywordID+"','ctr','"+totalPowerLevel+"');\">"+
-                        "<h2>CTR<a class=\"info-icon\" title=\"Click Through Rate for the ranking position and current keyword.\"> </a></h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>"+
-                    "</li>"+
-                    "<li class=\"monthly-organic-info col-lg-1\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+selectedKeywordID+"','power-level','"+totalPowerLevel+"');\">"+
-                        "<h2>Power Level</h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>"+
-                    "</li>"+
-                "</ul>";
+    var competitorInnerHTML = "<!--<h2 class=\"power-summary-heading\"><span class=\"tag-label\">them</span> COMPETITOR AVERAGE RANKING POWER LEVEL IS <span class=\"total-power-summery\" id=\"kwid-"+keywordID+"-total-power-summary\">"+totalPowerLevel+"</span></h2>\n"+
+                "<div class=\"divider\"></div>-->\n"+
+                "<ul class=\"power-summary-row power-summary-heading-row\">\n"+
+                    "<li class=\"checkbox-outer col-lg-1\"> &nbsp; </li>\n"+
+                    "<li class=\"keyword-phraser-tittle col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','google-rank','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
+                        "<h2>Search Rank</h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>\n"+
+                    "</li>\n"+
+                    "<li class=\"power-goal-info col-lg-6\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','url','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
+                        "<h2>URL</h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>\n"+
+                    "</li>\n"+
+                    "<li class=\"power-goal-info col-lg-1\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','ctr','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
+                        "<h2>CTR<a class=\"info-icon\" title=\"Click Through Rate for the ranking position and current keyword.\"> </a></h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>\n"+
+                    "</li>\n"+
+                    "<li class=\"monthly-organic-info col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','power-level','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
+                        "<h2>Power Level</h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>\n"+
+                    "</li>\n"+
+                "</ul>\n";
         var showWarning = false;
         
         //competitorInnerHTML += "<ul class=\"power-summary-row\" style=\"border:0;\" id=\"competitorsList\">";
@@ -838,27 +838,80 @@ function sortKeywordCompetitors(selectedKeywordID,field,totalPowerLevel)
                 competitorCheckboxStatus = "checked";
             }
             
-            competitorInnerHTML += "<ul class=\"power-summary-row\">"+
-                                "<li class=\"checkbox-outer col-lg-1\">"+
-                                    "<h2>"+
-                                        "<input type=\"checkbox\" "+competitorCheckboxStatus+" id=\"chk-content-all-c"+competitorID+"\" onchange=\"toggleCompetitor('"+competitorID+"',this.checked);\">"+
-                                        "<label for=\"chk-content-all-c"+competitorID+"\"></label>"+
-                                    "</h2>"+
-                                "</li>"+
-                                "<li class=\"col-lg-2\">"+
-                                    "<h2>"+competitorPositionRank+"</h2>"+
-                                "</li>"+
-                                "<li class=\"power-goal-info col-lg-6\">"+
-                                    "<h2 title=\""+competitorURL+"\">"+competitorURLShort+"</h2>"+
-                                "</li>"+
-                                "<li class=\"power-goal-info col-lg-1\">"+
-                                    "<h2>"+competitorCTR+"%</h2>"+
-                                "</li>"+
-                                "<li class=\"col-lg-1\">"+
-                                    "<h2>"+competitorPowerLevel+"</h2>"+
-                                "</li>"+
-                            "</ul>";
+            competitorInnerHTML += "<ul class=\"power-summary-row\">\n"+
+                                "<li class=\"checkbox-outer col-lg-1\">\n"+
+                                    "<h2>\n"+
+                                        "<input type=\"checkbox\" "+competitorCheckboxStatus+" id=\"chk-content-all-c"+competitorID+"\" onchange=\"toggleCompetitor('"+competitorID+"',this.checked);\">\n"+
+                                        "<label for=\"chk-content-all-c"+competitorID+"\"></label>\n"+
+                                    "</h2>\n"+
+                                "</li>\n"+
+                                "<li class=\"col-lg-2\">\n"+
+                                    "<h2>"+competitorPositionRank+"</h2>\n"+
+                                "</li>\n"+
+                                "<li class=\"power-goal-info col-lg-6\">\n"+
+                                    "<h2 title=\""+competitorURL+"\">"+competitorURLShort+"</h2>\n"+
+                                "</li>\n"+
+                                "<li class=\"power-goal-info col-lg-1\">\n"+
+                                    "<h2>"+competitorCTR+"%</h2>\n"+
+                                "</li>\n"+
+                                "<li class=\"col-lg-2\">\n"+
+                                    "<h2>"+competitorPowerLevel+"</h2>\n"+
+                                "</li>\n"+
+                            "</ul>\n";
         }
+        
+        //Add in the average row
+        competitorInnerHTML += "<ul class=\"power-summary-row-avg\" style=\"background-color:#e6e6e6;\">\n"+
+                                "<li class=\"checkbox-outer col-lg-1\" style=\"background-color:#e6e6e6;\">\n"+
+                                    "<h2><b>AVG</b></h2>\n"+
+                                "</li>\n"+
+                                "<li class=\"col-lg-2\" style=\"background-color:#e6e6e6;\">\n"+
+                                    "<h2>"+avgRank+"</h2>\n"+
+                                "</li>\n"+
+                                "<li class=\"power-goal-info col-lg-6\" style=\"background-color:#e6e6e6;\">\n"+
+                                    "<h2>Selected Competitors</h2>\n"+
+                                "</li>\n"+
+                                "<li class=\"power-goal-info col-lg-1\" style=\"background-color:#e6e6e6;\">\n"+
+                                    "<h2>"+avgCTR+"%</h2>\n"+
+                                "</li>\n"+
+                                "<li class=\"col-lg-2\" style=\"background-color:#e6e6e6;border-right:1px solid #e6e6e6;\">\n"+
+                                    "<h2>"+totalPowerLevel+"</h2>\n"+
+                                "</li>\n"+
+                            "</ul>\n";
+        
+        
+        //Add in the user's row
+        var clientCTR = 0;
+        competitorInnerHTML += "<ul class=\"power-summary-row-you\" style=\"background-color:#e6f2ff;\">\n"+
+                                "<li class=\"checkbox-outer col-lg-1\" style=\"background-color:#e6f2ff;\">\n"+
+                                    "<h2><b>YOU</b></h2>\n"+
+                                "</li>\n"+
+                                "<li class=\"col-lg-2\" style=\"background-color:#e6f2ff;\">\n"+
+                                    "<h2>"+clientRanking+"</h2>\n"+
+                                "</li>\n"+
+                                "<li class=\"power-goal-info col-lg-6\" style=\"background-color:#e6f2ff;\">\n"+
+                                    "<h2>"+clientURL+"</h2>\n"+
+                                "</li>\n"+
+                                "<li class=\"power-goal-info col-lg-1\" style=\"background-color:#e6f2ff;\">\n"+
+                                    "<h2>"+clientCTR+"%</h2>\n"+
+                                "</li>\n"+
+                                "<li class=\"col-lg-2\" style=\"background-color:#e6f2ff;border-right:1px solid #e6f2ff;\">\n"+
+                                    "<h2>"+clientPowerLevel+"</h2>\n"+
+                                "</li>\n"+
+                            "</ul>\n";
+        competitorInnerHTML += "</div>\n";
+        
+        
+        //Add in the summary row
+        competitorInnerHTML += "<ul class=\"power-summary-row-highlight\" style=\"background-color:#005cb9;color:#fff;border-right:1px solid #005cb9;\">\n"+
+                                "<li class=\"checkbox-outer col-lg-10\" style=\"background-color:#005cb9;border-right:1px solid #005cb9;\">\n"+
+                                    "<h2 style=\"color:#fff;\"><b>YOUR POWER LEVEL GOAL</b>&nbsp;Competitor average score - Your score =</h2>\n"+
+                                "</li>\n"+
+                                "<li class=\"col-lg-2\" style=\"background-color:#005cb9;color:#fff;border-right:1px solid #005cb9;margin-left:-4px;\">\n"+
+                                    "<h2 style=\"color:#fff;font-size:16px;\" id=\"kwid-"+keywordID+"-plg-2\"><b>"+powerLevelGoal+"</b></h2>\n"+
+                                "</li>\n"+
+                            "</ul>\n";
+        
         competitorInnerHTML += "</div>";
     $('#competitors-table-'+selectedKeywordID).html(competitorInnerHTML);
     $('body').removeClass('wait');
@@ -1174,24 +1227,34 @@ function displayProjectInfo(field)
                                 "<li class=\"content-blueprint-info width-2-5\">\n"+
                                     "<h2><span class=\"delete-icon\" title=\"Delete Keyword\" onclick=\"displayKeywordDeleteWindow('"+keywordID+"');\"></span></h2>\n"+
                                 "</li>\n"+
-                            "</ul>\n";
+                            "</ul>\n"+
+                            "<div id=\"keyword-phraser-collapse"+i+"\" class=\"panel-collapse collapse \" role=\"tabpanel\" aria-labelledby=\"keyword-phraser-heading"+i+"\">\n"+
+                            "<div class=\"power-level-summary\">\n";
         
         //Let's first build the "THEM" table so that we can determine if they hav a power level goal of 9 (need to know whether to show the warning message)
+        /* old onclick sorting: 
+         * 
+         * onclick=\"sortKeywordCompetitors('"+keywordID+"','google-rank','"+totalPowerLevel+"');\"
+         * onclick=\"sortKeywordCompetitors('"+keywordID+"','url','"+totalPowerLevel+"');\"
+         * onclick=\"sortKeywordCompetitors('"+keywordID+"','ctr','"+totalPowerLevel+"');\"
+         * onclick=\"sortKeywordCompetitors('"+keywordID+"','power-level','"+totalPowerLevel+"');\"
+         * 
+         */
         var competitorHTML = "<div class=\"col-lg-6 them-power-summary-section\" id=\"competitors-table-"+keywordID+"\">\n" +
                 "<!--<h2 class=\"power-summary-heading\"><span class=\"tag-label\">them</span> COMPETITOR AVERAGE RANKING POWER LEVEL IS <span class=\"total-power-summery\" id=\"kwid-"+keywordID+"-total-power-summary\">"+totalPowerLevel+"</span></h2>\n"+
                 "<div class=\"divider\"></div>-->\n"+
                 "<ul class=\"power-summary-row power-summary-heading-row\">\n"+
                     "<li class=\"checkbox-outer col-lg-1\"> &nbsp; </li>\n"+
-                    "<li class=\"keyword-phraser-tittle col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','google-rank','"+totalPowerLevel+"');\">\n"+
+                    "<li class=\"keyword-phraser-tittle col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','google-rank','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
                         "<h2>Search Rank</h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>\n"+
                     "</li>\n"+
-                    "<li class=\"power-goal-info col-lg-6\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','url','"+totalPowerLevel+"');\">\n"+
+                    "<li class=\"power-goal-info col-lg-6\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','url','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
                         "<h2>URL</h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>\n"+
                     "</li>\n"+
-                    "<li class=\"power-goal-info col-lg-1\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','ctr','"+totalPowerLevel+"');\">\n"+
+                    "<li class=\"power-goal-info col-lg-1\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','ctr','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
                         "<h2>CTR<a class=\"info-icon\" title=\"Click Through Rate for the ranking position and current keyword.\"> </a></h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>\n"+
                     "</li>\n"+
-                    "<li class=\"monthly-organic-info col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','power-level','"+totalPowerLevel+"');\">\n"+
+                    "<li class=\"monthly-organic-info col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','power-level','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
                         "<h2>Power Level</h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>\n"+
                     "</li>\n"+
                 "</ul>\n";
@@ -1292,15 +1355,13 @@ function displayProjectInfo(field)
                                     "<h2 style=\"color:#fff;\"><b>YOUR POWER LEVEL GOAL</b>&nbsp;Competitor average score - Your score =</h2>\n"+
                                 "</li>\n"+
                                 "<li class=\"col-lg-2\" style=\"background-color:#005cb9;color:#fff;border-right:1px solid #005cb9;margin-left:-4px;\">\n"+
-                                    "<h2 style=\"color:#fff;font-size:16px;\"><b>"+powerLevelGoal+"</b></h2>\n"+
+                                    "<h2 style=\"color:#fff;font-size:16px;\" id=\"kwid-"+keywordID+"-plg-2\"><b>"+powerLevelGoal+"</b></h2>\n"+
                                 "</li>\n"+
                             "</ul>\n";
         competitorHTML += "</div>\n";
         
         //Now put the info for client ranking power
-        accordianHTML += "<div id=\"keyword-phraser-collapse"+i+"\" class=\"panel-collapse collapse \" role=\"tabpanel\" aria-labelledby=\"keyword-phraser-heading"+i+"\">\n"+
-                            "<div class=\"power-level-summary\">\n"+
-                                "<div class=\"col-lg-6 you-power-summary-section\">\n"+
+        var plgHTML = "<div class=\"col-lg-6 you-power-summary-section\">\n"+
                                     "<!--<h2 class=\"power-summary-heading\"><span class=\"tag-label\">YOU</span> YOUR RANKING POWER LEVEL IS <span class=\"total-power-summery\">"+clientPowerLevel+"</span></h2>\n"+
                                     "<div class=\"divider\"></div>-->\n"+
                                     "<!--<ul class=\"power-summary-row power-summary-heading-row\">\n"+
@@ -1333,44 +1394,45 @@ function displayProjectInfo(field)
                                         "</li>\n"+
                                     "</ul>-->\n";
                             
-            if(true)
+            if(showWarning)
             {
-                accordianHTML += "<div class=\"warrining-message\">\n"+
+                plgHTML += "<div class=\"warrining-message\">\n"+
                                         "<div class=\"col-lg-2 warrining-icon\"><img src=\"images/warning-sign-white.png\" alt=\"\"></div>\n"+
-                                        "<div class=\"col-lg-10\">\n"+
+                                        "<div class=\"col-lg-10\" style=\"margin:0;\">\n"+
                                             "<h2>You have some tricky competitors</h2>\n"+
-                                            "<ul>\n"+
-                                                "<li>Uncheck competitor urls whose power level exceedes 9</li>\n"+
-                                            "</ul>\n"+
+                                        "</div>\n"+
+                                    "</div>\n";
+                plgHTML += "<div class=\"row\">\n"+
+                                        "<div class=\"col-lg-1\"></div>\n"+
+                                        "<div class=\"col-lg-11\" style=\"padding:10px;\">\n"+
+                                            "&middot;&nbsp;You may want to uncheck competitor urls whose power level exceedes 9</li>\n"+
                                         "</div>\n"+
                                     "</div>\n";
             }
-                accordianHTML += "<div class=\"power-goal-section\">\n"+
-                                        "<div class=\"col-lg-3 goal-img\"><img src=\"images/goal-img.png\" alt=\"\"></div>\n"+
-                                        "<div class=\"goal-details col-lg-9\">\n"+
-                                            "<h1>Power Level Goal is <span id=\"kwid-"+keywordID+"-plg-2\">"+powerLevelGoal+"</span></h1>\n"+
-                                            "<h3>We've subtracted your power level from the average of your competitors' to determine your Power Level Goal.</h3>\n"+
-                                            "<p>This number is derrived from both domain and page authority scores and is best used as a guide to determine your SEO marketing agression. For example if your PLG=3, then you may consider creating 3 pieces of content per month (or build 3 backlinks per month).</p>\n"+
-                                        "</div>\n"+
+                plgHTML += "<div class=\"power-goal-section\">\n"+
+                                        "<div>\n"+
+                                            "<div class=\"col-lg-3 goal-img\"><img src=\"images/goal-img.png\" alt=\"\"></div>\n"+
+                                            "<div class=\"goal-details col-lg-9\">\n"+
+                                                "<h1 style=\"margin-bottom:15px;\">Your Power Level Goal</h1>\n"+
+                                                "<span id=\"kwid-"+keywordID+"-their-pl\" class=\"their-power-level-box\">"+competitorPowerLevel+"</span>\n"+
+                                                "<span id=\"kwid-"+keywordID+"-your-pl\" class=\"your-power-level-box\">"+clientPowerLevel+"</span>\n"+
+                                                "<span id=\"kwid-"+keywordID+"-plg-3\" class=\"net-power-level-box\">"+powerLevelGoal+"</span>\n"+
+                                            "</div>\n"+
+                                            "<div class=\"goal-details col-lg-12\">\n"+
+                                                "<h3>To match the marketing aggression of your competitors for this keyword you need to increase your power level by <span id=\"kwid-"+keywordID+"-plg-4\" style=\"color:#005cb9;\">+3</span></h3>\n"+
+                                                "<p>This number is derived from both domain and page authority scores and is best used as a guide to determine your SEO marketing agression. For example if your Power Level Goal = 3, then you may consider creating 3 pieces of content per month (or build 3 backlinks per month).</p>\n"+
+                                            "</div>"+
+                                            "<div class=\"goal-details col-lg-12\" style=\"margin-top:50px;vertical-align:middle;\">\n"+
+                                                "<span class=\"get-the-hack-statement\">Create a content blueprint for this phrase.</span><span class=\"get-the-hack-button\">GET THE HACK</span>\n"+
+                                            "</div>"+
+                                        "</div>"+
                                     "</div>\n";
-            //if(showWarning === true)
-            if(true)
-            {
-                accordianHTML += "<div class=\"warrining-message\">\n"+
-                                        "<div class=\"col-lg-2 warrining-icon\"><img src=\"images/warning-sign.png\" alt=\"\"></div>\n"+
-                                        "<div class=\"col-lg-10\">\n"+
-                                            "<h2>You have some tricky competitors</h2>\n"+
-                                            "<ul>\n"+
-                                                "<li>Uncheck competitor urls whose power level exceedes 9</li>\n"+
-                                            "</ul>\n"+
-                                        "</div>\n"+
-                                    "</div>\n";
-            }
+                
         
-            accordianHTML += "</div>\n";
+            plgHTML += "</div>\n";
             
             //Add in the competitorHTML we already built, and finish off the div
-            accordianHTML += competitorHTML + "</div>\n" +
+            accordianHTML += competitorHTML + plgHTML + "</div>\n" +
                                                 "</div>\n" +
                                             "</div>\n";
     }

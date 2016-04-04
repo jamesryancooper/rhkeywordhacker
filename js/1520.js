@@ -1,7 +1,7 @@
-//var restURL = "http://fairmarketing.cloudapp.net/rest1.0/kh_endpoint.jsp?"
+var restURL = "http://fairmarketing.cloudapp.net/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://fairmarketing.cloudapp.net/rest1.0/servlet/ssd.DownloadInventoryReport?"
 var rhURL = "http://fairmarketing.cloudapp.net/rhstorefront/";
-var restURL = "http://localhost:8084/rest1.0/kh_endpoint.jsp?"
+//var restURL = "http://localhost:8084/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://localhost:8084/rest1.0/servlet/ssd.DownloadInventoryReport"
 var desc = false;
 
@@ -705,7 +705,7 @@ function unitTest()
     }*/
 }
 
-function sortKeywordCompetitors(selectedKeywordID,field,totalPowerLevel,avgRank,avgCTR,clientRanking,clientURL,clientPowerLevel,powerLevelGoal)
+function sortKeywordCompetitors(selectedKeywordID,field,totalPowerLevel,avgRank,avgCTR,clientCTR,clientRanking,clientURL,clientPowerLevel,powerLevelGoal)
 {
     $('body').addClass('wait');
     
@@ -799,16 +799,16 @@ function sortKeywordCompetitors(selectedKeywordID,field,totalPowerLevel,avgRank,
                 "<div class=\"divider\"></div>-->\n"+
                 "<ul class=\"power-summary-row power-summary-heading-row\">\n"+
                     "<li class=\"checkbox-outer col-lg-1\"> &nbsp; </li>\n"+
-                    "<li class=\"keyword-phraser-tittle col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','google-rank','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
+                    "<li class=\"keyword-phraser-tittle col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','google-rank','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
                         "<h2>Search Rank<i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i></h2>\n"+
                     "</li>\n"+
-                    "<li class=\"power-goal-info col-lg-6\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','url','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
+                    "<li class=\"power-goal-info col-lg-6\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','url','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
                         "<h2>URL<i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i></h2>\n"+
                     "</li>\n"+
-                    "<li class=\"power-goal-info col-lg-1\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','ctr','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
+                    "<li class=\"power-goal-info col-lg-1\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','ctr','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
                         "<h2>CTR<i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i><a class=\"info-icon\" title=\"Click Through Rate for the ranking position and current keyword.\"> </a></h2>\n"+
                     "</li>\n"+
-                    "<li class=\"monthly-organic-info col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','power-level','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
+                    "<li class=\"monthly-organic-info col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','power-level','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
                         "<h2>Power Level<i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i></h2>\n"+
                     "</li>\n"+
                 "</ul>\n";
@@ -881,7 +881,6 @@ function sortKeywordCompetitors(selectedKeywordID,field,totalPowerLevel,avgRank,
         
         
         //Add in the user's row
-        var clientCTR = 0;
         competitorInnerHTML += "<ul class=\"power-summary-row-you\" style=\"background-color:#e6f2ff;\">\n"+
                                 "<li class=\"checkbox-outer col-lg-1\" style=\"background-color:#e6f2ff;\">\n"+
                                     "<h2><b>YOU</b></h2>\n"+
@@ -1148,6 +1147,7 @@ function displayProjectInfo(field)
         var clientRanking = thisEntry.clientRanking;
         var keywordActive = thisEntry.active;
         var avgCTR = Math.round(thisEntry.avgCTR);
+        var clientCTR = Math.round(thisEntry.clientCTR);
         var avgRank = thisEntry.avgRank;
         var totalPowerLevel = thisEntry.totalPowerLevel;     //Add back the client power level to the total power level for this keyword
         var keyword = thisEntry.keyword;
@@ -1245,16 +1245,16 @@ function displayProjectInfo(field)
                 "<div class=\"divider\"></div>-->\n"+
                 "<ul class=\"power-summary-row power-summary-heading-row\">\n"+
                     "<li class=\"checkbox-outer col-lg-1\"> &nbsp; </li>\n"+
-                    "<li class=\"keyword-phraser-tittle col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','google-rank','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
+                    "<li class=\"keyword-phraser-tittle col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','google-rank','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
                         "<h2>Search Rank<i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i></h2>\n"+
                     "</li>\n"+
-                    "<li class=\"power-goal-info col-lg-6\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','url','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
+                    "<li class=\"power-goal-info col-lg-6\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','url','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
                         "<h2>URL<i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i></h2>\n"+
                     "</li>\n"+
-                    "<li class=\"power-goal-info col-lg-1\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','ctr','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
+                    "<li class=\"power-goal-info col-lg-1\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','ctr','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
                         "<h2>CTR<i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i><a class=\"info-icon\" title=\"Click Through Rate for the ranking position and current keyword.\"> </a></h2>\n"+
                     "</li>\n"+
-                    "<li class=\"monthly-organic-info col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','power-level','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
+                    "<li class=\"monthly-organic-info col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','power-level','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
                         "<h2>Power Level<i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i></h2>\n"+
                     "</li>\n"+
                 "</ul>\n";
@@ -1328,7 +1328,6 @@ function displayProjectInfo(field)
         
         
         //Add in the user's row
-        var clientCTR = 0;
         competitorHTML += "<ul class=\"power-summary-row-you\" style=\"background-color:#e6f2ff;margin:0;\">\n"+
                                 "<li class=\"checkbox-outer col-lg-1\" style=\"background-color:#e6f2ff;\">\n"+
                                     "<h2><b>YOU</b></h2>\n"+

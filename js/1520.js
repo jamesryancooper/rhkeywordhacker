@@ -800,16 +800,16 @@ function sortKeywordCompetitors(selectedKeywordID,field,totalPowerLevel,avgRank,
                 "<ul class=\"power-summary-row power-summary-heading-row\">\n"+
                     "<li class=\"checkbox-outer col-lg-1\"> &nbsp; </li>\n"+
                     "<li class=\"keyword-phraser-tittle col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','google-rank','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
-                        "<h2>Search Rank</h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>\n"+
+                        "<h2>Search Rank<i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i></h2>\n"+
                     "</li>\n"+
                     "<li class=\"power-goal-info col-lg-6\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','url','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
-                        "<h2>URL</h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>\n"+
+                        "<h2>URL<i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i></h2>\n"+
                     "</li>\n"+
                     "<li class=\"power-goal-info col-lg-1\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','ctr','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
-                        "<h2>CTR<a class=\"info-icon\" title=\"Click Through Rate for the ranking position and current keyword.\"> </a></h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>\n"+
+                        "<h2>CTR<i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i><a class=\"info-icon\" title=\"Click Through Rate for the ranking position and current keyword.\"> </a></h2>\n"+
                     "</li>\n"+
                     "<li class=\"monthly-organic-info col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','power-level','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
-                        "<h2>Power Level</h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>\n"+
+                        "<h2>Power Level<i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i></h2>\n"+
                     "</li>\n"+
                 "</ul>\n";
         var showWarning = false;
@@ -1196,31 +1196,31 @@ function displayProjectInfo(field)
                                 "<li class=\"power-goal-info width-7\" id=\"kwid-"+keywordID+"-plg-1\">\n"+
                                     "<h2>"+powerLevelGoal+"<a data-toggle=\"collapse\" data-parent=\"#keyword-phraser-accordion\" href=\"#keyword-phraser-collapse"+i+"\" aria-expanded=\"true\" aria-controls=\"keyword-phraser-collapse"+i+"\" class=\"rh-view-icon\"> </a></h2>\n"+
                                 "</li>\n"+
-                                "<li class=\"spacer-info\"><img src=\"images/keyword_row_arrow.png\" class=\"keyword-row-arrow\"></li>\n"+
+                                "<li class=\"spacer-info\"><img src=\"images/keyword_row_arrow_white.png\" class=\"keyword-row-arrow\"></li>\n"+
                                 "<li class=\"monthly-organic-info width-10\" id=\"kwid-"+keywordID+"-search-volume\">\n"+
                                     "<h2>"+numberWithCommas(searchVolume)+"</h2>\n"+
                                 "</li>\n"+
-                                "<li class=\"spacer-info\"><img src=\"images/keyword_row_arrow.png\" class=\"keyword-row-arrow\"></li>\n"+
+                                "<li class=\"spacer-info\"><img src=\"images/keyword_row_arrow_white.png\" class=\"keyword-row-arrow\"></li>\n"+
                                 "<li class=\"monthly-visitors-info width-10\" id=\"kwid-"+keywordID+"-monthly-visitors\">\n"+
                                     "<h2>"+numberWithCommas(monthlyVisitors)+"</h2>\n"+
                                 "</li>\n"+
-                                "<li class=\"spacer-info\"><img src=\"images/keyword_row_arrow.png\" class=\"keyword-row-arrow\"></li>\n"+
+                                "<li class=\"spacer-info\"><img src=\"images/keyword_row_arrow_white.png\" class=\"keyword-row-arrow\"></li>\n"+
                                 "<li class=\"monthly-customers-info width-12\" id=\"kwid-"+keywordID+"-monthly-customers\">\n"+
                                     "<h2>"+numberWithCommas(monthlyCustomers)+"</h2>\n"+
                                 "</li>\n"+
-                                "<li class=\"spacer-info\"><img src=\"images/keyword_row_arrow.png\" class=\"keyword-row-arrow\"></li>\n"+
+                                "<li class=\"spacer-info\"><img src=\"images/keyword_row_arrow_white.png\" class=\"keyword-row-arrow\"></li>\n"+
                                 "<li class=\"monthly-sales-info width-10\" id=\"kwid-"+keywordID+"-monthly-sales\">\n"+
                                     "<h2>"+currencyHexCode+numberWithCommas(monthlySales)+"</h2>\n"+
                                 "</li>\n"+
-                                "<li class=\"spacer-info\"><img src=\"images/keyword_row_arrow.png\" class=\"keyword-row-arrow\"></li>\n"+
+                                "<li class=\"spacer-info\"><img src=\"images/keyword_row_arrow_white.png\" class=\"keyword-row-arrow\"></li>\n"+
                                 "<li class=\"cost-monthly-info width-7\" id=\"kwid-"+keywordID+"-cost-per-month\">\n"+
                                     "<h2>"+currencyHexCode+numberWithCommas(costPerMonth)+"</h2>\n"+
                                 "</li>\n"+
-                                "<li class=\"spacer-info\"><img src=\"images/keyword_row_arrow.png\" class=\"keyword-row-arrow\"></li>\n"+
+                                "<li class=\"spacer-info\"><img src=\"images/keyword_row_arrow_white.png\" class=\"keyword-row-arrow\"></li>\n"+
                                 "<li class=\"keyword-net-worth-info width-7\" id=\"kwid-"+keywordID+"-kw-net-worth\">\n"+
                                     "<h2 class=\"\">"+currencyHexCode+numberWithCommas(keywordNetWorth)+"</h2>\n"+
                                 "</li>\n"+
-                                "<li class=\"spacer-info\"><img src=\"images/keyword_row_arrow.png\" class=\"keyword-row-arrow\"></li>\n"+
+                                "<li class=\"spacer-info\"><img src=\"images/keyword_row_arrow_white.png\" class=\"keyword-row-arrow\"></li>\n"+
                                 "<li class=\"keyword-net-worth-info width-10\">\n"+
                                     "<h2><a class=\"blueprint-links\">GET THE HACK</a></h2>\n"+
                                 "</li>\n"+
@@ -1246,16 +1246,16 @@ function displayProjectInfo(field)
                 "<ul class=\"power-summary-row power-summary-heading-row\">\n"+
                     "<li class=\"checkbox-outer col-lg-1\"> &nbsp; </li>\n"+
                     "<li class=\"keyword-phraser-tittle col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','google-rank','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
-                        "<h2>Search Rank</h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>\n"+
+                        "<h2>Search Rank<i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i></h2>\n"+
                     "</li>\n"+
                     "<li class=\"power-goal-info col-lg-6\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','url','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
-                        "<h2>URL</h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>\n"+
+                        "<h2>URL<i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i></h2>\n"+
                     "</li>\n"+
                     "<li class=\"power-goal-info col-lg-1\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','ctr','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
-                        "<h2>CTR<a class=\"info-icon\" title=\"Click Through Rate for the ranking position and current keyword.\"> </a></h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>\n"+
+                        "<h2>CTR<i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i><a class=\"info-icon\" title=\"Click Through Rate for the ranking position and current keyword.\"> </a></h2>\n"+
                     "</li>\n"+
                     "<li class=\"monthly-organic-info col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','power-level','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
-                        "<h2>Power Level</h2><i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i>\n"+
+                        "<h2>Power Level<i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i></h2>\n"+
                     "</li>\n"+
                 "</ul>\n";
         var showWarning = false;
@@ -1285,7 +1285,7 @@ function displayProjectInfo(field)
                 competitorCheckboxStatus = "checked";
             }
             
-            competitorHTML += "<ul class=\"power-summary-row\">\n"+
+            competitorHTML += "<ul class=\"power-summary-row\" style=\"margin:0;\">\n"+
                                 "<li class=\"checkbox-outer col-lg-1\">\n"+
                                     "<h2>\n"+
                                         "<input type=\"checkbox\" "+competitorCheckboxStatus+" id=\"chk-content-all-c"+competitorID+"\" onchange=\"toggleCompetitor('"+competitorID+"',this.checked);\">\n"+
@@ -1308,28 +1308,28 @@ function displayProjectInfo(field)
         }
         
         //Add in the average row
-        competitorHTML += "<ul class=\"power-summary-row-avg\" style=\"background-color:#e6e6e6;\">\n"+
+        competitorHTML += "<ul class=\"power-summary-row-avg\" style=\"background-color:#e6e6e6;margin:0;\">\n"+
                                 "<li class=\"checkbox-outer col-lg-1\" style=\"background-color:#e6e6e6;\">\n"+
                                     "<h2><b>AVG</b></h2>\n"+
                                 "</li>\n"+
                                 "<li class=\"col-lg-2\" style=\"background-color:#e6e6e6;\">\n"+
-                                    "<h2>"+avgRank+"</h2>\n"+
+                                    "<h2 id=\"kwid-"+keywordID+"-avg-rank\">"+avgRank+"</h2>\n"+
                                 "</li>\n"+
                                 "<li class=\"power-goal-info col-lg-6\" style=\"background-color:#e6e6e6;\">\n"+
                                     "<h2>Selected Competitors</h2>\n"+
                                 "</li>\n"+
                                 "<li class=\"power-goal-info col-lg-1\" style=\"background-color:#e6e6e6;\">\n"+
-                                    "<h2>"+avgCTR+"%</h2>\n"+
+                                    "<h2 id=\"kwid-"+keywordID+"-avg-ctr\">"+avgCTR+"%</h2>\n"+
                                 "</li>\n"+
                                 "<li class=\"col-lg-2\" style=\"background-color:#e6e6e6;border-right:1px solid #e6e6e6;\">\n"+
-                                    "<h2>"+totalPowerLevel+"</h2>\n"+
+                                    "<h2 id=\"kwid-"+keywordID+"-table-total-pl\">"+totalPowerLevel+"</h2>\n"+
                                 "</li>\n"+
                             "</ul>\n";
         
         
         //Add in the user's row
         var clientCTR = 0;
-        competitorHTML += "<ul class=\"power-summary-row-you\" style=\"background-color:#e6f2ff;\">\n"+
+        competitorHTML += "<ul class=\"power-summary-row-you\" style=\"background-color:#e6f2ff;margin:0;\">\n"+
                                 "<li class=\"checkbox-outer col-lg-1\" style=\"background-color:#e6f2ff;\">\n"+
                                     "<h2><b>YOU</b></h2>\n"+
                                 "</li>\n"+
@@ -1350,7 +1350,7 @@ function displayProjectInfo(field)
         
         
         //Add in the summary row
-        competitorHTML += "<ul class=\"power-summary-row-highlight\" style=\"background-color:#005cb9;color:#fff;border-right:1px solid #005cb9;\">\n"+
+        competitorHTML += "<ul class=\"power-summary-row-highlight\" style=\"background-color:#005cb9;color:#fff;border-right:1px solid #005cb9;margin:0;\">\n"+
                                 "<li class=\"checkbox-outer col-lg-10\" style=\"background-color:#005cb9;border-right:1px solid #005cb9;\">\n"+
                                     "<h2 style=\"color:#fff;\"><b>YOUR POWER LEVEL GOAL</b>&nbsp;Competitor average score - Your score =</h2>\n"+
                                 "</li>\n"+
@@ -1414,12 +1414,12 @@ function displayProjectInfo(field)
                                             "<div class=\"col-lg-3 goal-img\"><img src=\"images/goal-img.png\" alt=\"\"></div>\n"+
                                             "<div class=\"goal-details col-lg-9\">\n"+
                                                 "<h1 style=\"margin-bottom:15px;\">Your Power Level Goal</h1>\n"+
-                                                "<span id=\"kwid-"+keywordID+"-their-pl\" class=\"their-power-level-box\">"+competitorPowerLevel+"</span>\n"+
+                                                "<span id=\"kwid-"+keywordID+"-their-pl\" class=\"their-power-level-box\">"+totalPowerLevel+"</span>\n"+
                                                 "<span id=\"kwid-"+keywordID+"-your-pl\" class=\"your-power-level-box\">"+clientPowerLevel+"</span>\n"+
                                                 "<span id=\"kwid-"+keywordID+"-plg-3\" class=\"net-power-level-box\">"+powerLevelGoal+"</span>\n"+
                                             "</div>\n"+
                                             "<div class=\"goal-details col-lg-12\">\n"+
-                                                "<h3>To match the marketing aggression of your competitors for this keyword you need to increase your power level by <span id=\"kwid-"+keywordID+"-plg-4\" style=\"color:#005cb9;\">+3</span></h3>\n"+
+                                                "<h3>To match the marketing aggression of your competitors for this keyword you need to increase your power level by <span id=\"kwid-"+keywordID+"-plg-4\" style=\"color:#005cb9;\">+"+powerLevelGoal+"</span></h3>\n"+
                                                 "<p>This number is derived from both domain and page authority scores and is best used as a guide to determine your SEO marketing agression. For example if your Power Level Goal = 3, then you may consider creating 3 pieces of content per month (or build 3 backlinks per month).</p>\n"+
                                             "</div>"+
                                             "<div class=\"goal-details col-lg-12\" style=\"margin-top:50px;vertical-align:middle;\">\n"+
@@ -1663,6 +1663,7 @@ function refreshProjectInfo()
         var searchVolume = thisEntry.searchVolume;
         var keywordActive = thisEntry.active;
         var avgCTR = thisEntry.avgCTR;
+        var avgRank = thisEntry.avgRank;
         var totalPowerLevel = thisEntry.totalPowerLevel;     //Add back the client power level to the total power level for this keyword
         var keyword = thisEntry.keyword;
         
@@ -1682,7 +1683,14 @@ function refreshProjectInfo()
         $('#kwid-'+keywordID+'-cost-per-month').html("<h2>"+currencyHexCode+numberWithCommas(costPerMonth)+"</h2>");
         $('#kwid-'+keywordID+'-kw-net-worth').html("<h2 class=\"\">$"+numberWithCommas(keywordNetWorth)+"</h2>");
         $('#kwid-'+keywordID+'-plg-2').html(powerLevelGoal);
+        $('#kwid-'+keywordID+'-plg-3').html(powerLevelGoal);
+        $('#kwid-'+keywordID+'-plg-4').html("+"+powerLevelGoal);
         $('#kwid-'+keywordID+'-total-power-summary').html(totalPowerLevel);
+        $('#kwid-'+keywordID+'-avg-rank').html(avgRank);
+        $('#kwid-'+keywordID+'-avg-ctr').html(Math.round(avgCTR));
+        $('#kwid-'+keywordID+'-table-total-pl').html(totalPowerLevel);
+        $('#kwid-'+keywordID+'-their-pl').html(totalPowerLevel);
+        $('#kwid-'+keywordID+'-your-pl').html(clientPowerLevel);
     }
 }
 

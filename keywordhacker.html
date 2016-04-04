@@ -704,6 +704,9 @@
 
                 if (jQuery(this).children('div[aria-expanded="true"]').length != 0) {
                     jQuery(this).addClass('active');
+                    jQuery(this).find(".keyword-row-arrow").attr('src',function(i,e){
+                        return e.replace("keyword_row_arrow_white.png","keyword_row_arrow_yellow.png");
+                    });
                 }
             });
 
@@ -724,6 +727,9 @@
             jQuery('.phraser-accordion-outer .keyword-phraser-row').each(function (i) {
                 if (jQuery(this).children('div[aria-expanded="false"]').length != 0) {
                     jQuery(this).removeClass('active');
+                    jQuery(this).find(".keyword-row-arrow").attr('src',function(i,e){
+                        return e.replace("keyword_row_arrow_yellow.png","keyword_row_arrow_white.png");
+                    });
                 }
             });
 //		jQuery('.phraser-accordion-outer .keyword-phraser-row').removeClass('active');

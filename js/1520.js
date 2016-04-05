@@ -943,6 +943,8 @@ function displayProjectInfo(field)
         var monthlyVisitors = projectInfo.monthlyVisitors;
         var payingCustomers = projectInfo.payingCustomers;
         var currencyHexCode = projectInfo.currencyHexCode;
+        var useGoogle = projectInfo.useGoogle;
+        var useBing = projectInfo.useBing;
         
         var monthlyCustomers = Math.round(incomingTraffic * (payingCustomers / monthlyVisitors),0);
         var monthlySales = Math.round(monthlyCustomers * valuePerCustomer,0);
@@ -981,6 +983,19 @@ function displayProjectInfo(field)
         $('#currency-code-1').html(currencyHexCode);
         $('#currency-code-2').html(currencyHexCode);
         $('#currency-code-3').html(currencyHexCode);
+        
+        if(useGoogle == 1 && useBing != 1)
+        {
+            $("#search-engine-icons").html("<i class=\"keyword-item-icon rh-google-icon\" style=\"margin-left:-5px;\"></i>");
+        }
+        else if(useGoogle != 1 && useBing == 1)
+        {
+            $("#search-engine-icons").html("<img src=\"images/bing_icon.png\" class=\"icon-sized\"><img src=\"images/yahoo_icon.png\" class=\"icon-sized\">");
+        }
+        else
+        {
+            $("#search-engine-icons").html("<i class=\"keyword-item-icon rh-google-icon\" style=\"margin-left:-5px;\"></i><img src=\"images/bing_icon.png\" class=\"icon-sized\"><img src=\"images/yahoo_icon.png\" class=\"icon-sized\">");
+        }
         
         $('#projectTitle').html(clientURL+"<span><a style=\"cursor:pointer;margin-left:7px;\" class=\"edit-icon\" title=\"Edit Project\" onclick=\"displayProjectEditWindow('"+projectID+"');\"></a><a style=\"cursor:pointer;margin-left:7px;margin-top:3px;color:rgba(61,61,61,.25);\" title=\"Download\" class=\"download-icon\" onclick=\"saveTextAsFile();\"></a></span>");
         $('#numKeywords').html(keywordCount);
@@ -1270,7 +1285,7 @@ function displayProjectInfo(field)
             var competitorActive = thisCompetitor.active;
             var competitorPositionRank = thisCompetitor.positionRank;
             var competitorURL = thisCompetitor.url;
-                var competitorURLShort = competitorURL.substring(0,45)+"...";
+                var competitorURLShort = competitorURL.substring(0,65)+"...";
             var competitorCTR = Math.round(thisCompetitor.traffic);
             //var competitorPowerLevel = Math.round((thisCompetitor.DA+thisCompetitor.PA)/2/10);
             var competitorPowerLevel = thisCompetitor.powerLevel;

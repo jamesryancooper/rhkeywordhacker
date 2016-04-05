@@ -964,6 +964,10 @@ width: 100%;}
 
 .rh-google-icon {background-image:url("../images/rh-google-icon.png");}
 
+.rh-bing-icon {background-image:url("../images/bing_icon.png");}
+
+.rh-yahoo-icon {background-image:url("../images/yahoo_icon.png");}
+
 .rh-search-vol-icon{background-image:url("../images/rh-search-vol-icon.png");}
 
 .rh-mo-visitor-icon {background-image:url("../images/rh-mo-visitor-icon.png");}
@@ -1617,3 +1621,10 @@ width: 100%;}
 
 .get-the-hack-statement {text-align:left; float:left; font-size:20px; color:#005cb9; font-weight:bold;}
 .get-the-hack-button {border:1px solid #088D0C;margin-left:15px; padding:10px; color:#088D0C;font-size:20px; cursor:pointer;}
+
+.icon-sized {
+    height:33px;
+    width:auto;
+    float:left;
+    clear:right;
+}

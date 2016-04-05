@@ -1609,7 +1609,11 @@ width: 100%;}
 
 .their-power-level-box {background-image: url("../images/left_calc_box.png");background-repeat: no-repeat;cursor: default;display: inline-block;font-weight: bold;height: 89px;width:121px;left: 0;margin-left: 0;position: relative;top: 0;font-size:60px;color:#808080;padding-top:3px;padding-left:30px;}
 .your-power-level-box {background-image: url("../images/middle_calc_box.png");background-repeat: no-repeat;cursor: default;display: inline-block;font-weight: bold;height: 89px;width:121px;left: 0;margin-left: -5px;position: relative;top: 0;font-size:60px;color:#808080;padding-top:3px;padding-left:18px;}
-.net-power-level-box {background-image: url("../images/right_calc_box.png");background-repeat: no-repeat;cursor: default;display: inline-block;font-weight: bold;height: 89px;width:121px;left: 0;margin-left: -20px;position: relative;top: 0;font-size:60px;color:#005cb9;padding-top:3px;padding-left:18px;}
+.net-power-level-box {background-image: url("../images/right_calc_box.png");background-repeat: no-repeat;cursor: default;display: inline-block;font-weight: bold;height: 89px;width:121px;left: 0;margin-left: -22px;position: relative;top: 0;font-size:60px;color:#005cb9;padding-top:3px;padding-left:18px;}
+
+.their-power-level-label {display: inline-block;font-weight: normal;width:121px;left: 0;margin-left: 0;position: relative;top: 0;font-size:9px;color:#000;padding-top:3px;padding-left:5px;}
+.your-power-level-label {display: inline-block;font-weight: normal;width:121px;left: 0;margin-left: -6px;position: relative;top: 0;font-size:9px;color:#000;padding-top:3px;padding-left:0;}
+.net-power-level-label {display: inline-block;font-weight: normal;width:121px;left: 0;margin-left: -20px;position: relative;top: 0;font-size:9px;color:#000;padding-top:3px;padding-left:8px;}
 
 .get-the-hack-statement {text-align:left; float:left; font-size:20px; color:#005cb9; font-weight:bold;}
 .get-the-hack-button {border:1px solid #088D0C;margin-left:15px; padding:10px; color:#088D0C;font-size:20px; cursor:pointer;}

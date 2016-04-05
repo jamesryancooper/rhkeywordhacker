@@ -1417,6 +1417,12 @@ function displayProjectInfo(field)
                                                 "<span id=\"kwid-"+keywordID+"-your-pl\" class=\"your-power-level-box\">"+clientPowerLevel+"</span>\n"+
                                                 "<span id=\"kwid-"+keywordID+"-plg-3\" class=\"net-power-level-box\">"+powerLevelGoal+"</span>\n"+
                                             "</div>\n"+
+                                            "<div class=\"col-lg-3 goal-img\"></div>\n"+
+                                            "<div class=\"goal-details col-lg-9\">\n"+
+                                                "<span class=\"their-power-level-label\">Their Power Level</span>\n"+
+                                                "<span class=\"your-power-level-label\">Your Power Level</span>\n"+
+                                                "<span class=\"net-power-level-label\">Your Goal</span>\n"+
+                                            "</div>\n"+
                                             "<div class=\"goal-details col-lg-12\">\n"+
                                                 "<h3>To match the marketing aggression of your competitors for this keyword you need to increase your power level by <span id=\"kwid-"+keywordID+"-plg-4\" style=\"color:#005cb9;\">+"+powerLevelGoal+"</span></h3>\n"+
                                                 "<p>This number is derived from both domain and page authority scores and is best used as a guide to determine your SEO marketing agression. For example if your Power Level Goal = 3, then you may consider creating 3 pieces of content per month (or build 3 backlinks per month).</p>\n"+

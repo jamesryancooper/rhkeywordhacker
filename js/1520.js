@@ -544,7 +544,7 @@ function displayDashboardCards(sortMethod,flip)
             chHTML += "<div class=\"module-detail-section\">";
             chHTML += "<div class=\"row\">";
             chHTML += "<div class=\"col-lg-12 module-details-outer\">";
-            chHTML += "<h2 class=\"activate-link\" onclick=\"gotoRHCreateReport();\">[ Activate Content Hacker Module ]</h2>";
+            chHTML += "<h2 class=\"activate-link\" onclick=\"gotoRHCreateProject();\">[ Activate Content Hacker Module ]</h2>";
             chHTML += "</div>";
             chHTML += "</div>";
             chHTML += "</div>";

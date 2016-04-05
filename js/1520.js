@@ -1285,7 +1285,7 @@ function displayProjectInfo(field)
             var competitorActive = thisCompetitor.active;
             var competitorPositionRank = thisCompetitor.positionRank;
             var competitorURL = thisCompetitor.url;
-                var competitorURLShort = competitorURL.substring(0,65)+"...";
+                var competitorURLShort = competitorURL.substring(0,45)+"...";
             var competitorCTR = Math.round(thisCompetitor.traffic);
             //var competitorPowerLevel = Math.round((thisCompetitor.DA+thisCompetitor.PA)/2/10);
             var competitorPowerLevel = thisCompetitor.powerLevel;
@@ -1311,7 +1311,7 @@ function displayProjectInfo(field)
                                     "<h2>"+competitorPositionRank+"</h2>\n"+
                                 "</li>\n"+
                                 "<li class=\"power-goal-info col-lg-6\">\n"+
-                                    "<h2 title=\""+competitorURL+"\">"+competitorURLShort+"</h2>\n"+
+                                    "<h2 title=\""+competitorURL+"\">"+competitorURLShort+"<a title=\"Copy full URL to clipboard\" class=\"copy-button\" data-clipboard-action=\"copy\" data-clipboard-text=\""+competitorURL+"\"><i class=\"fa fa-copy\" style=\"padding-left:5px;color:gray;cursor:pointer;\"></i></a></h2>\n"+
                                 "</li>\n"+
                                 "<li class=\"power-goal-info col-lg-1\">\n"+
                                     "<h2>"+competitorCTR+"%</h2>\n"+

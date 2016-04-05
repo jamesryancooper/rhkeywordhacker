@@ -516,7 +516,7 @@ function displayDashboardCards(sortMethod,flip)
         
         if(chActive == 1)
         {
-            chHTML += "<a style=\"cursor:default;\" class=\"module-link content-hacker-module\" onclick=\"gotoRHStorefront();\">";
+            chHTML += "<a style=\"cursor:pointer;\" class=\"module-link content-hacker-module\" onclick=\"gotoRHStorefront();\">";
             chHTML += "<img src=\"images/card_down_arrow.png\" class=\"module-card-arrow\">";
             chHTML += "<h2 class=\"module-heading text-left\">Content Hacker Module</h2>";
             chHTML += "<div class=\"module-detail-section\">";
@@ -575,7 +575,7 @@ function displayDashboardCards(sortMethod,flip)
     }
 
     var addMoreHTML = "<li class=\"col-lg-4 matchheight\">" +
-                        "<div class=\"active-link-outer\"><span class=\"active-new-project-link\" style=\"padding-top:210px;\"> <a style=\"cursor:pointer;\" onclick=\"gotoCreateProject();\">[ Activate New Project ]</a> </span></div>" +
+                        "<div class=\"active-link-outer\"><span class=\"active-new-project-link\" style=\"padding-top:210px;\"> <a style=\"cursor:pointer;\" onclick=\"showActivate();\">[ Activate New Project ]</a> </span></div>" +
                         "</li>";
 
     finalOutput = "<ul class=\"row grid\">"+addMoreHTML+cardHTML+"</ul>";
@@ -2277,12 +2277,18 @@ function prefill()
 
 function gotoRHStorefront()
 {
-    window.location = rhURL+"dashboard.html";
+    var username = getCookie("username");
+    var fullname = getCookie("userFullName");
+    var destination = "dashboard";
+    window.location = rhURL+"auto_auth.html?username="+username+"&fullname="+fullname+"&destination="+destination;
 }
 
 function gotoRHCreateProject()
 {
-    window.location = rhURL+"create-report.html";
+    var username = getCookie("username");
+    var fullname = getCookie("userFullName");
+    var destination = "create-report";
+    window.location = rhURL+"auto_auth.html?username="+username+"&fullname="+fullname+"&destination="+destination;
 }
 
 function gotoKHDashboard()
@@ -2572,4 +2578,22 @@ function saveTextAsFileFromDashboard(projectID)
         }
     });
     
+}
+
+function hideActivate()
+{
+    document.getElementById("dimmer").style.display = "none";
+    document.getElementById("activate-new-window").style.display = "none";
+}
+
+function showActivate()
+{
+    document.getElementById("activate-new-window").style.display = "block";
+    document.getElementById("dimmer").style.display = "block";
+}
+
+function hideShow(hide,show)
+{
+    document.getElementById(hide).style.display = "none";
+    document.getElementById(show).style.display = "block";
 }

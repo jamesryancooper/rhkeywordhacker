@@ -300,7 +300,28 @@
     
 </div>
     
+
+<div id="activate-new-window" class="activate-new-window">
+    <div class="activate-heading">
+        <div class="col-lg-10"><h2>Select project type to activate</h2></div>
+        <div class="col-lg-2"><i class="fa fa-times close-activate" onclick="hideActivate();"></i></div>
+    </div>
     
+    <div class="activate-logo-container">
+        <div class="col-lg-6"><img src="images/keyword_logo_gray.png" id="kh_logo" class="large-shield-left" onclick="gotoCreateProject();"></div>
+        <div class="col-lg-6"><img src="images/content_logo_gray.png" id="ch_logo" class="large-shield-right" onclick="gotoRHCreateProject();"></div>
+    </div>
+    <div class="activate-logo-container">
+        <div class="col-lg-6"></div>
+        <div class="col-lg-6"></div>
+    </div>
+    <div class="activate-logo-container">
+        <div class="col-lg-6"><h3 class="shield-label">KEYWORD<br/>HACKER</h3><br/><p class="shield-description">Define phrases and identify net worth.</p></div>
+        <div class="col-lg-6"><h3 class="shield-label">CONTENT<br/>HACKER</h3><br/><p class="shield-description">Declassify and compare competitor strategy.</p></div>
+    </div>
+</div>
+
+
 </section>
 
 
@@ -361,6 +382,18 @@
 <script>
 
     jQuery(document).ready(function () {
+
+        $('#kh_logo').hover(function() {
+            $(this).attr('src', 'images/keyword_logo_blue.png');
+          }, function() {
+            $(this).attr('src', 'images/keyword_logo_gray.png');
+          });
+
+        $('#ch_logo').hover(function() {
+            $(this).attr('src', 'images/content_logo_blue.png');
+          }, function() {
+            $(this).attr('src', 'images/content_logo_gray.png');
+          });
 
         //isotope custom js
         var $grid = $('.grid').isotope({

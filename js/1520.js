@@ -335,7 +335,7 @@ function loadProjectDashboard(flip)
                     }
                     
                     //Set the welcome message
-                    $('#dashboard-user-full-name').html("welcome <strong>agent "+userLastName+"</strong> <strong>[</strong> manage your missions below <strong>]</strong>");
+                    $('#dashboard-user-full-name').html("welcome <strong>AGENT "+userLastName.toUpperCase()+"</strong> <strong>[</strong> manage your missions below <strong>]</strong>");
                     
                     //Populate the cards based on a default sort of create date
                     displayDashboardCards(sortMethod,flip);
@@ -574,8 +574,10 @@ function displayDashboardCards(sortMethod,flip)
         }
     }
 
-    var addMoreHTML = "<li class=\"col-lg-4 matchheight\">" +
-                        "<div class=\"active-link-outer\"><span class=\"active-new-project-link\" style=\"padding-top:210px;\"> <a style=\"cursor:pointer;\" onclick=\"showActivate();\">[ Activate New Project ]</a> </span></div>" +
+    var addMoreHTML = "<li class=\"col-lg-4 matchheight element-item\">" +
+                      "<div class=\"project-cart-box box-shadow-ot\">"+
+                        "<div class=\"active-link-outer\"><span class=\"active-new-project-link\" style=\"padding-top:210px;padding-bottom:227px;\"> <a style=\"cursor:pointer;\" onclick=\"showActivate();\">[ Activate New Project ]</a> </span></div>" +
+                      "</div>"
                         "</li>";
 
     finalOutput = "<ul class=\"row grid\">"+addMoreHTML+cardHTML+"</ul>";
@@ -645,13 +647,17 @@ function addKeyword(e)
 
         if(keyword.trim() !== '')
         {
-            var existingKeywords = $('#ctc').html();
-            var newKeywordCount = parseInt(currentKeywordCount)+1;
-            var newKeywords = existingKeywords + "<li id=\"keyword"+newKeywordCount+"\">"+keyword+"<span style=\"padding:5px;color:#ec1c24;font-weight:bold;cursor:pointer;\" id=\"remove-keyword"+newKeywordCount+"\" title=\"Remove\" onclick=\"removeKeyword(this);\">X</span></li>";
-            $('#ctc').html(newKeywords);
-            
-            $('#new-keyword').val('');
-            $('#keyword-count').val(newKeywordCount);
+            var kwArray = keyword.split(",");
+            for(var j=0; j<kwArray.length; j++)
+            {
+                var existingKeywords = $('#ctc').html();
+                var newKeywordCount = parseInt(currentKeywordCount)+kwArray.length;
+                var newKeywords = existingKeywords + "<li id=\"keyword"+newKeywordCount+"\">"+kwArray[j].trim()+"<span style=\"padding:5px;color:#ec1c24;font-weight:bold;cursor:pointer;\" id=\"remove-keyword"+newKeywordCount+"\" title=\"Remove\" onclick=\"removeKeyword(this);\">X</span></li>";
+                $('#ctc').html(newKeywords);
+
+                $('#new-keyword').val('');
+                $('#keyword-count').val(newKeywordCount);
+            }
         }
     }
 }
@@ -2110,7 +2116,7 @@ function addKeywordInReport(keyword)
         for(var i=0; i<kwArray.length; i++)
         {
             var existingKeywords = $('#ctc').html();
-            var newKeywordCount = parseInt(currentKeywordCount)+1;
+            var newKeywordCount = parseInt(currentKeywordCount)+kwArray.length;
             var newKeywords = existingKeywords + "<li id=\"keyword"+newKeywordCount+"\">"+kwArray[i].trim()+"<span style=\"padding:5px;color:#ec1c24;font-weight:bold;cursor:pointer;\" id=\"remove-keyword"+newKeywordCount+"\" title=\"Remove\" onclick=\"removeKeywordInReport(this);\">X</span></li>";
             $('#ctc').html(newKeywords);
 

@@ -457,8 +457,10 @@ cursor:pointer;
 }
 
 .large-shield-left {
-    height:225px;
-    width:auto;
+    //height:225px;
+    //width:auto;
+    height: auto;
+    width: -moz-calc(100% - 45px);width: -webkit-calc(100% - 45px);width: -o-calc(100% - 45px);width: calc(100% - 45px);
     float:left;
     border:0;
     cursor:pointer;
@@ -466,8 +468,10 @@ cursor:pointer;
 }
 
 .large-shield-right {
-    height:225px;
-    width:auto;
+    //height:225px;
+    //width:auto;
+    height: auto;
+    width: -moz-calc(100% - 45px);width: -webkit-calc(100% - 45px);width: -o-calc(100% - 45px);width: calc(100% - 45px);
     float:right;
     border:0;
     cursor:pointer;

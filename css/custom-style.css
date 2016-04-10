@@ -383,7 +383,9 @@ TWO TONE SPINNER
 
 #header #report-bg {height: 100vh;position: fixed;top: 0;left: 0;z-index: 3;background: #ededef url("../images/background-image2.png") no-repeat fixed center 100px !important;opacity:1;}
 
-.rt-bottom-section h2 {color: #b0b0b0;float: left;font-size: 3.5em;font-weight: normal;margin: 0;padding: 0;text-align: left;text-transform: none;width: 100%;}
+.rt-bottom-section h2 {color: #b0b0b0;float: left;font-size: 3.5em;font-weight: normal;margin: 0;padding: 0;text-align: center;text-transform: none;width: 100%;}
+
+.rt-bottom-section h3 { color: #b0b0b0; }
 
 .rt-bottom-section {display: table;margin:0 auto !important;max-width: 1200px;width: 100%;}
 
@@ -391,7 +393,23 @@ TWO TONE SPINNER
 
 .rt-bottom-section h2 span {background-color: #a2bfdc;color: #fff;font-size: 1em;font-weight: 400;line-height: normal;margin: 0 10px;padding: 0 15px 4px;text-transform: uppercase !important;}
 
-.rt-bottom-section p {color: #b0b0b0;float: left;font-size: 26px;font-weight: 400;line-height: normal;margin: 25px 0 0;padding: 0;text-align: left;width: 100%;}
+.rt-bottom-section > div {
+  margin-bottom: 60px;
+  margin-top: 60px;
+}
+
+.rt-bottom-section p {
+  color: #b0b0b0;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+  width: 600px;
+}
+
+//.rt-bottom-section p {color: #b0b0b0;float: left;font-size: 26px;font-weight: 400;line-height: normal;margin: 25px 0 0;padding: 0;text-align: left;width: 100%;}
 
 .egle-icon-2 {background-image: url("../images/egle-icon-2.png");background-repeat: no-repeat;display: inline-block;float: left;height: 108px;margin-right: 4%;margin-top: -15px;width: 122px;}
 
@@ -901,7 +919,7 @@ border-color:#26A9E0;
 
 .welcome-text {color: #818d94;float: left;font-family: "Montserrat",sans-serif !important;font-size: 16px;font-weight: 400;line-height: normal;margin: 0 0 10px;padding: 0;text-transform: uppercase !important;width: 100%;}
 
-.page-info {color: #231f20;float: left;font-family: "Montserrat",sans-serif !important;font-size: 28px;font-weight: normal;line-height: normal;margin: 0;text-align: left;text-transform: none;}
+.page-info {color: #231f20;float: left;font-family: "Montserrat",sans-serif !important;font-size: 42px;font-weight: normal;line-height: normal;margin: 0;text-align: left;text-transform: none;}
 
 .rh-actions-menu, .view-option-outer {padding:1.5em 0 0;}
 
@@ -1086,7 +1104,7 @@ width: 100%;}
 //.blueprint-links {color: #246eb4 !important;font-size: 12px;}
 .blueprint-links {color: #088D0C !important;font-size: 12px;}
 
-.blueprint-links:hover {color: #246eb4;text-decoration:underline !important;}
+.blueprint-links:hover {color: #246eb4;text-decoration:underline !important;cursor:pointer;}
 
 .rh-view-icon {background-image: url("../images/rh-view-icon.png");background-repeat: no-repeat;background-size: 100% auto;display: inline-block;font-weight: normal;height: 15px;left: 26px;margin-left: 0;position: relative;top: 4px;width: 25px;}
 
@@ -1636,3 +1654,10 @@ width: 100%;}
     float:left;
     clear:right;
 }
+
+//.info-link {color:#000;background-repeat: no-repeat;background-size: 100% auto;display: inline-block;height: 15px;left: 5px;margin-left: 0;position: relative;top: 4px;width: 15px; font-weight:normal;}
+.info-link, .info-link:hover {color:#000;}
+
+.info-link:hover:after {color:#fff;background: rgba(0, 0, 0, 0.8) none repeat scroll 0 0;border-radius: 5px;content: attr(title);font-size: 11px;left: -134px;margin: 0 auto;padding: 5px 15px;position: absolute;right: auto;width: 300px;z-index: 98;bottom: -moz-calc(100% + 10px);bottom: -webkit-calc(100% + 10px);bottom: -o-calc(100% + 10px);bottom: calc(100% + 10px); font-weight:normal;}
+
+.info-link:hover:before {bottom:5px;left: 50%;border: solid transparent;content: " ";height: 0;width: 0;position: absolute;pointer-events: none;border-color: rgba(136, 183, 213, 0);border-top-color: rgba(0, 0, 0, 0.8);border-width: 10px;margin-left: -10px; font-weight:normal;}

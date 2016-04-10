@@ -1243,7 +1243,7 @@ function displayProjectInfo(field)
                                 "</li>\n"+
                                 "<li class=\"spacer-info\"><img src=\"images/keyword_row_arrow_white.png\" class=\"keyword-row-arrow\"></li>\n"+
                                 "<li class=\"keyword-net-worth-info width-10\">\n"+
-                                    "<h2><a class=\"blueprint-links\">GET THE HACK</a></h2>\n"+
+                                    "<h2><a class=\"blueprint-links\" onclick=\"gotoRHCreateProject();\">GET THE HACK</a></h2>\n"+
                                 "</li>\n"+
                                 "<li class=\"content-blueprint-info width-2-5\">\n"+
                                     "<h2><span class=\"delete-icon\" title=\"Delete Keyword\" onclick=\"displayKeywordDeleteWindow('"+keywordID+"');\"></span></h2>\n"+
@@ -1291,12 +1291,13 @@ function displayProjectInfo(field)
             var competitorActive = thisCompetitor.active;
             var competitorPositionRank = thisCompetitor.positionRank;
             var competitorURL = thisCompetitor.url;
-                var competitorURLShort = competitorURL.substring(0,45)+"...";
+                var competitorURLShort = competitorURL.substring(0,40);
+                if(competitorURL.length > 40) { competitorURLShort += "..."; }
             var competitorCTR = Math.round(thisCompetitor.traffic);
             //var competitorPowerLevel = Math.round((thisCompetitor.DA+thisCompetitor.PA)/2/10);
             var competitorPowerLevel = thisCompetitor.powerLevel;
             
-            if(competitorPowerLevel > 9)
+            if(competitorPowerLevel > 9 && competitorActive == 1)
             {
                 showWarning = true;
             }
@@ -1416,13 +1417,13 @@ function displayProjectInfo(field)
                             
             if(showWarning)
             {
-                plgHTML += "<div class=\"warrining-message\">\n"+
+                plgHTML += "<div class=\"warrining-message\" id=\"warning-message-head-"+keywordID+"\">\n"+
                                         "<div class=\"col-lg-2 warrining-icon\"><img src=\"images/warning-sign-white.png\" alt=\"\"></div>\n"+
                                         "<div class=\"col-lg-10\" style=\"margin:0;\">\n"+
                                             "<h2>You have some tricky competitors</h2>\n"+
                                         "</div>\n"+
                                     "</div>\n";
-                plgHTML += "<div class=\"row\">\n"+
+                plgHTML += "<div class=\"row\" id=\"warning-message-body-"+keywordID+"\">\n"+
                                         "<div class=\"col-lg-1\"></div>\n"+
                                         "<div class=\"col-lg-11\" style=\"padding:10px;\">\n"+
                                             "&middot;&nbsp;You may want to uncheck competitor urls whose power level exceedes 9</li>\n"+
@@ -1449,7 +1450,7 @@ function displayProjectInfo(field)
                                                 "<p>This number is derived from both domain and page authority scores and is best used as a guide to determine your SEO marketing agression. For example if your Power Level Goal = 3, then you may consider creating 3 pieces of content per month (or build 3 backlinks per month).</p>\n"+
                                             "</div>"+
                                             "<div class=\"goal-details col-lg-12\" style=\"margin-top:50px;vertical-align:middle;\">\n"+
-                                                "<span class=\"get-the-hack-statement\">Create a content blueprint for this phrase.</span><span class=\"get-the-hack-button\">GET THE HACK</span>\n"+
+                                                "<span class=\"get-the-hack-statement\">Create a content blueprint for this phrase.</span><span class=\"get-the-hack-button\" onclick=\"gotoRHCreateProject();\">GET THE HACK</span>\n"+
                                             "</div>"+
                                         "</div>"+
                                     "</div>\n";
@@ -1684,6 +1685,31 @@ function refreshProjectInfo()
     {
         var thisEntry = keywordInfo[i];
         var thisCompetitorArray = thisEntry.competitorData;
+        var keywordID = thisEntry.keywordID;
+        
+        //Cycle through and see if any competitors have PLG of 10; if so, show the warning, else hide it.
+        var showWarning = false;
+        for(var j=0; j<thisCompetitorArray.length; j++)
+        {
+            var thisCompetitor = thisCompetitorArray[j];
+            var competitorPowerLevel = thisCompetitor.powerLevel;
+            var competitorActive = thisCompetitor.active;
+            if(competitorPowerLevel > 9 && competitorActive == 1)
+            {
+                showWarning = true;
+            }
+        }
+        if(showWarning)
+        {
+            $("#warning-message-head-"+keywordID).show();
+            $("#warning-message-body-"+keywordID).show();
+        }
+        else
+        {
+            $("#warning-message-head-"+keywordID).hide();
+            $("#warning-message-body-"+keywordID).hide();
+        }
+        
         
         var keywordID = thisEntry.keywordID;
         var searchVolume = thisEntry.searchVolume;
@@ -2083,15 +2109,15 @@ function getShowLinkText(currentText) {
 function toggleReadMore()
 {
     var content = $('#show-more-text').html();
-    if(content.includes("SHOW MORE KEYWORDS"))
+    if(content.includes("SHOW MORE"))
     {
-        $('#show-more-text').html("SHOW FEWER KEYWORDS");
+        $('#show-more-text').html("SHOW FEWER");
         $('#read-more-button-label').removeClass("read-more-trigger");
         $('#read-more-button-label').addClass("read-less-trigger");
     }
     else
     {
-        $('#show-more-text').html("SHOW MORE KEYWORDS");
+        $('#show-more-text').html("SHOW MORE");
         $('#read-more-button-label').removeClass("read-less-trigger");
         $('#read-more-button-label').addClass("read-more-trigger");
     }

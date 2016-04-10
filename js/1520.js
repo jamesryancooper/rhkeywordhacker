@@ -926,6 +926,7 @@ function displayProjectInfo(field)
 {
     $('body').addClass('wait');
     var returnData = $('#json').val();
+    console.log(returnData);
     var info = JSON.parse(returnData);
     
     //Fill in the project data here
@@ -1282,6 +1283,10 @@ function displayProjectInfo(field)
         var showWarning = false;
         
         //competitorHTML += "<ul class=\"power-summary-row-hidden\" id=\"competitorsList\">";
+        var competitorsCount = 0;
+        var totalCTR = 0;
+        var totalPowerLevel = 0;
+        var totalRank = 0;
         competitorHTML += "<div id=\"competitorsList\">\n";
         for(var j=0; j<thisCompetitorArray.length; j++)
         {
@@ -1305,6 +1310,10 @@ function displayProjectInfo(field)
             if(competitorActive == 1)
             {
                 competitorCheckboxStatus = "checked";
+                competitorsCount++;
+                totalCTR += competitorCTR;
+                totalPowerLevel += competitorPowerLevel;
+                totalRank += competitorPositionRank;
             }
             
             competitorHTML += "<ul class=\"power-summary-row\" style=\"margin:0;\">\n"+
@@ -1335,16 +1344,16 @@ function displayProjectInfo(field)
                                     "<h2><b>AVG</b></h2>\n"+
                                 "</li>\n"+
                                 "<li class=\"col-lg-2\" style=\"background-color:#e6e6e6;\">\n"+
-                                    "<h2 id=\"kwid-"+keywordID+"-avg-rank\">"+avgRank+"</h2>\n"+
+                                    "<h2 id=\"kwid-"+keywordID+"-avg-rank\">"+Math.round(totalRank/competitorsCount)+"</h2>\n"+
                                 "</li>\n"+
                                 "<li class=\"power-goal-info col-lg-6\" style=\"background-color:#e6e6e6;\">\n"+
                                     "<h2>Selected Competitors</h2>\n"+
                                 "</li>\n"+
                                 "<li class=\"power-goal-info col-lg-1\" style=\"background-color:#e6e6e6;\">\n"+
-                                    "<h2 id=\"kwid-"+keywordID+"-avg-ctr\">"+avgCTR+"%</h2>\n"+
+                                    "<h2 id=\"kwid-"+keywordID+"-avg-ctr\">"+Math.round(totalCTR/competitorsCount)+"%</h2>\n"+
                                 "</li>\n"+
                                 "<li class=\"col-lg-2\" style=\"background-color:#e6e6e6;border-right:1px solid #e6e6e6;\">\n"+
-                                    "<h2 id=\"kwid-"+keywordID+"-table-total-pl\">"+totalPowerLevel+"</h2>\n"+
+                                    "<h2 id=\"kwid-"+keywordID+"-table-total-pl\">"+Math.round(totalPowerLevel/competitorsCount)+"</h2>\n"+
                                 "</li>\n"+
                             "</ul>\n";
         
@@ -1688,17 +1697,34 @@ function refreshProjectInfo()
         var keywordID = thisEntry.keywordID;
         
         //Cycle through and see if any competitors have PLG of 10; if so, show the warning, else hide it.
+        var competitorsCount = 0;
+        var totalCTR = 0;
+        var totalPowerLevel = 0;
+        var totalRank = 0;
         var showWarning = false;
         for(var j=0; j<thisCompetitorArray.length; j++)
         {
             var thisCompetitor = thisCompetitorArray[j];
             var competitorPowerLevel = thisCompetitor.powerLevel;
             var competitorActive = thisCompetitor.active;
+            var competitorCTR = Math.round(thisCompetitor.traffic);
+            var competitorPowerLevel = thisCompetitor.powerLevel;
+            var competitorPositionRank = thisCompetitor.positionRank;
+
             if(competitorPowerLevel > 9 && competitorActive == 1)
             {
                 showWarning = true;
             }
+            
+            if(competitorActive == 1)
+            {
+                competitorsCount++;
+                totalCTR += competitorCTR;
+                totalPowerLevel += competitorPowerLevel;
+                totalRank += competitorPositionRank;
+            }
         }
+        
         if(showWarning)
         {
             $("#warning-message-head-"+keywordID).show();
@@ -1738,9 +1764,9 @@ function refreshProjectInfo()
         $('#kwid-'+keywordID+'-plg-3').html(powerLevelGoal);
         $('#kwid-'+keywordID+'-plg-4').html("+"+powerLevelGoal);
         $('#kwid-'+keywordID+'-total-power-summary').html(totalPowerLevel);
-        $('#kwid-'+keywordID+'-avg-rank').html(avgRank);
-        $('#kwid-'+keywordID+'-avg-ctr').html(Math.round(avgCTR));
-        $('#kwid-'+keywordID+'-table-total-pl').html(totalPowerLevel);
+        $('#kwid-'+keywordID+'-avg-rank').html(Math.round(totalRank/competitorsCount));
+        $('#kwid-'+keywordID+'-avg-ctr').html(Math.round(totalCTR/competitorsCount)+"%");
+        $('#kwid-'+keywordID+'-table-total-pl').html(Math.round(totalPowerLevel/competitorsCount));
         $('#kwid-'+keywordID+'-their-pl').html(totalPowerLevel);
         $('#kwid-'+keywordID+'-your-pl').html(clientPowerLevel);
     }

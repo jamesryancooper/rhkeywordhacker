@@ -297,8 +297,9 @@ function createKeywordHackerProject()
 
                 if(info.status == "success")
                 {
-                    var projectID = info.message;
-                    window.location = "keywordhacker.html?pid="+projectID;
+                    window.location = "dashboard.html";
+                    //var projectID = info.message;
+                    //window.location = "keywordhacker.html?pid="+projectID;
                 }
                 else
                 {
@@ -455,7 +456,7 @@ function displayDashboardCards(sortMethod,flip)
         if(completed != 1)
         {
             keywordNetWorthString = "<span style=\"color:red;display:block;\" class=\"loader__dot\">calculating...&nbsp;"+completionPercent+"%</span>";
-            anchorAhref = "onclick=\"'';\"";
+            anchorAhref = "onclick=\"window.location='keywordhacker.html?pid="+projectID+"';\"";
             plSum = "--";
         }
         else
@@ -1412,10 +1413,10 @@ function displayProjectInfo(field)
         
         //Add in the summary row
         competitorHTML += "<ul class=\"power-summary-row-highlight\" style=\"background-color:#005cb9;color:#fff;border-right:1px solid #005cb9;margin:0;\">\n"+
-                                "<li class=\"checkbox-outer col-lg-10\" style=\"background-color:#005cb9;border-right:1px solid #005cb9;\">\n"+
+                                "<li class=\"checkbox-outer col-lg-11\" style=\"background-color:#005cb9;border-right:1px solid #005cb9;\">\n"+
                                     "<h2 style=\"color:#fff;\"><b>YOUR POWER LEVEL GOAL</b>&nbsp;Competitor average score - Your score =</h2>\n"+
                                 "</li>\n"+
-                                "<li class=\"col-lg-2\" style=\"background-color:#005cb9;color:#fff;border-right:1px solid #005cb9;margin-left:-4px;\">\n"+
+                                "<li class=\"col-lg-1\" style=\"background-color:#005cb9;color:#fff;border-right:1px solid #005cb9;margin-left:-4px;\">\n"+
                                     "<h2 style=\"color:#fff;font-size:16px;\" id=\"kwid-"+keywordID+"-plg-2\"><b>"+powerLevelGoal+"</b></h2>\n"+
                                 "</li>\n"+
                             "</ul>\n";
@@ -2315,9 +2316,11 @@ function recalculateProject()
                 {
                     $('body').removeClass('wait');
                     //Show the warning message at top, and set the flag to keep checking
+                    /*
                     $("#warning-message").show(400);
                     $("#check-project-done-flag").val(1);
-                    //window.location = "dashboard.html";
+                    */
+                    window.location = "keywordhacker.html?pid="+projectID;
                 }
             }
         });

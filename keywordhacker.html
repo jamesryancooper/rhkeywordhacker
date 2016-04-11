@@ -47,7 +47,7 @@
     <script>
         function run(){
             loadProjectData();
-            //setInterval(loadProjectData, 60000);
+            setInterval(checkProjectDone, 15000);
         }
     </script>
 </head>
@@ -425,6 +425,18 @@
         <div class="project-setup-input row"><span id="delete-project-response" class="col-lg-12" style="text-align:center;"></span></div>
     </div>
     
+</div>
+
+<div class="warning-message" id="warning-message">
+    <div class="col-lg-12">
+        Your project is still calculating. You can manually refresh this page to get the latest info, and we'll let you know as soon as all the numbers are in!
+    </div>
+</div>
+
+<div class="success-message" id="success-message">
+    <div class="col-lg-12">
+        Your project is done! Please refresh this page when you're ready to get the final numbers.
+    </div>
 </div>
 
 </section>
@@ -833,6 +845,8 @@
 
 <input type="hidden" id="keyword-sort-method" value="keyword"/>
 <input type="hidden" id="keyword-sort-reversed" value="false"/>
+
+<input type="hidden" id="check-project-done-flag" value="0"/>
 
 </body>
 </html>

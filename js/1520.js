@@ -1004,6 +1004,13 @@ function displayProjectInfo(field)
             $("#search-engine-icons").html("<i class=\"keyword-item-icon rh-google-icon\" style=\"margin-left:-5px;\"></i><img src=\"images/bing_icon.png\" class=\"icon-sized\"><img src=\"images/yahoo_icon.png\" class=\"icon-sized\">");
         }
         
+        if(typeof searchVolume === 'undefined') {searchVolume = 0;}
+        if(typeof incomingTraffic === 'undefined') {incomingTraffic = 0;}
+        if(typeof payingCustomers === 'undefined') {payingCustomers = 0;}
+        if(typeof monthlyVisitors === 'undefined') {monthlyVisitors = 0.0000001;}
+        if(typeof monthlySales === 'undefined') {monthlySales = 0;}
+        if(typeof costPerMonth === 'undefined') {costPerMonth = 0;}
+        
         $('#projectTitle').html(clientURL+"<span><a style=\"cursor:pointer;margin-left:7px;\" class=\"edit-icon\" title=\"Edit Project\" onclick=\"displayProjectEditWindow('"+projectID+"');\"></a><a style=\"cursor:pointer;margin-left:7px;margin-top:3px;color:rgba(61,61,61,.25);\" title=\"Download\" class=\"download-icon\" onclick=\"saveTextAsFile();\"></a></span>");
         $('#numKeywords').html(keywordCount);
         $('#geoLocation').html("<h2>"+geoLocation+"<!--<a class=\"edit-icon\" title=\"Edit Location\"></a>--></h2>");
@@ -1613,6 +1620,7 @@ function refreshProjectData()
 function refreshProjectInfo()
 {
     var returnData = $('#json').val();
+    console.log(returnData);
     var info = JSON.parse(returnData);
     
     //Fill in the project data here
@@ -1669,6 +1677,13 @@ function refreshProjectInfo()
         {
             activeString = "INACTIVE";
         }
+        
+        if(typeof searchVolume === 'undefined') {searchVolume = 0;}
+        if(typeof incomingTraffic === 'undefined') {incomingTraffic = 0;}
+        if(typeof payingCustomers === 'undefined') {payingCustomers = 0;}
+        if(typeof monthlyVisitors === 'undefined') {monthlyVisitors = 0.0000001;}
+        if(typeof monthlySales === 'undefined') {monthlySales = 0;}
+        if(typeof costPerMonth === 'undefined') {costPerMonth = 0;}
         
         $('#projectTitle').html(clientURL+"<span><a style=\"cursor:pointer;margin-left:7px;\" class=\"edit-icon\" title=\"Edit Project\" onclick=\"displayProjectEditWindow('"+projectID+"');\"></a><a style=\"cursor:pointer;margin-left:7px;margin-top:3px;color:rgba(61,61,61,.25);\" title=\"Download\" class=\"download-icon\" onclick=\"javascript:void(0);\"></a></span>");
         $('#numKeywords').html(keywordCount);
@@ -1750,6 +1765,14 @@ function refreshProjectInfo()
         var monthlySales = Math.round(monthlyCustomers * valuePerCustomer,0);
         var costPerMonth = Math.round((totalPowerLevel - clientPowerLevel) * costPerLevel, 0);
         var keywordNetWorth = (monthlySales - costPerMonth);
+        
+        //Trap for nulls on numberWithCommas function
+        if(typeof searchVolume === 'undefined') {searchVolume = 0;}
+        if(typeof monthlyVisitors === 'undefined') {monthlyVisitors = 0;}
+        if(typeof monthlyCustomers === 'undefined') {monthlyCustomers = 0;}
+        if(typeof monthlySales === 'undefined') {monthlySales = 0;}
+        if(typeof costPerMonth === 'undefined') {costPerMonth = 0;}
+        if(typeof keywordNetWorth === 'undefined') {keywordNetWorth = 0;}
         
         var powerLevelGoal = Math.max(1,(totalPowerLevel - clientPowerLevel));
         

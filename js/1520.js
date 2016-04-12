@@ -484,6 +484,7 @@ function displayDashboardCards(sortMethod,flip)
         if(rhActive == 1)
         {
             rhHTML += "<a style=\"cursor:pointer;\" "+anchorAhref+" class=\"module-link keyword-hacker-module\">";
+            rhHTML += "<img src=\"images/tabDivider.png\" class=\"rh-folder-tab\">";
             rhHTML += "<h2 class=\"module-heading text-left\">KEYWORD HACKER MODULE</h2>";
             rhHTML += "<div class=\"module-detail-section\">";
             rhHTML += "<div class=\"row\">";
@@ -505,6 +506,7 @@ function displayDashboardCards(sortMethod,flip)
         else
         {
             rhHTML += "<a style=\"cursor:default;\" class=\"module-link content-hacker-module\">";
+            rhHTML += "<img src=\"images/tabDivider.png\" class=\"rh-folder-tab\">";
             rhHTML += "<h2 class=\"module-heading text-left\">Content Hacker Module</h2>";
             rhHTML += "<div class=\"module-detail-section\">";
             rhHTML += "<div class=\"row\">";
@@ -519,7 +521,8 @@ function displayDashboardCards(sortMethod,flip)
         if(chActive == 1)
         {
             chHTML += "<a style=\"cursor:pointer;\" class=\"module-link content-hacker-module\" onclick=\"gotoRHStorefront('"+projectTitle+"');\">";
-            chHTML += "<img src=\"images/card_down_arrow.png\" class=\"module-card-arrow\">";
+            //chHTML += "<img src=\"images/card_down_arrow.png\" class=\"module-card-arrow\">";
+            chHTML += "<img src=\"images/tabDivider.png\" class=\"ch-folder-tab\">";
             chHTML += "<h2 class=\"module-heading text-left\">Content Hacker Module</h2>";
             chHTML += "<div class=\"module-detail-section\">";
             chHTML += "<div class=\"row\">";
@@ -541,7 +544,8 @@ function displayDashboardCards(sortMethod,flip)
         else
         {
             chHTML += "<a style=\"cursor:default;\" class=\"module-link content-hacker-module\">";
-            chHTML += "<img src=\"images/card_down_arrow.png\" class=\"module-card-arrow\">";
+            //chHTML += "<img src=\"images/card_down_arrow.png\" class=\"module-card-arrow\">";
+            chHTML += "<img src=\"images/tabDivider.png\" class=\"ch-folder-tab\">";
             chHTML += "<h2 class=\"module-heading text-left\">Content Hacker Module</h2>";
             chHTML += "<div class=\"module-detail-section\">";
             chHTML += "<div class=\"row\">";

@@ -151,7 +151,8 @@ DOT SPINNER
 
 .card-header, .cart-small-headding {color: #000;float: left;font-size: 13px;margin: 0 ;padding: 0;width: 100%;}
 
-.card-header {border-bottom: 1px solid #eff1f0;padding: 0 25px 15px;}
+//.card-header {border-bottom: 1px solid #eff1f0;padding: 0 25px 15px;}
+.card-header {border-bottom: 0px solid #eff1f0;padding: 0 25px 15px;}
 
 .card-header label {float: left;top: 2px;}
 
@@ -1275,7 +1276,8 @@ width: 100%;}
 
 .project_name_sort input {float: left;margin-right: 15px;margin-top: 6px !important;}
 
-.keyword-hacker-module {border-bottom: 4px solid #eff1f0;float: left;margin: 0;min-height: 185px;padding: 20px 25px;width: 100%;}
+//.keyword-hacker-module {border-bottom: 4px solid #eff1f0;float: left;margin: 0;min-height: 185px;padding: 20px 25px;width: 100%;}
+.keyword-hacker-module {border-bottom: 0px solid #eff1f0;float: left;margin: 0;min-height: 185px;padding: 20px 25px;width: 100%;}
 
 .content-hacker-module {border-bottom: 1px solid #eff1f0;float: left;margin: 0;min-height: 185px;padding: 20px 25px;width: 100%; position: relative;}
 
@@ -1562,6 +1564,28 @@ width: 100%;}
     right: 0;
     height: 105px;
     width: auto;
+}
+
+.rh-folder-tab {
+    position: absolute;
+    margin-top: 90px;
+    margin-left: 0;
+    top: 0;
+    right: 0;
+    height: auto;
+    //width: 450px;
+    width: -moz-calc(100% + 0px);width: -webkit-calc(100% + 0px);width: -o-calc(100% + 0px);width: calc(100% + 0px);
+}
+
+.ch-folder-tab {
+    position: absolute;
+    margin-top: 0;
+    margin-left: 0;
+    top: 0;
+    right: 0;
+    height: auto;
+    //width: 450px;
+    width: -moz-calc(100% + 0px);width: -webkit-calc(100% + 0px);width: -o-calc(100% + 0px);width: calc(100% + 0px);
 }
 
 .keyword-row-arrow {

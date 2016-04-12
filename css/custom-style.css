@@ -1303,7 +1303,7 @@ width: 100%;}
 
 .module-link {float: left;width: 100%;}
 
-.module-link:hover { background-color:#ededed;-webkit-transition: background-color 0.5s ease-out;-moz-transition: background-color 0.5s ease-out;  -o-transition: background-color 0.5s ease-out;transition: background-color 0.5s ease-out;}
+//.module-link:hover { background-color:#ededed;-webkit-transition: background-color 0.5s ease-out;-moz-transition: background-color 0.5s ease-out;  -o-transition: background-color 0.5s ease-out;transition: background-color 0.5s ease-out;}
 
 .active-link-outer {display: table;float: left;height: 100%;text-align: center;width: 100%;}
 

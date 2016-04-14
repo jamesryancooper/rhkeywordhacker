@@ -1,6 +1,7 @@
 //var restURL = "http://fairmarketing.cloudapp.net/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://fairmarketing.cloudapp.net/rest1.0/servlet/ssd.DownloadInventoryReport?"
-var rhURL = "http://fairmarketing.cloudapp.net/rhstorefront/";
+//var rhURL = "http://fairmarketing.cloudapp.net/rhstorefront/";
+var rhURL = "http://localhost:8383/rhstorefront/";
 var restURL = "http://localhost:8084/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://localhost:8084/rest1.0/servlet/ssd.DownloadInventoryReport"
 var desc = false;
@@ -1323,6 +1324,13 @@ function displayProjectInfo(field)
         var totalCTR = 0;
         var totalPowerLevel = 0;
         var totalRank = 0;
+        
+        var c1 = "";
+        var c2 = "";
+        var c3 = "";
+        var c4 = "";
+        var c5 = "";
+        
         competitorHTML += "<div id=\"competitorsList\">\n";
         for(var j=0; j<thisCompetitorArray.length; j++)
         {
@@ -1334,6 +1342,28 @@ function displayProjectInfo(field)
             var competitorURL = thisCompetitor.url;
                 var competitorURLShort = competitorURL.substring(0,40);
                 if(competitorURL.length > 40) { competitorURLShort += "..."; }
+                
+            if(j == 0)
+            {
+                c1 = competitorURL;
+            }
+            else if(j == 1)
+            {
+                c2 = competitorURL;
+            }
+            else if(j == 2)
+            {
+                c3 = competitorURL;
+            }
+            else if(j == 3)
+            {
+                c4 = competitorURL;
+            }
+            else if(j == 4)
+            {
+                c5 = competitorURL;
+            }
+                
             var competitorCTR = Math.round(thisCompetitor.traffic);
             var competitorCTRExact = Math.round(thisCompetitor.trafficExact);
             
@@ -1510,7 +1540,7 @@ function displayProjectInfo(field)
                                                 "<p>This number is derived from both domain and page authority scores and is best used as a guide to determine your SEO marketing agression. For example if your Power Level Goal = 3, then you may consider creating 3 pieces of content per month (or build 3 backlinks per month).</p>\n"+
                                             "</div>"+
                                             "<div class=\"goal-details col-lg-12\" style=\"margin-top:50px;vertical-align:middle;\">\n"+
-                                                "<span class=\"get-the-hack-statement\">Create a content blueprint for this phrase.</span><span class=\"get-the-hack-button\" onclick=\"gotoRHCreateProject();\">GET THE HACK</span>\n"+
+                                                "<span class=\"get-the-hack-statement\">Create a content blueprint for this phrase.</span><span class=\"get-the-hack-button\" onclick=\"gotoRHCreateProject('"+clientURL+"','"+c1+"','"+c2+"','"+c3+"','"+c4+"','"+c5+"');\">GET THE HACK</span>\n"+
                                             "</div>"+
                                         "</div>"+
                                     "</div>\n";
@@ -2448,12 +2478,19 @@ function gotoRHStorefront(projectURL)
     window.location = rhURL+"auto_auth.html?username="+username+"&fullname="+fullname+"&projecturl="+projectURL+"&destination="+destination;
 }
 
-function gotoRHCreateProject()
+function gotoRHCreateProject(clientURL,competitor1,competitor2,competitor3,competitor4,competitor5)
 {
     var username = getCookie("username");
     var fullname = getCookie("userFullName");
     var destination = "create-report";
-    window.location = rhURL+"auto_auth.html?username="+username+"&fullname="+fullname+"&destination="+destination;
+    var projectID = getURLParameter("pid");
+    clientURL = encodeURIComponent(clientURL);
+    competitor1 = encodeURIComponent(competitor1);
+    competitor2 = encodeURIComponent(competitor2);
+    competitor3 = encodeURIComponent(competitor3);
+    competitor4 = encodeURIComponent(competitor4);
+    competitor5 = encodeURIComponent(competitor5);
+    window.location = rhURL+"auto_auth.html?username="+username+"&fullname="+fullname+"&destination="+destination+"&pid="+projectID+"&client="+clientURL+"&c1="+competitor1+"&c2="+competitor2+"&c3="+competitor3+"&c4="+competitor4+"&c5="+competitor5;
 }
 
 function gotoKHDashboard()

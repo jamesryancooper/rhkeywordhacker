@@ -551,7 +551,7 @@ function displayDashboardCards(sortMethod,flip)
             chHTML += "<div class=\"module-detail-section\">";
             chHTML += "<div class=\"row\">";
             chHTML += "<div class=\"col-lg-12 module-details-outer\">";
-            chHTML += "<h2 class=\"activate-link\" onclick=\"gotoRHCreateProject();\">[ Activate Content Hacker Module ]</h2>";
+            chHTML += "<h2 class=\"activate-link\" onclick=\"gotoRHCreateProject('"+projectTitle+"','','','','','');\">[ Activate Content Hacker Module ]</h2>";
             chHTML += "</div>";
             chHTML += "</div>";
             chHTML += "</div>";
@@ -2490,6 +2490,10 @@ function gotoRHCreateProject(clientURL,competitor1,competitor2,competitor3,compe
     competitor3 = encodeURIComponent(competitor3);
     competitor4 = encodeURIComponent(competitor4);
     competitor5 = encodeURIComponent(competitor5);
+    
+    //console.log("going to: "+"auto_auth.html?username="+username+"&fullname="+fullname+"&destination="+destination+"&pid="+projectID+"&client="+clientURL+"&c1="+competitor1+"&c2="+competitor2+"&c3="+competitor3+"&c4="+competitor4+"&c5="+competitor5);
+    //alert("check");
+    
     window.location = rhURL+"auto_auth.html?username="+username+"&fullname="+fullname+"&destination="+destination+"&pid="+projectID+"&client="+clientURL+"&c1="+competitor1+"&c2="+competitor2+"&c3="+competitor3+"&c4="+competitor4+"&c5="+competitor5;
 }
 

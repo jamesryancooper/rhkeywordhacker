@@ -1364,7 +1364,7 @@ function displayProjectInfo(field)
                 totalRank += competitorPositionRank;
             }
             
-            if(competitorsCount == 0) { competitorsCount = 1;}
+            //if(competitorsCount == 0) { competitorsCount = 1;}
             
             competitorHTML += "<ul class=\"power-summary-row\" style=\"margin:0;\">\n"+
                                 "<li class=\"checkbox-outer col-lg-1\">\n"+
@@ -1387,6 +1387,7 @@ function displayProjectInfo(field)
                                 "</li>\n"+
                             "</ul>\n";
         }
+        if(competitorsCount == 0) { competitorsCount = 1;}
         
         //Add in the average row
         competitorHTML += "<ul class=\"power-summary-row-avg\" style=\"background-color:#e6e6e6;margin:0;\">\n"+
@@ -1663,7 +1664,7 @@ function refreshProjectData()
 function refreshProjectInfo()
 {
     var returnData = $('#json').val();
-    console.log(returnData);
+    //console.log(returnData);
     var info = JSON.parse(returnData);
     
     //Fill in the project data here
@@ -1763,11 +1764,23 @@ function refreshProjectInfo()
         for(var j=0; j<thisCompetitorArray.length; j++)
         {
             var thisCompetitor = thisCompetitorArray[j];
-            var competitorPowerLevel = thisCompetitor.powerLevel;
+            
+            var competitorID = thisCompetitor.competitorID;
             var competitorActive = thisCompetitor.active;
-            var competitorCTR = Math.round(thisCompetitor.traffic);
-            var competitorPowerLevel = thisCompetitor.powerLevel;
             var competitorPositionRank = thisCompetitor.positionRank;
+            var competitorPowerLevel = thisCompetitor.powerLevel;
+            var competitorCTR = Math.round(thisCompetitor.traffic);
+            var competitorCTRExact = Math.round(thisCompetitor.trafficExact);
+
+            var ctrType = " (b)";
+            if(typeof competitorCTRExact != "undefined")
+            {
+                if(competitorCTRExact > 0)
+                {
+                    competitorCTR = competitorCTRExact;
+                    ctrType = " (e)";
+                }
+            }
 
             if(competitorPowerLevel > 9 && competitorActive == 1)
             {
@@ -1782,6 +1795,8 @@ function refreshProjectInfo()
                 totalRank += competitorPositionRank;
             }
         }
+        
+        if(competitorsCount == 0) { competitorsCount = 1;}
         
         if(showWarning)
         {

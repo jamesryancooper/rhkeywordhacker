@@ -1,7 +1,7 @@
-var restURL = "http://fairmarketing.cloudapp.net/rest1.0/kh_endpoint.jsp?"
+//var restURL = "http://fairmarketing.cloudapp.net/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://fairmarketing.cloudapp.net/rest1.0/servlet/ssd.DownloadInventoryReport?"
 var rhURL = "http://fairmarketing.cloudapp.net/rhstorefront/";
-//var restURL = "http://localhost:8084/rest1.0/kh_endpoint.jsp?"
+var restURL = "http://localhost:8084/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://localhost:8084/rest1.0/servlet/ssd.DownloadInventoryReport"
 var desc = false;
 
@@ -455,7 +455,7 @@ function displayDashboardCards(sortMethod,flip)
         var plSum = "";
         if(completed != 1)
         {
-            keywordNetWorthString = "<span style=\"color:red;display:block;\" class=\"loader__dot\">calculating...&nbsp;"+completionPercent+"%</span>";
+            keywordNetWorthString = "<span style=\"color:red;display:block;\" class=\"loader__dot\">"+completionPercent+"%&nbsp;data collected</span>";
             anchorAhref = "onclick=\"window.location='keywordhacker.html?pid="+projectID+"';\"";
             plSum = "--";
         }
@@ -564,7 +564,7 @@ function displayDashboardCards(sortMethod,flip)
             cardHTML += "<li class=\"col-lg-4 matchheight element-item\" id=\"project-card-"+projectID+"\">";
             cardHTML += "<div class=\"project-cart-box box-shadow-ot\">";
             cardHTML += "<div class=\"card-header\">";
-            cardHTML += "<div class=\"col-sm-6\"><span class=\"card-header-mission-text\">The Mission</span></div><div class=\"col-sm-6\"><h2 style=\"clear:both;text-align:right;margin-top:-10px;\"><a style=\"cursor:pointer;\" class=\"edit-icon\" title=\"Edit Project\" onclick=\"displayProjectEditWindow('"+projectID+"');\"></a><a style=\"cursor:pointer;color:rgba(61,61,61,.25);\" title=\"Download\" class=\"download-icon\" onclick=\"saveTextAsFileFromDashboard('"+projectID+"');\"></a><a style=\"cursor:pointer;\" class=\"delete-icon\" title=\"Delete Project\" onclick=\"displayProjectDeleteWindow('"+projectID+"');\"></a></h2></div>";
+            cardHTML += "<div class=\"col-sm-12\"><span class=\"card-header-mission-text\">The Mission</span></div><!--<div class=\"col-sm-6\"><h2 style=\"clear:both;text-align:right;margin-top:-10px;\"><a style=\"cursor:pointer;\" class=\"edit-icon\" title=\"Edit Project\" onclick=\"displayProjectEditWindow('"+projectID+"');\"></a><a style=\"cursor:pointer;color:rgba(61,61,61,.25);\" title=\"Download\" class=\"download-icon\" onclick=\"saveTextAsFileFromDashboard('"+projectID+"');\"></a><a style=\"cursor:pointer;\" class=\"delete-icon\" title=\"Delete Project\" onclick=\"displayProjectDeleteWindow('"+projectID+"');\"></a></h2></div>-->";
             cardHTML += "<h1 class=\"project_name_sort\"><label for=\"chk-content-all1\"></label><a style=\"cursor:pointer;\" "+anchorAhref+">"+projectTitle+"</a></h1>";
             cardHTML += "</div>";
             
@@ -580,10 +580,13 @@ function displayDashboardCards(sortMethod,flip)
         }
     }
 
-    var addMoreHTML = "<li class=\"col-lg-4 matchheight element-item\">" +
+    var addMoreHTML = "<li class=\"col-lg-4 matchheight element-item\" id=\"project-card-0\">" +
                       "<div class=\"project-cart-box box-shadow-ot\">"+
-                        "<div class=\"active-link-outer\"><span class=\"active-new-project-link\" style=\"padding-top:210px;padding-bottom:227px;\"> <a style=\"cursor:pointer;\" onclick=\"showActivate();\">[ Activate New Project ]</a> </span></div>" +
-                      "</div>"
+                      "<div class=\"card-header\">&nbsp;</div>"+
+                        "<div class=\"active-link-outer\"><span class=\"active-new-project-link\"> <a style=\"cursor:pointer;\" onclick=\"showActivate();\">[ Activate New Project ]</a> </span></div>" +
+                      "<div class=\"card-box-bottom\">&nbsp;</div>"+
+                      "</div>"+
+
                         "</li>";
 
     finalOutput = "<ul class=\"row grid\">"+addMoreHTML+cardHTML+"</ul>";
@@ -1016,11 +1019,20 @@ function displayProjectInfo(field)
         if(typeof payingCustomers === 'undefined') {payingCustomers = 0;}
         if(typeof monthlyVisitors === 'undefined') {monthlyVisitors = 0.0000001;}
         if(typeof monthlySales === 'undefined') {monthlySales = 0;}
-        if(typeof costPerMonth === 'undefined') {costPerMonth = 0;}
+        if(typeof costPerMonth === 'undefined' || keywordCount == 0) {costPerMonth = 0;}
+        
+        var locationTitleText = "Total monthly search volume for the city you typed in above.";
+        if(typeof projectInfo.useNational != "undefined")
+        {
+            if(projectInfo.useNational == 1)
+            {
+                locationTitleText = "Total monthly search volume for the country that your city resides within.";
+            }
+        }
         
         $('#projectTitle').html(clientURL+"<span><a style=\"cursor:pointer;margin-left:7px;\" class=\"edit-icon\" title=\"Edit Project\" onclick=\"displayProjectEditWindow('"+projectID+"');\"></a><a style=\"cursor:pointer;margin-left:7px;margin-top:3px;color:rgba(61,61,61,.25);\" title=\"Download\" class=\"download-icon\" onclick=\"saveTextAsFile();\"></a></span>");
         $('#numKeywords').html(keywordCount);
-        $('#geoLocation').html("<h2>"+geoLocation+"<!--<a class=\"edit-icon\" title=\"Edit Location\"></a>--></h2>");
+        $('#geoLocation').html("<h2><a title=\""+locationTitleText+"\" class=\"info-link\">"+geoLocation+"</a><!--<a class=\"edit-icon\" title=\"Edit Location\"></a>--></h2>");
         /*$('#searchVolume').html("<h2>"+numberWithCommas(searchVolume)+"<span>MO,SEARCH VOLUME<a class=\"info-icon\" title=\"This is the total sum of monthly search volume for all selected keywords in this project.\"></a></span></h2>");
         $('#projectedVisitors').html("<h2>"+numberWithCommas(incomingTraffic)+"<span>PROJECTED MO. VISITORS<a class=\"info-icon\" title=\"Calculated by applying the average CTR for your competitors to Mo. Search Volume.\"></a></span></h2>");
         $('#projectedCustomers').html("<h2>"+numberWithCommas(Math.round(incomingTraffic * (payingCustomers / monthlyVisitors),0))+"<span>PROJECTED MO. CUSTOMERS<a class=\"info-icon\" title=\"Calculated based on your conversion rate.\"></a></span></h2>");
@@ -1352,6 +1364,8 @@ function displayProjectInfo(field)
                 totalRank += competitorPositionRank;
             }
             
+            if(competitorsCount == 0) { competitorsCount = 1;}
+            
             competitorHTML += "<ul class=\"power-summary-row\" style=\"margin:0;\">\n"+
                                 "<li class=\"checkbox-outer col-lg-1\">\n"+
                                     "<h2>\n"+
@@ -1649,6 +1663,7 @@ function refreshProjectData()
 function refreshProjectInfo()
 {
     var returnData = $('#json').val();
+    console.log(returnData);
     var info = JSON.parse(returnData);
     
     //Fill in the project data here
@@ -1711,7 +1726,7 @@ function refreshProjectInfo()
         if(typeof payingCustomers === 'undefined') {payingCustomers = 0;}
         if(typeof monthlyVisitors === 'undefined') {monthlyVisitors = 0.0000001;}
         if(typeof monthlySales === 'undefined') {monthlySales = 0;}
-        if(typeof costPerMonth === 'undefined') {costPerMonth = 0;}
+        if(typeof costPerMonth === 'undefined' || keywordCount == 0) {costPerMonth = 0;}
         
         $('#projectTitle').html(clientURL+"<span><a style=\"cursor:pointer;margin-left:7px;\" class=\"edit-icon\" title=\"Edit Project\" onclick=\"displayProjectEditWindow('"+projectID+"');\"></a><a style=\"cursor:pointer;margin-left:7px;margin-top:3px;color:rgba(61,61,61,.25);\" title=\"Download\" class=\"download-icon\" onclick=\"javascript:void(0);\"></a></span>");
         $('#numKeywords').html(keywordCount);
@@ -1722,11 +1737,11 @@ function refreshProjectInfo()
         $('#projectedSales').html("<h2>$"+numberWithCommas(monthlySales)+"<span>PROJECTED MO. SALES<a class=\"info-icon\" title=\"Calculated based on your conversion rate and customer value.\"></a></span></h2>");
         $('#costPerMonth').html("<h2>$"+numberWithCommas(costPerMonth)+"<span>COST PER MONTH<a class=\"info-icon\" title=\"This is the total sum of monthly costs for all selected keywords in this project.\"></a></span></h2>");
         $('#kwNetWorth').html("<h2 class=\""+netWorthStyle+"\">"+keywordNetWorthString+"<span>KEYWORD NET-WORTH<a class=\"info-icon\" title=\"This is the projected return on your invested marketing dollars for all selected keywords in this project.\"></a></span></h2>");*/
-        $('#searchVolume').html("<h2>"+numberWithCommas(searchVolume)+"<span>MO,SEARCH VOLUME</span></h2>");
-        $('#projectedVisitors').html("<h2>"+numberWithCommas(incomingTraffic)+"<span>PROJECTED MO. VISITORS</span></h2>");
-        $('#projectedCustomers').html("<h2>"+numberWithCommas(Math.round(incomingTraffic * (payingCustomers / monthlyVisitors),0))+"<span>PROJECTED MO. CUSTOMERS</span></h2>");
-        $('#projectedSales').html("<h2>"+currencyHexCode+numberWithCommas(monthlySales)+"<span>PROJECTED MO. SALES</span></h2>");
-        $('#costPerMonth').html("<h2>"+currencyHexCode+numberWithCommas(costPerMonth)+"<span>COST PER MONTH</span></h2>");
+        $('#searchVolume').html("<h2>"+numberWithCommas(searchVolume)+"<span>MO,SEARCH VOLUME</span></h2><img src=\"images/header_arrow.png\" class=\"header-arrow\">");
+        $('#projectedVisitors').html("<h2>"+numberWithCommas(incomingTraffic)+"<span>PROJECTED MO. VISITORS</span></h2><img src=\"images/header_arrow.png\" class=\"header-arrow\">");
+        $('#projectedCustomers').html("<h2>"+numberWithCommas(Math.round(incomingTraffic * (payingCustomers / monthlyVisitors),0))+"<span>PROJECTED MO. CUSTOMERS</span></h2><img src=\"images/header_arrow.png\" class=\"header-arrow\">");
+        $('#projectedSales').html("<h2>"+currencyHexCode+numberWithCommas(monthlySales)+"<span>PROJECTED MO. SALES</span></h2><img src=\"images/header_arrow.png\" class=\"header-arrow\">");
+        $('#costPerMonth').html("<h2>"+currencyHexCode+numberWithCommas(costPerMonth)+"<span>COST PER MONTH</span></h2><img src=\"images/header_arrow.png\" class=\"header-arrow\">");
         $('#kwNetWorth').html("<h2 class=\""+netWorthStyle+"\">"+keywordNetWorthString+"<span>KEYWORD NET-WORTH</span></h2>");
         $('#dateDivBottom').html("<div class=\"project-date-card date_sort\"><i class=\"eagle-icon\"></i>Initiated "+runDate+"</div><a class=\"project-status-card  project_status_sort\" href=\"javascript:void(0);\">"+activeString+"</a>");
 

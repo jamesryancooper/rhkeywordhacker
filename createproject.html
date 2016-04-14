@@ -26,7 +26,7 @@
         ============================== -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/materialize.css" rel="stylesheet" id="theme-change">
-    <link href="css/custom-style.css" rel="stylesheet" id="theme-change">
+    <link href="css/custom-style.css?v=1" rel="stylesheet" id="theme-change">
     <link href="css/rankhacker.css" rel="stylesheet" id="theme-change">
     <link href="css/bootstrap-slider.min.css" rel="stylesheet" id="theme-change">
 
@@ -35,8 +35,8 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
     
     <!--1520 files-->
-    <script src="js/1520.js"></script>
-    <link href="css/1520.css" rel="stylesheet" id="theme-change">
+    <script src="js/1520.js?v=1"></script>
+    <link href="css/1520.css?v=1" rel="stylesheet" id="theme-change">
     <link href="css/spinner.css" rel="stylesheet" id="theme-change">
     
 </head>
@@ -49,6 +49,8 @@
 <div id="rank-header-outer">
     <nav id="mainmenu" class="navbar navbar-fixed-top main-menu" role="navigation">
         <!-- LOGO CONTAINER -->
+        <div class="col-lg-1"></div>
+        <div class="col-lg-9">
         <div class="logo-cont logo-outer">
             <a class="navbar-brand" data-text="RANKHACKER" href="#header"><img src="images/logo-main.png" alt="site-logo"> </a>
             <!--<span style="float:left;"><img src="images/icon-keyword_hacker_small.png" alt="kwhacker" class="module-icon" onclick="gotoKHDashboard();"></span><span class="module-icon-label" onclick="gotoKHDashboard();"><strong>KEYWORD</strong> HACKER</span>
@@ -58,9 +60,11 @@
             <div class="dashboard-status"><img src="images/content-hacker-icon-white.png" style="cursor:default;opacity:0.6;" alt="contenthacker" class="module-icon"><a class="module-icon-label" style="cursor:default;opacity:0.6;">Content Hacker</a></div>-->
             <div class="dashboard-status"><img src="images/keyword-hacker-icon-white.png" alt="kwhacker" style="cursor:pointer;" class="module-icon" onclick="gotoKHDashboard();"><a class="module-icon-label" style="cursor:pointer;" onclick="gotoKHDashboard();">Keyword Hacker</a></div>
         </div>
-        <div class="logo-cont logo-outer-2">
+        <div class="colg-lg-1 logo-cont logo-outer-2">
             <span class="logout-link" onclick="logout();">LOGOUT</span>
         </div>
+        </div>
+        <div class="col-lg-1"></div>
     </nav>
 </div>
 

@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 
-body {float: left;font-family: 'Montserrat', sans-serif !important;margin: 0;padding: 0;width: 100%;}
+body {float: left;font-family: 'Montserrat', sans-serif !important;margin: 0;padding: 0;width: 100%;max-width:1920px;}
 
 .page-loading {overflow-x: hidden !important;overflow-y: visible !important;}
 
@@ -152,7 +152,7 @@ DOT SPINNER
 .card-header, .cart-small-headding {color: #000;float: left;font-size: 13px;margin: 0 ;padding: 0;width: 100%;}
 
 //.card-header {border-bottom: 1px solid #eff1f0;padding: 0 25px 15px;}
-.card-header {border-bottom: 0px solid #eff1f0;padding: 0 25px 15px;}
+.card-header {border-bottom: 0px solid #eff1f0;padding: 0 25px 15px;min-height:65px;}
 
 .card-header label {float: left;top: 2px;}
 
@@ -334,7 +334,7 @@ TWO TONE SPINNER
 
 /*---------------------- footer css ------------------------*/
 
-#interface-footer {background-color: #3d3d3d;float: left;margin: 0;padding: 25px 0;position: relative;width: 100%;z-index: 99;}
+#interface-footer {background-color: #3d3d3d;float: left;margin: 0;padding: 25px 0;position: relative;width: 100%;z-index: 99999;}
 
 #interface-footer .row {margin: 0 -15px;}
 
@@ -974,7 +974,7 @@ width: 100%;}
 .project-name {color: #231f20;float: left;font-size: 1.5em;font-weight: bold;line-height: normal;margin: 0 0 20px;padding: 0;text-align: left;text-transform: none;width: 100%;}
 
 //.kerword-project-row ul , .kerword-project-row {background-color: #e4e4e7;float: left;margin: 0;padding: 20px 15px;width: 100%;cursor: pointer;}
-.kerword-project-row ul , .kerword-project-row {background-color: #fff;float: left;margin: 0;padding: 20px 15px;width: 100%;cursor: pointer;}
+.kerword-project-row ul , .kerword-project-row {background-color: #fff;float: left;margin: 0;padding-top: 15px;padding-bottom: 15px;padding-left: 0;padding-right: 0;width: 100%;cursor: pointer;border-bottom:1px solid rgba(0, 0, 0, 0.05); }
 
 .kerword-project-row li  , .keyword-items{display: inline-block;float: left;padding: 0 5px;width: 12.5%;margin-top:25px;}
 
@@ -1011,9 +1011,9 @@ width: 100%;}
 
 .calculator-text, .keyword-item-info-first .calculator-text {font-size: 12px;margin-left:-40px;}
 
-.kerword-project-row li:first-child {width: 10%;}
+.kerword-project-row li:first-child {width: 8%;margin-left:15px;}
 
-.kerword-project-row li:nth-child(2) {width: 15%;}
+.kerword-project-row li:nth-child(2) {width: 15%;margin-left:10px;}
 //.kerword-project-row li:nth-child(4) {width: 12.5%;}
 //.kerword-project-row li:nth-child(5) {width: -moz-calc(100% - 25px);width: -webkit-calc(100% - 25px);width: -o-calc(100% - 25px);width: calc(100% - 25px);}
 
@@ -1277,9 +1277,9 @@ width: 100%;}
 .project_name_sort input {float: left;margin-right: 15px;margin-top: 6px !important;}
 
 //.keyword-hacker-module {border-bottom: 4px solid #eff1f0;float: left;margin: 0;min-height: 185px;padding: 20px 25px;width: 100%;}
-.keyword-hacker-module {border-bottom: 0px solid #eff1f0;float: left;margin: 0;min-height: 185px;padding: 20px 25px;width: 100%;}
+.keyword-hacker-module {border-bottom: 0px solid #eff1f0;float: left;margin: 0;min-height: 195px;padding: 20px 25px;width: 100%;}
 
-.content-hacker-module {border-bottom: 1px solid #eff1f0;float: left;margin: 0;min-height: 185px;padding: 20px 25px;width: 100%; position: relative;}
+.content-hacker-module {border-bottom: 1px solid #eff1f0;float: left;margin: 0;min-height: 195px;padding: 20px 25px;width: 100%; position: relative;}
 
 .module-heading {color: #a6a8ab;float: left;font-size: 14px;font-weight: 300 ;margin: 0;padding: 0;line-height: normal;width: 100%;}
 
@@ -1299,17 +1299,17 @@ width: 100%;}
 
 .module-detail-section {display: block;float: left;margin-top: 20px;width: 100%;}
 
-.card-box-bottom {float: left;margin: 0;padding: 20px 25px 0;width: 100%;}
+.card-box-bottom {float: left;margin: 0;padding: 20px 25px 0;width: 100%;min-height:45px;}
 
 .module-link {float: left;width: 100%;}
 
 //.module-link:hover { background-color:#ededed;-webkit-transition: background-color 0.5s ease-out;-moz-transition: background-color 0.5s ease-out;  -o-transition: background-color 0.5s ease-out;transition: background-color 0.5s ease-out;}
 
-.active-link-outer {display: table;float: left;height: 100%;text-align: center;width: 100%;}
+.active-link-outer {display: table;float: left;height: 100%;min-height:391px;text-align: center;width: 100%;}
 
-.active-new-project-link  {display: table-cell;height: 100%;vertical-align: middle;}
+.active-new-project-link  {display: table-cell;height: 100%;vertical-align: middle;padding: 20px 25px;}
 
-.active-new-project-link  a{color: #9cc0cf !important;font-size:36px;font-weight: bold;height: 100%;text-transform:none;}
+.active-new-project-link  a{color: #9cc0cf !important;font-size:24px;font-weight: bold;height: 100%;text-transform:none;}
 
 .active-new-project-link  a:hover{color: #005FC3;}
 
@@ -1524,7 +1524,7 @@ width: 100%;}
     cursor:pointer;
 }
 
-.logo-outer-2 {float: right;margin: 0;padding: 0;width: auto;}
+.logo-outer-2 {float: right;margin:0;padding: 0;width: auto;}
 
 .logout-link:hover {
     color:#005cb9;
@@ -1561,7 +1561,7 @@ width: 100%;}
     margin-top: -55px;
     margin-left: 5px;
     top: 0;
-    right: 0;
+    right: -25px;
     height: 105px;
     width: auto;
 }
@@ -1571,10 +1571,10 @@ width: 100%;}
     margin-top: 90px;
     margin-left: 0;
     top: 0;
-    right: 0;
+    left: 15px;
     height: auto;
     //width: 450px;
-    width: -moz-calc(100% + 0px);width: -webkit-calc(100% + 0px);width: -o-calc(100% + 0px);width: calc(100% + 0px);
+    width: -moz-calc(100% - 30px);width: -webkit-calc(100% - 30px);width: -o-calc(100% - 30px);width: calc(100% - 30px);
 }
 
 .ch-folder-tab {
@@ -1582,10 +1582,10 @@ width: 100%;}
     margin-top: 0;
     margin-left: 0;
     top: 0;
-    right: 0;
+    left: -1px;
     height: auto;
     //width: 450px;
-    width: -moz-calc(100% + 0px);width: -webkit-calc(100% + 0px);width: -o-calc(100% + 0px);width: calc(100% + 0px);
+    width: -moz-calc(100% + 1px);width: -webkit-calc(100% + 1px);width: -o-calc(100% + 1px);width: calc(100% + 1px);
 }
 
 .keyword-row-arrow {

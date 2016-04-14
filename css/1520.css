@@ -379,6 +379,7 @@ cursor:pointer;
 
 .card-header-mission-text {
   margin-top: -5px;
+  margin-bottom: 5px;
   margin-left: -10px;
   color: #b3b3b3;
   font-weight: lighter;
@@ -390,7 +391,7 @@ cursor:pointer;
 }
 
 .activate-link {
-    color: #9cc0cf !important;font-size:24px;font-weight: bold;height: 100%;text-transform:none;cursor:pointer;
+    color: #9cc0cf !important;font-size:24px;font-weight: bold;height: 100%;text-transform:none;cursor:pointer;line-height:150%;
 }
 
 .show-more-text {
@@ -453,29 +454,31 @@ cursor:pointer;
 }
 
 .activate-logo-container {
-    padding:35px;
+    padding:25px;
 }
 
 .large-shield-left {
     //height:225px;
     //width:auto;
     height: auto;
-    width: -moz-calc(100% - 45px);width: -webkit-calc(100% - 45px);width: -o-calc(100% - 45px);width: calc(100% - 45px);
+    width: -moz-calc(100% - 50px);width: -webkit-calc(100% - 50px);width: -o-calc(100% - 50px);width: calc(100% - 50px);
     float:left;
     border:0;
     cursor:pointer;
     margin-left:15px;
+    overflow:hidden;
 }
 
 .large-shield-right {
     //height:225px;
     //width:auto;
     height: auto;
-    width: -moz-calc(100% - 45px);width: -webkit-calc(100% - 45px);width: -o-calc(100% - 45px);width: calc(100% - 45px);
+    width: -moz-calc(100% - 50px);width: -webkit-calc(100% - 50px);width: -o-calc(100% - 50px);width: calc(100% - 50px);
     float:right;
     border:0;
     cursor:pointer;
     margin-right:15px;
+    overflow:hidden;
 }
 
 .shield-label {
@@ -483,6 +486,7 @@ cursor:pointer;
     color:#000;
     font-weight:bold;
     font-size:22px;
+    overflow:hidden;
 }
 
 .shield-description {

@@ -26,7 +26,7 @@
         ============================== -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/materialize.css" rel="stylesheet" id="theme-change">
-    <link href="css/custom-style.css" rel="stylesheet" id="theme-change">
+    <link href="css/custom-style.css?v=1" rel="stylesheet" id="theme-change">
     <link href="css/rankhacker.css" rel="stylesheet" id="theme-change">
     <link href="css/bootstrap-slider.min.css" rel="stylesheet" id="theme-change">
 
@@ -36,8 +36,8 @@
     
     <!--1520 files-->
     <script src="js/bootstrap-slider.js"></script>
-    <script src="js/1520.js"></script>
-    <link href="css/1520.css" rel="stylesheet" id="theme-change">
+    <script src="js/1520.js?v=1"></script>
+    <link href="css/1520.css?v=1" rel="stylesheet" id="theme-change">
     <link href="css/spinner.css" rel="stylesheet" id="theme-change">
     
     <script>
@@ -57,6 +57,8 @@
 <div id="rank-header-outer">
     <nav id="mainmenu" class="navbar navbar-fixed-top main-menu" role="navigation">
         <!-- LOGO CONTAINER -->
+        <div class="col-lg-1"></div>
+        <div class="col-lg-9">
         <div class="logo-cont logo-outer">
             <a class="navbar-brand" data-text="RANKHACKER" onclick="gotoRHStorefront();" style="cursor:pointer;"><img src="images/logo-main.png" alt="site-logo" onclick="gotoRHStorefront();" style="cursor:pointer;"> </a>
             <!--<span style="float:left;"><img src="images/icon-keyword_hacker_small.png" alt="kwhacker" class="module-icon" onclick="gotoKHDashboard();"></span><span class="module-icon-label" onclick="gotoKHDashboard();"><strong>KEYWORD</strong> HACKER</span>
@@ -65,9 +67,11 @@
             <div class="dashboard-status"><img src="images/keyword-hacker-icon-white.png" alt="kwhacker" style="cursor:pointer;" class="module-icon" onclick="gotoKHDashboard();"><a class="module-icon-label" style="cursor:pointer;" onclick="gotoKHDashboard();">Keyword Hacker</a></div>
             <div class="dashboard-status"><img src="images/content-hacker-icon-white.png" style="cursor:default;" alt="contenthacker" class="module-icon"><a class="module-icon-label" style="cursor:default;">Content Hacker</a></div>-->
         </div>
-        <div class="logo-cont logo-outer-2">
+        <div class="colg-lg-1 logo-cont logo-outer-2">
             <span class="logout-link" onclick="logout();">LOGOUT</span>
         </div>
+        </div>
+        <div class="col-lg-1"></div>
     </nav>
 </div>
 
@@ -331,16 +335,16 @@
     </div>
     
     <div class="activate-logo-container">
-        <div class="col-lg-6"><img src="images/keyword_logo_gray.png" id="kh_logo" class="large-shield-left" onclick="gotoCreateProject();"></div>
-        <div class="col-lg-6"><img src="images/content_logo_gray.png" id="ch_logo" class="large-shield-right" onclick="gotoRHCreateProject();"></div>
+        <div class="row">
+            <div class="col-lg-6"><img src="images/keyword_logo_gray.png" id="kh_logo" class="large-shield-left" onclick="gotoCreateProject();"></div>
+            <div class="col-lg-6"><img src="images/content_logo_gray.png" id="ch_logo" class="large-shield-right" onclick="gotoRHCreateProject();"></div>
+        </div>
     </div>
     <div class="activate-logo-container">
-        <div class="col-lg-6"></div>
-        <div class="col-lg-6"></div>
-    </div>
-    <div class="activate-logo-container">
-        <div class="col-lg-6"><h3 class="shield-label">KEYWORD<br/>HACKER</h3><br/><p class="shield-description">Define phrases and identify net worth.</p></div>
-        <div class="col-lg-6"><h3 class="shield-label">CONTENT<br/>HACKER</h3><br/><p class="shield-description">Declassify and compare competitor strategy.</p></div>
+        <div class="row">
+            <div class="col-lg-6"><h3 class="shield-label">KEYWORD<br/>HACKER</h3><br/><p class="shield-description">Define phrases and identify net worth.</p></div>
+            <div class="col-lg-6"><h3 class="shield-label">CONTENT<br/>HACKER</h3><br/><p class="shield-description">Declassify and compare competitor strategy.</p></div>
+        </div>
     </div>
 </div>
 
@@ -353,7 +357,9 @@
 ============================== -->
 <!-- Footer start here -->
 <footer id="interface-footer">
-    <div class="col-lg-10 col-lg-offset-1">
+<div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
         <div class="row">
             <!--Footer left section start here-->
             <div class="footer-link col-lg-4">
@@ -381,6 +387,8 @@
             <!--copyright section close here-->
         </div>
     </div>
+    <div class="col-lg-1"></div>
+</div>
 </footer>
 <!--Footer close here-->
 

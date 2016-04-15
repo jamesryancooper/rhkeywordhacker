@@ -653,18 +653,18 @@ function addKeyword(e)
     if(e.keyCode == 13)
     {
         var keyword = $('#new-keyword').val();
-        var currentKeywordCount = $('#keyword-count').val();
 
         if(keyword.trim() !== '')
         {
             var kwArray = keyword.split(",");
+            
             for(var j=0; j<kwArray.length; j++)
             {
+                var currentKeywordCount = $('#keyword-count').val();
                 var existingKeywords = $('#ctc').html();
-                var newKeywordCount = parseInt(currentKeywordCount)+kwArray.length;
+                var newKeywordCount = parseInt(currentKeywordCount) + 1;
                 var newKeywords = existingKeywords + "<li id=\"keyword"+newKeywordCount+"\">"+kwArray[j].trim()+"<span style=\"padding:5px;color:#ec1c24;font-weight:bold;cursor:pointer;\" id=\"remove-keyword"+newKeywordCount+"\" title=\"Remove\" onclick=\"removeKeyword(this);\">X</span></li>";
                 $('#ctc').html(newKeywords);
-
                 $('#new-keyword').val('');
                 $('#keyword-count').val(newKeywordCount);
             }
@@ -2271,15 +2271,14 @@ function toggleReadMore()
 
 function addKeywordInReport(keyword)
 {
-    var currentKeywordCount = $('#keyword-count').val();
-
     if(keyword.trim() !== '')
     {
         var kwArray = keyword.split(",");
         for(var i=0; i<kwArray.length; i++)
         {
+            var currentKeywordCount = $('#keyword-count').val();
             var existingKeywords = $('#ctc').html();
-            var newKeywordCount = parseInt(currentKeywordCount)+kwArray.length;
+            var newKeywordCount = parseInt(currentKeywordCount)+1;
             var newKeywords = existingKeywords + "<li id=\"keyword"+newKeywordCount+"\">"+kwArray[i].trim()+"<span style=\"padding:5px;color:#ec1c24;font-weight:bold;cursor:pointer;\" id=\"remove-keyword"+newKeywordCount+"\" title=\"Remove\" onclick=\"removeKeywordInReport(this);\">X</span></li>";
             $('#ctc').html(newKeywords);
 
@@ -2372,7 +2371,6 @@ function recalculateProject()
                 keywordsList += ";"+keyword;
             }
         }
-        
         $.ajax({url: restURL, data: {'command':'addKeywordsToExistingProject','projectid':projectID,'keywords':keywordsList}, type: 'post', async: true, success: function postResponse(returnData){
                 var info = JSON.parse(returnData);
 
@@ -2380,10 +2378,8 @@ function recalculateProject()
                 {
                     $('body').removeClass('wait');
                     //Show the warning message at top, and set the flag to keep checking
-                    /*
-                    $("#warning-message").show(400);
-                    $("#check-project-done-flag").val(1);
-                    */
+                    //$("#warning-message").show(400);
+                    //$("#check-project-done-flag").val(1);
                     window.location = "keywordhacker.html?pid="+projectID;
                 }
             }

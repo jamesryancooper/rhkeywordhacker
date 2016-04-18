@@ -1198,13 +1198,13 @@ function displayProjectInfo(field)
         var avgCTR = Math.round(thisEntry.avgCTR);
         var avgCTRExact = Math.round(thisEntry.avgCTRExact);
         
-        if(typeof avgCTRExact != "undefined")
+        /*if(typeof avgCTRExact != "undefined")
         {
             if(avgCTRExact > 0)
             {
                 avgCTR = avgCTRExact;
             }
-        }
+        }*/
         
         var clientCTR = Math.round(thisEntry.clientCTR);
         var avgRank = thisEntry.avgRank;
@@ -1311,7 +1311,7 @@ function displayProjectInfo(field)
                         "<h2>URL<i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i></h2>\n"+
                     "</li>\n"+
                     "<li class=\"power-goal-info col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','ctr','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
-                        "<h2>CTR<i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i><a class=\"info-icon\" title=\"Click Through Rate for the ranking position and current keyword. A (b) indicates a broad CTR based on competitors' keyword rankings; an (e) indicates an exact CTR.\"> </a></h2>\n"+
+                        "<h2>CTR<i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i><a class=\"info-icon\" title=\"Click Through Rate for the ranking position and current keyword.\"> </a></h2>\n"+
                     "</li>\n"+
                     "<li class=\"monthly-organic-info col-lg-1\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','power-level','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
                         "<h2>Power Level<i class=\"fa fa-sort\" style=\"padding-left:5px;color:#8c8c8c;\"></i></h2>\n"+
@@ -1368,14 +1368,14 @@ function displayProjectInfo(field)
             var competitorCTRExact = Math.round(thisCompetitor.trafficExact);
             
             var ctrType = " (b)";
-            if(typeof competitorCTRExact != "undefined")
+            /*if(typeof competitorCTRExact != "undefined")
             {
                 if(competitorCTRExact > 0)
                 {
                     competitorCTR = competitorCTRExact;
                     ctrType = " (e)";
                 }
-            }
+            }*/
             
             //var competitorPowerLevel = Math.round((thisCompetitor.DA+thisCompetitor.PA)/2/10);
             var competitorPowerLevel = thisCompetitor.powerLevel;
@@ -1803,14 +1803,14 @@ function refreshProjectInfo()
             var competitorCTRExact = Math.round(thisCompetitor.trafficExact);
 
             var ctrType = " (b)";
-            if(typeof competitorCTRExact != "undefined")
+            /*if(typeof competitorCTRExact != "undefined")
             {
                 if(competitorCTRExact > 0)
                 {
                     competitorCTR = competitorCTRExact;
                     ctrType = " (e)";
                 }
-            }
+            }*/
 
             if(competitorPowerLevel > 9 && competitorActive == 1)
             {

@@ -1197,6 +1197,7 @@ function displayProjectInfo(field)
         var keywordActive = thisEntry.active;
         var avgCTR = Math.round(thisEntry.avgCTR);
         var avgCTRExact = Math.round(thisEntry.avgCTRExact);
+        var keywordHidden = thisEntry.hidden;
         
         /*if(typeof avgCTRExact != "undefined")
         {
@@ -1240,8 +1241,15 @@ function displayProjectInfo(field)
             rowBGText = " style=\"opacity:0.33;\"";
         }
         
+        var hideCSS = "";
+        if(keywordHidden == 1)
+        {
+            hideCSS = "style=\"display:none;\"";
+        }
+        
+        
         //Add the header info for the accordian HTML
-        accordianHTML += "<div id=\"kw-panel-div"+keywordID+"\" class=\"panel panel-default keyword-phraser-row\">\n"+
+        accordianHTML += "<div id=\"kw-panel-div"+keywordID+"\" class=\"panel panel-default keyword-phraser-row\" "+hideCSS+">\n"+
                             "<ul role=\"tab\" id=\"keyword-phraser-heading"+keywordID+"\""+rowBGText+">\n"+
                                 "<li class=\"checkbox-outer width-2-5\">\n"+
                                     "<h2>\n"+

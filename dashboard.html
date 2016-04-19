@@ -43,7 +43,7 @@
     <script>
         function run(){
             loadProjectDashboard(false);
-            setInterval(loadProjectDashboard.bind(false), 15000);
+            //setInterval(loadProjectDashboard.bind(false), 15000);
         }
     </script>
     
@@ -58,8 +58,7 @@
     <nav id="mainmenu" class="navbar navbar-fixed-top main-menu" role="navigation">
         <!-- LOGO CONTAINER -->
         <div class="col-lg-1"></div>
-        <div class="col-lg-9">
-        <div class="logo-cont logo-outer">
+        <div class="logo-cont logo-outer col-lg-9" style="width:77%;">
             <a class="navbar-brand" data-text="RANKHACKER" onclick="gotoRHStorefront();" style="cursor:pointer;"><img src="images/logo-main.png" alt="site-logo" onclick="gotoRHStorefront();" style="cursor:pointer;"> </a>
             <!--<span style="float:left;"><img src="images/icon-keyword_hacker_small.png" alt="kwhacker" class="module-icon" onclick="gotoKHDashboard();"></span><span class="module-icon-label" onclick="gotoKHDashboard();"><strong>KEYWORD</strong> HACKER</span>
             <span style="float:left;"><img src="images/icon-content_hacker_small.png" alt="contenthacker" class="module-icon"></span><span class="module-icon-label"><strong>CONTENT</strong> HACKER</span>-->
@@ -67,9 +66,8 @@
             <div class="dashboard-status"><img src="images/keyword-hacker-icon-white.png" alt="kwhacker" style="cursor:pointer;" class="module-icon" onclick="gotoKHDashboard();"><a class="module-icon-label" style="cursor:pointer;" onclick="gotoKHDashboard();">Keyword Hacker</a></div>
             <div class="dashboard-status"><img src="images/content-hacker-icon-white.png" style="cursor:default;" alt="contenthacker" class="module-icon"><a class="module-icon-label" style="cursor:default;">Content Hacker</a></div>-->
         </div>
-        <div class="colg-lg-1 logo-cont logo-outer-2">
+        <div class="logo-cont logo-outer-2 col-lg-1" style="width:9%;">
             <span class="logout-link" onclick="logout();">LOGOUT</span>
-        </div>
         </div>
         <div class="col-lg-1"></div>
     </nav>
@@ -83,11 +81,13 @@
     <!--div class="piece scanlines noclick"></div>
         <div id="hacker-text" class="piece glow noclick"></div>
         <div id="crt-output" class="piece output noopacity"></div-->
-
+    
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
     <div class="overlay interface-outer">
         <div class="projects">
             <div class="row row-v-spacing"></div>
-            <div id="dashboard-header" class="col-lg-10 col-md-offset-1 ">
+            <div id="dashboard-header" class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="head-info-box">
@@ -117,7 +117,7 @@
                 </div>
                 <div id="shadow"></div>
             </div>
-            <div class="col-lg-10 col-md-offset-1">
+            <div class="col-lg-12">
                 <div class="padding-box">
 
                     <div class="big-demo go-wide" data-js-module="sorting-demo">
@@ -143,11 +143,11 @@
                             </div>
                         </div>
 
-                        <div class="dashboard-keywordhacker">
+                        <div class="dashboard-keywordhacker col-lg-12">
                             <div class="row-v-spacing project-cards-outer" id="card-container" style="text-align:center;">
                                 
                                     <br/><br/><br/>
-                                    <div class="three-quarters-loader" id="loading_spinner" style="text-align:middle;"></div>
+                                    <div class="three-quarters-loader" id="loading_spinner" style="text-align:middle;margin-left:-45px;"></div>
                                     
                                     
                                 
@@ -160,10 +160,8 @@
 
 
                 </div>
-            </div>
-        </div>
-        
-        <div class="rt-bottom-outer">
+                
+                <div class="rt-bottom-outer">
             <div class="rt-bottom-section">
                 <h2 class="text-center"><b>[<span>Coming soon</span>]</b></h2>
                 <br/><br/>
@@ -186,6 +184,13 @@
         </div>
         
     </div>
+                
+            </div>
+        </div>
+        
+        
+    </div>
+        <div class="col-lg-1"></div>
     
 <!-- Edit project modal -->
 <div id="dimmer" class="dimmer"></div>

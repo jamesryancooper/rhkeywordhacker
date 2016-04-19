@@ -43,7 +43,7 @@
   box-sizing: border-box;
   display: inline-block;
   position: fixed;
-  left: 47%;
+  //left: 47%;
   overflow: hidden;
   text-indent: -9999px;
   width: 128px;

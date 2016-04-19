@@ -1002,12 +1002,12 @@ width: 100%;}
 
 //.keyword-item-info {float: right;margin: 0;padding: 0;width: -moz-calc(100% - 45px);width: -webkit-calc(100% - 45px);width: -o-calc(100% - 45px);width: calc(100% - 45px);}
 .keyword-item-info-first {float: right;margin-top: 40px;margin-bottom:0;margin-right:0;margin-left: -40px;padding: 0;width: -moz-calc(100% - 45px);width: -webkit-calc(100% - 45px);width: -o-calc(100% - 45px);width: calc(100% - 45px);color:#000;}
-.keyword-item-info-second {float: left;margin-top: 0px;margin-bottom:0;margin-right:0;margin-left:0px;padding: 0;width: -moz-calc(100% - 45px);width: -webkit-calc(100% - 45px);width: -o-calc(100% - 45px);width: calc(100% - 45px);}
+.keyword-item-info-second {float: left;margin-top: -3px;margin-bottom:8px;margin-right:0;margin-left:0px;padding: 0;width: -moz-calc(100% - 45px);width: -webkit-calc(100% - 45px);width: -o-calc(100% - 45px);width: calc(100% - 45px);}
 .keyword-item-info {float: left;margin-top: 35px;margin-bottom:0;margin-right:0;margin-left:-40px;padding: 0;width: -moz-calc(100% - 30px);width: -webkit-calc(100% - 30px);width: -o-calc(100% - 30px);width: calc(100% - 30px);}
 
 .keyword-item-info span,.keyword-item-info-second span {float: left;font-size: 9px;margin: 0;padding: 0;width: 100%;color: #000; position: relative;}
 
-.keyword-item-info h2,.keyword-item-info-first h2,.keyword-item-info-second h2 {color: #000;font-size: 16px;font-weight: bold;line-height: normal;margin: 0;padding: 0;text-align: left;}
+.keyword-item-info h2,.keyword-item-info-first h2,.keyword-item-info-second h2 {color: #000;font-size: 13px;font-weight: bold;line-height: normal;margin: 0;padding: 0;text-align: left;}
 
 .calculator-text, .keyword-item-info-first .calculator-text {font-size: 12px;margin-left:-40px;}
 

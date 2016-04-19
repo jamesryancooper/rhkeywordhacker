@@ -1004,7 +1004,7 @@ function displayProjectInfo(field)
         
         if(useGoogle == 1 && useBing != 1)
         {
-            $("#search-engine-icons").html("<i class=\"keyword-item-icon rh-google-icon\" style=\"margin-left:-5px;\"></i>");
+            $("#search-engine-icons").html("<i class=\"keyword-item-icon rh-google-icon\" style=\"margin-left:-5px;margin-bottom:-3px;\"></i>");
         }
         else if(useGoogle != 1 && useBing == 1)
         {
@@ -1012,7 +1012,7 @@ function displayProjectInfo(field)
         }
         else
         {
-            $("#search-engine-icons").html("<i class=\"keyword-item-icon rh-google-icon\" style=\"margin-left:-5px;\"></i><img src=\"images/bing_icon.png\" class=\"icon-sized\"><img src=\"images/yahoo_icon.png\" class=\"icon-sized\">");
+            $("#search-engine-icons").html("<i class=\"keyword-item-icon rh-google-icon\" style=\"margin-left:-5px;margin-bottom:-3px;\"></i><img src=\"images/bing_icon.png\" class=\"icon-sized\"><img src=\"images/yahoo_icon.png\" class=\"icon-sized\">");
         }
         
         if(typeof searchVolume === 'undefined') {searchVolume = 0;}

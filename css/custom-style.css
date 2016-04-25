@@ -1685,3 +1685,81 @@ width: 100%;}
 .info-link:hover:after {color:#fff;background: rgba(0, 0, 0, 0.8) none repeat scroll 0 0;border-radius: 5px;content: attr(title);font-size: 11px;left: -134px;margin: 0 auto;padding: 5px 15px;position: absolute;right: auto;width: 300px;z-index: 98;bottom: -moz-calc(100% + 10px);bottom: -webkit-calc(100% + 10px);bottom: -o-calc(100% + 10px);bottom: calc(100% + 10px); font-weight:normal;}
 
 .info-link:hover:before {bottom:5px;left: 50%;border: solid transparent;content: " ";height: 0;width: 0;position: absolute;pointer-events: none;border-color: rgba(136, 183, 213, 0);border-top-color: rgba(0, 0, 0, 0.8);border-width: 10px;margin-left: -10px; font-weight:normal;}
+
+/* Pricing Tables */
+.pricing {
+  margin-top: 80px;
+  color: #000000;
+}
+
+.pricing h1 {
+  font-size: 4.25em;
+  color: #000000;
+}
+
+.pricing .panel
+{
+  text-align: center;
+}
+
+.pricing .panel:hover { box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4), 0 1px 5px rgba(130, 130, 130, 0.35); }
+.pricing .panel-body
+{
+  padding: 0px;
+  text-align: center;
+}
+
+.pricing .btn-success {
+  border-color: #000000;
+}
+
+.pricing .btn-success {
+  color: #000000;
+}
+
+.btn-success:hover {
+  color: #ffffff;
+}
+
+.panel-black {
+  border-color: #000000;
+}
+
+.panel-black>.panel-heading {
+  color: #fff;
+  background-color: #000000;
+  border-color: #000000;
+}
+
+.the-price
+{
+  background-color: rgba(220,220,220,.17);
+  box-shadow: 0 1px 0 #dcdcdc, inset 0 1px 0 #fff;
+  padding: 20px;
+  margin: 0;
+}
+
+.the-price h1
+{
+  line-height: 1em;
+  padding: 0;
+  margin: 0;
+}
+
+.subscript
+{
+  font-size: 25px;
+}
+
+.row-centered {
+  text-align:center;
+}
+
+.col-centered {
+  display:inline-block;
+  float:none;
+  /* reset the text-align */
+  text-align:left;
+  /* inline-block space fix */
+  margin-right:-4px;
+}

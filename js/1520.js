@@ -1471,10 +1471,10 @@ function displayProjectInfo(field)
         
         //Add in the summary row
         competitorHTML += "<ul class=\"power-summary-row-highlight\" style=\"background-color:#005cb9;color:#fff;border-right:1px solid #005cb9;margin:0;\">\n"+
-                                "<li class=\"checkbox-outer col-lg-11\" style=\"background-color:#005cb9;border-right:1px solid #005cb9;\">\n"+
+                                "<li class=\"checkbox-outer col-lg-10\" style=\"background-color:#005cb9;border-right:1px solid #005cb9;\">\n"+
                                     "<h2 style=\"color:#fff;\"><b>YOUR POWER LEVEL GOAL</b>&nbsp;Competitor average score - Your score =</h2>\n"+
                                 "</li>\n"+
-                                "<li class=\"col-lg-1\" style=\"background-color:#005cb9;color:#fff;border-right:1px solid #005cb9;margin-left:-4px;\">\n"+
+                                "<li class=\"col-lg-2\" style=\"background-color:#005cb9;color:#fff;border-right:1px solid #005cb9;margin-left:-4px;\">\n"+
                                     "<h2 style=\"color:#fff;font-size:16px;\" id=\"kwid-"+keywordID+"-plg-2\"><b>"+powerLevelGoal+"</b></h2>\n"+
                                 "</li>\n"+
                             "</ul>\n";
@@ -1797,7 +1797,7 @@ function refreshProjectInfo()
         //Cycle through and see if any competitors have PLG of 10; if so, show the warning, else hide it.
         var competitorsCount = 0;
         var totalCTR = 0;
-        var totalPowerLevel = 0;
+        var keywordTotalPowerLevel = 0;
         var totalRank = 0;
         var showWarning = false;
         for(var j=0; j<thisCompetitorArray.length; j++)
@@ -1831,7 +1831,7 @@ function refreshProjectInfo()
             {
                 competitorsCount++;
                 totalCTR += competitorCTR;
-                totalPowerLevel += competitorPowerLevel;
+                keywordTotalPowerLevel += competitorPowerLevel;
                 totalRank += competitorPositionRank;
             }
         }
@@ -1855,13 +1855,13 @@ function refreshProjectInfo()
         var keywordActive = thisEntry.active;
         var avgCTR = thisEntry.avgCTR;
         var avgRank = thisEntry.avgRank;
-        var totalPowerLevel = thisEntry.totalPowerLevel;     //Add back the client power level to the total power level for this keyword
+        //var keywordTotalPowerLevel = thisEntry.totalPowerLevel;     //Add back the client power level to the total power level for this keyword
         var keyword = thisEntry.keyword;
         
         var monthlyVisitors = Math.round(searchVolume * avgCTR,0);
         var monthlyCustomers = Math.round(monthlyVisitors * customerConversionRate,0);
         var monthlySales = Math.round(monthlyCustomers * valuePerCustomer,0);
-        var costPerMonth = Math.round((totalPowerLevel - clientPowerLevel) * costPerLevel, 0);
+        var costPerMonth = Math.round((keywordTotalPowerLevel - clientPowerLevel) * costPerLevel, 0);
         var keywordNetWorth = (monthlySales - costPerMonth);
         
         //Trap for nulls on numberWithCommas function
@@ -1872,7 +1872,7 @@ function refreshProjectInfo()
         if(typeof costPerMonth === 'undefined') {costPerMonth = 0;}
         if(typeof keywordNetWorth === 'undefined') {keywordNetWorth = 0;}
         
-        var powerLevelGoal = Math.max(1,(totalPowerLevel - clientPowerLevel));
+        var powerLevelGoal = Math.max(1,Math.round((keywordTotalPowerLevel/competitorsCount) - clientPowerLevel));
         
         $('#kwid-'+keywordID+'-plg-1').html("<h2>"+powerLevelGoal+"<a data-toggle=\"collapse\" data-parent=\"#keyword-phraser-accordion\" href=\"#keyword-phraser-collapse"+i+"\" aria-expanded=\"true\" aria-controls=\"keyword-phraser-collapse"+i+"\" class=\"rh-view-icon\"> </a></h2>");
         $('#kwid-'+keywordID+'-search-volume').html("<h2>"+numberWithCommas(searchVolume)+"</h2>");
@@ -1884,11 +1884,11 @@ function refreshProjectInfo()
         $('#kwid-'+keywordID+'-plg-2').html(powerLevelGoal);
         $('#kwid-'+keywordID+'-plg-3').html(powerLevelGoal);
         $('#kwid-'+keywordID+'-plg-4').html("+"+powerLevelGoal);
-        $('#kwid-'+keywordID+'-total-power-summary').html(totalPowerLevel);
+        $('#kwid-'+keywordID+'-total-power-summary').html(keywordTotalPowerLevel);
         $('#kwid-'+keywordID+'-avg-rank').html(Math.round(totalRank/competitorsCount));
         $('#kwid-'+keywordID+'-avg-ctr').html(Math.round(totalCTR/competitorsCount)+"%");
-        $('#kwid-'+keywordID+'-table-total-pl').html(Math.round(totalPowerLevel/competitorsCount));
-        $('#kwid-'+keywordID+'-their-pl').html(totalPowerLevel);
+        $('#kwid-'+keywordID+'-table-total-pl').html(Math.round(keywordTotalPowerLevel/competitorsCount));
+        $('#kwid-'+keywordID+'-their-pl').html(Math.round(keywordTotalPowerLevel/competitorsCount));
         $('#kwid-'+keywordID+'-your-pl').html(clientPowerLevel);
     }
 }

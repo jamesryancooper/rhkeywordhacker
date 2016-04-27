@@ -737,9 +737,12 @@
                     jQuery(this).find(".keyword-row-arrow").attr('src',function(i,e){
                         return e.replace("keyword_row_arrow_white.png","keyword_row_arrow_yellow.png");
                     });
+                    var id = $(this).attr('id');
+                    var targetID = "kwid-"+id.replace("kw-panel-div","")+"-plg-1";
+                    jQuery("#"+targetID).css("margin-top","-2px");
                 }
             });
-
+            
 
             jQuery('.phraser-accordion-outer').each(function (i) {
 
@@ -760,6 +763,10 @@
                     jQuery(this).find(".keyword-row-arrow").attr('src',function(i,e){
                         return e.replace("keyword_row_arrow_yellow.png","keyword_row_arrow_white.png");
                     });
+                    
+                    var id = $(this).attr('id');
+                    var targetID = "kwid-"+id.replace("kw-panel-div","")+"-plg-1";
+                    jQuery("#"+targetID).css("margin-top","0");
                 }
             });
 //		jQuery('.phraser-accordion-outer .keyword-phraser-row').removeClass('active');

@@ -135,7 +135,7 @@ function remindPassword()
 
                 if(info.status == "success")
                 {
-                    $("#login-response").html("Please check your email for a message from SSD Fair Marketing containing a new password for your account.");
+                    $("#login-response").html("Please check your email for a message from Rank Hacker Admin containing a new password for your account.");
                 }
                 else if(info.status == "error")
                 {

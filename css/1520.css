@@ -148,8 +148,8 @@ cursor:pointer;
 }
 
 .login-response {
-  margin-top: 16px;
-  padding-top: 34px;
+  margin-top: 0;
+  padding-top: 0;
   color: #ec1c24;
   font-weight: bold;
   clear: both;
@@ -524,3 +524,5 @@ cursor:pointer;
     text-align: center;
     display: none;
 }
+
+.green-text-link {color:#088D0C !important;padding-left:5px;margin-top:-10px;float:right;cursor:pointer;clear:right;font-size:14px;}

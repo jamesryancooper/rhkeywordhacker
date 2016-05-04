@@ -937,7 +937,7 @@ function displayProjectInfo(field)
     $('body').addClass('wait');
     var returnData = $('#json').val();
     var info = JSON.parse(returnData);
-    
+        
     //Fill in the project data here
     var projectInfo = info.projectSummary;
         var projectID = projectInfo.projectID;
@@ -1861,7 +1861,7 @@ function refreshProjectInfo()
         var monthlyVisitors = Math.round(searchVolume * avgCTR,0);
         var monthlyCustomers = Math.round(monthlyVisitors * customerConversionRate,0);
         var monthlySales = Math.round(monthlyCustomers * valuePerCustomer,0);
-        var costPerMonth = Math.round((keywordTotalPowerLevel - clientPowerLevel) * costPerLevel, 0);
+        var costPerMonth = Math.round(Math.max(1,Math.round((keywordTotalPowerLevel/competitorsCount) - clientPowerLevel)) * costPerLevel, 0);
         var keywordNetWorth = (monthlySales - costPerMonth);
         
         //Trap for nulls on numberWithCommas function

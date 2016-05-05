@@ -813,6 +813,13 @@ function sortKeywordCompetitors(selectedKeywordID,field,totalPowerLevel,avgRank,
     //Now re-draw the content for the competitors div
     var competitorInnerHTML = "<!--<h2 class=\"power-summary-heading\"><span class=\"tag-label\">them</span> COMPETITOR AVERAGE RANKING POWER LEVEL IS <span class=\"total-power-summery\" id=\"kwid-"+keywordID+"-total-power-summary\">"+totalPowerLevel+"</span></h2>\n"+
                 "<div class=\"divider\"></div>-->\n"+
+                
+                "<ul class=\"power-summary-row-highlight\" style=\"background-color:#cccccc;color:#000;border-right:1px solid #cccccc;margin:0;\">\n"+
+                                "<li class=\"checkbox-outer col-lg-12\" style=\"background-color:#cccccc;border-right:1px solid #cccccc;\">\n"+
+                                    "<h2 style=\"color:#000;text-align:center;\"><b>TOP TEN COMPETITORS RANKING FOR THIS KEYWORD PHRASE</b></h2>\n"+
+                                "</li>\n"+
+                            "</ul>\n"+
+                            
                 "<ul class=\"power-summary-row power-summary-heading-row\">\n"+
                     "<li class=\"checkbox-outer col-lg-1\"> &nbsp; </li>\n"+
                     "<li class=\"keyword-phraser-tittle col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','google-rank','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
@@ -920,7 +927,7 @@ function sortKeywordCompetitors(selectedKeywordID,field,totalPowerLevel,avgRank,
         //Add in the summary row
         competitorInnerHTML += "<ul class=\"power-summary-row-highlight\" style=\"background-color:#005cb9;color:#fff;border-right:1px solid #005cb9;margin:0;\">\n"+
                                 "<li class=\"checkbox-outer col-lg-10\" style=\"background-color:#005cb9;border-right:1px solid #005cb9;\">\n"+
-                                    "<h2 style=\"color:#fff;\"><b>YOUR POWER LEVEL GOAL</b>&nbsp;Competitor average score - Your score =</h2>\n"+
+                                    "<h2 style=\"color:#fff;\"><a data-toggle=\"tooltip\" title=\"Power Level Goal = Competitor Power Level - Your Power Level\" class=\"tooltip-hover\" style=\"color:#fff;\"><b>YOUR POWER LEVEL GOAL</b></a></h2>\n"+
                                 "</li>\n"+
                                 "<li class=\"col-lg-2\" style=\"background-color:#005cb9;color:#fff;border-right:1px solid #005cb9;margin-left:-4px;\">\n"+
                                     "<h2 style=\"color:#fff;font-size:16px;\" id=\"kwid-"+keywordID+"-plg-2\"><b>"+powerLevelGoal+"</b></h2>\n"+
@@ -1310,6 +1317,14 @@ function displayProjectInfo(field)
         var competitorHTML = "<div class=\"col-lg-6 them-power-summary-section\" id=\"competitors-table-"+keywordID+"\">\n" +
                 "<!--<h2 class=\"power-summary-heading\"><span class=\"tag-label\">them</span> COMPETITOR AVERAGE RANKING POWER LEVEL IS <span class=\"total-power-summery\" id=\"kwid-"+keywordID+"-total-power-summary\">"+totalPowerLevel+"</span></h2>\n"+
                 "<div class=\"divider\"></div>-->\n"+
+                
+                "<ul class=\"power-summary-row-highlight\" style=\"background-color:#cccccc;color:#000;border-right:1px solid #cccccc;margin:0;\">\n"+
+                                "<li class=\"checkbox-outer col-lg-12\" style=\"background-color:#cccccc;border-right:1px solid #cccccc;\">\n"+
+                                    "<h2 style=\"color:#000;text-align:center;\"><b>TOP TEN COMPETITORS RANKING FOR THIS KEYWORD PHRASE</b></h2>\n"+
+                                "</li>\n"+
+                            "</ul>\n"+
+                
+                
                 "<ul class=\"power-summary-row power-summary-heading-row\">\n"+
                     "<li class=\"checkbox-outer col-lg-1\"> &nbsp; </li>\n"+
                     "<li class=\"keyword-phraser-tittle col-lg-2\" style=\"cursor:pointer;\" onclick=\"sortKeywordCompetitors('"+keywordID+"','google-rank','"+totalPowerLevel+"','"+avgRank+"','"+avgCTR+"','"+clientCTR+"','"+clientRanking+"','"+clientURL+"','"+clientPowerLevel+"','"+powerLevelGoal+"');\">\n"+
@@ -1472,7 +1487,7 @@ function displayProjectInfo(field)
         //Add in the summary row
         competitorHTML += "<ul class=\"power-summary-row-highlight\" style=\"background-color:#005cb9;color:#fff;border-right:1px solid #005cb9;margin:0;\">\n"+
                                 "<li class=\"checkbox-outer col-lg-10\" style=\"background-color:#005cb9;border-right:1px solid #005cb9;\">\n"+
-                                    "<h2 style=\"color:#fff;\"><b>YOUR POWER LEVEL GOAL</b>&nbsp;Competitor average score - Your score =</h2>\n"+
+                                    "<h2 style=\"color:#fff;\"><a data-toggle=\"tooltip\" title=\"Power Level Goal = Competitor Power Level - Your Power Level\" class=\"tooltip-hover\" style=\"color:#fff;\"><b>YOUR POWER LEVEL GOAL</b></a></h2>\n"+
                                 "</li>\n"+
                                 "<li class=\"col-lg-2\" style=\"background-color:#005cb9;color:#fff;border-right:1px solid #005cb9;margin-left:-4px;\">\n"+
                                     "<h2 style=\"color:#fff;font-size:16px;\" id=\"kwid-"+keywordID+"-plg-2\"><b>"+powerLevelGoal+"</b></h2>\n"+

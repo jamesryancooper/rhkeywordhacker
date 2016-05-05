@@ -944,7 +944,7 @@ function displayProjectInfo(field)
     $('body').addClass('wait');
     var returnData = $('#json').val();
     var info = JSON.parse(returnData);
-        
+    
     //Fill in the project data here
     var projectInfo = info.projectSummary;
         var projectID = projectInfo.projectID;
@@ -957,7 +957,7 @@ function displayProjectInfo(field)
         var completed = projectInfo.completed;
         var clientDA = projectInfo.clientDA;
         var clientPA = projectInfo.clientPA;
-        var clientPowerLevel = Math.max(1,Math.round((clientDA+clientPA)/2/10,0));
+        //var clientPowerLevel = Math.max(1,Math.round((clientDA+clientPA)/2/10,0));
         var totalPowerLevel = projectInfo.totalPowerLevel
         var incomingTraffic = Math.round(projectInfo.incomingTraffic,0);
         var runDateRaw = projectInfo.runDateRaw;
@@ -1205,7 +1205,7 @@ function displayProjectInfo(field)
         var avgCTR = Math.round(thisEntry.avgCTR);
         var avgCTRExact = Math.round(thisEntry.avgCTRExact);
         var keywordHidden = thisEntry.hidden;
-        
+        var clientPowerLevel = thisEntry.clientKeywordPowerLevel;
         /*if(typeof avgCTRExact != "undefined")
         {
             if(avgCTRExact > 0)
@@ -1748,7 +1748,7 @@ function refreshProjectInfo()
         var keywordNetWorth = (monthlySales - costPerMonth);
         
         var customerConversionRate = (payingCustomers / monthlyVisitors);
-        var clientPowerLevel = Math.max(1,Math.round((clientDA+clientPA)/2/10,0));
+        //var clientPowerLevel = Math.max(1,Math.round((clientDA+clientPA)/2/10,0));
         
         var netWorthStyle = "green-text";
         if(keywordNetWorth < 0 || completed != 1)
@@ -1872,6 +1872,7 @@ function refreshProjectInfo()
         var avgRank = thisEntry.avgRank;
         //var keywordTotalPowerLevel = thisEntry.totalPowerLevel;     //Add back the client power level to the total power level for this keyword
         var keyword = thisEntry.keyword;
+        var clientPowerLevel = thisEntry.clientKeywordPowerLevel;
         
         var monthlyVisitors = Math.round(searchVolume * avgCTR,0);
         var monthlyCustomers = Math.round(monthlyVisitors * customerConversionRate,0);

@@ -1,8 +1,8 @@
-var restURL = "http://fairmarketing.cloudapp.net/rest1.0/kh_endpoint.jsp?"
+//var restURL = "http://fairmarketing.cloudapp.net/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://fairmarketing.cloudapp.net/rest1.0/servlet/ssd.DownloadInventoryReport?"
-var rhURL = "http://fairmarketing.cloudapp.net/rhstorefront/";
-//var rhURL = "http://localhost:8383/rhstorefront/";
-//var restURL = "http://localhost:8084/rest1.0/kh_endpoint.jsp?"
+//var rhURL = "http://fairmarketing.cloudapp.net/rhstorefront/";
+var rhURL = "http://localhost:8383/rhstorefront/";
+var restURL = "http://localhost:8084/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://localhost:8084/rest1.0/servlet/ssd.DownloadInventoryReport"
 var desc = false;
 
@@ -565,7 +565,7 @@ function displayDashboardCards(sortMethod,flip)
             cardHTML += "<li class=\"col-lg-4 matchheight element-item\" id=\"project-card-"+projectID+"\">";
             cardHTML += "<div class=\"project-cart-box box-shadow-ot\">";
             cardHTML += "<div class=\"card-header\">";
-            cardHTML += "<div class=\"col-sm-10\"><span class=\"card-header-mission-text\">The Mission</span></div><div class=\"col-sm-2\"><h2 style=\"clear:both;text-align:right;margin-top:-10px;\"><!--<a style=\"cursor:pointer;\" class=\"edit-icon\" title=\"Edit Project\" onclick=\"displayProjectEditWindow('"+projectID+"');\"></a><a style=\"cursor:pointer;color:rgba(61,61,61,.25);\" title=\"Download\" class=\"download-icon\" onclick=\"saveTextAsFileFromDashboard('"+projectID+"');\"></a>--><a style=\"cursor:pointer;\" class=\"delete-icon\" title=\"Delete Project\" onclick=\"displayProjectDeleteWindow('"+projectID+"');\"></a></h2></div>";
+            cardHTML += "<div class=\"col-sm-10\"><span class=\"card-header-mission-text\">The Mission</span></div><div class=\"col-sm-2\"><h2 style=\"clear:both;text-align:right;margin-top:-10px;\"><!--<a style=\"cursor:pointer;\" class=\"edit-icon\" title=\"Edit Mission\" onclick=\"displayProjectEditWindow('"+projectID+"');\"></a><a style=\"cursor:pointer;color:rgba(61,61,61,.25);\" title=\"Download\" class=\"download-icon\" onclick=\"saveTextAsFileFromDashboard('"+projectID+"');\"></a>--><a class=\"delete-icon\" title=\"Delete Mission\" onclick=\"displayProjectDeleteWindow('"+projectID+"');\"></a></h2></div>";
             cardHTML += "<h1 class=\"project_name_sort\"><label for=\"chk-content-all1\"></label><a style=\"cursor:pointer;\" "+anchorAhref+">"+projectTitle+"</a></h1>";
             cardHTML += "</div>";
             
@@ -584,7 +584,7 @@ function displayDashboardCards(sortMethod,flip)
     var addMoreHTML = "<li class=\"col-lg-4 matchheight element-item\" id=\"project-card-0\">" +
                       "<div class=\"project-cart-box box-shadow-ot\">"+
                       "<div class=\"card-header\">&nbsp;</div>"+
-                        "<div class=\"active-link-outer\"><span class=\"active-new-project-link\"> <a style=\"cursor:pointer;\" onclick=\"showActivate();\">[ Activate New Project ]</a> </span></div>" +
+                        "<div class=\"active-link-outer\"><span class=\"active-new-project-link\"> <a style=\"cursor:pointer;\" onclick=\"showActivate();\">[ Activate New Mission ]</a> </span></div>" +
                       "<div class=\"card-box-bottom\">&nbsp;</div>"+
                       "</div>"+
 
@@ -593,7 +593,7 @@ function displayDashboardCards(sortMethod,flip)
     finalOutput = "<ul class=\"row grid\">"+addMoreHTML+cardHTML+"</ul>";
 
     $('#card-container').html(finalOutput);
-    
+    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
     /*var fullHTML = $("#body").html();
     console.log(fullHTML);*/
 }
@@ -1031,7 +1031,7 @@ function displayProjectInfo(field)
             }
         }
         
-        $('#projectTitle').html(clientURL+"<span><a style=\"cursor:pointer;margin-left:7px;\" class=\"edit-icon\" title=\"Edit Project\" onclick=\"displayProjectEditWindow('"+projectID+"');\"></a><a style=\"cursor:pointer;margin-left:7px;margin-top:3px;color:rgba(61,61,61,.25);\" title=\"Download\" class=\"download-icon\" onclick=\"saveTextAsFile();\"></a></span>");
+        $('#projectTitle').html(clientURL+"<span><a style=\"cursor:pointer;margin-left:7px;\" class=\"edit-icon\" title=\"Edit Mission\" onclick=\"displayProjectEditWindow('"+projectID+"');\"></a><a style=\"cursor:pointer;margin-left:7px;margin-top:3px;color:rgba(61,61,61,.25);\" title=\"Download\" class=\"download-icon\" onclick=\"saveTextAsFile();\"></a></span>");
         $('#numKeywords').html(keywordCount);
         $('#geoLocation').html("<h2><a title=\""+locationTitleText+"\" class=\"info-link\">"+geoLocation+"</a><!--<a class=\"edit-icon\" title=\"Edit Location\"></a>--></h2>");
         /*$('#searchVolume').html("<h2>"+numberWithCommas(searchVolume)+"<span>MO,SEARCH VOLUME<a class=\"info-icon\" title=\"This is the total sum of monthly search volume for all selected keywords in this project.\"></a></span></h2>");
@@ -1582,7 +1582,7 @@ function displayProjectInfo(field)
     $("#suggestedKeywordsList").html(suggestedKeywordsHTML);
     document.getElementById('loading_spinner').style.display = "none";
     $('body').removeClass('wait');
-    
+    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
     /*var fullHTML = $('#body').html();
     console.log(fullHTML);*/
 }
@@ -1768,7 +1768,7 @@ function refreshProjectInfo()
         if(typeof monthlySales === 'undefined') {monthlySales = 0;}
         if(typeof costPerMonth === 'undefined' || keywordCount == 0) {costPerMonth = 0;}
         
-        $('#projectTitle').html(clientURL+"<span><a style=\"cursor:pointer;margin-left:7px;\" class=\"edit-icon\" title=\"Edit Project\" onclick=\"displayProjectEditWindow('"+projectID+"');\"></a><a style=\"cursor:pointer;margin-left:7px;margin-top:3px;color:rgba(61,61,61,.25);\" title=\"Download\" class=\"download-icon\" onclick=\"javascript:void(0);\"></a></span>");
+        $('#projectTitle').html(clientURL+"<span><a style=\"cursor:pointer;margin-left:7px;\" class=\"edit-icon\" title=\"Edit Mission\" onclick=\"displayProjectEditWindow('"+projectID+"');\"></a><a style=\"cursor:pointer;margin-left:7px;margin-top:3px;color:rgba(61,61,61,.25);\" title=\"Download\" class=\"download-icon\" onclick=\"javascript:void(0);\"></a></span>");
         $('#numKeywords').html(keywordCount);
         $('#geoLocation').html("<h2>"+geoLocation+"<!--<a class=\"edit-icon\" title=\"Edit Location\"></a>--></h2>");
         /*$('#searchVolume').html("<h2>"+numberWithCommas(searchVolume)+"<span>MO,SEARCH VOLUME<a class=\"info-icon\" title=\"This is the total sum of monthly search volume for all selected keywords in this project.\"></a></span></h2>");
@@ -2291,6 +2291,7 @@ function addKeywordInReport(keyword)
             var newKeywordCount = parseInt(currentKeywordCount)+1;
             var newKeywords = existingKeywords + "<li id=\"keyword"+newKeywordCount+"\">"+kwArray[i].trim()+"<span style=\"padding:5px;color:#ec1c24;font-weight:bold;cursor:pointer;\" id=\"remove-keyword"+newKeywordCount+"\" title=\"Remove\" onclick=\"removeKeywordInReport(this);\">X</span></li>";
             $('#ctc').html(newKeywords);
+            $('#new-phrase-container').show();
 
             $('#keyword-count').val(newKeywordCount);
             
@@ -2352,7 +2353,9 @@ function removeKeywordInReport(element)
     else
     {
         $("#add-keywords-button").html("");
+        $('#new-phrase-container').hide();
         $("#add-keywords-button").hide(100,function(){});
+        
     }
 }
 

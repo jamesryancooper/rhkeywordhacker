@@ -52,13 +52,13 @@
         <!--<div class="col-lg-1"></div>-->
         
         <div class="col-lg-10 col-lg-offset-1" style="width:77%;">
-            <a class="navbar-brand" data-text="RANKHACKER" href="#header"><img src="images/logo-main.png" alt="site-logo"> </a>
+            <a class="navbar-brand" data-text="RANKHACKER" href="#header"><img src="images/logo-main.png" alt="site-logo" style="cursor:pointer;" onclick="gotoKHDashboard();"> </a>
             <!--<span style="float:left;"><img src="images/icon-keyword_hacker_small.png" alt="kwhacker" class="module-icon" onclick="gotoKHDashboard();"></span><span class="module-icon-label" onclick="gotoKHDashboard();"><strong>KEYWORD</strong> HACKER</span>
             <span style="float:left;"><img src="images/icon-content_hacker_small.png" alt="contenthacker" class="module-icon"></span><span class="module-icon-label"><strong>CONTENT</strong> HACKER</span>-->
             <!--<div class="dashboard-status"><i class="white_eagle-rh"></i><a style="cursor:default;">Dashboard Activated</a></div>-->
             <!--<div class="dashboard-status"><img src="images/keyword-hacker-icon-white.png" alt="kwhacker" style="cursor:pointer;" class="module-icon" onclick="gotoKHDashboard();"><a class="module-icon-label" style="cursor:pointer;" onclick="gotoKHDashboard();">Keyword Hacker</a></div>
             <div class="dashboard-status"><img src="images/content-hacker-icon-white.png" style="cursor:default;opacity:0.6;" alt="contenthacker" class="module-icon"><a class="module-icon-label" style="cursor:default;opacity:0.6;">Content Hacker</a></div>-->
-            <div class="dashboard-status"><img src="images/keyword-hacker-icon-white.png" alt="kwhacker" style="cursor:pointer;" class="module-icon" onclick="gotoKHDashboard();"><a class="module-icon-label" style="cursor:pointer;" onclick="gotoKHDashboard();">Keyword Hacker</a></div>
+            <div class="dashboard-status"><img src="images/keyword-hacker-icon-white.png" alt="kwhacker" class="module-icon"><a class="module-icon-label">Keyword Hacker</a></div>
         </div>
         <div class="logo-cont logo-outer-2 col-lg-1" style="width:9%;">
             <span class="logout-link" onclick="logout();">LOGOUT</span>
@@ -90,7 +90,7 @@
                         <ul>
                             <li class="black_eagle-rh"></li>
                             <li><a href="dashboard.html">Missions</a></li>
-                            <li><a>New Project Setup</a></li>
+                            <li><a>New Mission Setup</a></li>
                         </ul>
                     </div>
 
@@ -110,12 +110,12 @@
                     </div>
 
                     <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2" id="setup-box-outer">
-                        <h2 class="setup-heading">You are about to uncover Keyword Net-Worth™.</h2>
+                        <h2 class="setup-heading">You are about to uncover <a data-toggle="tooltip" title="Find out the monthly ROI for keyword phrases that rank on page 1 of the search engine results pages." class="tooltip-hover">Keyword Net-Worth™</a>.</h2>
 
                         <form class="project-setup-form">
                             <div class="project-setup-input row">
-                                <label class="col-lg-4 col-md-4">Project URL*</label>
-                                <span class="col-lg-8 col-md-8"><input type="text" id="project-url" placeholder="Enter project URL"></span>
+                                <label class="col-lg-4 col-md-4">Mission URL*</label>
+                                <span class="col-lg-8 col-md-8"><input type="text" id="project-url" placeholder="Enter mission URL"></span>
                             </div>
                             <div class="project-setup-input row">
                                 <label class="col-lg-4 col-md-4"> Location*</label>
@@ -409,6 +409,8 @@ $('#scrollable-dropdown-menu .typeahead').on(
     
     
     jQuery(document).ready(function () {
+
+        $('[data-toggle="tooltip"]').tooltip();
 
         /*
          var originalVal;

@@ -62,13 +62,13 @@
         <!-- LOGO CONTAINER -->
         <!--<div class="col-lg-1"></div>-->
         <div class="col-lg-10 col-lg-offset-1" style="width:77%;">
-            <a class="navbar-brand" data-text="RANKHACKER" href="#header"><img src="images/logo-main.png" alt="site-logo"></a>
+            <a class="navbar-brand" data-text="RANKHACKER" href="#header"><img src="images/logo-main.png" alt="site-logo" style="cursor:pointer;" onclick="gotoKHDashboard();"> </a>
             <!--<span style="float:left;"><img src="images/icon-keyword_hacker_small.png" alt="kwhacker" class="module-icon" onclick="gotoKHDashboard();"></span><span class="module-icon-label" onclick="gotoKHDashboard();"><strong>KEYWORD</strong> HACKER</span>
             <span style="float:left;"><img src="images/icon-content_hacker_small.png" alt="contenthacker" class="module-icon"></span><span class="module-icon-label"><strong>CONTENT</strong> HACKER</span>-->
             <!--<div class="dashboard-status"><i class="white_eagle-rh"></i><a style="cursor:default;">Dashboard Activated</a></div>-->
             <!--<div class="dashboard-status"><img src="images/keyword-hacker-icon-white.png" alt="kwhacker" style="cursor:pointer;" class="module-icon" onclick="gotoKHDashboard();"><a class="module-icon-label" style="cursor:pointer;" onclick="gotoKHDashboard();">Keyword Hacker</a></div>
             <div class="dashboard-status"><img src="images/content-hacker-icon-white.png" style="cursor:default;opacity:0.6;" alt="contenthacker" class="module-icon"><a class="module-icon-label" style="cursor:default;opacity:0.6;">Content Hacker</a></div>-->
-            <div class="dashboard-status"><img src="images/keyword-hacker-icon-white.png" alt="kwhacker" style="cursor:pointer;" class="module-icon" onclick="gotoKHDashboard();"><a class="module-icon-label" style="cursor:pointer;" onclick="gotoKHDashboard();">Keyword Hacker</a></div>
+            <div class="dashboard-status"><img src="images/keyword-hacker-icon-white.png" alt="kwhacker" class="module-icon"><a class="module-icon-label">Keyword Hacker</a></div>
         </div>
         <div class="logo-cont logo-outer-2 col-lg-1" style="width:9%;">
             <span class="logout-link" onclick="logout();">LOGOUT</span>
@@ -210,35 +210,35 @@
                                                 <h2>Keyword<br>Phrases</h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
                                             </li>
                                             <li class="power-goal-info width-7" style="cursor:pointer;" onclick="displayProjectInfo('powerLevelGoal');">
-                                                <h2><a title="Represents the level of marketing effort required for each keyword. A lower Power Level Goal is preferable since it suggests that less effort is required to meet your goals." class="info-link">Power<br>Level Goal </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
+                                                <h2><a data-toggle="tooltip" class="tooltip-hover" title="Represents the level of marketing effort required for each keyword. A lower Power Level Goal is preferable since it suggests that less effort is required to meet your goals.">Power<br>Level Goal </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
                                             </li>
                                             <li class="spacer-info"></li>
                                             <li class="monthly-organic-info width-10" style="cursor:pointer;" onclick="displayProjectInfo('searchVolume');">
-                                                <h2><a title="The monthly average searches for each keyword." class="info-link">Monthly Organic<br>Search Volume </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
+                                                <h2><a data-toggle="tooltip" class="tooltip-hover" title="The monthly average searches for each keyword.">Monthly Organic<br>Search Volume </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
                                             </li>
                                             <li class="spacer-info"></li>
                                             <li class="monthly-visitors-info width-10" style="cursor:pointer;" onclick="displayProjectInfo('monthlyVisitors');">
-                                                <h2><a title="Applying each keyword's average Click Through Rate to the Monthly Organic Search Volume. Assumes a page one ranking position." class="info-link">Projected<br>Monthly Visitors </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
+                                                <h2><a data-toggle="tooltip" class="tooltip-hover" title="Applying each keyword's average Click Through Rate to the Monthly Organic Search Volume. Assumes a page one ranking position.">Projected<br>Monthly Visitors </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
                                             </li>
                                             <li class="spacer-info"></li>
                                             <li class="monthly-customers-info width-12" style="cursor:pointer;" onclick="displayProjectInfo('monthlyCustomers');">
-                                                <h2><a title="Applying your website's current Conversion Rate to Projected Monthly Visitors." class="info-link">Projected<br>Monthly Customers </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
+                                                <h2><a data-toggle="tooltip" class="tooltip-hover" title="Applying your website's current Conversion Rate to Projected Monthly Visitors.">Projected<br>Monthly Customers </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
                                             </li>
                                             <li class="spacer-info"></li>
                                             <li class="monthly-sales-info width-10" style="cursor:pointer;" onclick="displayProjectInfo('monthlySales');">
-                                                <h2><a title="Applying the one-time customer value to the Projected Monthly Customers." class="info-link">Projected<br>Monthly Sales </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
+                                                <h2><a data-toggle="tooltip" class="tooltip-hover" title="Applying the one-time customer value to the Projected Monthly Customers.">Projected<br>Monthly Sales </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
                                             </li>
                                             <li class="spacer-info"></li>
                                             <li class="cost-monthly-info width-7" style="cursor:pointer;" onclick="displayProjectInfo('costPerMonth');">
-                                                <h2><a title="Marketing cost for this keyword." class="info-link">Cost<br>Per Month </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
+                                                <h2><a data-toggle="tooltip" class="tooltip-hover" title="Marketing cost for this keyword.">Cost<br>Per Month </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
                                             </li>
                                             <li class="spacer-info"></li>
                                             <li class="keyword-net-worth-info width-7" style="cursor:pointer;" onclick="displayProjectInfo('keywordNetWorth');">
-                                                <h2><a title="Projected return on your invested marketing dollars for this keyword." class="info-link">Keyword<br>Net-Worth </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
+                                                <h2><a data-toggle="tooltip" class="tooltip-hover" title="Projected return on your invested marketing dollars for this keyword." >Keyword<br>Net-Worth </a></h2><i class="fa fa-sort" style="padding-left:5px;color:#8c8c8c;"></i>
                                             </li>
                                             <li class="spacer-info"></li>
                                             <li class="content-blueprint-info width-7">
-                                                <h2><a title="Generate a Content Blueprint for each keyword." class="info-link">Content<br>Blueprint </a></h2>
+                                                <h2><a data-toggle="tooltip" class="tooltip-hover" title="Generate a Content Blueprint for each keyword.">Content<br>Blueprint </a></h2>
                                             </li>
                                             <li class="checkbox-outer width-2-5">&nbsp;</li>
                                         </ul>
@@ -261,7 +261,7 @@
                                             </div>
                                         </div>
                                         
-                                        <div class="add-custom-keyword-outer">
+                                        <div class="add-custom-keyword-outer" id="new-phrase-container" style="display:none;">
                                             <input type="hidden" id="keyword-count" value="0"/>
                                             <div class="suggest-keywords-list">
                                                 <ul id="ctc">
@@ -309,9 +309,9 @@
     
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-2" id="setup-box-outer">
         <br/>
-        <h2 class="setup-heading" style="color:#337ab7;">Edit Project-Level Information</h2>
+        <h2 class="setup-heading" style="color:#337ab7;">Edit Mission-Level Information</h2>
         <form class="project-setup-form">
-            <div class="project-setup-input row"><label class="col-lg-3 col-md-3">Project URL</label><label id="project-url" style="color:rgba(61,61,61,.8);"></label></div>
+            <div class="project-setup-input row"><label class="col-lg-3 col-md-3">Mission URL</label><label id="project-url" style="color:rgba(61,61,61,.8);"></label></div>
             <div class="project-setup-input row" style="margin-top:-10px;"><label class="col-lg-3 col-md-3">Location</label><label id="project-location" style="color:rgba(61,61,61,.8);"></label></div>
             
             <div class="project-setup-input row">
@@ -520,6 +520,9 @@
     $(document).ready(function () {
 
     new Clipboard('.copy-button');
+    
+    //$('[data-toggle="tooltip"]').tooltip();
+    //$("body").tooltip({ selector: '[data-toggle=tooltip]' });
 
     //Active the project table
     $('#projectResearchDiv').click();

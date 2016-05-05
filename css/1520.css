@@ -425,10 +425,10 @@ cursor:pointer;
 
 .activate-heading {
     width:100%;
-    height:70px;
+    height:75px;
     vertical-align:middle;
-    margin-top:30px;
-    margin-bottom:30px;
+    margin-top:15px;
+    margin-bottom:25px;
     border-bottom: 1px solid #e2e5e5;
 }
 
@@ -439,6 +439,7 @@ cursor:pointer;
     margin-left: 15px;
     float:left;
     text-align:left;
+    line-height: 115%;
 }
 
 .close-activate {
@@ -451,6 +452,7 @@ cursor:pointer;
     font-size:30px;
     margin-right: 15px;
     margin-top: 15px;
+    line-height: 115%;
 }
 
 .activate-logo-container {

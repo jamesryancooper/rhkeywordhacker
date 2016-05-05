@@ -2502,7 +2502,7 @@ function gotoRHStorefront(projectURL)
     window.location = rhURL+"auto_auth.html?username="+username+"&fullname="+fullname+"&projecturl="+projectURL+"&destination="+destination;
 }
 
-function gotoRHCreateProject(clientURL,competitor1,competitor2,competitor3,competitor4,competitor5)
+function gotoRHCreateProject(clientURL,competitor1,competitor2,competitor3,competitor4,competitor5,keywordPhrase)
 {
     var username = getCookie("username");
     var fullname = getCookie("userFullName");
@@ -2518,7 +2518,7 @@ function gotoRHCreateProject(clientURL,competitor1,competitor2,competitor3,compe
     //console.log("going to: "+"auto_auth.html?username="+username+"&fullname="+fullname+"&destination="+destination+"&pid="+projectID+"&client="+clientURL+"&c1="+competitor1+"&c2="+competitor2+"&c3="+competitor3+"&c4="+competitor4+"&c5="+competitor5);
     //alert("check");
     
-    window.location = rhURL+"auto_auth.html?username="+username+"&fullname="+fullname+"&destination="+destination+"&pid="+projectID+"&client="+clientURL+"&c1="+competitor1+"&c2="+competitor2+"&c3="+competitor3+"&c4="+competitor4+"&c5="+competitor5;
+    window.location = rhURL+"auto_auth.html?username="+username+"&fullname="+fullname+"&destination="+destination+"&pid="+projectID+"&client="+clientURL+"&c1="+competitor1+"&c2="+competitor2+"&c3="+competitor3+"&c4="+competitor4+"&c5="+competitor5+"&phrase="+keywordPhrase;
 }
 
 function gotoKHDashboard()
@@ -2868,6 +2868,7 @@ function gotoStorefrontPrefill(keywordCounter)
     var keywordInfo = info.keywordData;
     var thisEntry = keywordInfo[keywordCounter];
     var thisCompetitorArray = thisEntry.competitorData;
+    var thisKeywordPhrase = thisEntry.keyword;
 
     var c1 = "";
     var c2 = "";
@@ -2904,5 +2905,5 @@ function gotoStorefrontPrefill(keywordCounter)
     
     //console.log(clientURL+"\n"+c1+"\n"+c2+"\n"+c3+"\n"+c4+"\n"+c5);
     
-    gotoRHCreateProject(clientURL,c1,c2,c3,c4,c5);
+    gotoRHCreateProject(clientURL,c1,c2,c3,c4,c5,thisKeywordPhrase);
 }

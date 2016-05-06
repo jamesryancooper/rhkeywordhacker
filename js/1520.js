@@ -256,7 +256,8 @@ function createKeywordHackerProject()
     else
     {
         //Show the spinner
-        $("#submit-button-block").html("<div class='three-quarters-loader-small' style='float:right;margin-right:60px;'></div>");
+        $("#submit-button-block-1").html("<div class='three-quarters-loader-small' style='float:right;margin-right:60px;'></div>");
+        $("#submit-button-block-2").html("<div class='three-quarters-loader-small' style='float:right;margin-right:60px;'></div>");
         //projectURL = encodeURI(projectURL);
         
         //Build the keywords list
@@ -304,7 +305,8 @@ function createKeywordHackerProject()
                 }
                 else
                 {
-                    $("#submit-button-block").html("<a class=\"orange-btn btn pull-right\" onclick=\"createKeywordHackerProject();\">FINISH</a>");
+                    $("#submit-button-block-1").html("<a class=\"orange-btn btn pull-right\" onclick=\"createKeywordHackerProject();\">FINISH</a>");
+                    $("#submit-button-block-2").html("<a class=\"orange-btn btn pull-right\" onclick=\"createKeywordHackerProject();\">FINISH</a>");
                     showAlert(info.message);
                 }
             }
@@ -2907,4 +2909,22 @@ function gotoStorefrontPrefill(keywordCounter)
     //console.log(clientURL+"\n"+c1+"\n"+c2+"\n"+c3+"\n"+c4+"\n"+c5);
     
     gotoRHCreateProject(clientURL,c1,c2,c3,c4,c5,thisKeywordPhrase);
+}
+
+function refreshIndustries()
+{
+    var eCommerce = $("#e-commerce-selection").val();
+    
+    $.ajax({url: restURL, data: {'command':'updateIndustriesSelection','ecommerce':eCommerce}, type: 'post', async: true, success: function postResponse(returnData){
+                        var info = JSON.parse(returnData);
+
+                        if(info.status == "success")
+                        {
+                            var optionsString = info.optionsString;
+                            
+                            $("#industry-selection").html(optionsString);
+                        }
+                    }
+                });
+    
 }

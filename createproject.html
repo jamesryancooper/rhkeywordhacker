@@ -109,98 +109,95 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2" id="setup-box-outer">
-                        <h2 class="setup-heading">You are about to uncover <a data-toggle="tooltip" title="Find out the monthly ROI for keyword phrases that rank on page 1 of the search engine results pages." class="tooltip-hover">Keyword Net-Worth™</a>.</h2>
+                    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2" id="setup-box-outer">
+                        <h2 class="setup-heading">Hack the <a data-toggle="tooltip" title="Find out the monthly ROI for keyword phrases that rank on page 1 of the search engine results pages." class="tooltip-hover">Keyword Net-Worth™</a> of target phrases</h2>
 
                         <form class="project-setup-form">
-                            <div class="project-setup-input row">
-                                <label class="col-lg-4 col-md-4">Mission URL*</label>
-                                <span class="col-lg-8 col-md-8"><input type="text" id="project-url" placeholder="Enter mission URL"></span>
-                            </div>
-                            <div class="project-setup-input row">
-                                <label class="col-lg-4 col-md-4"> Location*</label>
-                                <span class="col-lg-8 col-md-8" id="scrollable-dropdown-menu">
-                                    <input type="text" size="60" class="typeahead" id="project-location" placeholder="Enter location">
-                                </span>
-                            </div>
-
-                            <div class="project-setup-input row">
-                                <label class="col-lg-4 col-md-4">Search Engines</label>
-                                <span class="col-lg-8 col-md-8" style="margin-top:-25px;">
-                                <ul style="margin-left:-25px;">
-                                    <li class="checkbox-outer col-lg-4 col-md-4">
-                                        <h2 style="vertical-align:middle;">
-                                            <input type="checkbox" id="use-google" value="1" checked onclick="checkRequiredEngine('google','bing');">
-                                            <label for="use-google" style="font-size:13px;">Google</label>
-                                        </h2>
-                                    </li>
-                                    <li class="checkbox-outer col-lg-4 col-md-4">
-                                        <h2 style="vertical-align:middle;">
-                                            <input type="checkbox" id="use-bing" value="1" checked onclick="checkRequiredEngine('bing','google');">
-                                            <label for="use-bing" style="font-size:13px;">Bing+Yahoo</label>
-                                        </h2>
-                                    </li>
-                                </ul>
-                                </span>
-                            </div>
-                            <div class="project-setup-input row" style="display:none;">
-                                <label class="col-lg-4 col-md-4"></label>
-                                <span class="col-lg-8 col-md-8" style="margin-top:-25px;">
-                                <ul style="margin-left:-25px;">
-                                    <li class="checkbox-outer col-lg-4 col-md-4">
-                                        <h2 style="vertical-align:middle;">
-                                            <input type="checkbox" id="use-you-tube" value="1">
-                                            <label for="use-you-tube" style="font-size:13px;">You Tube</label>
-                                        </h2>
-                                    </li>
-                                    <li class="checkbox-outer col-lg-4 col-md-4">
-                                        <h2 style="vertical-align:middle;">
-                                            <input type="checkbox" id="use-app-store" value="1">
-                                            <label for="use-app-store" style="font-size:13px;">App Store</label>
-                                        </h2>
-                                    </li>
-                                </ul>
-                                </span>
-                            </div>
-                            
-                            <div class="project-setup-input row">
-                                <label class="col-lg-4 col-md-4">Search Volume</label>
-                                <span class="col-lg-8 col-md-8" style="margin-top:-25px;">
-                                <ul style="margin-left:-33px;">
-                                    <li class="checkbox-outer col-lg-4 col-md-4">
-                                        <h2 style="vertical-align:middle;">
-                                            <input type="checkbox" id="use-local" value="1" checked onclick="toggleLocalNational('local','national');">
-                                            <label for="use-local" style="font-size:13px;">Local</label>
-                                        </h2>
-                                    </li>
-                                    <li class="checkbox-outer col-lg-4 col-md-4">
-                                        <h2 style="vertical-align:middle;">
-                                            <input type="checkbox" id="use-national" value="1" onclick="toggleLocalNational('national','local');">
-                                            <label for="use-national" style="font-size:13px;">National</label>
-                                        </h2>
-                                    </li>
-                                </ul>
-                                </span>
-                            </div>
-                            
-                            <div class="project-setup-input row enter-keyword-new-project"><label class="col-lg-12 col-md-12"> Preliminary Keywords*</label>
-
-                                <p class="col-lg-12 col-md-12 note">Provide at least one keyword phrase, and press &lt;Enter&gt; to add</p>
-                                <!--p>Separate additional phrases with commas.</p-->
+                            <div class="project-setup-input row enter-keyword-new-project" style="text-align:left;"><label class="col-lg-12 col-md-12"> The keywords I want to hack are:</label>
+                                
+                                <p class="col-lg-12 col-md-12 note">Enter keyword phrases separated by a comma, and press &lt;Enter&gt; to add
+                                <a class="orange-btn-small btn" style="float:right;margin-top:-15px;" onclick="importKeywords();">IMPORT KEYWORDS</a>
+                                </p>
                                 
                                 <div class="col-lg-12">
                                     <input type="hidden" id="keyword-count" value="0"/>
                                     <input type="text" id="new-keyword" class="custom-input-keyword" onkeypress="return addKeyword(event);"/>
                                 </div>
-                                <p class="col-lg-12 col-md-12 note"><br/><br/>Keywords provided so far</p>
+                                <p class="col-lg-12 col-md-12 note"><br/><br/>All target keyword phrases</p>
                                 <div class="col-lg-12">
                                     <ul id="ctc">
 
                                     </ul>
                                 </div>
                             </div>
-                            <div class="range-slider-section">
-                                <div class="project-setup-input row"><label class="col-lg-6">How many visitors currently land on your website each month?</label>
+                            
+                            
+                            <h2 class="setup-heading">Describe your website and business</h2>
+                            <div class="project-setup-input row" style="text-align:left;">
+                                <div class="col-lg-12">
+                                    <label class="col-lg-12 col-md-12">
+                                        <span class="mixed-use-paragraph">My business' website URL is </span><span class="col-lg-7 col-md-7 mixed-use-paragraph"><input type="text" id="project-url" placeholder="Enter mission URL"></span><span class="mixed-use-paragraph"> and is an</span><span class="mixed-use-paragraph"><select id='e-commerce-selection' onchange="refreshIndustries();"><option value='1'>e-commerce</option><option value='0'>non-ecommerce</option></select></span><span class="mixed-use-paragraph"> site that targets the</span><span class="mixed-use-paragraph"><select id='industry-selection'><option value='0'>Select...</option></select></span><span class="mixed-use-paragraph"> industry.</span>
+                                    </label>
+                                </div>
+                                
+                                <div class="col-lg-12" style="margin-top:35px;">
+                                    <label class="col-lg-8 col-md-8">
+                                        <span class="mixed-use-paragraph">The monetary value <div id="currency-code-1" style="display:none;">$</div>of one paying customer is</span>
+                                    </label>
+                                    <div class="col-lg-4 project-setup-slider">
+                                        <input id="ex8" type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="25" data-slider-value="0"/>
+
+                                        <div id="ex8CurrentSliderValLabel" class="range-slider-value"><span class="range-title" id="currency-code-2">$</span>
+                                            <input id="ex8SliderVal" type="text" class="range-count" value="0"/></div>
+                                    </div>
+                                </div>
+                                
+                                
+                                <div class="col-lg-12" style="margin-top:35px;">
+                                    <label class="col-lg-12 col-md-12">
+                                        <span class="mixed-use-paragraph">My business is located in</span><span class="col-lg-8 col-md-8 mixed-use-paragraph" id="scrollable-dropdown-menu">
+                                            <input type="text" size="60" class="typeahead mixed-use-paragraph" style="margin:0;" id="project-location" placeholder="Enter location">
+                                            </span>
+                                        <span class="mixed-use-paragraph">and I would like to rank</span><span class="mixed-use-paragraph"><select id="local-national"><option value="local">Locally</option><option value="national">Nationally</option></select></span>
+                                        <span class="mixed-use-paragraph">&nbsp;&nbsp;on</span>
+                                        <span class="col-lg-2 col-md-2 mixed-use-paragraph">
+                                        <ul>
+                                            <li class="checkbox-outer col-lg-2 col-md-2 mixed-use-paragraph">
+                                                <h2 style="vertical-align:middle;float:left;margin-top:-10px;">
+                                                    <input type="checkbox" id="use-google" value="1" checked onclick="checkRequiredEngine('google','bing');">
+                                                    <label for="use-google" style="font-size:13px;">Google</label>
+                                                </h2>
+                                            </li>
+                                        </ul>
+                                        </span>
+                                        <span class="mixed-use-paragraph">&nbsp;and&nbsp;&nbsp;</span>
+                                        <span class="col-lg-2 col-md-2 mixed-use-paragraph">
+                                        <ul>
+                                            <li class="checkbox-outer col-lg-2 col-md-2 mixed-use-paragraph">
+                                                <h2 style="vertical-align:middle;float:left;margin-top:-10px;">
+                                                    <input type="checkbox" id="use-bing" value="1" checked onclick="checkRequiredEngine('bing','google');">
+                                                    <label for="use-bing" style="font-size:13px;">Bing+Yahoo</label>
+                                                </h2>
+                                            </li>
+                                        </ul>
+                                        </span>
+                                        
+                                    </label>
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="project-setup-input row" style="margin-top:15px;">
+                                <div class="col-lg-12" id="submit-button-block-1">
+                                    <a class="orange-btn btn" onclick="createKeywordHackerProject();">HACK KEYWORD NET-WORTH NOW</a>
+                                    <p style="text-align:center;margin: 15px 0;">-- or --</p>
+                                    <p style="text-align:center;margin: 25px 0;">Fill in the information below for more accurate keyword net-worth data</p>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="col-lg-12 range-slider-section">
+                                <div class="project-setup-input col-lg-12" style="text-align:left;"><label class="col-lg-6">How many visitors currently land on your website each month?</label>
 
                                     <div class="col-lg-6 project-setup-slider">
                                         <input id="ex6" type="text" data-slider-min="0" data-slider-max="100000" data-slider-step="1000" data-slider-value="0"/>
@@ -209,7 +206,7 @@
                                     </div>
                                 </div>
 
-                                <div class="project-setup-input row"><label class="col-lg-6">How many of the above visitors convert to actual paying customers?</label>
+                                <div class="project-setup-input col-lg-12" style="text-align:left;"><label class="col-lg-6">How many of the above visitors convert to actual paying customers?</label>
 
                                     <div class="col-lg-6 project-setup-slider">
                                         <input id="ex7" type="text" data-slider-min="0" data-slider-max="1000" data-slider-step="10" data-slider-value="0"/>
@@ -218,18 +215,8 @@
                                             <input id="ex7SliderVal" type="text" class="range-count" value="0"/></div>
                                     </div>
                                 </div>
-
-                                <div class="project-setup-input row"><label class="col-lg-6">What is the one-time <span id="currency-code-1">$</span> value of ONE paying customer? (average is okay)</label>
-
-                                    <div class="col-lg-6 project-setup-slider">
-                                        <input id="ex8" type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="25" data-slider-value="0"/>
-
-                                        <div id="ex8CurrentSliderValLabel" class="range-slider-value"><span class="range-title" id="currency-code-2">$</span>
-                                            <input id="ex8SliderVal" type="text" class="range-count" value="0"/></div>
-                                    </div>
-                                </div>
                                 
-                                <div class="project-setup-input row"><label class="col-lg-6">What is your average cost to produce one piece of marketing content?</label>
+                                <div class="project-setup-input col-lg-12" style="text-align:left;"><label class="col-lg-6">What is your average cost to produce one piece of marketing content?</label>
 
                                     <div class="col-lg-6 project-setup-slider">
                                         <input id="ex9" type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="25" data-slider-value="0"/>
@@ -241,8 +228,8 @@
 
                             </div>
 
-                            <div id="submit-button-block">
-                                <a class="orange-btn btn pull-right" onclick="createKeywordHackerProject();">FINISH</a>
+                            <div id="submit-button-block-2">
+                                <a class="orange-btn btn" onclick="createKeywordHackerProject();">HACK KEYWORD NET-WORTH</a>
                             </div>
                         </form>
                     </div>
@@ -411,6 +398,7 @@ $('#scrollable-dropdown-menu .typeahead').on(
     jQuery(document).ready(function () {
 
         $('[data-toggle="tooltip"]').tooltip();
+        refreshIndustries();
 
         /*
          var originalVal;

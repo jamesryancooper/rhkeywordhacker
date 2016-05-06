@@ -528,3 +528,5 @@ cursor:pointer;
 }
 
 .green-text-link {color:#088D0C !important;padding-left:5px;margin-top:-10px;float:right;cursor:pointer;clear:right;font-size:14px;}
+
+.mixed-use-paragraph { float:left;}

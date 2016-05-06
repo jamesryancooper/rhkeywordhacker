@@ -26,7 +26,7 @@
         ============================== -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/materialize.css" rel="stylesheet" id="theme-change">
-    <link href="css/custom-style.css?v=5" rel="stylesheet" id="theme-change">
+    <link href="css/custom-style.css?v=6" rel="stylesheet" id="theme-change">
     <link href="css/rankhacker.css" rel="stylesheet" id="theme-change">
     <link href="css/bootstrap-slider.min.css" rel="stylesheet" id="theme-change">
 
@@ -35,9 +35,13 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
     
     <!--1520 files-->
-    <script src="js/1520.js?v=5"></script>
-    <link href="css/1520.css?v=5" rel="stylesheet" id="theme-change">
-    <link href="css/spinner.css?v=5" rel="stylesheet" id="theme-change">
+    <script src="js/1520.js?v=6"></script>
+    <script src="js/jquery.ui.widget.js"></script>
+    <script src="js/jquery.csv.js"></script>
+    <!--<script src="js/jquery.iframe-transport.js"></script>
+    <script src="js/jquery.fileupload.js"></script>-->
+    <link href="css/1520.css?v=6" rel="stylesheet" id="theme-change">
+    <link href="css/spinner.css?v=6" rel="stylesheet" id="theme-change">
     
 </head>
 
@@ -116,7 +120,13 @@
                             <div class="project-setup-input row enter-keyword-new-project" style="text-align:left;"><label class="col-lg-12 col-md-12"> The keywords I want to hack are:</label>
                                 
                                 <p class="col-lg-12 col-md-12 note">Enter keyword phrases separated by a comma, and press &lt;Enter&gt; to add
-                                <a class="orange-btn-small btn" style="float:right;margin-top:-15px;" onclick="importKeywords();">IMPORT KEYWORDS</a>
+                                
+                                <span class="orange-btn-small btn fileinput-button" style="float:right;margin-top:-15px;">
+                                    <span>IMPORT KEYWORDS</span>
+                                    <!-- The file input field used as target for the file upload widget -->
+                                    <!--<input id="fileupload" type="file" name="files[]">-->
+                                    <input type="file" name="File Upload" id="fileupload" accept=".csv" />
+                                </span>
                                 </p>
                                 
                                 <div class="col-lg-12">
@@ -399,6 +409,88 @@ $('#scrollable-dropdown-menu .typeahead').on(
 
         $('[data-toggle="tooltip"]').tooltip();
         refreshIndustries();
+
+        // The event listener for the file upload
+        document.getElementById('fileupload').addEventListener('change', upload, false);
+
+        // Method that checks that the browser supports the HTML5 File API
+        function browserSupportFileUpload() {
+            var isCompatible = false;
+            if (window.File && window.FileReader && window.FileList && window.Blob) {
+            isCompatible = true;
+            }
+            return isCompatible;
+        }
+
+        // Method that reads and processes the selected file
+        function upload(evt) {
+        if (!browserSupportFileUpload()) {
+            showAlert('The necessary file APIs are not fully supported in this browser! Please use an HTML5-compliant browser such as Google Chrome.');
+            } else {
+                var data = null;
+                var file = evt.target.files[0];
+                var reader = new FileReader();
+                reader.readAsText(file);
+                reader.onload = function(event) {
+                    var csvData = event.target.result;
+                    
+                    /*csvData = csvData.replace(/[, ]+/g, ",");
+                    csvData.replace(/$/mg, ",");
+                    console.log(csvData);
+                    $("#new-keyword").val(csvData);*/
+                    data = $.csv.toArrays(csvData);
+                    if (data && data.length > 0) {
+                      var dataToShow = "";
+                      for(var i=0; i<data.length; i++)
+                      {
+                          var thisEntry = data[i].toString().replace(/[, ]+/g, ",");
+                          if(i==0)
+                          {
+                              if(thisEntry.slice(-1) == ",")
+                              {
+                                  dataToShow = thisEntry.substring(0,thisEntry.length-1);
+                              }
+                              else
+                              {
+                                  dataToShow = thisEntry;
+                              }
+                              
+                          }
+                          else
+                          {
+                              if(thisEntry.slice(-1) == ",")
+                              {
+                                  dataToShow += ","+thisEntry.substring(0,thisEntry.length-1);
+                              }
+                              else
+                              {
+                                  dataToShow += ","+thisEntry;
+                              }
+                          }
+                      }
+                      //console.log(dataToShow);
+                      $("#new-keyword").val(dataToShow);
+                      addKeyword("addme");
+                      
+                      
+                    } else {
+                        showAlert('No data to import!');
+                    }
+                };
+                reader.onerror = function() {
+                    showAlert('Unable to read ' + file.fileName);
+                };
+            }
+        }
+
+        /*$('#fileupload').fileupload({
+            dataType: 'json',
+            done: function (e, data) {
+                $.each(data.result.files, function (index, file) {
+                    console.log(file.name);
+                });
+            }
+        });*/
 
         /*
          var originalVal;

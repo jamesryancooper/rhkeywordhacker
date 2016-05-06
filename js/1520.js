@@ -1,8 +1,8 @@
-//var restURL = "http://fairmarketing.cloudapp.net/rest1.0/kh_endpoint.jsp?"
+var restURL = "http://fairmarketing.cloudapp.net/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://fairmarketing.cloudapp.net/rest1.0/servlet/ssd.DownloadInventoryReport?"
-//var rhURL = "http://fairmarketing.cloudapp.net/rhstorefront/";
-var rhURL = "http://localhost:8383/rhstorefront/";
-var restURL = "http://localhost:8084/rest1.0/kh_endpoint.jsp?"
+var rhURL = "http://fairmarketing.cloudapp.net/rhstorefront/";
+//var rhURL = "http://localhost:8383/rhstorefront/";
+//var restURL = "http://localhost:8084/rest1.0/kh_endpoint.jsp?"
 //var downloadURL = "http://localhost:8084/rest1.0/servlet/ssd.DownloadInventoryReport"
 var desc = false;
 
@@ -298,13 +298,6 @@ function createKeywordHackerProject(id)
         var customerValue = $('#ex8SliderVal').val();
         var costPerLevel = $('#ex9SliderVal').val();
         
-        /*console.log("proj url  = "+projectURL);
-        console.log("location  = "+projectLocation);
-        console.log("keywords  = "+keywordsList);
-        console.log("visitors  = "+monthlyVisitors);
-        console.log("customers = "+payingCustomers);
-        console.log("custvalue = "+customerValue);*/
-        
         
         //Once you have required info, create the project
         $.ajax({url: restURL, data: {'command':'createKHProject','username':username,'projectURL':projectURL,'projectLocation':projectLocation,'keywords':keywordsList,'monthlyVisitors':monthlyVisitors,'payingCustomers':payingCustomers,'customerValue':customerValue,'costPerLevel':costPerLevel,'useGoogle':useGoogle,'useBing':useBing,'useYouTube':useYouTube,'useAppStore':useAppStore,'useLocal':useLocal,'useNational':useNational,'industry':industry}, type: 'post', async: true, success: function postResponse(returnData){
@@ -373,10 +366,9 @@ function loadProjectDashboard(flip)
     }
 }
 
-function displayDashboardCards(sortMethod,flip)
+function displayDashboardCards(sortMethod,flip,filterString)
 {
     var returnData = $('#json').val();
-    //console.log(returnData);
     var currSortMethod = $('#curr_sort').val();
     var sortMethodReversed = $('#curr_sort_reversed').val();
     
@@ -433,9 +425,17 @@ function displayDashboardCards(sortMethod,flip)
         data.sort(sort_by('completed', reversed, parseInt));
     }
     
-    //Save the new sort method and reversed status
-    $('#curr_sort').val(sortMethod);
-    $('#curr_sort_reversed').val(reversed);
+    //Save the new sort method and reversed status (but only if we're not filtering!)
+    var useFilter = false;
+    if(typeof filterString !== 'undefined' && filterString !== '')
+    {
+        useFilter = true;
+    }
+    else
+    {
+        $('#curr_sort').val(sortMethod);
+        $('#curr_sort_reversed').val(reversed);        
+    }
     
     
     
@@ -463,6 +463,12 @@ function displayDashboardCards(sortMethod,flip)
         var currencyHexCode = entry.currencyHexCode;
         var completionPercent = entry.completionPercent;
         var storefrontReports = entry.storefrontReports;
+
+        var canShow = true;
+        if(useFilter && projectTitle.indexOf(filterString) === -1)
+        {
+            canShow = false;
+        }
 
         var activeString = "ACTIVE";
         
@@ -581,7 +587,8 @@ function displayDashboardCards(sortMethod,flip)
 
         //Create a card and add it to the div
         //if(completed == '1')
-        if(true)
+        //if(true)
+        if(canShow)
         {
             cardHTML += "<li class=\"col-lg-4 matchheight element-item\" id=\"project-card-"+projectID+"\">";
             cardHTML += "<div class=\"project-cart-box box-shadow-ot\">";
@@ -615,8 +622,6 @@ function displayDashboardCards(sortMethod,flip)
 
     $('#card-container').html(finalOutput);
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
-    /*var fullHTML = $("#body").html();
-    console.log(fullHTML);*/
 }
 
 function loadProjectData()
@@ -671,7 +676,7 @@ function gotoCreateProject()
 
 function addKeyword(e)
 {
-    if(e.keyCode == 13)
+    if(e.keyCode == 13 || e == "addme")
     {
         var keyword = $('#new-keyword').val();
 
@@ -1625,8 +1630,6 @@ function displayProjectInfo(field)
     document.getElementById('loading_spinner').style.display = "none";
     $('body').removeClass('wait');
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
-    /*var fullHTML = $('#body').html();
-    console.log(fullHTML);*/
 }
 
 function toggleCompetitor(competitorID,checked)
@@ -1745,7 +1748,6 @@ function refreshProjectData()
 function refreshProjectInfo()
 {
     var returnData = $('#json').val();
-    //console.log(returnData);
     var info = JSON.parse(returnData);
     
     //Fill in the project data here
@@ -2587,9 +2589,6 @@ function gotoRHCreateProject(clientURL,competitor1,competitor2,competitor3,compe
     competitor4 = encodeURIComponent(competitor4);
     competitor5 = encodeURIComponent(competitor5);
     
-    //console.log("going to: "+"auto_auth.html?username="+username+"&fullname="+fullname+"&destination="+destination+"&pid="+projectID+"&client="+clientURL+"&c1="+competitor1+"&c2="+competitor2+"&c3="+competitor3+"&c4="+competitor4+"&c5="+competitor5);
-    //alert("check");
-    
     window.location = rhURL+"auto_auth.html?username="+username+"&fullname="+fullname+"&destination="+destination+"&pid="+projectID+"&client="+clientURL+"&c1="+competitor1+"&c2="+competitor2+"&c3="+competitor3+"&c4="+competitor4+"&c5="+competitor5+"&phrase="+keywordPhrase;
 }
 
@@ -2949,33 +2948,36 @@ function gotoStorefrontPrefill(keywordCounter)
     var c5 = "";
 
     //for(var j=0; j<thisCompetitorArray.length; j++)
-    for(var j=0; j<5; j++)
+    var selectedCounter = 0;
+    for(var j=0; j<10; j++)
     {
         var thisCompetitor = thisCompetitorArray[j];
         var competitorURL = thisCompetitor.url;
-        if(j == 0)
+        if(thisCompetitor.active == 1)
         {
-            c1 = competitorURL;
-        }
-        else if(j == 1)
-        {
-            c2 = competitorURL;
-        }
-        else if(j == 2)
-        {
-            c3 = competitorURL;
-        }
-        else if(j == 3)
-        {
-            c4 = competitorURL;
-        }
-        else if(j == 4)
-        {
-            c5 = competitorURL;
+            if(selectedCounter == 0)
+            {
+                c1 = competitorURL;
+            }
+            else if(selectedCounter == 1)
+            {
+                c2 = competitorURL;
+            }
+            else if(selectedCounter == 2)
+            {
+                c3 = competitorURL;
+            }
+            else if(selectedCounter == 3)
+            {
+                c4 = competitorURL;
+            }
+            else if(selectedCounter == 4)
+            {
+                c5 = competitorURL;
+            }
+            selectedCounter++;
         }
     }
-    
-    //console.log(clientURL+"\n"+c1+"\n"+c2+"\n"+c3+"\n"+c4+"\n"+c5);
     
     gotoRHCreateProject(clientURL,c1,c2,c3,c4,c5,thisKeywordPhrase);
 }
@@ -3077,3 +3079,19 @@ function getAllIndustries()
                     }
                 });
 }
+
+function searchCards()
+{
+    var searchString = $("#search-box").val();
+    var sortMethod = $("#curr_sort").val();
+    var flip = $("#curr_sort_reversed").val();
+    if(flip == "true")
+    {
+        displayDashboardCards(sortMethod,true,searchString);
+    }
+    else
+    {
+        displayDashboardCards(sortMethod,false,searchString);
+    }
+}
+

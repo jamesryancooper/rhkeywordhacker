@@ -169,11 +169,13 @@ function getSessionID(callback)
     
 }
 
-function createKeywordHackerProject()
+function createKeywordHackerProject(id)
 {
     var projectURL = $('#project-url').val();
     var projectLocation = $('#project-location').val();
     var currentKeywordCount = parseInt($('#keyword-count').val());
+    //var eCommerce = $('#e-commerce-selection').val();
+    var industry = $('#industry-selection').val();
     
     var useGoogle;
     var useBing;
@@ -218,7 +220,18 @@ function createKeywordHackerProject()
         useAppStore = 0;
     }
     
-    if($('#use-local').is(':checked'))
+    if($('#local-national').val() !== "local")
+    {
+        useLocal = 0;
+        useNational = 1;
+    }
+    else
+    {
+        useLocal = 1;
+        useNational = 0;
+    }
+    
+    /*if($('#use-local').is(':checked'))
     {
         useLocal = 1;
     }
@@ -234,7 +247,7 @@ function createKeywordHackerProject()
     else
     {
         useNational = 0;
-    }
+    }*/
     
     var username = getCookie("username");
     if(username == "")
@@ -256,8 +269,8 @@ function createKeywordHackerProject()
     else
     {
         //Show the spinner
-        $("#submit-button-block-1").html("<div class='three-quarters-loader-small' style='float:right;margin-right:60px;'></div>");
-        $("#submit-button-block-2").html("<div class='three-quarters-loader-small' style='float:right;margin-right:60px;'></div>");
+        $("#submit-button-block-"+id).html("<div class='three-quarters-loader-small' style='float:right;margin-right:60px;'></div>");
+        //$("#submit-button-block-2").html("<div class='three-quarters-loader-small' style='float:right;margin-right:60px;'></div>");
         //projectURL = encodeURI(projectURL);
         
         //Build the keywords list
@@ -294,7 +307,7 @@ function createKeywordHackerProject()
         
         
         //Once you have required info, create the project
-        $.ajax({url: restURL, data: {'command':'createKHProject','username':username,'projectURL':projectURL,'projectLocation':projectLocation,'keywords':keywordsList,'monthlyVisitors':monthlyVisitors,'payingCustomers':payingCustomers,'customerValue':customerValue,'costPerLevel':costPerLevel,'useGoogle':useGoogle,'useBing':useBing,'useYouTube':useYouTube,'useAppStore':useAppStore,'useLocal':useLocal,'useNational':useNational}, type: 'post', async: true, success: function postResponse(returnData){
+        $.ajax({url: restURL, data: {'command':'createKHProject','username':username,'projectURL':projectURL,'projectLocation':projectLocation,'keywords':keywordsList,'monthlyVisitors':monthlyVisitors,'payingCustomers':payingCustomers,'customerValue':customerValue,'costPerLevel':costPerLevel,'useGoogle':useGoogle,'useBing':useBing,'useYouTube':useYouTube,'useAppStore':useAppStore,'useLocal':useLocal,'useNational':useNational,'industry':industry}, type: 'post', async: true, success: function postResponse(returnData){
                 var info = JSON.parse(returnData);
 
                 if(info.status == "success")
@@ -305,8 +318,8 @@ function createKeywordHackerProject()
                 }
                 else
                 {
-                    $("#submit-button-block-1").html("<a class=\"orange-btn btn pull-right\" onclick=\"createKeywordHackerProject();\">FINISH</a>");
-                    $("#submit-button-block-2").html("<a class=\"orange-btn btn pull-right\" onclick=\"createKeywordHackerProject();\">FINISH</a>");
+                    $("#submit-button-block-"+id).html("<a class=\"orange-btn btn pull-right\" onclick=\"createKeywordHackerProject();\">FINISH</a>");
+                    //$("#submit-button-block-2").html("<a class=\"orange-btn btn pull-right\" onclick=\"createKeywordHackerProject();\">FINISH</a>");
                     showAlert(info.message);
                 }
             }
@@ -347,6 +360,12 @@ function loadProjectDashboard(flip)
                 }
             }
         });
+        
+        //At least show the login link for admin
+        if(username == 'admin@fairmarketing.com')
+        {
+            $('#industry-link').show();
+        }
     }
     else
     {
@@ -971,12 +990,18 @@ function displayProjectInfo(field)
         var useGoogle = projectInfo.useGoogle;
         var useBing = projectInfo.useBing;
         
-        var monthlyCustomers = Math.round(incomingTraffic * (payingCustomers / monthlyVisitors),0);
+        var customerConversionRate = projectInfo.defaultConversionRate;
+        if(monthlyVisitors !== 0 && payingCustomers !== 0)
+        {
+            customerConversionRate = (payingCustomers / monthlyVisitors);
+        }
+        
+        var monthlyCustomers = Math.round(incomingTraffic * customerConversionRate,0);
         var monthlySales = Math.round(monthlyCustomers * valuePerCustomer,0);
         var costPerMonth = Math.round((totalPowerLevel * costPerLevel),0);
         var keywordNetWorth = (monthlySales - costPerMonth);
         
-        var customerConversionRate = (payingCustomers / monthlyVisitors);
+        //var customerConversionRate = (payingCustomers / monthlyVisitors);
         
         var netWorthStyle = "green-text";
         if(keywordNetWorth < 0 || completed != 1)
@@ -1051,7 +1076,7 @@ function displayProjectInfo(field)
         $('#kwNetWorth').html("<h2 class=\""+netWorthStyle+"\">"+keywordNetWorthString+"<span>KEYWORD NET-WORTH<a class=\"info-icon\" title=\"This is the projected return on your invested marketing dollars for all selected keywords in this project.\"></a></span></h2>");*/
         $('#searchVolume').html("<h2>"+numberWithCommas(searchVolume)+"<span>MO. SEARCH VOLUME</span></h2><img src=\"images/header_arrow.png\" class=\"header-arrow\">");
         $('#projectedVisitors').html("<h2>"+numberWithCommas(incomingTraffic)+"<span>PROJ. MO. VISITORS</span></h2><img src=\"images/header_arrow.png\" class=\"header-arrow\">");
-        $('#projectedCustomers').html("<h2>"+numberWithCommas(Math.round(incomingTraffic * (payingCustomers / monthlyVisitors),0))+"<span>PROJ. MO. CUSTOMERS</span></h2><img src=\"images/header_arrow.png\" class=\"header-arrow\">");
+        $('#projectedCustomers').html("<h2>"+numberWithCommas(Math.round(incomingTraffic * customerConversionRate,0))+"<span>PROJ. MO. CUSTOMERS</span></h2><img src=\"images/header_arrow.png\" class=\"header-arrow\">");
         $('#projectedSales').html("<h2>"+currencyHexCode+numberWithCommas(monthlySales)+"<span>PROJ. MO. SALES</span></h2><img src=\"images/header_arrow.png\" class=\"header-arrow\">");
         $('#costPerMonth').html("<h2>"+currencyHexCode+numberWithCommas(costPerMonth)+"<span>COST PER MONTH</span></h2><img src=\"images/header_arrow.png\" class=\"header-arrow\">");
         $('#kwNetWorth').html("<h2 class=\""+netWorthStyle+"\">"+keywordNetWorthString+"<span>KEYWORD NET-WORTH</span></h2>");
@@ -1744,13 +1769,16 @@ function refreshProjectInfo()
         var payingCustomers = projectInfo.payingCustomers;
         var currencyHexCode = projectInfo.currencyHexCode;
         
-        var monthlyCustomers = Math.round(incomingTraffic * (payingCustomers / monthlyVisitors),0);
+        var customerConversionRate = projectInfo.defaultConversionRate;
+        if(monthlyVisitors !== 0 && payingCustomers !== 0)
+        {
+            customerConversionRate = (payingCustomers / monthlyVisitors);
+        }
+        
+        var monthlyCustomers = Math.round(incomingTraffic * customerConversionRate,0);
         var monthlySales = Math.round(monthlyCustomers * valuePerCustomer,0);
         var costPerMonth = Math.round((totalPowerLevel * costPerLevel),0);
         var keywordNetWorth = (monthlySales - costPerMonth);
-        
-        var customerConversionRate = (payingCustomers / monthlyVisitors);
-        //var clientPowerLevel = Math.max(1,Math.round((clientDA+clientPA)/2/10,0));
         
         var netWorthStyle = "green-text";
         if(keywordNetWorth < 0 || completed != 1)
@@ -1796,7 +1824,7 @@ function refreshProjectInfo()
         $('#kwNetWorth').html("<h2 class=\""+netWorthStyle+"\">"+keywordNetWorthString+"<span>KEYWORD NET-WORTH<a class=\"info-icon\" title=\"This is the projected return on your invested marketing dollars for all selected keywords in this project.\"></a></span></h2>");*/
         $('#searchVolume').html("<h2>"+numberWithCommas(searchVolume)+"<span>MO. SEARCH VOLUME</span></h2><img src=\"images/header_arrow.png\" class=\"header-arrow\">");
         $('#projectedVisitors').html("<h2>"+numberWithCommas(incomingTraffic)+"<span>PROJ. MO. VISITORS</span></h2><img src=\"images/header_arrow.png\" class=\"header-arrow\">");
-        $('#projectedCustomers').html("<h2>"+numberWithCommas(Math.round(incomingTraffic * (payingCustomers / monthlyVisitors),0))+"<span>PROJ. MO. CUSTOMERS</span></h2><img src=\"images/header_arrow.png\" class=\"header-arrow\">");
+        $('#projectedCustomers').html("<h2>"+numberWithCommas(Math.round(incomingTraffic * customerConversionRate,0))+"<span>PROJ. MO. CUSTOMERS</span></h2><img src=\"images/header_arrow.png\" class=\"header-arrow\">");
         $('#projectedSales').html("<h2>"+currencyHexCode+numberWithCommas(monthlySales)+"<span>PROJ. MO. SALES</span></h2><img src=\"images/header_arrow.png\" class=\"header-arrow\">");
         $('#costPerMonth').html("<h2>"+currencyHexCode+numberWithCommas(costPerMonth)+"<span>COST PER MONTH</span></h2><img src=\"images/header_arrow.png\" class=\"header-arrow\">");
         $('#kwNetWorth').html("<h2 class=\""+netWorthStyle+"\">"+keywordNetWorthString+"<span>KEYWORD NET-WORTH</span></h2>");
@@ -1939,6 +1967,8 @@ function displayProjectEditWindow(projectID)
                     var useLocal = projectInfo.useLocal;
                     var useNational = projectInfo.useNational;
                     var currencyHexCode = projectInfo.currencyHexCode;
+                    var industryID = projectInfo.industryID;
+                    var eCommerce = projectInfo.eCommerce;
                     
                     //Update the inputs with the appropriate values
                     $('#project-url').html(projectURL);
@@ -1946,6 +1976,24 @@ function displayProjectEditWindow(projectID)
                     $('#currency-code-1').html(currencyHexCode);
                     $('#currency-code-2').html(currencyHexCode);
                     $('#currency-code-3').html(currencyHexCode);
+                    
+                    if(typeof eCommerce !== "undefined")
+                    {
+                        if(eCommerce == "1")
+                        {
+                            $('#e-commerce-selection option')[0].selected = true;
+                        }
+                        else
+                        {
+                            $('#e-commerce-selection option')[1].selected = true;
+                        }
+                    }
+                    refreshIndustries();
+                    
+                    if(typeof industryID !== "undefined")
+                    {
+                        $('#industry-selection').val(parseInt(industryID));
+                    }
                     
                     if(useGoogle == 1)
                     {
@@ -1983,7 +2031,7 @@ function displayProjectEditWindow(projectID)
                        $('#use-app-store').prop('checked',false); 
                     }
                     
-                    if(useLocal == 1)
+                    /*if(useLocal == 1)
                     {
                         $('#use-local').prop('checked',true);
                     }
@@ -1999,7 +2047,17 @@ function displayProjectEditWindow(projectID)
                     else
                     {
                        $('#use-national').prop('checked',false); 
+                    }*/
+                    
+                    if(useLocal == 1)
+                    {
+                        $('#local-national option')[0].selected = true;
                     }
+                    else
+                    {
+                       $('#local-national option')[1].selected = true;
+                    }
+                    
                     /*$('#ex6SliderVal').val(numberWithCommas(monthlyVisitors));
                     $('#ex7SliderVal').val(numberWithCommas(payingCustomers));
                     $('#ex8SliderVal').val(numberWithCommas(valuePerCustomer));
@@ -2064,6 +2122,7 @@ function editKeywordHackerProject(source)
         var payingCustomers = $('#ex7SliderVal').val();
         var customerValue = $('#ex8SliderVal').val();
         var costPerLevel = $('#ex9SliderVal').val();
+        var industry = $('#industry-selection').val();
         
         var useGoogle;
         var useBing;
@@ -2108,7 +2167,7 @@ function editKeywordHackerProject(source)
             useAppStore = 0;
         }
         
-        if($('#use-local').is(':checked'))
+        /*if($('#use-local').is(':checked'))
         {
             useLocal = 1;
         }
@@ -2124,10 +2183,20 @@ function editKeywordHackerProject(source)
         else
         {
             useNational = 0;
+        }*/
+        if($('#local-national').val() !== "local")
+        {
+            useLocal = 0;
+            useNational = 1;
+        }
+        else
+        {
+            useLocal = 1;
+            useNational = 0;
         }
 
         //Make the AJAX call
-        $.ajax({url: restURL, data: {'command':'editKHProject','projectid':projectID,'monthlyVisitors':monthlyVisitors,'payingCustomers':payingCustomers,'customerValue':customerValue,'costPerLevel':costPerLevel,'useGoogle':useGoogle,'useBing':useBing,'useYouTube':useYouTube,'useAppStore':useAppStore,'useLocal':useLocal,'useNational':useNational}, type: 'post', async: true, success: function postResponse(returnData){
+        $.ajax({url: restURL, data: {'command':'editKHProject','projectid':projectID,'monthlyVisitors':monthlyVisitors,'payingCustomers':payingCustomers,'customerValue':customerValue,'costPerLevel':costPerLevel,'useGoogle':useGoogle,'useBing':useBing,'useYouTube':useYouTube,'useAppStore':useAppStore,'useLocal':useLocal,'useNational':useNational,'industry':industry}, type: 'post', async: true, success: function postResponse(returnData){
                 var info = JSON.parse(returnData);
 
                 if(info.status == "success")
@@ -2915,7 +2984,7 @@ function refreshIndustries()
 {
     var eCommerce = $("#e-commerce-selection").val();
     
-    $.ajax({url: restURL, data: {'command':'updateIndustriesSelection','ecommerce':eCommerce}, type: 'post', async: true, success: function postResponse(returnData){
+    $.ajax({url: restURL, data: {'command':'updateIndustriesSelection','ecommerce':eCommerce}, type: 'post', async: false, success: function postResponse(returnData){
                         var info = JSON.parse(returnData);
 
                         if(info.status == "success")
@@ -2927,4 +2996,84 @@ function refreshIndustries()
                     }
                 });
     
+}
+
+function manageIndustries()
+{
+    $.ajax({url: restURL, data: {'command':'getAdminLink'}, type: 'post', async: true, success: function postResponse(returnData){
+                        var info = JSON.parse(returnData);
+
+                        if(info.status == "success")
+                        {
+                            window.location = info.adminLink;
+                        }
+                    }
+                });
+}
+
+function updateIndustry(id)
+{
+    var name = $("#name_"+id).val();
+    var eCommerce = $("#ecommerce_"+id).val();
+    var convRate = $("#conv-rate_"+id).val();
+    
+    $.ajax({url: restURL, data: {'command':'processIndustry','industryid':id,'name':name,'ecommerce':eCommerce,'convrate':convRate}, type: 'post', async: true, success: function postResponse(returnData){
+                        var info = JSON.parse(returnData);
+
+                        if(info.status == "success")
+                        {
+                            if(id == 0)
+                            {
+                                $("#name_"+id).val("");
+                                $("#ecommerce_"+id).val(0);
+                                $("#conv-rate_"+id).val(0.00);
+                            }
+                            getAllIndustries();
+                        }
+                    }
+                });
+}
+
+function getAllIndustries()
+{
+    $.ajax({url: restURL, data: {'command':'getAllIndustries'}, type: 'post', async: true, success: function postResponse(returnData){
+                        var info = JSON.parse(returnData);
+
+                        if(info.status == "success")
+                        {
+                            var industryInfo = info.industries;
+                            var rowData = "";
+                            for(var i=0; i<industryInfo.length; i++)
+                            {
+                                var thisEntry = industryInfo[i];
+                                var id = thisEntry.industryID;
+                                var name = thisEntry.industryName;
+                                var eCommerce = thisEntry.eCommerce;
+                                var noSelected = "";
+                                var yesSelected = "";
+                                if(eCommerce == 0)
+                                {
+                                    noSelected = " selected";
+                                    yesSelected = "";
+                                }
+                                else
+                                {
+                                    noSelected = "";
+                                    yesSelected = " selected";
+                                }
+                                var convRate = thisEntry.customerConversionRate;
+                                
+                                rowData += "<tr>" +
+                                        "<td style='text-align:center;'>"+id+"</td>" +
+                                        "<td style='text-align:left;'><input type='text' size='60' id='name_"+id+"' value='"+name+"'/></td>" +
+                                        "<td style='text-align:center;'><select id='ecommerce_"+id+"'><option value='no'"+noSelected+">No</option><option value='yes'"+yesSelected+">Yes</option></select>" +
+                                        "<td style='text-align:center;'><input type='text' size='10' id='conv-rate_"+id+"' value='"+convRate+"'/></td>" +
+                                        "<td style='text-align:center;'><input type='button' class='blue-btn-small' onclick=\"updateIndustry('"+id+"');\" value='Update'/></td>" +
+                                        "</tr>";
+                            }
+
+                            $("#industry-table").html(rowData);
+                        }
+                    }
+                });
 }

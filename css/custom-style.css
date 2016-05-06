@@ -1772,3 +1772,6 @@ width: 100%;}
 .tooltip-hover + .tooltip > .tooltip-inner { text-align:left; }
 
 .new-mission-background {background-image: url("../images/black-eagle-icon.png");background-position: center 4px;background-repeat: no-repeat;background-size: 100% auto;border: medium none !important;height: 40px;margin-right: 0px !important;margin-top: -13px !important;padding: 0 !important;position: relative;width: 45px;}
+
+.blue-btn-small {background-color: #005cb9;border-radius: 0 !important;color: #fff;font-size: 14px;font-weight: bold;margin: 0 0 6px;min-width: 55px;padding: 4px 12px !important;}
+.blue-btn-small:hover {background:#fff !important; color:#005cb9 !important;}

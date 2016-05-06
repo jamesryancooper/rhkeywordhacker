@@ -311,64 +311,60 @@
         <br/>
         <h2 class="setup-heading" style="color:#337ab7;">Edit Mission-Level Information</h2>
         <form class="project-setup-form">
-            <div class="project-setup-input row"><label class="col-lg-3 col-md-3">Mission URL</label><label id="project-url" style="color:rgba(61,61,61,.8);"></label></div>
-            <div class="project-setup-input row" style="margin-top:-10px;"><label class="col-lg-3 col-md-3">Location</label><a data-toggle="tooltip" title="The mission location cannot be changed; however, you can click here to create a new project." class="tooltip-hover" style="cursor:pointer;" onclick="gotoCreateProject();"><label id="project-location" style="color:rgba(61,61,61,.8);"></label></a></div>
-            
-            <div class="project-setup-input row">
-                <label class="col-lg-3 col-md-3">Search Engines</label>
-                <span class="col-lg-9 col-md-9" style="margin-top:-25px;margin-bottom:25px;">
-                <ul style="margin-left:-45px;">
-                    <li class="checkbox-outer col-lg-3 col-md-3">
-                        <h2 style="vertical-align:middle;">
-                            <input type="checkbox" id="use-google" value="1" checked onclick="checkRequiredEngine('google','bing');">
-                            <label for="use-google" style="font-size:13px;">Google</label>
-                        </h2>
-                    </li>
-                    <li class="checkbox-outer col-lg-3 col-md-3">
-                        <h2 style="vertical-align:middle;">
-                            <input type="checkbox" id="use-bing" value="1" checked onclick="checkRequiredEngine('bing','google');">
-                            <label for="use-bing" style="font-size:13px;">Bing+Yahoo</label>
-                        </h2>
-                    </li>
-                    <li class="checkbox-outer col-lg-3 col-md-3" style="display:none;">
-                        <h2 style="vertical-align:middle;">
-                            <input type="checkbox" id="use-you-tube" value="1">
-                            <label for="use-you-tube" style="font-size:13px;">You Tube</label>
-                        </h2>
-                    </li>
-                    <li class="checkbox-outer col-lg-3 col-md-3" style="display:none;">
-                        <h2 style="vertical-align:middle;">
-                            <input type="checkbox" id="use-app-store" value="1">
-                            <label for="use-app-store" style="font-size:13px;">App Store</label>
-                        </h2>
-                    </li>
-                </ul>
-                </span>
-            </div>
-            
-            <div class="project-setup-input row">
-                <label class="col-lg-3 col-md-3">Search Volume</label>
-                <span class="col-lg-9 col-md-9" style="margin-top:-25px;margin-bottom:25px;">
-                <ul style="margin-left:-53px;">
-                    <li class="checkbox-outer col-lg-3 col-md-3">
-                        <h2 style="vertical-align:middle;">
-                            <input type="checkbox" id="use-local" value="1" checked onclick="toggleLocalNational('local','national');">
-                            <label for="use-local" style="font-size:13px;">Local</label>
-                        </h2>
-                    </li>
-                    <li class="checkbox-outer col-lg-3 col-md-3">
-                        <h2 style="vertical-align:middle;">
-                            <input type="checkbox" id="use-national" value="1" onclick="toggleLocalNational('national','local');">
-                            <label for="use-national" style="font-size:13px;">National</label>
-                        </h2>
-                    </li>
-                </ul>
-                </span>
-            </div>
-            
+            <h2 class="setup-heading">Describe your website and business</h2>
+            <div class="project-setup-input row" style="text-align:left;">
+                <div class="col-lg-12">
+                    <label class="col-lg-12 col-md-12">
+                        <span class="mixed-use-paragraph">My business' website URL is </span><span class="mixed-use-paragraph" style="color:#595959;padding:0 15px;text-decoration:underline;" id="project-url"></span><span class="mixed-use-paragraph"> and is an</span><span class="mixed-use-paragraph" style="margin-top:-5px;"><select id='e-commerce-selection' onchange="refreshIndustries();"><option value='1'>e-commerce</option><option value='0'>non-ecommerce</option></select></span><span class="mixed-use-paragraph"> site that targets the</span><span class="mixed-use-paragraph" style="margin-top:-5px;"><select id='industry-selection'><option value='0'>Select...</option></select></span><span class="mixed-use-paragraph"> industry.</span>
+                    </label>
+                </div>
 
-            <div class="range-slider-section">
-                <div class="project-setup-input row"><label class="col-lg-6">How many visitors currently land on your website each month?</label>
+                <div class="col-lg-12" style="margin-top:35px;">
+                    <label class="col-lg-8 col-md-8">
+                        <span class="mixed-use-paragraph">The monetary value <div id="currency-code-1" style="display:none;">$</div>of one paying customer is</span>
+                    </label>
+                    <div class="col-lg-4 project-setup-slider">
+                        <input id="ex8" type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="25" data-slider-value="0"/>
+
+                        <div id="ex8CurrentSliderValLabel" class="range-slider-value"><span class="range-title" id="currency-code-2">$</span>
+                            <input id="ex8SliderVal" type="text" class="range-count" value="0"/></div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-12" style="margin-top:35px;">
+                    <label class="col-lg-12 col-md-12">
+                        <span class="mixed-use-paragraph">My business is located in</span><span class="mixed-use-paragraph" style="color:#595959;padding:0 15px;text-decoration:underline;" id="project-location"></span>
+                        <span class="mixed-use-paragraph">and I would like to rank</span><span class="mixed-use-paragraph" style="margin-top:-5px;"><select id="local-national"><option value="local">Locally</option><option value="national">Nationally</option></select></span>
+                        <span class="mixed-use-paragraph">&nbsp;&nbsp;on</span>
+                        <span class="col-lg-2 col-md-2 mixed-use-paragraph">
+                        <ul>
+                            <li class="checkbox-outer col-lg-2 col-md-2 mixed-use-paragraph">
+                                <h2 style="vertical-align:middle;float:left;margin-top:-10px;">
+                                    <input type="checkbox" id="use-google" value="1" checked onclick="checkRequiredEngine('google','bing');">
+                                    <label for="use-google" style="font-size:13px;">Google</label>
+                                </h2>
+                            </li>
+                        </ul>
+                        </span>
+                        <span class="mixed-use-paragraph">&nbsp;and&nbsp;&nbsp;</span>
+                        <span class="col-lg-2 col-md-2 mixed-use-paragraph">
+                        <ul>
+                            <li class="checkbox-outer col-lg-2 col-md-2 mixed-use-paragraph">
+                                <h2 style="vertical-align:middle;float:left;margin-top:-10px;">
+                                    <input type="checkbox" id="use-bing" value="1" checked onclick="checkRequiredEngine('bing','google');">
+                                    <label for="use-bing" style="font-size:13px;">Bing+Yahoo</label>
+                                </h2>
+                            </li>
+                        </ul>
+                        </span>
+
+                    </label>
+                </div>
+
+            </div>
+            <div class="col-lg-12 range-slider-section" style="margin-top:25px;">
+                <div class="project-setup-input col-lg-12" style="text-align:left;"><label class="col-lg-6">How many visitors currently land on your website each month?</label>
 
                     <div class="col-lg-6 project-setup-slider">
                         <input id="ex6" type="text" data-slider-min="0" data-slider-max="100000" data-slider-step="1000" data-slider-value="0"/>
@@ -377,7 +373,7 @@
                     </div>
                 </div>
 
-                <div class="project-setup-input row"><label class="col-lg-6">How many of the above visitors convert to actual paying customers?</label>
+                <div class="project-setup-input col-lg-12" style="text-align:left;"><label class="col-lg-6">How many of the above visitors convert to actual paying customers?</label>
 
                     <div class="col-lg-6 project-setup-slider">
                         <input id="ex7" type="text" data-slider-min="0" data-slider-max="1000" data-slider-step="10" data-slider-value="0"/>
@@ -387,17 +383,7 @@
                     </div>
                 </div>
 
-                <div class="project-setup-input row"><label class="col-lg-6">What is the one-time <span id="currency-code-1">$</span> value of ONE paying customer? (average is okay)</label>
-
-                    <div class="col-lg-6 project-setup-slider">
-                        <input id="ex8" type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="25" data-slider-value="0"/>
-
-                        <div id="ex8CurrentSliderValLabel" class="range-slider-value"><span class="range-title" id="currency-code-2">$</span>
-                            <input id="ex8SliderVal" type="text" class="range-count" value="0"/></div>
-                    </div>
-                </div>
-
-                <div class="project-setup-input row"><label class="col-lg-6">What is your average cost to produce one piece of marketing content?</label>
+                <div class="project-setup-input col-lg-12" style="text-align:left;"><label class="col-lg-6">What is your average cost to produce one piece of marketing content?</label>
 
                     <div class="col-lg-6 project-setup-slider">
                         <input id="ex9" type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="25" data-slider-value="0"/>
@@ -431,7 +417,7 @@
                 <p>Are you sure you want to delete this keyword?</p>
             </div>
 
-            <div id="submit-button-block">
+            <div id="submit-button-block" style="text-align:center;">
                 <a class="gray-btn btn pull-right" style="margin-left:10px;" onclick="cancelDeleteKeywordHackerProject();">CANCEL</a>
                 <a class="orange-btn btn pull-right" style="margin-right:10px;" onclick="deleteKeyword();">Delete</a>
             </div>

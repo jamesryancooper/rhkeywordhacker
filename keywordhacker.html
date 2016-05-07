@@ -315,7 +315,7 @@
             <div class="project-setup-input row" style="text-align:left;">
                 <div class="col-lg-12">
                     <label class="col-lg-12 col-md-12">
-                        <span class="mixed-use-paragraph">My business' website URL is </span><span class="mixed-use-paragraph" style="color:#595959;padding:0 15px;text-decoration:underline;" id="project-url"></span><span class="mixed-use-paragraph"> and is an</span><span class="mixed-use-paragraph" style="margin-top:-5px;"><select id='e-commerce-selection' onchange="refreshIndustries();"><option value='1'>e-commerce</option><option value='0'>non-ecommerce</option></select></span><span class="mixed-use-paragraph"> site that targets the</span><span class="mixed-use-paragraph" style="margin-top:-5px;"><select id='industry-selection'><option value='0'>Select...</option></select></span><span class="mixed-use-paragraph"> industry.</span>
+                        <span class="mixed-use-paragraph">My business' website URL is </span><span class="mixed-use-paragraph" style="color:#595959;padding:0 15px;text-decoration:underline;"><a data-toggle="tooltip" class="tooltip-hover" title="Sorry, the mission URL cannot be changed; however, you can click here to start a new mission." id="project-url" onclick="gotoCreateProject();"></a></span><span class="mixed-use-paragraph"> and is an</span><span class="mixed-use-paragraph" style="margin-top:-5px;"><select id='e-commerce-selection' onchange="refreshIndustries();"><option value='1'>e-commerce</option><option value='0'>non-ecommerce</option></select></span><span class="mixed-use-paragraph"> site that targets the</span><span class="mixed-use-paragraph" style="margin-top:-5px;"><select id='industry-selection'><option value='0'>Select...</option></select></span><span class="mixed-use-paragraph"> industry.</span>
                     </label>
                 </div>
 
@@ -334,7 +334,7 @@
 
                 <div class="col-lg-12" style="margin-top:35px;">
                     <label class="col-lg-12 col-md-12">
-                        <span class="mixed-use-paragraph">My business is located in</span><span class="mixed-use-paragraph" style="color:#595959;padding:0 15px;text-decoration:underline;" id="project-location"></span>
+                        <span class="mixed-use-paragraph">My business is located in</span><span class="mixed-use-paragraph" style="color:#595959;padding:0 15px;text-decoration:underline;"><a data-toggle="tooltip" class="tooltip-hover" title="Sorry, the mission location cannot be changed; however, you can click here to start a new mission." id="project-location" onclick="gotoCreateProject();"></a></span>
                         <span class="mixed-use-paragraph">and I would like to rank</span><span class="mixed-use-paragraph" style="margin-top:-5px;"><select id="local-national"><option value="local">Locally</option><option value="national">Nationally</option></select></span>
                         <span class="mixed-use-paragraph">&nbsp;&nbsp;on</span>
                         <span class="col-lg-2 col-md-2 mixed-use-paragraph">

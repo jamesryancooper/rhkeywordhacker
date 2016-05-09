@@ -1993,7 +1993,9 @@
                     active = document.activeElement;
                     isActive = $menu.is(active);
                     hasActive = $menu.has(active).length > 0;
-                    if (_.isMsie() && (isActive || hasActive)) {
+                    
+                    var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 && navigator.userAgent && !navigator.userAgent.match('CriOS');
+                    if ((_.isMsie() && (isActive || hasActive)) || isSafari) {
                         $e.preventDefault();
                         $e.stopImmediatePropagation();
                         _.defer(function() {

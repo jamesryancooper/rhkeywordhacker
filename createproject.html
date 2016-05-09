@@ -444,7 +444,7 @@ $('#scrollable-dropdown-menu .typeahead').on(
                       var dataToShow = "";
                       for(var i=0; i<data.length; i++)
                       {
-                          var thisEntry = data[i].toString().replace(/[, ]+/g, ",");
+                          var thisEntry = data[i].toString().replace(/[,]+/g, ",");
                           if(i==0)
                           {
                               if(thisEntry.slice(-1) == ",")

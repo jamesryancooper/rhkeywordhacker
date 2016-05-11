@@ -369,6 +369,9 @@ function loadProjectDashboard(flip)
 function displayDashboardCards(sortMethod,flip,filterString)
 {
     var returnData = $('#json').val();
+    
+    console.log(returnData);
+    
     var currSortMethod = $('#curr_sort').val();
     var sortMethodReversed = $('#curr_sort_reversed').val();
     
@@ -468,6 +471,11 @@ function displayDashboardCards(sortMethod,flip,filterString)
         if(useFilter && projectTitle.indexOf(filterString) === -1)
         {
             canShow = false;
+        }
+        
+        if(monthlyVisitors == 0)
+        {
+            monthlyVisitors = 1;
         }
 
         var activeString = "ACTIVE";
@@ -890,7 +898,7 @@ function sortKeywordCompetitors(selectedKeywordID,field,totalPowerLevel,avgRank,
             competitorInnerHTML += "<ul class=\"power-summary-row\" style=\"margin:0;\">\n"+
                                 "<li class=\"checkbox-outer col-lg-1\">\n"+
                                     "<h2>\n"+
-                                        "<input type=\"checkbox\" "+competitorCheckboxStatus+" id=\"chk-content-all-c"+competitorID+"\" onchange=\"toggleCompetitor('"+competitorID+"',this.checked);\">\n"+
+                                        "<input type=\"checkbox\" "+competitorCheckboxStatus+" id=\"chk-content-all-c"+competitorID+"\" onchange=\"toggleCompetitor('"+competitorID+"',this.checked,'"+i+"');\">\n"+
                                         "<label for=\"chk-content-all-c"+competitorID+"\"></label>\n"+
                                     "</h2>\n"+
                                 "</li>\n"+
@@ -1328,7 +1336,7 @@ function displayProjectInfo(field)
                                 "</li>\n"+
                                 "<li class=\"spacer-info\"><img src=\"images/keyword_row_arrow_white.png\" class=\"keyword-row-arrow\"></li>\n"+
                                 "<li class=\"keyword-net-worth-info width-7\">\n"+
-                                    "<h2><a class=\"blueprint-links\" onclick=\"gotoStorefrontPrefill('"+i+"');\">GET THE HACK</a></h2>\n"+
+                                    "<h2><a id=\"get-the-hack-1-"+i+"\" class=\"blueprint-links\" onclick=\"gotoStorefrontPrefill('"+i+"');\">GET THE HACK</a></h2>\n"+
                                 "</li>\n"+
                                 "<li class=\"content-blueprint-info width-2-5\">\n"+
                                     "<h2><span class=\"delete-icon\" title=\"Delete Keyword\" onclick=\"displayKeywordDeleteWindow('"+keywordID+"');\"></span></h2>\n"+
@@ -1455,7 +1463,7 @@ function displayProjectInfo(field)
             competitorHTML += "<ul class=\"power-summary-row\" style=\"margin:0;\">\n"+
                                 "<li class=\"checkbox-outer col-lg-1\">\n"+
                                     "<h2>\n"+
-                                        "<input type=\"checkbox\" "+competitorCheckboxStatus+" id=\"chk-content-all-c"+competitorID+"\" onchange=\"toggleCompetitor('"+competitorID+"',this.checked);\">\n"+
+                                        "<input type=\"checkbox\" "+competitorCheckboxStatus+" id=\"chk-content-all-c"+competitorID+"\" onchange=\"toggleCompetitor('"+competitorID+"',this.checked,'"+i+"');\">\n"+
                                         "<label for=\"chk-content-all-c"+competitorID+"\"></label>\n"+
                                     "</h2>\n"+
                                 "</li>\n"+
@@ -1596,7 +1604,7 @@ function displayProjectInfo(field)
                                                 "<p>This number is derived from both domain and page authority scores and is best used as a guide to determine your SEO marketing agression. For example if your Power Level Goal = 3, then you may consider creating 3 pieces of content per month (or build 3 backlinks per month).</p>\n"+
                                             "</div>"+
                                             "<div class=\"goal-details col-md-12\" style=\"margin-top:50px;vertical-align:middle;\">\n"+
-                                                "<span class=\"get-the-hack-statement\">Create a content blueprint for this phrase.</span><span class=\"get-the-hack-button\" onclick=\"gotoStorefrontPrefill('"+i+"');\">GET THE HACK</span>\n"+
+                                                "<span class=\"get-the-hack-statement\">Create a content blueprint for this phrase.</span><span id=\"get-the-hack-2-"+i+"\" class=\"get-the-hack-button\" onclick=\"gotoStorefrontPrefill('"+i+"');\">GET THE HACK</span>\n"+
                                             "</div>"+
                                         "</div>"+
                                     "</div>\n";
@@ -1632,9 +1640,14 @@ function displayProjectInfo(field)
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 }
 
-function toggleCompetitor(competitorID,checked)
+function toggleCompetitor(competitorID,checked,keywordCounter)
 {
     $('body').addClass('wait');
+    //Hide the Get the Hack buttons
+    $("#get-the-hack-1-"+keywordCounter).hide(200);
+    $("#get-the-hack-2-"+keywordCounter).hide(200);
+    //document.getElementById("get-the-hack-1-"+keywordCounter).style.display = "none";
+    //document.getElementById("get-the-hack-2-"+keywordCounter).style.display = "none";
 
     var projectID = getURLParameter("pid");
     var active = "";
@@ -1649,13 +1662,14 @@ function toggleCompetitor(competitorID,checked)
     
     if(competitorID != '' && projectID != '')
     {
+        
+        
         $.ajax({url: restURL, data: {'command':'toggleCompetitorActive','projectid':projectID,'competitorid':competitorID,'active':active}, type: 'post', async: true, success: function postResponse(returnData){
                 var info = JSON.parse(returnData);
 
                 if(info.status == "success")
                 {
-                    refreshProjectData();
-                    $('body').removeClass('wait');
+                    refreshProjectData(keywordCounter);
                 }
             }
         });
@@ -1696,7 +1710,7 @@ function toggleKeyword(keywordID,checked)
 
                 if(info.status == "success")
                 {
-                    refreshProjectData();
+                    refreshProjectData(-1);
                     $('body').removeClass('wait');
                 }
             }
@@ -1722,7 +1736,7 @@ function addKeywordToProject(keyword)
     }
 }
 
-function refreshProjectData()
+function refreshProjectData(keywordCounter)
 {
     var projectID = getURLParameter("pid");
     if(projectID != '')
@@ -1734,7 +1748,7 @@ function refreshProjectData()
                 {
                     //Save this to local storage so that it can be sent to the PDF printer service
                     $('#json').val(returnData);
-                    refreshProjectInfo();
+                    refreshProjectInfo(keywordCounter);
                 }
             }
         });
@@ -1745,7 +1759,7 @@ function refreshProjectData()
     }
 }
 
-function refreshProjectInfo()
+function refreshProjectInfo(keywordCounter)
 {
     var returnData = $('#json').val();
     var info = JSON.parse(returnData);
@@ -1938,6 +1952,16 @@ function refreshProjectInfo()
         $('#kwid-'+keywordID+'-table-total-pl').html(Math.round(keywordTotalPowerLevel/competitorsCount));
         $('#kwid-'+keywordID+'-their-pl').html(Math.round(keywordTotalPowerLevel/competitorsCount));
         $('#kwid-'+keywordID+'-your-pl').html(clientPowerLevel);
+    }
+    
+    $('body').removeClass('wait');
+    //Re-display the Get the Hack buttons
+    if(keywordCounter > -1)
+    {
+        $("#get-the-hack-1-"+keywordCounter).show(200).css('display','inline');
+        $("#get-the-hack-2-"+keywordCounter).show(200).css('display','inline');
+        //document.getElementById("get-the-hack-1-"+keywordCounter).style.display = "inline";
+        //document.getElementById("get-the-hack-2-"+keywordCounter).style.display = "inline";
     }
 }
 

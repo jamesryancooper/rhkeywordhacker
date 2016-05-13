@@ -370,8 +370,6 @@ function displayDashboardCards(sortMethod,flip,filterString)
 {
     var returnData = $('#json').val();
     
-    console.log(returnData);
-    
     var currSortMethod = $('#curr_sort').val();
     var sortMethodReversed = $('#curr_sort_reversed').val();
     
@@ -1979,7 +1977,7 @@ function displayProjectEditWindow(projectID)
                 if(info.status == "success")
                 {
                     var projectInfo = info.projectSummary;
-                    
+
                     var projectURL = projectInfo.clientURL;
                     var geoLocation = projectInfo.geoLocation;
                     var monthlyVisitors = parseInt(projectInfo.monthlyVisitors);
@@ -2005,13 +2003,13 @@ function displayProjectEditWindow(projectID)
                     
                     if(typeof eCommerce !== "undefined")
                     {
-                        if(eCommerce == "1")
+                        if(eCommerce == 1)
                         {
-                            $('#e-commerce-selection option')[0].selected = true;
+                            $('#e-commerce-selection option')[1].selected = true;
                         }
                         else
                         {
-                            $('#e-commerce-selection option')[1].selected = true;
+                            $('#e-commerce-selection option')[0].selected = true;
                         }
                     }
                     refreshIndustries();

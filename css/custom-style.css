@@ -1775,3 +1775,6 @@ width: 100%;}
 
 .blue-btn-small {background-color: #005cb9;border-radius: 0 !important;color: #fff;font-size: 14px;font-weight: bold;margin: 0 0 6px;min-width: 55px;padding: 4px 12px !important;}
 .blue-btn-small:hover {background:#fff !important; color:#005cb9 !important;}
+
+.blue-btn {background-color: #005cb9;border-radius: 0 !important;color: #fff;font-size: 18px;font-weight: bold;margin: 0 0 15px;min-width: 160px;padding: 8px 25px !important;}
+.blue-btn:hover {background:#fff !important; color:#005cb9 !important;}

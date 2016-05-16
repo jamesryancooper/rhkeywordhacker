@@ -266,6 +266,10 @@ function createKeywordHackerProject(id)
     {
         showAlert("Please enter at least one keyword phrase.");
     }
+    else if((id == "2") && ($('#ex6SliderVal').val() == 0 || $('#ex7SliderVal').val() == 0))
+    {
+        showAlert("Please enter a value for both monthly visitors and paying customers in order to hack actual net-worth.");
+    }
     else
     {
         //Show the spinner
@@ -2218,6 +2222,11 @@ function editKeywordHackerProject(source)
             useLocal = 1;
             useNational = 0;
         }
+        
+        /*if(monthlyVisitors == 0 || payingCustomers == 0)
+        {
+            showAlert("Please enter a value for both monthly visitors and paying customers.");
+        }*/
 
         //Make the AJAX call
         $.ajax({url: restURL, data: {'command':'editKHProject','projectid':projectID,'monthlyVisitors':monthlyVisitors,'payingCustomers':payingCustomers,'customerValue':customerValue,'costPerLevel':costPerLevel,'useGoogle':useGoogle,'useBing':useBing,'useYouTube':useYouTube,'useAppStore':useAppStore,'useLocal':useLocal,'useNational':useNational,'industry':industry}, type: 'post', async: true, success: function postResponse(returnData){
